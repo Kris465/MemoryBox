@@ -1,5 +1,4 @@
-﻿Console.Clear();
-//Console.SetCursorPosition(10, 4);
+﻿//Console.SetCursorPosition(10, 4);
 //Console.WriteLine("+");
 
 /* You can write like this, or
@@ -9,9 +8,11 @@ int xb = 1;
 int yb = 30;
 */
 
-int xa = 15, ya = 1, 
-    xb = 1, yb = 15,
-    xc = 30, yc = 15;
+Console.Clear();
+
+int xa = 30, ya = 1, 
+    xb = 1, yb = 30,
+    xc = 60, yc = 30;
 
 Console.SetCursorPosition(xa, ya);
 Console.WriteLine("+");
@@ -51,3 +52,5 @@ while(count < 10000)
     Console.WriteLine("+");
     count = count + 1;
 }
+
+Console.ReadLine();
