@@ -24,7 +24,7 @@ int ThirdDigit(int number)
         while(current > 1000)
         {
             current /= 10;
-        }
+    }
         return output = current % 10;
     }
     else 
