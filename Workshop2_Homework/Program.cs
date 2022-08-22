@@ -14,15 +14,20 @@ Console.WriteLine($"The second digit in number is {outputdigit}");
 */
 
 // 13. Напишите программу, которая вываодит третью цифру заданного числа или сообщает, что третьей цифры нет. 
-
+/*
 int ThirdDigit(int number)
 {
-    if(number % 100 >= 1)
+    if(number >= 100)
     {
-        int digit = number / 100;
-        return digit;
+        int current = number;
+        int output = 0;
+        while(current > 1000)
+        {
+            current /= 10;
+        }
+        return output = current % 10;
     }
-    else
+    else 
     {
         return -1;
     }
@@ -31,3 +36,5 @@ int ThirdDigit(int number)
 Console.Write("Input your number: ");
 int inputnum = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine(ThirdDigit(inputnum));
+*/
+
