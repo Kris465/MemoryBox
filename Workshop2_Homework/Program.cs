@@ -37,7 +37,7 @@ Console.Write("Input your number: ");
 int inputnum = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine(ThirdDigit(inputnum));
 */
-// 15. Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
+
 /*
 void ThirdDigit(int number)
 {
@@ -87,3 +87,21 @@ Console.Write("Input your number: ");
 int inputnum = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine(ThirdDigit(inputnum));
 */
+
+// 15. Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
+
+void DayOfWeek(int number)
+{
+    if(number < 6)
+    {
+        Console.WriteLine("Yes");
+    }
+    else
+    {
+        Console.WriteLine("No");
+    }
+}
+
+Console.Write("Input your number: ");
+int inputnum = Convert.ToInt32(Console.ReadLine());
+DayOfWeek(inputnum);
