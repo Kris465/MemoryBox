@@ -37,4 +37,53 @@ Console.Write("Input your number: ");
 int inputnum = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine(ThirdDigit(inputnum));
 */
+// 15. Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
+/*
+void ThirdDigit(int number)
+{
+    if(number >= 100 ^ number <= -100)
+    {
+        int current = number;
+        int output = 0;
+        while(current > 1000 ^ current < -1000)
+        {
+            current /= 10;
+        }   
+        output = current % 10; 
+        if (output < 0) output = output * (-1);
+        Console.WriteLine($".... {output}");
+    }
+    else 
+    {
+        Console.WriteLine("....");
+    }
+}
 
+Console.Write("Input your number: ");
+int inputnum = Convert.ToInt32(Console.ReadLine());
+ThirdDigit(inputnum);
+*/
+
+/*
+int ThirdDigit(int number)
+{
+    if(number >= 100)
+    {
+        int current = number;
+        int output = 0;
+        while(current > 1000)
+        {
+            current /= 10;
+        }
+        return output = current % 10;
+    }
+    else 
+    {
+        return -1;
+    }
+}
+
+Console.Write("Input your number: ");
+int inputnum = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine(ThirdDigit(inputnum));
+*/
