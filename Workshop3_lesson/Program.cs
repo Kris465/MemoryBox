@@ -57,11 +57,19 @@ Square(num);
 */ 
 
 // Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 2D пространстве. Math.Sqrt() 4 переменных, возвращается double
-
-void Distance(double xA, double yA, double xB, double yB)
+/*
+double FindDistance(double x1, double y1, double x2, double y2)
 {
-    double catit1 = xA - xB;
-    double catit2 = yA - yB;
-    double dis = Math.Sqrt(catit1 * catit1 + catit2 * catit2);
-    Console.WriteLine('')
+    return Math.Sqrt((x2 - x1) * (x2 - x1) * (y2 - y1) * (y2 - y1));
 }
+
+Console.WriteLine("Enter the first dot: ");
+double xA = Convert.ToDouble(Console.ReadLine());
+double yA = Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("Enter the second dot: ");
+double xB = Convert.ToDouble(Console.ReadLine());
+double yB = Convert.ToDouble(Console.ReadLine());
+
+double dist = FindDistance(xA, yA, xB, yB);
+Console.WriteLine($"Distance is {dist}");
+*/
