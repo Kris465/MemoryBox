@@ -40,6 +40,7 @@ FindXandY(num);
 */
 
 // Напишите программу, которая принимает на вход число (n) и выдаёт квадраты чисел от 1 до n.
+/*
 void Square(int number)
 {
     int current = 1;
@@ -53,10 +54,14 @@ void Square(int number)
 Console.Write("Input number: ");
 int num = Convert.ToInt32(Console.ReadLine());
 Square(num);
+*/ 
 
 // Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 2D пространстве. Math.Sqrt() 4 переменных, возвращается double
 
 void Distance(double xA, double yA, double xB, double yB)
 {
-    
+    double catit1 = xA - xB;
+    double catit2 = yA - yB;
+    double dis = Math.Sqrt(catit1 * catit1 + catit2 * catit2);
+    Console.WriteLine('')
 }
