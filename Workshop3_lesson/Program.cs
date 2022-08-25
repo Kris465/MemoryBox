@@ -15,7 +15,7 @@ Console.Write("Input y: ");
 double yA = Convert.ToDouble(Console.ReadLine());
 
 int quadrant = FindQuadrant(xA, yA);
-Console.WritLine($"Num of quad is {quadrant}");
+Console.WriteLine($"Num of quad is {quadrant}");
 */
 
 // Напишите программу, которая по заданному номеру четверти, показывает диапазон возможных координат точек в этой четверти (x и y).
