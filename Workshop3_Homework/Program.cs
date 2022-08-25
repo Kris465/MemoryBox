@@ -101,15 +101,17 @@ void Palindrome(int number)
      int check = 0;
      double firstnum = Math.Pow(10, length);
      int cutnum = number;
+     length = Convert.ToInt32(length);
+     firstnum = Convert.ToInt32(firstnum);
      while(check < length / 2)
      {
-          if(number / firstnum == cutnum % 10)
+          while(number / firstnum == cutnum % 10)
           {
-               Console.WriteLine("Your number isn't a palindrome");
+               Console.WriteLine("Your number is a palindrome");
+               firstnum = firstnum - 1;
+               cutnum = cutnum / 10;
           }
-          firstnum = firstnum - 1;
-          cutnum = cutnum / 10;
-          check = check + 1;    
+          check = check + 1;
      } 
 }
 
