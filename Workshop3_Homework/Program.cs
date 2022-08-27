@@ -122,7 +122,7 @@ int num = Convert.ToInt32(Console.ReadLine());
 Palindrome(num);
 */
 
-
+/*
 void Palindrome(int number)
 {
      int inverse = 0;
@@ -141,7 +141,7 @@ void Palindrome(int number)
 Console.Write("Input yout number: ");
 int num = Convert.ToInt32(Console.ReadLine());
 Palindrome(num);
-
+*/
 
 // 21. Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
 
