@@ -54,7 +54,7 @@ Console.WriteLine($"Sum of numbers from 1 to {a} is {FindFact(a)}");
 */
 
 // Напишите программу, которая выводит массив из 8 элементов, заполненный нулями и единицами в случайном порядке.
-
+/*
 void FillArray(int[] collection)
 {
     int length = collection.Length;
@@ -83,5 +83,26 @@ int[] array = new int[8];
 
 FillArray(array);
 PrintArray(array);
+*/
 
 
+int[] CreateRandomArray(int size, int minValue, int maxValue) // Генерирует любой рандомный массив. 
+{
+    int[] newArray = new int[size];
+
+    for(int i = 0; i < size; i++) //i = i + 2
+        newArray[i] = new Random().Next(minValue, maxValue + 1);
+
+    return newArray;
+}
+
+void ShowArray(int[] array)
+{
+    for(int i = 0; i < array.Length; i ++)
+        Console.Write(array[i] + " ");
+
+    Console.WriteLine();    
+}
+
+// ShowArray(CreateRandomArray(8, 0, 1));
+ShowArray(CreateRandomArray(25, 0, 9));
