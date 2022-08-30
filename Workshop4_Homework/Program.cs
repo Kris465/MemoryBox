@@ -121,18 +121,29 @@ void AskedArray (int size, string[] array)
 }
 */
 
-int[] AskedArray(int size, string array)
+int[] AskedArray()
 {
+    Console.WriteLine("Input the size of your array: ");
+    int size = Convert.ToInt32(Console.ReadLine());
+
     int[] newArray = new int[size];
 
+    Console.WriteLine($"Input please {size} numbers: ");
     for(int i = 0; i < size; i++)
+    {
+        Console.Write($"Input number {i + 1}: ");
         newArray[i] = Convert.ToInt32(Console.ReadLine());
-
+    }
     return newArray;
 }
 
-Console.WriteLine("....");
-int asksize = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine(".....");
-string array1 = Console.ReadLine();
-AskedArray(asksize, array1);
+void ShowArray(int[] array)
+{
+    for(int i = 0; i < array.Length; i ++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();    
+}
+
+ShowArray(AskedArray());
