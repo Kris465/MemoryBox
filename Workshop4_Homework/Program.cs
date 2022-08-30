@@ -86,7 +86,7 @@ void Main(string[] args)
     }
 
 */
-
+/*
 int[] CreateRandomArray(int size, int minValue, int maxValue) 
 {
     int[] newArray = new int[size];
@@ -106,3 +106,33 @@ void ShowArray(int[] array)
 }
 
 ShowArray(CreateRandomArray(25, 0, 9));
+*/
+/* Моя очередная гениальная хуйня!!! ААААААААААААААААААААААА!
+
+void AskedArray (int size, string[] array)
+{
+    Console.WriteLine("Input the size of your array: ");
+    int i = 0;
+    int num = Convert.ToInt32(Console.ReadLine());
+    int[] arr = new int[size];
+    Console.Write("Input your array: ");
+    string[] str = Console.ReadLine();
+    for (i = 0; i < size)
+}
+*/
+
+int[] AskedArray(int size, string array)
+{
+    int[] newArray = new int[size];
+
+    for(int i = 0; i < size; i++)
+        newArray[i] = Convert.ToInt32(Console.ReadLine());
+
+    return newArray;
+}
+
+Console.WriteLine("....");
+int asksize = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine(".....");
+string array1 = Console.ReadLine();
+AskedArray(asksize, array1);
