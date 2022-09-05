@@ -22,7 +22,7 @@ void ShowArray(int[] array)
     Console.WriteLine($"\nThere are {count} even numbers!");    
 }
 
-Console.WriteLine("Input the size of random array: ");
+Console.WriteLine("Input the size of a random array: ");
 int si = Convert.ToInt32(Console.ReadLine());
 ShowArray(CreateRandomArray(si));
 */
