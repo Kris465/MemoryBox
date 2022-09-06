@@ -190,9 +190,20 @@ SumUp(usernum);
 
 // Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
 
-int Common(int b1, int k1, int b2, int k2)
+void Common(int b1, int k1, int b2, int k2)
 {
-    
+    if (k2 - k1 != 0)
+    {
+        double x = (b1 - b2) / (k2 - k1);
+        double y = (k2 * b1 - k1 * b2) / (k2 - k1);
+        Console.WriteLine($"Cross point is {x} in x and {y} in y");
+    }
+    else Console.WriteLine("Sorry, these lines don't have the same point.");
 }
 
-
+Console.WriteLine(".....");
+int num1 = Convert.ToInt32(Console.ReadLine());
+int number1 = Convert.ToInt32(Console.ReadLine());
+int num2 = Convert.ToInt32(Console.ReadLine());
+int number2 = Convert.ToInt32(Console.ReadLine());
+Common(num1, number1, num2, number2);
