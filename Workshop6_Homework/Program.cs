@@ -56,7 +56,7 @@ void Fuck (string num)
     else Console.WriteLine("Thank you");
 }
 
-God(Console.ReadLine());
+Fuck(Console.ReadLine());
 */
 
 /*
@@ -102,8 +102,97 @@ string somenumber = Console.ReadLine();
 CheckNum(somenumber);
 */
 
+/*
+bool CheckNum (string word)
+{
+    if (word = Convert.ToInt32() is int) return true;
+    else return false;
+}
+
+Console.WriteLine(CheckNum(Console.ReadLine()));
+*/
+/*
+int StopWord(string word)
+{
+    var number = word;
+    while(word != 'stop')
+    {
+        number = Convert.ToInt32();
+        return number;
+    }
+    Console.WriteLine("Thank you!");
+}
+
+void Sumup(int num)
+{
+
+}
+*/
+/*
+int StopWord(string word)
+{
+    while (word != "stop")
+    {
+        int number = Convert.ToInt32(word);
+        SumUp(number);  
+    }
+    return -1;
+}
+
+void SumUp(int numb)
+{
+    int sum = numb;
+    if (numb > 0)
+    {    
+        sum += numb;
+        SumUp(sum);
+    }
+    if (numb == -1) Console.WriteLine($",,,{sum},, ");
+}
+
+Console.WriteLine(".....");
+string userWord = Console.ReadLine();
+StopWord(userWord);
+*/
+
+/*
+void SumUp(int number, string stop)
+{
+    var arg = number;AAAAAAAAAAAAA
+}
+*/
+/////////////// БОЖЕСТВЕННАЯ ХРЕНЬ ГОТОВА!!!!
+/*
+int sum = 0;
+
+void SumUp(int number)
+{
+    if (number != 333)
+    {
+        Console.WriteLine("Input your number. If you want to leave, press 333: ");
+            if (number > 0) 
+            {
+                sum += number;
+                Console.WriteLine($"You sum is {sum}.");
+            }
+        int num = Convert.ToInt32(Console.ReadLine());
+        SumUp(num);
+        
+    }
+    else Console.WriteLine($"Thank you!");
+}
+
+Console.WriteLine("Hello! I'll count positive numbers! If you want to leave, press 333: ");
+int usernum = Convert.ToInt32(Console.ReadLine());
+
+SumUp(usernum);
+*/
 
 // Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
 
+int Common(int b1, int k1, int b2, int k2)
+{
+    
+}
 
 
