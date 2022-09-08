@@ -43,6 +43,7 @@ ShowArray2(newArray);
 
 // Задайте двумерный массив размера m на n, каждый элемент в массиве находится по формуле: Aij = i+j. Выведите полученный массив на экран. (показывает масив, аргументы - строки и столбцы)
 /*
+
 int[,] CreateRandom2Array(int rows, int columns)
 {
     int[,] newArray = new int[rows, columns];
