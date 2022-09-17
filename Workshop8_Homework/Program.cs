@@ -115,6 +115,7 @@ SortedArray(myArray, j);
 ShowArray2(myArray);
 */
 
+/*
 int[,] CreateRandom2Array()
 {
     Console.WriteLine("Input number of rows: ");
@@ -155,19 +156,27 @@ void SortedArray(int[,] array, int row)
 {
     for (int j = 0; j < array.GetLength(1) - 1; j ++)
     {
-        if (array[row, j] > array[row, j + 1])
-        {
-            Console.WriteLine(array[row, j]);
-        }
-        else SortedArray(array, row);
+        for (int k = j + 1; k < array.GetLength(1); k++)
+        {    
+            if (array[row, j] < array[row, k])                  
+            {                                               
+                int temp = array[row, j];
+                array[row, j] = array[row, k];
+                array[row, k] = temp;
+            }
+        }       
     }
+
+    if (row < array.GetLength(0)-1)
+        SortedArray(array, row + 1);
 }
 
 
 int[,] myArray = CreateRandom2Array();
 ShowArray2(myArray);
 SortedArray(myArray, 0);
-
+ShowArray2(myArray);
+*/ 
 
 // Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 
