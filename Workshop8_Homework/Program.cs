@@ -369,3 +369,101 @@ int[,,] userArray = CreateRandom3Array();
 ShowArray3(userArray);
 
 // Напишите программу, которая заполнит спирально массив 4 на 4. 
+////////////////////Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+
+// Console.Write("Enter rows numbers: ");
+// int rows = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Enter columns numbers: ");
+// int columns = Convert.ToInt32(Console.ReadLine());
+
+// int w = 1;
+
+// int [,] array = new int [rows, columns];
+
+// for (int y = 0; y < columns; y++)
+// {
+//     array [0,y] = w;
+//     w++;
+// }
+
+// for (int x = 1; x < rows; x++)
+// {
+//     array [x, columns - 1] = w;
+//     w++;
+// }
+
+// for (int y = columns - 2; y >= 0; y--)
+// {
+//     array [rows - 1, y] = w;
+//     w++;
+// }
+
+// for (int x = rows - 2; x > 0; x--)
+// {
+//     array [x, 0] = w;
+//     w++;
+// }
+
+// int c = 1;
+// int d = 1;
+
+// while (w < rows * columns)
+// {
+//     while (array [c, d + 1] == 0)
+//     {
+//         array [c,d] = w;
+//         w++;
+//         d++;
+//     }
+
+//     while (array[c + 1, d] == 0) 
+//     {
+//         array[c, d] = w;
+//         w++;
+//         c++;
+//     }
+ 
+//     while (array[c, d - 1] == 0) 
+//     {
+//         array[c, d] = w;
+//         w++;
+//         d--;
+//     }
+ 
+//     while (array[c - 1, d] == 0) 
+//     {
+//         array[c, d] = w;
+//         w++;
+//         c--;
+    
+//     }
+
+//     for (int x = 0; x < rows; x++) 
+//     {
+//         for (int y = 0; y < columns; y++) 
+//         {
+//             if (array[x, y] == 0) 
+//             {
+//                 array[x, y] = w;
+//                 w++;
+//             }
+//         }
+//     }
+
+
+//     for (int x = 0; x < rows; x++) 
+//     {
+//         for (int y = 0; y < columns; y++) 
+//         {
+//             if (array[x, y] < 10) 
+//             {
+//                 Console.Write(array[x, y] + ",  ");
+//             }    
+//             else 
+//             {
+//                 Console.Write(array[x, y] + ", ");
+//             }
+//         }  
+//         Console.WriteLine("");
+//     }
+// }
