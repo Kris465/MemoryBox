@@ -9,3 +9,9 @@ print(a)
 a = int(a)
 print(a)
 print(a % 10)
+
+a = 6.385 # float
+st = str(a)
+print(st)
+d = st.find(".")
+print(st[d+1])
