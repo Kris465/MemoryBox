@@ -66,3 +66,9 @@ third_task()
 #     i += 1
 # print(i)
 
+import math
+
+a = int(input('Введите первое число '))
+b = int(input('Введите второе число '))
+res = math.lcm(a, b)
+print(f'НОК =', res)
