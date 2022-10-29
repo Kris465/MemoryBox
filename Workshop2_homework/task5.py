@@ -2,32 +2,21 @@
 
 import random
 
-
-def input_num():
-    n = int(input("Введите длину списка: "))
-    return n  
-        
-
-def create_random_lst(size):
+def random_mixed_list():
+    size = int(input("Input the size of your list: "))
     lst = []
-    iMin = int(input("Введите минимальное рандомное число: "))
-    iMax = int(input("Введите максимальное рандомное число: "))
+    iMin = int(input("Input the minimum number: "))
+    iMax = int(input("Input the maximum number: "))
   
     for i in range(size):
         lst.append(random.randint(iMin, iMax))
-    return lst
+    print(lst)
 
-
-def shuffle_lst(lst):
     for i in range(len(lst)):
-        rnd = random.randint(0, len(lst))
-        lst[i], lst[rnd] = lst[rnd], lst[i]
-        return lst
+        rnd = random.randint(0, len(lst) - 1)
+        temp = lst[i]
+        lst[i] = lst[rnd]
+        lst[rnd] = lst[i]
+    print(lst)
         
-    
-
-
-my_list = create_random_lst(input_num())
-print(f'Рандомный список выглядит так: {my_list}')
-
-print(f'Перемешанный список выглядит так: {shuffle_lst(my_list)}')
+random_mixed_list()
