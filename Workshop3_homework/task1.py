@@ -10,7 +10,7 @@ def creating_a_new_list():
     size = int(input("Input the size of the list: "))
     lst = []
 
-    for i in range(size + 1):
+    for i in range(size):
         lst.append(randint(0, 10))
     
     print(lst)
