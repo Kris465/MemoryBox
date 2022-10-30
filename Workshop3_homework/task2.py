@@ -14,7 +14,7 @@ def the_multilist_of_pairs():
     for i in range(size):
         lst.append(randint(0, 10))
     
-    print(lst)
+    print(f"Random list is: {lst}")
     
     multi_list = []
     k = 0
@@ -27,7 +27,7 @@ def the_multilist_of_pairs():
         multi_list.append(lst[k] * lst[ - (k + 1)])
         k += 1
         
-    print(multi_list)
+    print("New list which consists of multiplicated pairs is: {multi_list}")
 
 
 the_multilist_of_pairs()

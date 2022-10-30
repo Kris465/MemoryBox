@@ -13,7 +13,7 @@ def creating_a_new_list():
     for i in range(size):
         lst.append(randint(0, 10))
     
-    print(lst)
+    print(f"Random list is: {lst}")
     return lst
 
 def sum_up_odd_numbers(random_list):
@@ -26,7 +26,7 @@ def sum_up_odd_numbers(random_list):
         else: sum_up += 0
         print(index, random_list[index], end = "\n")
     
-    print(sum_up)
+    print(f"Asked sum is: {sum_up}")
 
 my_list = creating_a_new_list()
 sum_up_odd_numbers(my_list)
