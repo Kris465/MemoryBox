@@ -7,7 +7,7 @@
 
 from random import randint
 
-def creating_a_new_list():
+def the_multilist_of_pairs():
     size = int(input("Input the size of the list: "))
     lst = []
 
@@ -30,4 +30,4 @@ def creating_a_new_list():
     print(multi_list)
 
 
-creating_a_new_list()
+the_multilist_of_pairs()
