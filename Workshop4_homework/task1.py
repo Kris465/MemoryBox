@@ -14,7 +14,6 @@ def round_func():
         current += 1
 
     number = round(number, current)
-    print(number)
-
+    print(f"Your number in asked sample: {number}")
 
 round_func()
