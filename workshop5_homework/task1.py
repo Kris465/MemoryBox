@@ -1,7 +1,7 @@
 # Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
 
 def delete_letters():
-    d_text = input("Input combinations you wish to delete from the text: ")
+    d_text = input("Input words you wish to delete from the text: ")
     lst = []
 
     with open("task1.txt", "r") as file:
