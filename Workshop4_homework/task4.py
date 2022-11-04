@@ -33,3 +33,8 @@ def text_writing(pol, name):
 
 polinom = random_polinom()
 text_writing(polinom, "task4.txt")
+
+#for the fifth task:
+print("Input data for the fifth task.")
+polinom2 = random_polinom()
+text_writing(polinom2, "task5.txt")
