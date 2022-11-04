@@ -21,13 +21,15 @@ def random_polinom():
         x.append(' + ')
     polynomial = list(itertools.chain(* polynomial))
     polynomial[-1] = ' = 0'
-
-    put_text = open('task4.txt', 'w')
-    put_text.write("".join(map(str, polynomial)).replace(' 1*x', ' x'))
-    put_text.close()
-
-    print("".join(map(str, polynomial)).replace(' 1*x', ' x'))
     
+    print("".join(map(str, polynomial)).replace(' 1*x', ' x'))
+    return "".join(map(str, polynomial)).replace(' 1*x', ' x')
 
-random_polinom()
 
+def text_writing(pol, name):
+    text_to_file = open(f"{name}", "w")
+    text_to_file.write(pol)
+    text_to_file.close()
+
+polinom = random_polinom()
+text_writing(polinom, "task4.txt")
