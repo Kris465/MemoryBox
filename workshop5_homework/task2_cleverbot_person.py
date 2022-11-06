@@ -6,9 +6,6 @@
 
 # b) Подумайте как наделить бота ""интеллектом""
 
-# from random import randint
-
-
 def sweets_game():
     print("Hello! Nobody wants to lose, so let's have some fun!")
     name = input("What's your name? ")
