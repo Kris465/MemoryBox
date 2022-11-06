@@ -26,7 +26,7 @@ def sweets_game():
             if user_action > sweets:
                 yes_mes = input(f"You can take just {sweets}. Would you like take them and win? Input 'yes'.")
                 if yes_mes == 'yes':
-                    print("You won! Congratulations!")
+                    print("Congratulations!")
                 else: print("Thank you, so I won!")
             sweets -= user_action
             current_turn = False
@@ -36,10 +36,16 @@ def sweets_game():
             print(f"I'll take {my_action}")
             if sweets < my_action and sweets != 0:
                 my_action = sweets
-                print("I won! So nice!")
             else:
                 sweets -= my_action
                 current_turn = True
-        print(f"There are {sweets} sweets.")
+
+        if sweets > 0:
+            print(f"There are {sweets} sweets.")
+        elif sweets <= 0:
+            print(f"There are 0 sweets")
+            if current_turn == True:
+                print("I have won!")
+            else: print("You have won!")
 
 sweets_game()
