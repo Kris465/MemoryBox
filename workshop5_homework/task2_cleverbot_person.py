@@ -31,12 +31,15 @@ def sweets_game():
         else:
             print("Oh, it's my turn!")
             k = sweets % 2
+            my_action = 0
             if 1 < k and k < step:
                 my_action = k
             elif k == 0:
                 my_action = step - 1
-            elif sweets < my_action and sweets != 0:
-                my_action = sweets
+            elif sweets < step and sweets != 0:
+                if k == 0:
+                    my_action = sweets - 2
+                else: my_action = sweets - 1
             else: my_action = step
             
             print(f"I'll take {my_action} sweets.")
