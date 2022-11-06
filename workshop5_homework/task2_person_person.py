@@ -40,5 +40,4 @@ def sweet_game():
             
     print(f"The winner is {winner}")
     
-
 sweet_game()
