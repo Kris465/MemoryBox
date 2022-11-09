@@ -7,7 +7,6 @@ text_in_file.close()
 
 def encrypt(some_text):
     encrypting = ""
-    # i = 0
     count = 1
     p_char = ""
 
@@ -25,14 +24,6 @@ def encrypt(some_text):
         encrypting += str(count) + p_char
         return encrypting
 
-    # while i < len(some_text):
-    #     count = 1
-    #     while i + 1 < len(some_text) and some_text[i] == some_text[i + 1]:
-    #         count += 1
-    #         i += 1
-    #     encrypting += str(count) + some_text[i]
-    #     i += 1
-    # return encrypting
 
 print(encrypt(text_))
 

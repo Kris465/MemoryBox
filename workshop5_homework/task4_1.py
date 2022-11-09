@@ -6,16 +6,7 @@ crypted_text.close()
 
 def decoding(some_text):
     decoding = ''
-    # count = ''
     i = 0
-
-    # for char in some_text:
-    #     if str(char).isdigit():
-    #         count += char
-    #     elif not str(char).isdigit():
-    #         decoding += char * int(count)
-    #         count = ''
-    #     else: break
 
     while i < len(some_text):
         count = 0
