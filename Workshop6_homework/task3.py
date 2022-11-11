@@ -11,6 +11,7 @@ def sweets_game():
     name = input("What's your name? ")
     sweets = int(input("How many sweets do we have? "))
     step = int(input("How many sweets will we take at once? "))
+
     if input("Imput 'yes' if you want to take sweets first, otherwise I'll be first: ") == 'yes':
         current_turn = True
     else: current_turn = False
@@ -23,9 +24,7 @@ def sweets_game():
                 user_action = int(input())
             if user_action > sweets:
                 yes_mes = input(f"You can take just {sweets}. Would you like take them and win? Input 'yes'.")
-                if yes_mes == 'yes':
-                    print("Congratulations!")
-                else: print("Thank you, so I won!")
+                print("Congratulations!" if yes_mes == 'yes' else "Thank you, so I won!")
             sweets -= user_action
             current_turn = False
         else:
@@ -37,9 +36,7 @@ def sweets_game():
             elif k == 0:
                 my_action = step - 1
             elif sweets < step and sweets != 0:
-                if k == 0:
-                    my_action = sweets - 2
-                else: my_action = sweets - 1
+                my_action = [sweets - 2 if k == 0 else sweets - 1]
             else: my_action = step
             
             print(f"I'll take {my_action} sweets.")
@@ -50,8 +47,6 @@ def sweets_game():
             print(f"There are {sweets} sweets.")
         elif sweets <= 0:
             print(f"There are 0 sweets")
-            if current_turn == True:
-                print("I have won!")
-            else: print("You have won!")
+            print(*["I have won!" if current_turn == True else "You have won!"])
 
 sweets_game()
