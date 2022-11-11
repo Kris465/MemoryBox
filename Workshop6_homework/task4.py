@@ -28,7 +28,7 @@ def win_message(new_board):
         win_sign = lst[4]
     elif (lst[6] == lst[7] == lst[8]) or (lst[2] == lst[5] == lst[8]):
         winning = True
-        win_sign = lst[0]
+        win_sign = lst[8]
     else: 
         winning = False
         win_sign = -1
@@ -70,7 +70,7 @@ def tic_tac_toe():
                 board[line][column] = 1
             else: board[line][column] = 0
             flag = True
-            
+                   
         for row in board:
             for elem in row:
                 if elem == 0:
