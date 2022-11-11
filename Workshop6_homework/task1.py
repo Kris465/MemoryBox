@@ -12,6 +12,6 @@ def simple_multipliers():
         else:
             a += 1
 
-    print(f"The multipliers of your number is:", *multipliers)
+    print("The multipliers of your number is:", *multipliers)
 
 simple_multipliers()
