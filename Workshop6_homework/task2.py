@@ -15,20 +15,6 @@
 
 # (1+2)*3 => 9;
 
-# def multiply(x, y):
-#     return (x * y)
-
-# def add(x, y):
-#     return (x + y)
-
-# def division(x, y):
-#     if y == 0:
-#         print("Division for zero is forbidden. It's sad, sorry.")
-#     else: return (x / y)
-
-# def minus(x, y):
-#     return (x - y)
-
 def calc():
     action = input("Input you operation. Please separate numbers from the sign of operation with space: ")
     data = action.split()
