@@ -32,4 +32,4 @@ def output(result):
         print(f"Your result is:", *result)
     else: print(result)
 
-start_menu()
+

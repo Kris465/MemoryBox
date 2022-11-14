@@ -28,3 +28,6 @@ User input:
 21:27
 Result of calculations is: 
 division for zero
+21:57
+User input: 
+None
