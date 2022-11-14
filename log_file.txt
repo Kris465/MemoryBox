@@ -4,3 +4,27 @@ User input:
 20:20
 Result of calculations is: 
 1.5
+21:09
+User input: 
+2 + 2
+21:09
+Result of calculations is: 
+4.0
+21:09
+User input: 
+2 / 0
+21:09
+Result of calculations is: 
+division for zero
+21:20
+User input: 
+10 * 100
+21:20
+Result of calculations is: 
+1000.0
+21:27
+User input: 
+10 / 0
+21:27
+Result of calculations is: 
+division for zero
