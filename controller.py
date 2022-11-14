@@ -6,8 +6,7 @@ import log
 
 def button_click():
     value_lst = view.get_value()
-    log.logwrite("Пользователь ввел", value_lst) 
+    log.logwrite("User input: ", value_lst) 
     result = operations.calc(value_lst)
+    log.logwrite("Result of calculations is: ", result)
     view.output(result)
-    log_message = log.end_OK(result)
-    log.logwrite(log_message)

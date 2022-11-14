@@ -1,0 +1,6 @@
+19:52
+User input: 
+2 + 2
+19:52
+Result of calculations is: 
+[4]
