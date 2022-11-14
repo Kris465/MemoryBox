@@ -9,4 +9,6 @@ def get_value():
 def output(result):
     if str(result).isdigit():
         print(f"Your result is:", *result)
+    elif result % 10 != 0:
+        print(f"Yout result is:", round(result, 2))
     else: print(result)

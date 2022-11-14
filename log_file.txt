@@ -1,6 +1,6 @@
-19:52
+20:20
 User input: 
-2 + 2
-19:52
+3 / 2
+20:20
 Result of calculations is: 
-[4]
+1.5
