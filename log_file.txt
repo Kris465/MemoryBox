@@ -31,3 +31,81 @@ division for zero
 21:57
 User input: 
 None
+11:10
+User input: 
+None
+11:13
+User input: 
+[2, '+', 2]
+11:17
+User input: 
+2 + 2
+11:17
+Result of calculations is: 
+4.0
+11:29
+User input: 
+2 * 2
+11:29
+Result of calculations is: 
+4.0
+11:29
+User input: 
+10 - 3
+11:29
+Result of calculations is: 
+7.0
+11:30
+User input: 
+10 - 23
+11:30
+Result of calculations is: 
+-13.0
+11:31
+User input: 
+10 - 2
+11:31
+Result of calculations is: 
+8.0
+11:31
+User input: 
+2 - 2
+11:31
+Result of calculations is: 
+0.0
+11:32
+User input: 
+11 - 1
+11:32
+Result of calculations is: 
+10.0
+11:33
+User input: 
+3 - 2
+11:33
+Result of calculations is: 
+1.0
+11:42
+User input: 
+None
+11:43
+User input: 
+None
+11:47
+User input: 
+2 + 32
+11:47
+Result of calculations is: 
+34.0
+11:47
+User input: 
+2 + 33
+11:47
+Result of calculations is: 
+35.0
+11:48
+User input: 
+None
+11:50
+User input: 
+None
