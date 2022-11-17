@@ -9,17 +9,17 @@ def get_value():
         data = try_act.split()
 
         if len(data) == 3:
-            if data[1] == "+" or data[2] == "-" or data[1] == "*" or data[1] == "/":
+            if data[1] == "+" or data[1] == "-" or data[1] == "*" or data[1] == "/":
                 print("Thank you!")
                 break
-        else:
-            print("Your input is incorrect. Try again, please.")
+
+        print("Your input is incorrect. Try again, please.")
 
     return inp
 
 
 def output(result):
-    if result % 10 == 0:
+    if result.is_integer():
         print(f"Your result is:", int(result))
     elif isinstance(result, float):
         print(f"Your result is:", result)

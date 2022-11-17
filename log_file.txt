@@ -220,3 +220,72 @@ User input:
 13:16
 Result of calculations is: 
 50.0
+13:23
+User input: 
+2.3 / 2
+13:23
+Result of calculations is: 
+1.15
+13:31
+User input: 
+à * 2
+13:36
+User input: 
+2 - 2
+13:36
+Result of calculations is: 
+0.0
+13:43
+User input: 
+f + 3
+13:49
+User input: 
+f + 2
+13:49
+User input: 
+2.3 + 15
+13:49
+Result of calculations is: 
+17.3
+14:01
+User input: 
+2 + 145
+14:01
+Result of calculations is: 
+147.0
+14:02
+User input: 
+2.5 * 2
+14:02
+Result of calculations is: 
+5.0
+14:02
+User input: 
+2.4 - 0.4
+14:02
+Result of calculations is: 
+2.0
+14:02
+User input: 
+2 + 3
+14:02
+Result of calculations is: 
+5.0
+14:07
+User input: 
+2.2 + 2.5
+14:07
+Result of calculations is: 
+4.7
+14:07
+User input: 
+2 + 5
+14:07
+Result of calculations is: 
+7.0
+14:09
+User input: 
+2.5 * 2
+14:09
+Result of calculations is: 
+5.0
