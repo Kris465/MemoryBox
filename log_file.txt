@@ -109,3 +109,48 @@ None
 11:50
 User input: 
 None
+11:53
+User input: 
+2 / 2
+11:53
+Result of calculations is: 
+1.0
+11:53
+User input: 
+None
+12:04
+User input: 
+2 + 2
+12:04
+Result of calculations is: 
+4.0
+12:16
+User input: 
+2 + 2
+12:16
+Result of calculations is: 
+4.0
+12:21
+User input: 
+2 + 2
+12:21
+Result of calculations is: 
+4.0
+12:24
+User input: 
+2 * 2
+12:24
+Result of calculations is: 
+4.0
+12:25
+User input: 
+2 + 2
+12:25
+Result of calculations is: 
+4.0
+12:28
+User input: 
+2 * 2
+12:28
+Result of calculations is: 
+4.0
