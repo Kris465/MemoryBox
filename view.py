@@ -2,6 +2,7 @@
 
 def get_value():
     print("Hello! Welcome to our caculator.")
+    kind_operation = input("For complex numbers input 1, for usual numbers input 2: ")
     
     while True:
         inp = input("Input you operation. Please separate numbers from the sign of operation with space: ")
@@ -15,12 +16,15 @@ def get_value():
 
         print("Your input is incorrect. Try again, please.")
 
-    return inp
+    return inp, kind_operation
 
 
 def output(result):
-    if result.is_integer():
-        print(f"Your result is:", int(result))
-    elif isinstance(result, float):
-        print(f"Your result is:", result)
-    else: print(result)
+    try:
+        if result.is_integer():
+            print(f"Your result is:", int(result))
+        elif isinstance(result, float):
+            print(f"Your result is:", result)
+        else: print(result)
+    except:
+        print(result)

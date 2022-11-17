@@ -289,3 +289,11 @@ User input:
 14:09
 Result of calculations is: 
 5.0
+17:48 User input: 10 + 10
+17:48 Result of calculations is: 20.0
+18:31 User input: 8 - 8i
+18:38 User input: 2 - 9i
+18:44 User input: 2 + 2
+18:44 Result of calculations is: (4+0j)
+18:48 User input: 2 + 2
+18:48 Result of calculations is: (4+0j)
