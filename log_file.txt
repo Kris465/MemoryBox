@@ -178,3 +178,45 @@ User input:
 12:43
 Result of calculations is: 
 4.0
+12:48
+User input: 
+2 + 14
+12:48
+Result of calculations is: 
+16.0
+12:53
+User input: 
+2 + 13
+12:53
+Result of calculations is: 
+15.0
+12:54
+User input: 
+2 + 18
+12:54
+Result of calculations is: 
+20.0
+12:55
+User input: 
+10 / 3
+12:55
+Result of calculations is: 
+3.3333333333333335
+13:14
+User input: 
+2.2 + 3
+13:14
+Result of calculations is: 
+5.2
+13:15
+User input: 
+2.5 + 2.5
+13:15
+Result of calculations is: 
+5.0
+13:16
+User input: 
+20 * 2.5
+13:16
+Result of calculations is: 
+50.0

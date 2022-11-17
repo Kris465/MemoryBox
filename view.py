@@ -9,10 +9,9 @@ def get_value():
         data = try_act.split()
 
         if len(data) == 3:
-            if str(data[0]).isdigit() and str(data[2]).isdigit():
-                if data[1] == "+" or data[2] == "-" or data[1] == "*" or data[1] == "/":
-                    print("Thank you!")
-                    break
+            if data[1] == "+" or data[2] == "-" or data[1] == "*" or data[1] == "/":
+                print("Thank you!")
+                break
         else:
             print("Your input is incorrect. Try again, please.")
 
@@ -20,14 +19,8 @@ def get_value():
 
 
 def output(result):
-    
-
-    # if isinstance(result, 'float'):
-    #     print(f"Your result is:", *result)
-    # elif isinstance(result, 'int'):
-    #     print(f"Your result is:", int(result))
-    # else: print(result)
-
-    # if str(result).isdigit():
-    #     print(f"Your result is:", *result)
-    # else: print(result)
+    if result % 10 == 0:
+        print(f"Your result is:", int(result))
+    elif isinstance(result, float):
+        print(f"Your result is:", result)
+    else: print(result)
