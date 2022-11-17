@@ -20,6 +20,14 @@ def get_value():
 
 
 def output(result):
-    if str(result).isdigit():
-        print(f"Your result is:", *result)
-    else: print(result)
+    
+
+    # if isinstance(result, 'float'):
+    #     print(f"Your result is:", *result)
+    # elif isinstance(result, 'int'):
+    #     print(f"Your result is:", int(result))
+    # else: print(result)
+
+    # if str(result).isdigit():
+    #     print(f"Your result is:", *result)
+    # else: print(result)

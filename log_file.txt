@@ -154,3 +154,27 @@ User input:
 12:28
 Result of calculations is: 
 4.0
+12:33
+User input: 
+2 + 3
+12:33
+Result of calculations is: 
+5.0
+12:37
+User input: 
+2 + 10
+12:37
+Result of calculations is: 
+12.0
+12:40
+User input: 
+2 + 11
+12:40
+Result of calculations is: 
+13.0
+12:43
+User input: 
+2 + 2
+12:43
+Result of calculations is: 
+4.0
