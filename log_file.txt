@@ -297,3 +297,5 @@ Result of calculations is:
 18:44 Result of calculations is: (4+0j)
 18:48 User input: 2 + 2
 18:48 Result of calculations is: (4+0j)
+18:53 User input: 2 + 5
+18:53 Result of calculations is: (7+0j)
