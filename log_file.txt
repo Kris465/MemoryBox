@@ -326,3 +326,4 @@ Result of calculations is:
 00:35 Result of calculations is: 1.0
 00:36 User input: ['4', '+', '8']
 00:36 Result of calculations is: 12
+00:41 User input: ['2', '/', '0']
