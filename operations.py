@@ -1,7 +1,6 @@
 # Создать калькулятор для работы с рациональными и комплексными числами, организовать меню, добавив в неё систему логирования.
 
-def calc(action, kind):
-    data = action.split()
+def calc(data, kind):
     sign = data[1]
     
     if kind == "NUM":
