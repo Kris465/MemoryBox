@@ -2,11 +2,22 @@
 
 def get_value():
     print("Hello! Welcome to our caculator.")
+    expression = input("Input your expression, please: ")
     kind_operation = input("For complex numbers input 1, for usual numbers input 2: ")
 
+    if kind_operation == 1:
+        reel_part = input("Input the reel or main part of the first complex number: ")
+        imaginaire_part = input("Input the imaginaire part of the first complex number: ")
+        sign = input("Input the sing of operation: ")
+        reel_part1 = input("Input the reel or main part of the second complex number: ")
+        imaginaire_part1 = input("Input the imaginaire part of the second complex number: ")
+        step = [reel_part + imaginaire_part, sign, reel_part1 + imaginaire_part1]
+    else:
+        data = expression.split()
 
-    
-    
+
+
+    # kind_operation = input("For complex numbers input 1, for usual numbers input 2: ")
     # if kind_operation == 1:
     #     reel_part = input("Input the reel or main part of the first complex number: ")
     #     imaginaire_part = input("Input the imaginaire part of the first complex number: ")
