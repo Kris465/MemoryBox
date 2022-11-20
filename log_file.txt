@@ -327,3 +327,31 @@ Result of calculations is:
 00:36 User input: ['4', '+', '8']
 00:36 Result of calculations is: 12
 00:41 User input: ['2', '/', '0']
+00:45 User input: ['1', '-', '2']
+00:45 Result of calculations is: -1
+00:45 User input: ['2', '/', '0']
+00:45 Result of calculations is: division for zero
+00:45 User input: ['2', '+', 'j', '-', '1', '+', '4', 'j']
+00:45 Result of calculations is: Complex numbers
+01:49 User input: ['2', '+', '3', 'j', '*', '1', '+', 'j']
+01:51 User input: ['2', '+', '3', 'j', '*', '1', '+', '1', 'j']
+01:51 Result of calculations is: -1.0+5.0j
+01:53 User input: ['2', '+', '3', 'j', '*', '5', '-', '7', 'j']
+01:53 Result of calculations is: -11.0+29.0j
+02:02 User input: ['2', '+', '3', 'j', '*', '5', '-', '7', 'j']
+02:02 Result of calculations is: -11.0+29.0j
+02:05 User input: ['2', '+', '3', 'j', '*', '5', '+', '7', 'j']
+02:05 Result of calculations is: -11.0+29.0j
+02:08 User input: ['2', '+', '3', 'j', '/', '5', '+', '7', 'j']
+02:12 User input: ['2', '+', '3', 'j', '/', '5', '+', '7', 'j']
+02:12 Result of calculations is: 0.4189189189189189+0.013513513513513514j
+02:14 User input: ['2', '+', '3', 'j', '+', '5', '+', '7', 'j']
+02:15 User input: ['3', '+', '8', 'j', '+', '6', '+', '3', 'j']
+02:15 Result of calculations is: 9.0+11.0j
+02:17 User input: ['3', '8', '3', '+', '8', 'j', '-', '6', '+', '3', 'j']
+02:22 User input: ['2', '+', '3', 'j', '+', '5', '+', '9', 'j']
+02:22 Result of calculations is: 7.0+12.0j
+02:23 User input: ['2', '+', '6', 'j', '-', '8', '+', '3', 'j']
+02:23 Result of calculations is: -6.0-3.0j
+02:25 User input: ['4', '/', '2']
+02:25 Result of calculations is: 2.0
