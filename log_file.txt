@@ -302,3 +302,27 @@ Result of calculations is:
 22:30 User input: None
 22:35 User input: None
 22:42 User input: None
+00:06 User input: None
+00:07 User input: None
+00:13 User input: None
+00:16 User input: ['2']
+00:17 User input: ['2']
+00:24 User input: None
+00:27 User input: ['2', '*', '2', '=', '=', '=', '=', '=', '=', '=', '=', '=', '=', '=']
+00:27 Result of calculations is: 4
+00:28 User input: ['2', '+', '2', '=']
+00:28 Result of calculations is: 4
+00:28 User input: ['2', '+', '5', '=']
+00:28 Result of calculations is: 7
+00:32 User input: ['2', '/', '1', '=', 'Exit', 'Exit', 'Exit', 'Exit', 'Exit']
+00:32 Result of calculations is: 2.0
+00:33 User input: ['4', '-', '3', '=']
+00:33 Result of calculations is: 1
+00:34 User input: ['5']
+00:34 User input: ['2']
+00:35 User input: ['2', '+', '7']
+00:35 Result of calculations is: 9
+00:35 User input: ['2', '/', '2']
+00:35 Result of calculations is: 1.0
+00:36 User input: ['4', '+', '8']
+00:36 Result of calculations is: 12
