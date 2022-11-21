@@ -20,7 +20,7 @@ def user_menu():
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Узнать ответ':
             break
-        elif event == '0' or '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' or '+' or '-' or '/' or '*' or 'j':
+        elif event in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '/', '*', 'j']:
             for elem in range(0, 1):
                 action.append(event)
             sg.Print(event, end = " ")
