@@ -10,8 +10,8 @@ def sum_of_digits():
     sumdig = 0
     number = abs(number)
 
-    while number % 10 != 0:
-        number *= 10
+    while round(number, 9) % 10 != 0:
+        number = round(number, 9) * 10
 
     int(number)
    
