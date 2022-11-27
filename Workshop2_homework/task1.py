@@ -8,10 +8,12 @@
 def sum_of_digits():
     number = float(input("Input your number, please: "))
     sumdig = 0
-    number = number *(-1)
+    number = abs(number)
 
-    while round(number, 10) % 10 != 0:
+    while number % 10 != 0:
         number *= 10
+
+    int(number)
    
     while number > 0:
         digit = number % 10
