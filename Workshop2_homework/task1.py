@@ -7,7 +7,6 @@
 
 def sum_of_digits():
     number = float(input("Input your number, please: "))
-    digit = number % 10
     sumdig = 0
     number = number *(-1)
 
