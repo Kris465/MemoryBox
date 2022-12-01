@@ -40,6 +40,8 @@ def game(dictionary_play, m_pos):
 
     return dictionary_play
 
+time = 2
+
 def game_winner(dictionary_play, m_pos, time):
 
         new_dictionary = game_winner(game(dictionary_play, m_pos), m_pos, time)
