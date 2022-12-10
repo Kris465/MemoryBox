@@ -6,19 +6,20 @@ def calc(input_dict):
 
     if current == None:
         answer = "Попробуйте еще раз"
-    else: data = current.split()
-
-    if 'j' in data:
-        print(data)
-        sign = data[4]
+    else:
+        cur_data = current.replace('j', ' ')
+        data = cur_data.split()
+        
+    if 'j' in current:
+        sign = data[3]
         if sign == "+":
-            answer = str(float(data[0]) + float(data[5])) + "+" + str(float(data[2]) + float(data[7])) + "j"
+            answer = str(float(data[0]) + float(data[4])) + "+" + str(float(data[2]) + float(data[6])) + "j"
         elif sign == "-":
-            answer = str(float(data[0]) - float(data[5])) + "-" + str(float(data[2]) - float(data[7])) + "j"
+            answer = str(float(data[0]) - float(data[4])) + "-" + str(float(data[2]) - float(data[6])) + "j"
         elif sign == "/":
-            answer = str((float(data[0]) * float(data[5]) + float(data[2]) * float(data[7])) / (float(data[5]) ** 2 + float(data[7]) ** 2)) + "+" + str((float(data[5]) * float(data[2]) - float(data[0]) * float(data[7])) / (float(data[5]) ** 2 + float(data[7]) ** 2)) + "j"
+            answer = str((float(data[0]) * float(data[4]) + float(data[2]) * float(data[6])) / (float(data[4]) ** 2 + float(data[6]) ** 2)) + "+" + str((float(data[4]) * float(data[2]) - float(data[0]) * float(data[6])) / (float(data[4]) ** 2 + float(data[6]) ** 2)) + "j"
         elif sign == "*":
-            answer = str(float(data[0]) * float(data[5]) - float(data[2]) * float(data[7])) + "+" + str(float(data[0]) * float(data[7]) + float(data[2]) * float(data[5])) + "j"
+            answer = str(float(data[0]) * float(data[4]) - float(data[2]) * float(data[6])) + "+" + str(float(data[0]) * float(data[6]) + float(data[2]) * float(data[4])) + "j"
     else:
         sign = data[1]
     

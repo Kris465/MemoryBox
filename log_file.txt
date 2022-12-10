@@ -1,3 +1,25 @@
 18:28 User input: 2 + 2
 18:28 Answer: 4
 18:30 User input: 2 + 2j + 1 + 4j
+18:35 User input: 2 + 2J + 3 + 4j
+18:35 User input: 2 + 2j + 3 + 4j
+18:35 Answer: 4
+18:38 User input: 2 + 2j + 3 + 4j
+18:42 User input: 2 + 2j + 3 + 4j
+18:43 User input: 2 + 2j + 3 + 4j
+18:43 Answer: Surprise Mother Fucker!
+18:49 User input: 2 + 2j + 3 + 4j
+18:52 User input: 2 + 2j + 3 + 4j
+18:53 User input: 2 + 2j + 3 + 4j
+18:54 User input: 2 + 2j + 3 + 4j
+18:54 Answer: 2 + 2  + 3 + 4 
+18:55 User input: 2 + 2j + 3 + 4j
+18:55 Answer: ['2', '+', '2', '+', '3', '+', '4']
+18:57 User input: 2 + 2j + 3 + 4j
+18:57 User input: /calc
+18:57 User input: 2 + 14
+18:57 Answer: 16
+18:57 User input: 2.4 + 14
+19:05 User input: 2 + 2j + 3 + 4j
+19:07 User input: 2 + 2j + 3 + 4j
+19:07 Answer: 5.0+6.0j
