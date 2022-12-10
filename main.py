@@ -1,34 +1,49 @@
-from aiogram import Bot, types
+
+from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
-from aiogram.types import InputFile
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.dispatcher import FSMContext
+
+
 
 import os
 from dotenv import load_dotenv, find_dotenv
+
+from operations import calc
+from log import logwrite
 
 
 load_dotenv(find_dotenv())
 token = os.environ.get('TOKEN')
 bot = Bot(token)
-dp = Dispatcher(bot)
+
+storage = MemoryStorage()
+dp = Dispatcher(bot, storage=storage)
 
 
-photo = InputFile("1_prac.png")
+class UserState(StatesGroup):
+    operation = State()
 
 
-@dp.message_handler()
-async def conversation_send(message: types.Message):
-    if message.text == 'Привет':
-        await bot.send_message(message.from_user.id, "И тебе привет!")
-    elif message.text == 'Урок':
-        await bot.send_photo(message.from_user.id, photo = photo)
-    elif message.text == 'Проверка':
-        await bot.send_message(message.from_user.id, "Ответы")
-        
-    
-    # await message.answer(message.text)
-    # await message.reply(message.text)
-    # await bot.answer_send(message.from_user.id, message.text)
+@dp.message_handler(commands = ['calc'])
+async def user_register(message: types.Message):
+    await message.answer("Введите, ваше выражение, пожалуйста. Формат для целых чисел 2 * 2, формат для комплексных чисел 2 + 3j: ")
+    await UserState.operation.set()
+
+
+@dp.message_handler(state=UserState.operation)
+async def get_useroperation(message: types.Message, state: FSMContext):
+    await state.update_data(useroperation = message.text)
+    logwrite("User input: ", message.text)
+    await message.answer("Отлично! Считаем!")
+    data = await state.get_data()
+    answer = calc(data)
+    await message.answer(f'Ваш ответ: {answer}')
+    logwrite("Answer: ", answer)
+
+    await state.finish()
 
 
 executor.start_polling(dp, skip_updates=True)
