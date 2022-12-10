@@ -43,8 +43,4 @@ async def get_useroperation(message: types.Message, state: FSMContext):
 
     await state.finish()
 
-
 executor.start_polling(dp, skip_updates=True)
-
-# if __name__ == 'main':
-#     main()
