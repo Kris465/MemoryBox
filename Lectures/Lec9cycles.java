@@ -30,4 +30,43 @@ package Lectures;
 //     }
 // }
 
+// Цикл for
+// public class Program {
+//     public static void main(String[] args) {
 
+//         int s = 0;
+//         for (int i = 1; i <= 10; i++) {
+//             s += i;
+//         }
+//         System.out.println(s);
+//     }
+// }
+
+// Вложенные циклы
+// public class Program {
+//     public static void main(String[] args) {
+//         for (int i = 0; i < 5; i++) {
+//             for (int j = 0; j < 5; j++) {
+//                 System.out.print("* ");
+//             }
+//             System.out.println();
+//         }
+//         // * * * * *
+//         // * * * * *
+//         // * * * * *
+//         // * * * * *
+//         // * * * * *
+//     }
+// }
+
+// for : для коллекций
+// public class Program {
+//     public static void main(String[] args) {
+
+//         int arr[] = new int[10];
+//         for (int item : arr) {
+//             System.out.printf("%d ", item);
+//         }
+//         System.out.println();
+//     }
+// }
