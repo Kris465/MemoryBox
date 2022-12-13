@@ -6,7 +6,7 @@ package Lectures;
 // import java.io.IOException;
 // public class Lec10Files {
 //     public static void main(String[] args) {
-//         try (FileWriter fw = new FileWriter("file.txt", false)) {
+//         try (FileWriter fw = new FileWriter("file.txt", false)) {   //false - создать файл, true - дописать в файл
 //             fw.write("line 1");
 //             fw.append('\n');
 //             fw.append('2');
@@ -14,7 +14,7 @@ package Lectures;
 //             fw.write("line 3");
 //             fw.flush();
 //         } catch (IOException ex) {
-//             System.out.println(ex.getMessage());
+//             System.out.println(ex.getMessage());   // Обработка ошибок 
 //         }
 //     } }
 
