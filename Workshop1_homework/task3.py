@@ -21,21 +21,3 @@ def square_part():
     else: print("Try again, plese.")
 
 square_part()
-
-# Если двигаться из правого верхнего угла против часовой стрелки, ответы не соответвуют тем, что даны в задании. Наверху вариант для ответов, которые даны в задании, внизу изначальный.
-
-# def square_part(): 
-#     x = int(input("Input x: "))
-#     y = int(input("Input y: "))
-
-#     if x > 0 and y > 0:
-#         print(f"Your part is 1")
-#     elif x > 0 and y < 0:
-#         print(f"Your part is 2")
-#     elif x < 0 and y < 0:
-#         print(f"Your part is 3")
-#     elif x < 0 and y > 0:
-#         print(f"Your part is 4")
-#     else: print("Try again, plese.")
-
-# square_part()
