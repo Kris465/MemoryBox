@@ -14,24 +14,35 @@ package WorkShop1_Homework;
 
 import java.io.*;
 import java.lang.String;
-import java.utils.Arrays;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class task1 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader("input.txt"));
         String str;
         String[] in_str;
-        int[] a_b = new int[2];
+        double[] a_b = new double[2];
         int numbers;
-        int a;
-        int b;
+        int i = 0;
         while ((str = br.readLine()) != null) {           
             in_str = str.split("\\D+");
             numbers = Integer.parseInt(String.join("", in_str));
-            
-            
-            System.out.println(numbers);
+            a_b[i] = numbers;
+            i++;
         }
         br.close();
+        
+        double multi = Math.pow(a_b[0], a_b[1]);
+        int output_str = (int) multi;
+
+        System.out.print(multi);
+
+        try (FileWriter fw = new FileWriter("output.txt", true)) {   
+            fw.write(Integer.toString(output_str));
+            fw.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
