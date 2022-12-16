@@ -13,16 +13,22 @@ package WorkShop1_Homework;
 // 1000
 
 import java.io.*;
+import java.lang.String;
+import java.utils.Arrays;
 
 public class task1 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader("input.txt"));
         String str;
         String[] in_str;
-        Integer numbers;
-        while ((str = br.readLine()) != null) {
+        int[] a_b = new int[2];
+        int numbers;
+        int a;
+        int b;
+        while ((str = br.readLine()) != null) {           
             in_str = str.split("\\D+");
             numbers = Integer.parseInt(String.join("", in_str));
+            
             
             System.out.println(numbers);
         }
