@@ -1,4 +1,4 @@
-package Some_extras;
+package Extras;
 import java.util.Scanner; // специальный класс, позволяющий нам сканировать или брать данные от пользователя
 
 public class task3 {

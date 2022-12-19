@@ -1,4 +1,4 @@
-package Some_extras;
+package Extras;
 import java.util.Scanner;
 
 public class task4 {
