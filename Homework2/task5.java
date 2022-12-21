@@ -12,6 +12,7 @@ public class task5 {
         int n = scanner.nextInt();
         int[] mass = new int[n];
 
+        System.out.println("Thank you, input your array: ");
         for (int i = 1; i < n; i++) {
             mass[i] = scanner.nextInt();
             if (mass[i] % 10 == (mass[i] / 10) % 10) {
