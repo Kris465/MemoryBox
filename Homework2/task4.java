@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class task4 {
     public static void main(String[] args) {
         int a, b, n;
-        boolean green_flag = true;
+        boolean greenFlag = true;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input the length of number sequence: ");
         n = scanner.nextInt();
@@ -17,13 +17,13 @@ public class task4 {
         for (int i = 1; i < n; i++) {
             b = scanner.nextInt();
             if (a > b) {
-                green_flag = false;
+                greenFlag = false;
             }
             a = b;
         }
         scanner.close();
 
-        if (green_flag == true) {
+        if (greenFlag == true) {
             System.out.println("The sequence is ascending.");
         } else {
             System.out.println("The sequence isn't ascending.");
