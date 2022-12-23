@@ -1,0 +1,210 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Workshop3lesson.Main",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch task1",
+            "request": "launch",
+            "mainClass": "Extras.task1",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task2",
+            "request": "launch",
+            "mainClass": "Extras.task2",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task3",
+            "request": "launch",
+            "mainClass": "Extras.task3",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task4",
+            "request": "launch",
+            "mainClass": "Extras.task4",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task1(1)",
+            "request": "launch",
+            "mainClass": "Homework1.task1",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task1(2)",
+            "request": "launch",
+            "mainClass": "Homework2.task1",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task2(1)",
+            "request": "launch",
+            "mainClass": "Homework2.task2",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task3(1)",
+            "request": "launch",
+            "mainClass": "Homework2.task3",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task4(1)",
+            "request": "launch",
+            "mainClass": "Homework2.task4",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task5",
+            "request": "launch",
+            "mainClass": "Homework2.task5",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task6",
+            "request": "launch",
+            "mainClass": "Homework2.task6",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec1",
+            "request": "launch",
+            "mainClass": "Lectures.Lec1",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec11plus",
+            "request": "launch",
+            "mainClass": "Lectures.Lec11plus",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec12pluses",
+            "request": "launch",
+            "mainClass": "Lectures.Lec12pluses",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec13mistakes",
+            "request": "launch",
+            "mainClass": "Lectures.Lec13mistakes",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec2Inf",
+            "request": "launch",
+            "mainClass": "Lectures.Lec2Inf",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec3Name",
+            "request": "launch",
+            "mainClass": "Lectures.Lec3Name",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec4Check",
+            "request": "launch",
+            "mainClass": "Lectures.Lec4Check",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec5output",
+            "request": "launch",
+            "mainClass": "Lectures.Lec5output",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec6output2",
+            "request": "launch",
+            "mainClass": "Lectures.Lec6output2",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec7def",
+            "request": "launch",
+            "mainClass": "Lectures.Lec7def",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Lec8IfElse",
+            "request": "launch",
+            "mainClass": "Lectures.Lec8IfElse",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task1(3)",
+            "request": "launch",
+            "mainClass": "Workshop2Lesson.task1",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task2(2)",
+            "request": "launch",
+            "mainClass": "Workshop2Lesson.task2",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task3(2)",
+            "request": "launch",
+            "mainClass": "Workshop2Lesson.task3",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch task4(2)",
+            "request": "launch",
+            "mainClass": "Workshop2Lesson.task4",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Workshop3_lesson.Main",
+            "projectName": "Java_fa7915a7"
+        }
+    ]
+}

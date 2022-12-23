@@ -1,4 +1,4 @@
-package Workshop3_lesson.Goods;
+package Workshop3lesson.Goods;
 
 // 1.	Даны сведения об экспортируемых товарах: 
 // указывается наименование товара, страна, экспортирующая товар, 

@@ -1,14 +1,14 @@
-package Workshop3_lesson;
-
-import Workshop3_lesson.Goods.Goods;
+package Workshop3lesson;
 
 import java.util.*;
 
+import Workshop3lesson.Goods.*;
+
 public class Main {
     public static void main(String[] args) {
-        Goods goods1 = new Goods("qwe2", "rt1", "5");
-        Goods goods2 = new Goods("qwe", "rt2", "6");
-        Goods goods3 = new Goods("qwe2", "rt14", "7");
+        Goods goods1 = new Goods("qwe2", "rt1", 5);
+        Goods goods2 = new Goods("qwe", "rt2", 6);
+        Goods goods3 = new Goods("qwe2", "rt14", 7);
         List<Goods> listGoods = new ArrayList<>();
         listGoods.add(goods1);
         listGoods.add(goods2);
