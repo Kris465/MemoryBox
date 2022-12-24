@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
+            "mainClass": "Homework3.Goods.Main",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
             "mainClass": "Workshop3Lesson2.Main",
             "projectName": "Java_fa7915a7"
         },

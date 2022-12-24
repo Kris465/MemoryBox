@@ -11,6 +11,6 @@ public class task4 {
         second = num.nextInt();
         result = first + second;
         System.out.println("Your result is: " + result);
-        
+        num.close();
     }
 }
