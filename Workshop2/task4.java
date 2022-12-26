@@ -1,4 +1,4 @@
-package Workshop2Lesson;
+package Workshop2;
 
 public class task4 {
     public static void main(String[] args) {

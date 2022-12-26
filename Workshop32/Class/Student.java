@@ -1,4 +1,4 @@
-package Workshop3Lesson2.Class;
+package Workshop32.Class;
 
 public class Student {
     private String surName;

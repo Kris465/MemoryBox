@@ -1,7 +1,8 @@
-package Workshop3Lesson2;
+package Workshop32;
 
 import java.util.*;
-import Workshop3Lesson2.Class.*;
+
+import Workshop32.Class.*;
 
 public class Main {
     public static void main(String[] args) {

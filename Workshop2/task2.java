@@ -1,4 +1,4 @@
-package Workshop2Lesson;
+package Workshop2;
 
 import java.util.Scanner;
 
