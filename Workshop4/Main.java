@@ -29,5 +29,13 @@ public class Main {
         // Замена элементов
         integerLinkedList.set(3, 10);
         System.out.println("list = " + integerLinkedList);
+        // Проверить на наличие 
+        integerLinkedList.contains(3);
+        System.out.println("list = " + integerLinkedList);
+        // Удаление элемента
+        integerLinkedList.remove(3);
+        System.out.println("list = " + integerLinkedList);
+        integerLinkedList.remove((Integer) 2);
+        System.out.println("list = " + integerLinkedList);
     }   
 }
