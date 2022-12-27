@@ -22,15 +22,18 @@
 
 from random import randint
 
-def random_polinom():
-    user_len = int(input("Inpit the length of your wished polinom: "))
-    lst = []
-    lst_polinom = []
+def random_polinom(user_len):   
+    rand_lst = []
 
     for i in range(1, user_len + 1): 
-        lst.append(randint(-10, 10))
+        rand_lst.append(randint(-9, 9))
+           
+    print(rand_lst)
+    return(rand_lst)
 
-    for i in range(1, user_len):
+def file_writing(lst, user_len):
+    lst_polinom = []
+    for i in range(0, user_len):
         if lst[i] > 0: 
             polinom_part = "+ " + str(lst[i]) + "*x^" + str(user_len)
             lst_polinom.append(polinom_part)
@@ -41,22 +44,19 @@ def random_polinom():
             user_len -= 1
         else:
             user_len -= 1
-           
-    print(lst_polinom)
-    return(lst_polinom)
 
-def file_writing(lst):
-    if "+" in lst[0]:
-        str_lst = str(lst[0])
+    if "+" in lst_polinom[0]:
+        str_lst = str(lst_polinom[0])
         str_lst = str_lst[2:]
-        lst[0] = str_lst
+        lst_polinom[0] = str_lst
 
-    pol = " ".join(lst) + " = 0"
+    pol = " ".join(lst_polinom) + " = 0"
     print(pol)
     text_to_file = open("task4.txt", "a") # Здесь можно поменять название файла на task5_input.txt чтобы сделать многочлен для 5 
     text_to_file.write(pol + "\n")
     text_to_file.close
 
 
-lst_pol = random_polinom()
-file_writing(lst_pol)
+user_number = int(input("Inpit the length of your wished polinom: "))
+lst_pol = random_polinom(user_number)
+file_writing(lst_pol, user_number)
