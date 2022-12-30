@@ -18,6 +18,7 @@ public class task2 {
         String userWord = scanner.nextLine();
         userWord = userWord.toLowerCase();
         map.put(userWord, 0);
+        scanner.close();
 
         for (int i = 0; i < words.length; i++) {
             if (words[i].equals(userWord)) {
