@@ -1,9 +1,7 @@
 package Homework5;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 // 3) Найти пересечения слов в массивах и указать их общее количество.
 // Пример:
