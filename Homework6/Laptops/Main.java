@@ -1,4 +1,4 @@
-package Homework6;
+package Homework6.Laptops;
 
 // Задание:
 // • Подумать над структурой класса Ноутбук для магазина техники - выделить поля и методы. Реализовать в java.
@@ -13,7 +13,9 @@ package Homework6;
 // • Отфильтровать ноутбуки их первоначального множества и вывести проходящие по условиям.
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -30,6 +32,21 @@ public class Main {
         
         System.out.println("Input the number of your wished option: \n 1.RAM \n 2.HDD \n 3.OS \n 4.Colour \n 5.Size");
         Scanner scanner = new Scanner(System.in);
+        Map<Integer, String> map = new HashMap<>();
+        List<String> userValues = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            System.out.println(i + 1);
+            userValues.add(scanner.nextLine());
+        }
         
+        for (int i = 0; i < userValues.size(); i++) {
+            map.put(i, userValues[i]);
+        }
+
+        for (Map.Entry<Integer, String> entry :map.entrySet()) {
+            System.out.println("The word - " + entry.getKey() + " - meets " + entry.getValue());
+
+        }
+        scanner.close();
     }
 }

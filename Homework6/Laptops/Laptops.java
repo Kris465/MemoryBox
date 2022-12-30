@@ -1,4 +1,4 @@
-package Homework6;
+package Homework6.Laptops;
 
 public class Laptops {
     private Integer ram;

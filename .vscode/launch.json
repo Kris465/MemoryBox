@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Homework6.Laptops.Main",
+            "projectName": "Java_fa7915a7"
+        },
+        {
+            "type": "java",
             "name": "Launch task2",
             "request": "launch",
             "mainClass": "Homework5.task2",
