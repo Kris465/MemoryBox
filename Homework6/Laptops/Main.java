@@ -39,9 +39,6 @@ public class Main {
             userValues.add(scanner.nextLine());
         }
         
-        for (int i = 0; i < userValues.size(); i++) {
-            map.put(i, userValues[i]);
-        }
 
         for (Map.Entry<Integer, String> entry :map.entrySet()) {
             System.out.println("The word - " + entry.getKey() + " - meets " + entry.getValue());
