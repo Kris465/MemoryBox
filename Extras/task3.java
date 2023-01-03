@@ -6,5 +6,6 @@ public class task3 {
         Scanner str = new Scanner(System.in); // str - переменная объекта Scanner, в которую мы присваиваем значение функции Scanner(Берем System и делаем в нее in)
         System.out.println("Your string is: " + str.nextLine()); // для вывода int можем использовать ...nextInt()
         // Через + я сложила несколько строк в выводе
+        str.close();
     }
 }

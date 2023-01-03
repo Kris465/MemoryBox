@@ -2,24 +2,22 @@ package Workshop32;
 
 import java.util.*;
 
-import Workshop32.Class.*;
-
 public class Main {
     public static void main(String[] args) {
-        Student student1 = new Student("Иванов", 5, 1700.0, 2);
-        Student student2 = new Student("Петров", 6, 1550.6, 3);
-        Student student3 = new Student("Сидорова", 7, 2300.2, 5);
-        Student student4 = new Student("Лукьянова", 7, 1263.2, 3);
-        List<Student> listStudent = new ArrayList<>();
-        listStudent.add(student1);
-        listStudent.add(student2);
-        listStudent.add(student3);
-        listStudent.add(student4);
-        for (int i = 0; i < listStudent.size(); i++) {
-            Student student = listStudent.get(i);
-            if ((student.getMark() >= 2) && (student.getMark() <= 5) && 
-                    (student.getMark() % 2 == 1) && (student.getSurName().endsWith("ова"))) {
-                System.out.println("Student: " + student.getSurName() + " salary " + student.getSalary());
+        Students Student1 = new Students("Иванов", 5, 1700.0, 2);
+        Students Student2 = new Students("Петров", 6, 1550.6, 3);
+        Students Student3 = new Students("Сидорова", 7, 2300.2, 5);
+        Students Student4 = new Students("Лукьянова", 7, 1263.2, 3);
+        List<Students> listStudents = new ArrayList<>();
+        listStudents.add(Student1);
+        listStudents.add(Student2);
+        listStudents.add(Student3);
+        listStudents.add(Student4);
+        for (int i = 0; i < listStudents.size(); i++) {
+            Students Students = listStudents.get(i);
+            if ((Students.getMark() >= 2) && (Students.getMark() <= 5) && 
+                    (Students.getMark() % 2 == 1) && (Students.getSurName().endsWith("ова"))) {
+                System.out.println("Students: " + Students.getSurName() + " salary " + Students.getSalary());
             }
         }
     } 
