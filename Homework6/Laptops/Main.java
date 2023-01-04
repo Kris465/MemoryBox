@@ -30,20 +30,39 @@ public class Main {
         listLaptops.add(laptop3);
         listLaptops.add(laptop4);
         
-        System.out.println("Input the number of your wished option: \n 1.RAM \n 2.HDD \n 3.OS \n 4.Colour \n 5.Size");
         Scanner scanner = new Scanner(System.in);
         Map<Integer, String> map = new HashMap<>();
-        List<String> userValues = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            System.out.println(i + 1);
-            userValues.add(scanner.nextLine());
-        }
         
-
+        System.out.println("Input you wished values. 1. RAM: ");
+        map.put(1, scanner.nextLine());
+        System.out.println("2. HDD: ");
+        map.put(2, scanner.nextLine());
+        System.out.println("3. OS: ");
+        map.put(3, scanner.nextLine());
+        System.out.println("4. Colour: ");
+        map.put(4, scanner.nextLine());
+        System.out.println("5. Size: ");
+        map.put(5, scanner.nextLine());
+        
         for (Map.Entry<Integer, String> entry :map.entrySet()) {
-            System.out.println("The word - " + entry.getKey() + " - meets " + entry.getValue());
-
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
+
+        List<Laptops> outputLaptops = new ArrayList<>();
+
+        int option = 5;
+        switch (option) {
+            case 1:
+                var tempValue = map.get(1);
+                if (listLaptops.contains(tempValue)) {
+                    int index = listLaptops.indexOf(tempValue);
+                    outputLaptops.add(listLaptops.get(index)); 
+                }
+        }
+
+
         scanner.close();
     }
+
+    
 }
