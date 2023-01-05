@@ -49,62 +49,10 @@ public class Main {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
 
-        List<Laptops> outputLaptops = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                var tempValue = map.get(i);
-                if (listLaptops.contains(tempValue)) {
-                    int index = listLaptops.indexOf(tempValue);
-                    outputLaptops.add(listLaptops.get(index));
-                } else {
-                    break;
-                }
-                
+        for (int i = 0; i < listLaptops.size(); i++) {
+            if (listLaptops.get(i) == map) {
+                System.out.println(listLaptops.get(i));
             }
         }
-
-        // int option = 5;
-        // switch (option) {
-        //     case 1:
-        //         var tempValue1 = map.get(1);
-        //         if (listLaptops.contains(tempValue1)) {
-        //             int index = listLaptops.indexOf(tempValue1);
-        //             outputLaptops.add(listLaptops.get(index)); 
-        //         }
-        //         break;
-        //     case 2:
-        //         var tempValue2 = map.get(2);
-        //         if (listLaptops.contains(tempValue2)) {
-        //         int index = listLaptops.indexOf(tempValue2);
-        //         outputLaptops.add(listLaptops.get(index)); 
-        //         }
-        //         break;
-        //     case 3:
-        //         var tempValue3 = map.get(3);
-        //         if (listLaptops.contains(tempValue3)) {
-        //             int index = listLaptops.indexOf(tempValue3);
-        //             outputLaptops.add(listLaptops.get(index)); 
-        //         }
-        //         break;
-        //     case 4:
-        //         var tempValue4 = map.get(4);
-        //         if (listLaptops.contains(tempValue4)) {
-        //             int index = listLaptops.indexOf(tempValue4);
-        //             outputLaptops.add(listLaptops.get(index)); 
-        //         }
-        //         break;
-        //     case 5:
-        //         var tempValue5 = map.get(5);
-        //         if (listLaptops.contains(tempValue5)) {
-        //             int index = listLaptops.indexOf(tempValue5);
-        //             outputLaptops.add(listLaptops.get(index)); 
-        //         }
-        //         break;
-        // }
-
-        for (int i = 0; i < outputLaptops.size(); i++) {
-            System.out.println(outputLaptops.get(i));
-        } 
     } 
 }
