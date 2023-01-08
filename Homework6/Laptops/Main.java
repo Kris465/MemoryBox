@@ -79,9 +79,8 @@ public class Main {
             }
         }
 
-        Iterator<Laptops> laptop = outputLaptops.iterator();
-        while (laptop.hasNext()) {
-            System.out.println(laptop.next());  
+        for (Laptops i : outputLaptops) {
+            System.out.println(i);
         }
     } 
 }
