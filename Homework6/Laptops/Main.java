@@ -14,6 +14,8 @@ package Homework6.Laptops;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -49,10 +51,37 @@ public class Main {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
 
+        int ram = Integer.parseInt(map.get(1));
+        int hdd = Integer.parseInt(map.get(2));
+        double size = Double.parseDouble(map.get(5));
+
+        HashSet<Laptops> outputLaptops = new HashSet<>();
+
         for (int i = 0; i < listLaptops.size(); i++) {
-            if (listLaptops.get(i) == map) {
-                System.out.println(listLaptops.get(i));
+            Laptops Laptop = listLaptops.get(i);           
+            if (Laptop.getRam() >= ram) {
+                outputLaptops.add(Laptop);
+                System.out.println(Laptop + "1");
+            } else if (Laptop.getHdd() >= hdd) {
+                outputLaptops.add(Laptop);
+                System.out.println(Laptop + "2");
+            } else if (Laptop.getOs() == map.get(3)) {
+                outputLaptops.add(Laptop);
+                System.out.println(Laptop + "3");
+            } else if (Laptop.getColour() == map.get(4)) {
+                outputLaptops.add(Laptop);
+                System.out.println(Laptop + "4");
+            } else if (Laptop.getSize() >= size) {
+                outputLaptops.add(Laptop);
+                System.out.println(Laptop + "5");
+            } else {
+                System.out.println("There isn't the most suitable laptop. Change options and try again.");
             }
+        }
+
+        Iterator<Laptops> laptop = outputLaptops.iterator();
+        while (laptop.hasNext()) {
+            System.out.println(laptop.next());  
         }
     } 
 }
