@@ -13,14 +13,13 @@ package Homework6.Laptops;
 // • Отфильтровать ноутбуки их первоначального множества и вывести проходящие по условиям.
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Laptops laptop1 = new Laptops(2, 200, "Windows", "black", 19.2);
         Laptops laptop2 = new Laptops(4, 100, "Mac", "blue", 14.2);
@@ -32,35 +31,27 @@ public class Main {
         listLaptops.add(laptop3);
         listLaptops.add(laptop4);
         
-        Scanner scanner = new Scanner(System.in);
-        Map<Integer, String> map = new HashMap<>();
+        Scanner inputword = new Scanner(System.in);
         
         System.out.println("Input you wished values. 1. RAM: ");
-        map.put(1, scanner.nextLine());
+        int ram = inputword.nextInt();
         System.out.println("2. HDD: ");
-        map.put(2, scanner.nextLine());
+        int hdd = inputword.nextInt();
         System.out.println("3. OS: ");
-        map.put(3, scanner.nextLine());
+        String userOS = inputword.next();
         System.out.println("4. Colour: ");
-        map.put(4, scanner.nextLine());
+        String colour = inputword.next();
         System.out.println("5. Size: ");
-        map.put(5, scanner.nextLine());
-        scanner.close();
-        
-        for (Map.Entry<Integer, String> entry :map.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }
-
-        int ram = Integer.parseInt(map.get(1));
-        int hdd = Integer.parseInt(map.get(2));
-        double size = Double.parseDouble(map.get(5));
+        double size = inputword.nextDouble();
+        inputword.close();
 
         List<Laptops> outputLaptops = new ArrayList<>();
 
         for (int i = 0; i < listLaptops.size(); i++) {
             Laptops Laptop = listLaptops.get(i);
-            System.out.println(Laptop.getRam() + " " + Laptop.getHdd() + Laptop.getOs() + Laptop.getColour() + Laptop.getSize());
-            if ((Laptop.getRam() >= ram) || (Laptop.getHdd() >= hdd) || (Laptop.getOs() == map.get(3)) || (Laptop.getColour() == map.get(4)) || (Laptop.getSize() >= size)) {
+            if ((Laptop.getRam() >= ram) | (Laptop.getHdd() >= hdd) | (Laptop.getSize() >= size)) {
+                outputLaptops.add(Laptop);
+            } else if ((Laptop.getOs().equals(userOS) | Laptop.getColour().equals(colour))) {
                 outputLaptops.add(Laptop);
             }
         }
