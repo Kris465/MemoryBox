@@ -55,32 +55,19 @@ public class Main {
         int hdd = Integer.parseInt(map.get(2));
         double size = Double.parseDouble(map.get(5));
 
-        HashSet<Laptops> outputLaptops = new HashSet<>();
+        List<Laptops> outputLaptops = new ArrayList<>();
 
         for (int i = 0; i < listLaptops.size(); i++) {
-            Laptops Laptop = listLaptops.get(i);           
-            if (Laptop.getRam() >= ram) {
+            Laptops Laptop = listLaptops.get(i);
+            System.out.println(Laptop.getRam() + " " + Laptop.getHdd() + Laptop.getOs() + Laptop.getColour() + Laptop.getSize());
+            if ((Laptop.getRam() >= ram) || (Laptop.getHdd() >= hdd) || (Laptop.getOs() == map.get(3)) || (Laptop.getColour() == map.get(4)) || (Laptop.getSize() >= size)) {
                 outputLaptops.add(Laptop);
-                System.out.println(Laptop + "1");
-            } else if (Laptop.getHdd() >= hdd) {
-                outputLaptops.add(Laptop);
-                System.out.println(Laptop + "2");
-            } else if (Laptop.getOs() == map.get(3)) {
-                outputLaptops.add(Laptop);
-                System.out.println(Laptop + "3");
-            } else if (Laptop.getColour() == map.get(4)) {
-                outputLaptops.add(Laptop);
-                System.out.println(Laptop + "4");
-            } else if (Laptop.getSize() >= size) {
-                outputLaptops.add(Laptop);
-                System.out.println(Laptop + "5");
-            } else {
-                System.out.println("There isn't the most suitable laptop. Change options and try again.");
             }
         }
 
-        for (Laptops i : outputLaptops) {
-            System.out.println(i);
+        for (int i = 0; i < outputLaptops.size(); i++) {
+            Laptops laptop = outputLaptops.get(i);
+            System.out.println(laptop.getRam() + " " + laptop.getHdd() + " " + laptop.getOs() + " " + laptop.getColour() + " " + laptop.getSize());
         }
     } 
 }
