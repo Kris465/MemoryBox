@@ -15,5 +15,4 @@ public class PointMethod {
         // Создать точку 
         // Печать точки
     }
-
 }
