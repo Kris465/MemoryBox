@@ -24,7 +24,7 @@ import random
 def abv_func():
     text = input("Input text you wish to shuffle: ")
     num = int(input("Input the number of mixed words: "))
-    ls = ["".join([random.choice(text) for i in range(0, len(text))]) for k in range(num)]
+    ls = ["".join(random.choice(text) for i in range(0, len(text))) for k in range(num)]
     print(ls)
     looking_for = input("Which word would you like to delete? ")
     
