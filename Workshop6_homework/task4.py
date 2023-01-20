@@ -12,11 +12,14 @@ from collections import OrderedDict
 
 def main_func():
     num = int(input("How many names would you like to input?: "))
-    users_names = [input() for i in range(num)]
+    names = sorted([input() for i in range(num)])
     
-    for name in users_names:
-        users_names.setdefault(name.split[1][0], {}).setdefault(name.split[0][0], []).append(name)
-        return dict(OrderedDict(sorted(users_names.items(), k=lambda x: x[0])))
+    users_names = {}
     
+    for name in names:
+        users_names.setdefault(name.split()[1][0], {}).setdefault(name.split()[0][0], []).append(name)
+        dictionary = dict(OrderedDict(sorted(users_names.items(), key=lambda x: x[0])))
     
-print(main_func())
+    print(dictionary)
+
+main_func()
