@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
+            "mainClass": "Workshop32.Main",
+            "projectName": "Java_272ca9ca"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
             "mainClass": "Homework6.Laptops.Main",
             "projectName": "Java_fa7915a7"
         },
