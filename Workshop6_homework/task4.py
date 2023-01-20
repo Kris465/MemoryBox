@@ -18,7 +18,7 @@ def main_func():
     
     for name in names:
         users_names.setdefault(name.split()[1][0], {}).setdefault(name.split()[0][0], []).append(name)
-        dictionary = dict(OrderedDict(sorted(users_names.items(), key=lambda x: x[0])))
+        dictionary = dict(OrderedDict(users_names.items(), key=lambda x: x[0]))
     
     print(dictionary)
 
