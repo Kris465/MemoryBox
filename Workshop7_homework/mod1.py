@@ -5,8 +5,9 @@ in: list.split()
 out: list[0]
 
 actions: **, *, /, //, %, +, -, s(sqrt)
-доделать возведение в степень
 """
+
+import logg
 
 actions = {
     "^": lambda x, y: str(float(x) ** float(y)),

@@ -3,12 +3,15 @@ Complex numbers are counted here
 
 """
 
+import logg
+
 actions = {
     "*": lambda x, y: str(complex(x) * complex(y)),
     "+": lambda x, y: str(complex(x) + complex(y)),
     "-": lambda x, y: str(complex(x) - complex(y)),
     "/": lambda x, y: str(complex(x) / complex(y))
 }
+
 
 def calculator(new_lst):
     
@@ -31,6 +34,7 @@ def calculator(new_lst):
         new_lst.insert(0, actions[b](a, c))
     
     return new_lst[0]
+
 
 def cut(ls):
     lst = []

@@ -8,8 +8,11 @@ output_menu shows user a result. It calls in main
 
 """
 from exception import errors
+import logg
+
 
 def input_menu():
+    logg.logging.debug("Program starts")
     print("Hello! I'm a calculator. Let's count? \n")
     print('''Input your statement usually: -2 + 3. 
     For addition: '+' 
@@ -23,15 +26,15 @@ def input_menu():
     For complex numbers you shoul use: -2+3j. Without spaces inside the number. If you don't have any value before j, you should put 1, like: 6+1j''')
     print("Don't forget to separete '(' and ')' with spaces.\n")
 
-    result = " "
+    result = "-1"
 
     while isinstance(result, str):
         us_string = input("Input your statement. If you want to come back, press 0: \n")
         result = errors(us_string)
 
-    print(result)
     return result
 
 def output_menu(result_in_main):
     print("Your answer is: ", result_in_main)
+    logg.logging.debug("Program has finished")
 
