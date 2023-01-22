@@ -19,36 +19,18 @@ def input_menu():
     For divining without  fraction: '//'
     For fraction from divining: '%'
     For power: '^' 
-    For square root put 's' before the number.\n''')
+    For square root put 's' before the number.\n
+    For complex numbers you shoul use: -2+3j. Without spaces inside the number. If you don't have any value before j, you should put 1, like: 6+1j''')
     print("Don't forget to separete '(' and ')' with spaces.\n")
 
     result = " "
 
     while isinstance(result, str):
-        us_string = sub_menu()
+        us_string = input("Input your statement. If you want to come back, press 0: \n")
         result = errors(us_string)
 
     print(result)
-    return result, kind
-
-def sub_menu():
-    c = 0
-
-    options = input("What kind of numbers would you like to count? \n 1 - rational numbers \n 2 - complex numbers \n 3 - exit \n")
-    if options == "1":
-        print("Thank you!")
-        user_string = input("Input your statement. Please, separate symbols from numbers. If you want to come back, press 0: \n")
-    elif options == "2":
-        print("So nice from you!")
-        user_string = input("Input you statemen. Plese, separate symbols from numbers, but symbol 'j' you don't have to separate. If you want to come back, press 0: \n")
-    elif options == "3" or c == 100:
-        print("Good bye!")
-        user_string = " "
-    else: 
-        print("I didn't understand you, try again: ")
-        c += 1
-
-    return user_string
+    return result
 
 def output_menu(result_in_main):
     print("Your answer is: ", result_in_main)
