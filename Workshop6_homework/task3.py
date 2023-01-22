@@ -9,7 +9,13 @@
 def names_dictionary():
     num = int(input("How many names would you like to input?: "))
     names = sorted([input() for i in range(num)])
-    dictionary = {name[0]: [name] * names.count(name) for name in names}
+    dictionary = {}
+    for i in names:
+        letter = i[0]
+        if letter not in dictionary:
+            dictionary[letter] = [i]
+        else:
+            dictionary[letter] += [i] 
     return dictionary
 
 print(names_dictionary())
