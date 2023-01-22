@@ -21,7 +21,7 @@ def input_menu():
     For divining: '/'
     For divining without  fraction: '//'
     For fraction from divining: '%'
-    For power: '^' 
+    For power: '**' 
     For square root put 's' before the number.\n
     For complex numbers you shoul use: -2+3j. Without spaces inside the number. If you don't have any value before j, you should put 1, like: 6+1j''')
     print("Don't forget to separete '(' and ')' with spaces.\n")
@@ -29,7 +29,7 @@ def input_menu():
     result = "-1"
 
     while isinstance(result, str):
-        us_string = input("Input your statement. If you want to come back, press 0: \n")
+        us_string = input("Input your statement: \n")
         result = errors(us_string)
 
     return result

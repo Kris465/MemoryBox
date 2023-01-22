@@ -1,12 +1,12 @@
 """
 This module checks user string for correct input
 
-It gets string and returns list
+it gets string and returns list
 first check returns False if there isn't a space in user's string
-Second check returns the type of operation
-third check returns False if divining on zero
-# Третья проверка на знаки в строке, должны быть только необходимые знаки
-# Обработки - 's' - привести к виду num s 0.5
+second check returns the type of operation
+third check returns string to menu, if it is invalid
+fourth check report about divining by zero
+fifth check formats s-string to give it to calculator
 """
 
 import logg
@@ -14,18 +14,29 @@ import logg
 def errors(users_string):
     ch1 = first_check(users_string)
     logg.logging.info(f"first check: {ch1}")
+
+    if ch1 == False:
+        return users_string
+        
     ch3 = third_check(users_string)
-    logg.logging.info(f"third check: {ch3}")
+    logg.logging.info(f"third check: {ch3}")   
     
     if ch3 != users_string:
-        print(ch3)
-        return users_string
-
+            return ch3
     
-        
-    use_lst = users_string.split()
+    ch4 = fourth_check(users_string)
+    logg.logging.info(f"fourth check: {ch4}")
 
-    return use_lst
+    if ch4 == users_string:
+        use_lst = users_string.split()
+    else: return users_string
+
+    if "s" in users_string:
+        ch5 = fifth_check(use_lst)
+        logg.logging.info(f"fifth check: {ch5}")
+        return ch5
+    else: return use_lst
+    
 
 def first_check(use_string):
     empty = " "
@@ -39,29 +50,47 @@ def second_check(use_string):
     else: return 1
 
 def third_check(use_string):
+    answer = ""
     k = second_check(use_string)
     if k == 1:
         for el in use_string:
             if el in "^+-%/*s0123456789 ":
-                return use_string
+                answer += el
             else:
-                return "invalid character"
+                answer = "invalid character"
+                break
     if k == 2:
         for el in use_string:
             if el in "+-/*0123456789j ":
-                return use_string
+                answer += use_string
             else:
-                return "invalid character"
+                answer = "invalid character"
+                break
+    return answer
 
-def fourth_check(use_lst):
-    indexes = [i + 1 for i in range(0, len(use_lst)) if use_lst[i] == "/"] # Берем следующие после / индексы в списке
-    pass
+
+def fourth_check(use_string):
+    indexes = [i + 2 for i in range(len(use_string)) if use_string[i] == "/"]
+    answer = use_string
+    for ind in indexes:
+        if use_string[ind] == "0":
+            answer = "division by zero"
+        else: answer = use_string
+
+    return answer
 
 def fifth_check(use_lst):
-    if "s" in use_lst:
-        k = use_lst.index("s")
-        if use_lst[k + 1].isdigit() or use_lst[k + 2].isdigit():
-            !!!!!!!
+    new_lst = []
+    for i in range(len(use_lst)):
+        if "s" in use_lst[i]:
+            new_lst.append(use_lst[i][1:])
+            new_lst.append(use_lst[i][0])
+            new_lst.append("0.5")
+        else:
+            new_lst.append(use_lst[i])
+    print(use_lst, new_lst)
+
+    return new_lst
     
 
 

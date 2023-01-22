@@ -14,7 +14,7 @@ from exception import second_check
 
 def main():
     use_lst = input_menu()
-
+    
     ch2 = second_check(str(use_lst))
     logg.logging.info(f"second check (1 - numbers, 2 - complex): {ch2}")
     if ch2 == 1:
