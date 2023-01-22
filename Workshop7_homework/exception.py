@@ -3,12 +3,15 @@ This module checks user string for correct input
 
 It gets string and returns list
 first check returns False if there isn't a space in user's string
-second check returns False if divining on zero
-# Третья проверка на знаки в строке, должны быть только необходимые знаки, причем надо подумать как передать тип операций (комлескное или обычное)
+second check finds out the type of numbers
+third check returns False if divining on zero
+# Четвертая проверка на знаки в строке, должны быть только необходимые знаки, причем надо подумать как передать тип операций (комлескное или обычное)
 """
 
 def errors(users_string):
     ch1 = first_check(users_string)
+    ch2 = second_check(users_string)
+    print(ch1, ch2)
 
     use_lst = users_string.split()
     # ch2 = second_check(use_lst)
@@ -20,7 +23,12 @@ def first_check(use_string):
         return False
     else: return True
 
-def second_check(use_lst):
+def second_check(use_string):
+    if "j" in use_string:
+        return 2
+    else: return 1
+
+def third_check(use_lst):
     indexes = [i + 1 for i in range(0, len(use_lst)) if use_lst[i] == "/"] # Берем следующие после / индексы в списке
     pass
     

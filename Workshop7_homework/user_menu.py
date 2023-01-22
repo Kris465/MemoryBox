@@ -29,7 +29,7 @@ def input_menu():
         result = errors(us_string)
 
     print(result)
-    return result
+    return result, kind
 
 def sub_menu():
     c = 0

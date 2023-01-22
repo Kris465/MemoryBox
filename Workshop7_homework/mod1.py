@@ -5,7 +5,7 @@ in: list.split()
 out: list[0]
 
 actions: **, *, /, //, %, +, -, s(sqrt)
-
+доделать возведение в степень
 """
 
 actions = {
@@ -25,14 +25,14 @@ def calculator(new_lst):
         if isinstance(val, list):
             new_lst[i] = calculator(val)
 
-    index_lst = [i for i, val in enumerate(new_lst) if val in "*/"]
+    index_lst = [i for i, val in enumerate(new_lst) if val in "*/%//^"]
 
     while index_lst:
         index_op = index_lst[0]
         a, b, c = new_lst[index_op - 1: index_op + 2]
         new_lst.insert(index_op - 1, actions[b](a, c))
         del new_lst[index_op: index_op + 3]
-        index_lst = [i for i, val in enumerate(new_lst) if val in "*/"]
+        index_lst = [i for i, val in enumerate(new_lst) if val in "*/%//^"]
     
     while len(new_lst) > 1:
         a, b, c = new_lst[:3]
