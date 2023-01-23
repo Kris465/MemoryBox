@@ -1,6 +1,9 @@
+"""
+this module prints answer
+
+"""
 
 import logg
-
 
 def output(result):
     print(result)
