@@ -5,24 +5,27 @@ This module is a point of entry. So run it to run the app
 
 """
 
+import logg
 from user_menu import input_menu
-from user_menu import output_menu
 import mod1
 import mod2
 from exception import second_check
-from logg import logger
+from end_menu import output
 
 def main():
     use_lst = input_menu()
-    logger()
-    k = second_check(str(use_lst))
-    print(k)
-    if k == 1:
+    temp_string = str(use_lst)
+    
+    ch2 = second_check(temp_string)
+    logg.logging.info(f"second check (1 - numbers, 2 - complex): {ch2}")
+    if ch2 == 1:
         temp = mod1.cut(use_lst)
         result = mod1.calculator(temp)
     else:
         temp = mod2.cut(use_lst)
         result = mod2.calculator(temp)
-    output_menu(result)
+    
+    output(result)
+
 
 main()
