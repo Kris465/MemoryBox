@@ -10,19 +10,22 @@ fifth check formats s-string to give it to calculator
 """
 
 import logg
+from end_menu import output
 
 def errors(users_string):
     ch1 = first_check(users_string)
     logg.logging.info(f"first check: {ch1}")
 
     if ch1 == False:
-        return users_string
+        print("I couldn't find statement in your input.")
+        output(users_string)
         
     ch3 = third_check(users_string)
     logg.logging.info(f"third check: {ch3}")   
     
     if ch3 != users_string:
-            return ch3
+            print("Please, check it again.")
+            output(ch3)
     
     ch4 = fourth_check(users_string)
     logg.logging.info(f"fourth check: {ch4}")
@@ -54,15 +57,15 @@ def third_check(use_string):
     k = second_check(use_string)
     if k == 1:
         for el in use_string:
-            if el in "^+-%/*s0123456789 ":
+            if el in "^+-%/*s0123456789() ":
                 answer += el
             else:
                 answer = "invalid character"
                 break
-    if k == 2:
+    elif k == 2:
         for el in use_string:
-            if el in "+-/*0123456789j ":
-                answer += use_string
+            if el in "+-/*0123456789j() ":
+                answer += el
             else:
                 answer = "invalid character"
                 break
@@ -88,7 +91,6 @@ def fifth_check(use_lst):
             new_lst.append("0.5")
         else:
             new_lst.append(use_lst[i])
-    print(use_lst, new_lst)
 
     return new_lst
     

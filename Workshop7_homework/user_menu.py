@@ -34,7 +34,5 @@ def input_menu():
 
     return result
 
-def output_menu(result_in_main):
-    print("Your answer is: ", result_in_main)
-    logg.logging.debug("Program has finished")
+
 
