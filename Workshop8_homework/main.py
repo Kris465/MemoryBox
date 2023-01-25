@@ -9,13 +9,13 @@ def main():
     print("Hello!")
     choic = menu.options()
     if choic == "1":
-        menu.first_menu(choic)
+        menu.first_menu()
     elif choic == "2":
         menu.second_menu()
     elif choic == "3":
-        menu.third_menu(choic)
+        menu.third_menu()
     elif choic == "4":
-        menu.fourth_menu(choic)
+        menu.fourth_menu()
     elif choic == "5":
         menu.fifth_menu(choic)
     elif choic == "6":

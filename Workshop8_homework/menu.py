@@ -1,13 +1,15 @@
 """
 Menu
 
-1. options is a start menu.
-
+options is a start menu.
+first_menu is reading the whole file
+second_menu is reading line and column
 
 """
 
 import check
 import read_mod
+import write_mod
 
 def options():
     print("Choose one option: ")
@@ -19,8 +21,8 @@ def options():
         end_menu("Sorry, your phrase is incorrect, try again.")
     else: return choic
 
-def first_menu(use_choice):
-    everything = read_mod.reader("0" + use_choice)
+def first_menu():
+    everything = read_mod.reader("0")
     end_menu(everything)
 
 def second_menu():
@@ -39,10 +41,22 @@ def second_menu():
     else: end_menu("Incorrect input!")
 
 def third_menu():
-    pass # add information
+    print("What would you like to add? ")
+    lst = [input() for i in range(4)]
+    lst.append(0)
+    answer = write_mod.writer(lst)
+    end_menu(answer)
 
 def fourth_menu():
-    pass # correct information
+    first_menu()
+    num_line = input("Which line would you like to correct?")
+    num_line = check.check_in(num_line, "1234567890")
+    lst = [input() for i in range(4)]
+    lst.append(num_line)
+    lst.append(1)
+    answer = write_mod.writer(lst)
+    
+
 
 def fifth_menu():
     pass # delete information
