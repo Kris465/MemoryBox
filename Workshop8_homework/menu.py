@@ -11,9 +11,10 @@ import check
 import read_mod
 import write_mod
 
+
 def options():
     print("Choose one option: ")
-    choic = input("1. Show all \n2. Find information \n3. Add information \n4. Correct information \n5. Delete information \n6. Export/Import \n7. Exit \n")
+    choic = input("1. Show all \n2. Find information \n3. Add information \n4. Correct information \n5. Delete information \n6. Export/Import \n")
     ticket = check.check_in(choic, "1234567")
     if choic == "7":
         end_menu("Bye!")
@@ -21,9 +22,11 @@ def options():
         end_menu("Sorry, your phrase is incorrect, try again.")
     else: return choic
 
+
 def first_menu():
     everything = read_mod.reader("0")
     return everything
+
 
 def second_menu():
     in_str = input("What kind of information would you like? \n1. Line \n2. Column \n")
@@ -40,6 +43,7 @@ def second_menu():
         end_menu(answer)
     else: end_menu("Incorrect input!")
 
+
 def third_menu():
     lst = first_menu()
     print("What would you like to add? ")
@@ -47,6 +51,7 @@ def third_menu():
     lst.append(add_lst)
     write_mod.writer(lst)
     end_menu(first_menu())
+
 
 def fourth_menu():
     all_inf = first_menu()
@@ -61,6 +66,7 @@ def fourth_menu():
         end_menu(first_menu())
     else: end_menu("Sorry, try again.")
 
+
 def fifth_menu():
     all_inf = first_menu()
     end_menu(all_inf)
@@ -70,6 +76,7 @@ def fifth_menu():
     write_mod.writer(all_inf)
     end_menu(first_menu())
 
+
 def sixth_menu():
     in_str = input("1. Export\n2. Import\n")
     checked_str = check.check_in(in_str, "12")
@@ -78,7 +85,9 @@ def sixth_menu():
         if in_str == "1":
             all_inf = first_menu()
             with open("eximp.txt", "w") as f:
-                f.write(str(all_inf))
+                for elem in all_inf:
+                    elem = ",".join([ch for ch in elem if ch != "[" or ch != "]"])
+                    f.write(elem + "\n")
         else:
             ls = []
             with open("eximp.txt", "r") as f:
@@ -94,4 +103,10 @@ def sixth_menu():
 
 
 def end_menu(output):
-    print(output)
+    if isinstance(output, list):
+        for i in range(len(output)):
+            print(*output[i])
+    elif isinstance(output, str):
+        print(output)
+    elif isinstance(output, int):
+        print(output)

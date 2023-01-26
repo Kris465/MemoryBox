@@ -21,6 +21,5 @@ def main():
         menu.fifth_menu()
     elif choic == "6":
         menu.sixth_menu()
-    else: k += 1
 
 main()
