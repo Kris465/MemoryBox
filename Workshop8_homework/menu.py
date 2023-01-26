@@ -4,7 +4,10 @@ Menu
 options is a start menu.
 first_menu is reading the whole file
 second_menu is reading line and column
-
+third_menu adds line at the end of the file
+fourth_menu loads information from file, adds one line in asked index and writes back to the file
+fifth_menu loads information from file and deletes asked line with pop()
+sixth_menu reads - writes (csv - txt, txt - csv)
 """
 
 import check
