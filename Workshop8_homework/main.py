@@ -9,7 +9,8 @@ def main():
     print("Hello!")
     choic = menu.options()
     if choic == "1":
-        menu.first_menu()
+        everything = menu.first_menu()
+        menu.end_menu(everything)
     elif choic == "2":
         menu.second_menu()
     elif choic == "3":
@@ -17,9 +18,9 @@ def main():
     elif choic == "4":
         menu.fourth_menu()
     elif choic == "5":
-        menu.fifth_menu(choic)
+        menu.fifth_menu()
     elif choic == "6":
-        menu.sixth_menu(choic)
+        menu.sixth_menu()
     else: k += 1
 
 main()
