@@ -1,13 +1,15 @@
 """
 Menu
 
-1. options is a start menu.
-
+options is a start menu.
+first_menu is reading the whole file
+second_menu is reading line and column
 
 """
 
 import check
 import read_mod
+import write_mod
 
 def options():
     print("Choose one option: ")
@@ -19,9 +21,9 @@ def options():
         end_menu("Sorry, your phrase is incorrect, try again.")
     else: return choic
 
-def first_menu(use_choice):
-    everything = read_mod.reader("0" + use_choice)
-    end_menu(everything)
+def first_menu():
+    everything = read_mod.reader("0")
+    return everything
 
 def second_menu():
     in_str = input("What kind of information would you like? \n1. Line \n2. Column \n")
@@ -39,16 +41,57 @@ def second_menu():
     else: end_menu("Incorrect input!")
 
 def third_menu():
-    pass # add information
+    lst = first_menu()
+    print("What would you like to add? ")
+    add_lst = [input() for i in range(4)]
+    lst.append(add_lst)
+    write_mod.writer(lst)
+    end_menu(first_menu())
 
 def fourth_menu():
-    pass # correct information
+    all_inf = first_menu()
+    end_menu(all_inf)
+    num_line = input("Which line would you like to correct?\n")
+    num_line = check.check_in(num_line, "1234567890")
+    if num_line == True:
+        lst = [input() for i in range(4)]
+        all_inf.insert(num_line, lst)
+        all_inf.pop(num_line + 1)
+        write_mod.writer(all_inf)
+        end_menu(first_menu())
+    else: end_menu("Sorry, try again.")
 
 def fifth_menu():
-    pass # delete information
+    all_inf = first_menu()
+    end_menu(all_inf)
+    num_line = input("Which line would you like to delete?\n")
+    num_line = check.check_in(num_line, "1234567890")
+    all_inf.pop(num_line)
+    write_mod.writer(all_inf)
+    end_menu(first_menu())
 
 def sixth_menu():
-    pass # export\import
+    in_str = input("1. Export\n2. Import\n")
+    checked_str = check.check_in(in_str, "12")
+
+    if checked_str == True:
+        if in_str == "1":
+            all_inf = first_menu()
+            with open("eximp.txt", "w") as f:
+                f.write(str(all_inf))
+        else:
+            ls = []
+            with open("eximp.txt", "r") as f:
+                for line in f:
+                    ls.append(line)
+            lst = first_menu()
+            lst.append(ls)
+            write_mod.writer(lst)
+    else: 
+        print("Try again.")
+
+    end_menu(first_menu())
+
 
 def end_menu(output):
     print(output)
