@@ -5,8 +5,13 @@ public class Cat {
     String colour;
 
     public Cat(String name, int age, String colour) {
+
+        if (age > 0) 
+            this.age = age;
+        else
+            this.age = 1; //Защищаем поле age от отрицательного возрастра
+
         this.name = name;
-        this.age = age;
         this.colour = colour;
     }
 
@@ -15,7 +20,7 @@ public class Cat {
     }
 
     public Cat(String name) {
-        this(name, 4, "White");
+        this(name, 4);
     }
 
     void displayInfo() {
