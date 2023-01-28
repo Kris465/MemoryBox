@@ -1,0 +1,28 @@
+File - Preferences - Configure User Snippets - java.json
+
+ctor Public constructor
+dowhile Do-while statement
+foreach, iter Iterate over an array or Iterable
+fori Iterate over array
+if If statement
+ifelse If-else statement
+ifnull If statement checking for null
+ifnotnull If statement checking for not null
+main, psvm Public static main method
+new Create new Object
+private-metod Private method (нижнее подчеркивание)
+private-static-method Private static method (нижнее подчеркивание)
+prf Private field
+protected-method Protected method (нижнее подчеркивание)
+public-mеtod Public method (нижнее подчеркивание)
+public-static-method Public static method (нижнее подчеркивание)
+switch Switch statement
+syserr, serr Print to standard err
+sysout, sout Print to standard out
+systrace, soutm Print current method to standard out
+try-catch Try/catch block (нижнее подчеркивание)
+try-resources Try-with-resources statement (нижнее подчеркивание)
+while While statement
+
+https://snippet-generator.app/
+описание - сочетание клавиш - код. Справа - текст для java.json
