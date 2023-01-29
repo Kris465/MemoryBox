@@ -81,6 +81,29 @@ def fifth_menu():
 
 
 def sixth_menu():
+    # in_str = input("1. Export\n2. Import\n")
+    # checked_str = check.check_in(in_str, "12")
+
+    # if checked_str == True:
+    #     if in_str == "1":
+    #         all_inf = first_menu()
+    #         with open("eximp.txt", "w") as f:
+    #             for elem in all_inf:
+    #                 elem = ",".join([ch for ch in elem if ch != "[" or ch != "]"])
+    #                 f.write(elem + "\n")
+    #     else:
+    #         ls = []
+    #         with open("eximp.txt", "r") as f:
+    #             for line in f:
+    #                 line.split(",")
+    #                 ls.append(line)
+    #         lst = first_menu()
+    #         lst.append(ls)
+    #         write_mod.writer(lst)
+    # else: 
+    #     print("Try again.")
+
+    # end_menu(first_menu())
     in_str = input("1. Export\n2. Import\n")
     checked_str = check.check_in(in_str, "12")
 
@@ -95,11 +118,10 @@ def sixth_menu():
             ls = []
             with open("eximp.txt", "r") as f:
                 for line in f:
-                    line.split(",")
-                    ls.append(line)
-            lst = first_menu()
-            lst.append(ls)
-            write_mod.writer(lst)
+                    ls.append(line.rstrip().split(','))
+            # lst = first_menu()
+            # lst.append(ls)
+            write_mod.writer(ls)
     else: 
         print("Try again.")
 
