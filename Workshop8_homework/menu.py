@@ -95,6 +95,7 @@ def sixth_menu():
             ls = []
             with open("eximp.txt", "r") as f:
                 for line in f:
+                    line.split(",")
                     ls.append(line)
             lst = first_menu()
             lst.append(ls)
