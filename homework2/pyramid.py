@@ -29,8 +29,10 @@ def max_heapify(alist, index, size):
         largest = l
     else:
         largest = index
+
     if (r < size and alist[r] > alist[largest]):
         largest = r
+        
     if (largest != index):
         alist[largest], alist[index] = alist[index], alist[largest]
         max_heapify(alist, largest, size)
