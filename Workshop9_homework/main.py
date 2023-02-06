@@ -27,9 +27,7 @@ class UserState(StatesGroup):
 async def user_register(message: types.Message):
     await message.answer("Hello! What would you like to count?")
     logg.logging.debug("Program starts")
-    await message.answer("Input your statement usually: -2 + 3. \nFor addition: '+' \nFor subtraction: '-' \nFor multiplication: '*' \nFor divining: '/' \nFor divining without  fraction: '//' \nFor fraction from divining: '%' \nFor power: '**' \nFor square root put 's' before the number.\nFor complex numbers you shoul use: -2+3j. Without spaces inside the number. If you don't have any value before j, you should put 1, like: 6+1j.")
-    await message.answer("Don't forget to separate '(' and ')' with spaces.\n")
-    await message.answer("Please, input your statement: ")
+    await message.answer("Please, write your statement: ")
     await UserState.userstring.set()
 
 
@@ -49,7 +47,7 @@ async def get_userstring(message: types.Message, state: FSMContext):
         if isinstance(correct_in, str):
             answer = correct_in
         elif correct_in:
-            if "s" in data:
+            if "s" in current:
                 data = check.pow_remake(data)
                 answer = mod1.calculator(mod1.cut(data))
             else: answer = mod1.calculator(mod1.cut(data))   
