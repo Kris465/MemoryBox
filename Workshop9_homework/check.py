@@ -7,12 +7,12 @@ out: string if input was incorrect, True if usual numbers, False if complex numb
 """
 
 def checking(use_str):
-    if universal_check(use_str, "^+-%/*s0123456789() ") and zero_check(use_str):
+    if universal_check(use_str, "^+-%/*s0123456789(). ") and zero_check(use_str):
         return True
-    elif universal_check(use_str, "+-/*0123456789j() "):
+    elif universal_check(use_str, "+-/*0123456789j() ") and zero_check(use_str):
         return False
     else:
-        return "input is wrong"
+        return "Input is wrong!"
 
 def universal_check(use_string, example_string):
     i = 0
@@ -46,5 +46,4 @@ def pow_remake(use_lst):
             new_lst.append("0.5")
         else:
             new_lst.append(use_lst[i])
-
     return new_lst
