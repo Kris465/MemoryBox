@@ -1,40 +1,3 @@
-def find_index(new_board, num):
-    if isinstance(new_board, (list, tuple)):
-        for i, elem in enumerate(new_board):
-            index_ = find_index(elem, num)
-            if index_ != None:
-                return (i,) + index_
-    elif new_board == num:
-        return tuple()
-    return None
-
-def win_message(new_board):
-    lst = []
-    winning = False
-    win_sign = -1
-
-    for i in new_board:
-        for j in i:
-            lst.append(j)
-
-    if (lst[0] == lst[1] == lst[2]) or (lst[0] == lst[3] == lst[6]) or (lst[0] == lst[4] == lst[8]):
-        winning = True
-        win_sign = lst[0]
-    elif (lst[3] == lst[4] == lst[5]) or (lst[1] == lst[4] == lst[7]) or (lst[2] == lst[4] == lst[6]):
-        winning = True
-        win_sign = lst[4]
-    elif (lst[6] == lst[7] == lst[8]) or (lst[2] == lst[5] == lst[8]):
-        winning = True
-        win_sign = lst[8]
-    else: 
-        winning = False
-        win_sign = -1
-    
-    if winning == True:
-        return win_sign
-    else: return -1
-
-    
 def tic_tac_toe():
     print("Hello! Let's play tic_tac_toe!")
 
@@ -89,4 +52,40 @@ def tic_tac_toe():
             break
         else: continue
 
-tic_tac_toe()
+
+def find_index(new_board, num):
+    if isinstance(new_board, (list, tuple)):
+        for i, elem in enumerate(new_board):
+            index_ = find_index(elem, num)
+            if index_ != None:
+                return (i,) + index_
+    elif new_board == num:
+        return tuple()
+    return None
+
+
+def win_message(new_board):
+    lst = []
+    winning = False
+    win_sign = -1
+
+    for i in new_board:
+        for j in i:
+            lst.append(j)
+
+    if (lst[0] == lst[1] == lst[2]) or (lst[0] == lst[3] == lst[6]) or (lst[0] == lst[4] == lst[8]):
+        winning = True
+        win_sign = lst[0]
+    elif (lst[3] == lst[4] == lst[5]) or (lst[1] == lst[4] == lst[7]) or (lst[2] == lst[4] == lst[6]):
+        winning = True
+        win_sign = lst[4]
+    elif (lst[6] == lst[7] == lst[8]) or (lst[2] == lst[5] == lst[8]):
+        winning = True
+        win_sign = lst[8]
+    else: 
+        winning = False
+        win_sign = -1
+    
+    if winning == True:
+        return win_sign
+    else: return -1
