@@ -1,24 +1,17 @@
-"""
-Reading ssv module
-"""
-
-import csv
-
 def take():
-    lst = []
-    with open("vars.csv", encoding='utf-8') as r_file:
-        lst = csv.reader(r_file, delimiter = ",")
-        #lst = [row for row in read_object]
+    ls = []
+    with open("vars.txt", "r") as f:
+        for line in f.readlines():
+            ls.append(line)
+    f.close()
+    print(ls)
+    return ls
 
-    return lst
-    
-"""
-Writing csv module
-"""
-
-def put(use_lst):
-
-    with open("vars.csv", mode="w", newline='', encoding='utf-8') as w_file:
-        file_writer = csv.writer(w_file)
-        for elem in range(len(use_lst)):
-            file_writer.writerow(use_lst[elem])
+def put(lst):
+    print(lst)
+    with open("vars.txt", "w") as f:
+        f.write(lst[0])
+        f.write(lst[1] + "\n")
+        f.write(lst[2] + "\n")
+        f.write(lst[3])
+    f.close()
