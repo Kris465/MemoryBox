@@ -1,0 +1,20 @@
+@startuml
+
+Building <|-- Location
+
+Character <|-- Player
+Character <|-- Staff
+Character <|-- Patient
+Character <|-- Monster
+
+Staff <|-- Chief
+Staff <|-- Nurse
+Staff <|-- Doctor
+
+class Character{
+    -name
+    -hp
+    +Character(name, hp)
+}
+
+@enduml
