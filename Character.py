@@ -1,3 +1,6 @@
+import random
+
+
 class Character:
 
     @property
@@ -22,3 +25,9 @@ class Character:
         self.__hp = self.__base_hp
         self.__attack = attack
 
+    def attack(self, character):
+        damage = random.randint(0, self.__attack)
+        character.__get_damage(damage)
+
+    def __get_damage(self, damage):
+        self.__hp -= damage
