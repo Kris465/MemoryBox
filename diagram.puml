@@ -17,10 +17,10 @@ class Character{
     +name(self) -> str:
     +hp(self) -> int:
     +full_hp(self) -> int:
-    --Protected--
-    #_name: str
-    #_age: int
-    #_full_hp: int
+    --Private--
+    -_name: str
+    -_age: int
+    -_base_hp: int
     --Public constructor--
     +Character(self, name: str, hp: int) -> None:
 '    --Public method--
