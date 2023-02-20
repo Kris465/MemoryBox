@@ -1,21 +1,33 @@
+import random
+
+
 class Character:
 
-    def __init__(self, name, hp):
-        self.__name = name
-        self.__hp = hp
+    @property
+    def name(self) -> int:
+        return self.__name
 
     @property
-    def name(self):
-        return self.__name
-    
-    @name.setter
-    def name(self, name):
+    def full_hp(self) -> int:
+        return self.__base_hp
+
+    @property
+    def hp(self) -> int:
+        return self.__hp
+
+    @property
+    def attack(self) -> int:
+        return self.__attack
+
+    def __init__(self, name: str, hp: int, attack: int) -> None:
         self.__name = name
+        self.__base_hp = hp
+        self.__hp = self.__base_hp
+        self.__attack = attack
 
-    
-doctor = Character("Scary", 100)
-doctor.name = "House"
-print(doctor.name)
-print(doctor.__dict__)
+    def attack(self, character):
+        damage = random.randint(0, self.__attack)
+        character.__get_damage(damage)
 
-
+    def __get_damage(self, damage):
+        self.__hp -= damage
