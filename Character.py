@@ -1,21 +1,19 @@
 class Character:
 
-    def __init__(self, name, hp):
-        self.__name = name
-        self.__hp = hp
+    @property
+    def name(self) -> int:
+        return self.__name
 
     @property
-    def name(self):
-        return self.__name
-    
-    @name.setter
-    def name(self, name):
+    def full_hp(self) -> int:
+        return self.__base_hp
+
+    @property
+    def hp(self) -> int:
+        return self.__hp
+
+    def __init__(self, name: str, hp: int) -> None:
         self.__name = name
-
-    
-doctor = Character("Scary", 100)
-doctor.name = "House"
-print(doctor.name)
-print(doctor.__dict__)
-
+        self.__base_hp = hp
+        self.__hp = self.__base_hp
 
