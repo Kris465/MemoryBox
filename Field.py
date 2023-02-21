@@ -12,16 +12,11 @@ class Field():
     def mobs(self) -> Mob:
         return self.__mobs
     
-    def __init__ (self, size, player, mobs):
-        self.field = ["*" for i in range(size)]
-        self.__player = player
-        self.__mobs = mobs
+    def __init__ (self, player, mob):
+        self.field = [["*" * 5] for i in range(5)]
+        self.field.insert(0, self.__player.name)
+        self.field.insert(randint(0, 25), self.__mob.name)
 
     def display_info(self):
-        print(f"{self.field}")
-
-John = Player("John", 100, 10)
-Monster = Mob("Monster", 100, 10)
-new_field = Field(25, John, Monster)
-new_field.display_info()
+        [print(i) for i in self.field] 
 
