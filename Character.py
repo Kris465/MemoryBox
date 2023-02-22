@@ -5,29 +5,31 @@ class Character:
 
     @property
     def name(self) -> int:
-        return self.__name
+        return self._name
 
     @property
     def full_hp(self) -> int:
-        return self.__base_hp
+        return self._base_hp
 
     @property
     def hp(self) -> int:
-        return self.__hp
+        return self._hp
 
     @property
     def attack(self) -> int:
-        return self.__attack
+        return self._attack
 
-    def __init__(self, name: str, hp: int, attack: int) -> None:
-        self.__name = name
-        self.__base_hp = hp
-        self.__hp = self.__base_hp
-        self.__attack = attack
+    def __init__(self, character) -> None:
+        self._name = character._name
+        self._base_hp = character._hp
+        self._hp = self._base_hp
+        self._attack = character._attack
+        self._sign = character._sign
+        self._place = None
 
     def attack(self, character):
-        damage = random.randint(0, self.__attack)
+        damage = random.randint(0, self._attack)
         character.__get_damage(damage)
 
     def __get_damage(self, damage):
-        self.__hp -= damage
+        self._hp -= damage
