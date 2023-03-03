@@ -16,8 +16,16 @@ class Character:
         return self._hp
 
     @property
-    def attack(self) -> int:
+    def attack_power(self) -> int:
         return self._attack
+
+    @property
+    def place(self):
+        return self._place
+
+    @property
+    def sign(self):
+        return self._sign
 
     def __init__(self, character) -> None:
         self._name = character._name

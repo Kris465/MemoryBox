@@ -2,7 +2,6 @@ from Character import Character
 
 
 class Player(Character):
-    
 
     def __init__(self, name):
         self._base_hp = 100
@@ -12,4 +11,3 @@ class Player(Character):
         self._sign = "X"
 
         super().__init__(self)
-
