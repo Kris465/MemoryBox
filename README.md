@@ -1,11 +1,14 @@
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Kris465/TheGame)<br>
+![GitHub issues](https://img.shields.io/github/issues/Kris465/TheGame)<br>
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Kris465/TheGame)
 #  Простая игра ***TheGame*** #
 <code>![Alt-текст](https://ltdfoto.ru/image/ixRdPB)
 </code>
 
-### Этот проект выполнен в рамках дополнительных занятий по Python. 
+### Этот проект выполнен в рамках дополнительных занятий по Python.
 Игра написана на языке программирования Python.
- 
-_ _ _ _ _  
+
+_ _ _ _ _
 </code>
 
 ### Описание проекта:
@@ -21,14 +24,14 @@ _ _ _ _ _
   * *os*
   * *random*
 
-_ _ _ _ _  
+_ _ _ _ _
 </code>
 
 ### В следующей картинке изображена страктура игры *TheGame* и взаимодействия персонажей игры.
 ![alternative text](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/lameRER/TheGame/diagram/diagram.puml)
 
 
-_ _ _ _ _  
+_ _ _ _ _
 </code>
 
 ### Авторы игры:
