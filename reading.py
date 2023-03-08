@@ -1,4 +1,5 @@
 import reader
+from datetime import datetime
 
 def read(id_note):
     if id_note == 0:
