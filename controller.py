@@ -16,7 +16,9 @@ def user_menu():
             adding.add_(name, body)
         case 3:
             id_note = int(input("Input id of the note you would like to edit.\n"))
-            editing.edit(id_note)
+            name = input("What title would you like to see?\n")
+            body = input("What message would you like to leave?\n")
+            editing.edit(id_note, name, body)
         case 4:
-            deleting.delete()
-
+            id_note = int(input("Input id of the note that you wish to delete.\n"))
+            deleting.delete(id_note)
