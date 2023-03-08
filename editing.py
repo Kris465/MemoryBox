@@ -6,12 +6,11 @@ def edit(id_note, name, body):
     data = reader.read()
 
     now = datetime.now()
-    current_time = now.strftime("%H:%M")
 
     data["id"].insert(id_note, {
         'title': name,
         'message': body,
-        'time': current_time
+        'time': now
     })
 
     data["id"].pop(id_note + 1)
