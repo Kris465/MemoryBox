@@ -2,9 +2,10 @@ import editing
 import reading
 import adding
 import deleting
+import zero_note
 
 def user_menu():
-    value = int(input("1. Read\n2. Add\n3. Edit\n4. Delete\n"))
+    value = int(input("1. Read\n2. Add\n3. Edit\n4. Delete\n5. HELP!\n"))
     
     match value:
         case 1:
@@ -22,3 +23,10 @@ def user_menu():
         case 4:
             id_note = int(input("Input id of the note that you wish to delete.\n"))
             deleting.delete(id_note)
+        case 5:
+            answer = input("Have you lost file 'notes.json'? yes/no\n")
+            if answer == 'yes':
+                zero_note.sample_()
+            else:
+                print("Good luck!")
+        
