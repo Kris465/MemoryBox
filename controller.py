@@ -11,9 +11,9 @@ def logic():
     
         match value:
             case 1:
-                menu.output(reading.read(True))
+                menu.output(reading.read_all())
             case 2:
-                menu.output(reading.read(menu.id_()))
+                menu.output(reading.read_one())
             case 3:
                 adding.add_(menu.note())
             case 4:
