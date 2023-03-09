@@ -30,3 +30,9 @@ def start_menu():
     if option in [1, 2, 3, 4, 5, 6, 7]:
         return option
     else: print("Sorry, can you repeat, please?")
+
+def id_or_time():
+    opt = int(input("How would you like to see notes? id (1) or time (2)?\n"))
+    if opt == 1:
+        return True
+    else: return False
