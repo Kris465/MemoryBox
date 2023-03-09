@@ -30,9 +30,8 @@ _ _ _ _ _
 ### В следующей картинке изображена страктура игры *TheGame* и взаимодействия персонажей игры.
 ![alternative text](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/lameRER/TheGame/diagram/diagram.puml)
 
-
-_ _ _ _ _
-</code>
+main.py - пока не пушим
+!!!!!!!!!!!!!!!!!!!!!
 
 ### Авторы игры:
 
