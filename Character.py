@@ -1,10 +1,11 @@
 import random
 from move import Move
 
+
 class Character:
 
     @property
-    def name(self) -> int:
+    def name(self) -> int:  # возможно тут надо стринг
         return self._name
 
     @property
@@ -56,8 +57,10 @@ class Character:
 
     def move(self, field, move):
 
-            position = self._place
-            # print(field.field)
-            field.field[self._place[0]][self._place[1]] = '_'
-            field.field[position[0]-1][position[1]] = self._sign
-        # print(self.place)
+        position = self._place
+        # print(field.field)
+        field.field[self._place[0]][self._place[1]] = '_'
+        field.field[position[0] - 1][position[1]] = self._sign
+
+        print(field.field[position[0]][position[1] - 1])
+    # print(self.place)
