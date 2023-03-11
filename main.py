@@ -12,4 +12,4 @@ controller = Controller(vc, player, mobs, field)
 controller.init_units()
 game = True
 while game:
-    controller.move()
+    controller.review()
