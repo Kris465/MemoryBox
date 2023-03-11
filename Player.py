@@ -9,4 +9,5 @@ class Player(Character):
         self._name = name
         self._attack = 10
         self._sign = "X"
+        self._step = 1
         super().__init__(self)
