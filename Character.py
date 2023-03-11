@@ -4,7 +4,6 @@ from move import Move
 
 
 class Character:
-
     @property
     def name(self) -> int:  # возможно тут надо стринг
         return self._name
@@ -42,31 +41,48 @@ class Character:
         self._step = character._step
         self._place = None
 
-    def attack(self, character):
+    def attack(self, characters: list, review: dict):
         damage = random.randint(0, self._attack)
-        character.__get_damage(damage)
+        for character in characters:
+            for key, value in review.items():
+                if key != 'cp' and review[key] == character.place:
+                    return character.__get_damage(damage)
+        return None
+
 
     def __get_damage(self, damage):
         self._hp -= damage
+        if self._hp <= 0:
+            self._sign = '-'
+        return self
 
-    def move_side(self, field, x_cur, y_cur, x_new, y_new):
-        field.field[x_cur][y_cur] = '-'
-        field.field[x_new][y_new] = self._sign
-        self._place = [x_new, y_new]
+    def __move_side(self, field, pos_cur, pos_new):
+        if 0 <= pos_new[0] <= field.size -1 and 0 <= pos_new[1] <= field.size -1:
+            field.field[pos_new[0]][pos_new[1]] = self._sign
+            field.field[pos_cur[0]][pos_cur[1]] = '-'
+            self._place = pos_new
+        else:
+            field.field[pos_cur[0]][pos_cur[1]] = self._sign
         return field
 
-    def move(self, field, move):
-        step = self._step
-        x_cur, y_cur = self._place
-        x_new = x_cur
-        y_new = y_cur
+    def move(self, field, move, review: dict):
         match move:
             case Move.LEFT.value:
-                return self.move_side(field, x_cur, y_cur, x_new, y_new - step)
+                return self.move_side(field, review['cp'], review['left'])
             case Move.DOWN.value:
-                return self.move_side(field, x_cur, y_cur, x_new + step, y_new)
+                return self.move_side(field, review['cp'], review['down'])
             case Move.UP.value:
-                return self.move_side(field, x_cur, y_cur, x_new - step, y_new)
+                return self.move_side(field, review['cp'], review['up'])
             case Move.RIGHT.value:
-                return self.move_side(field, x_cur, y_cur, x_new, y_new + step)
-            
+                return self.move_side(field, review['cp'], review['right'])
+
+    def review(self):
+        step = self._step
+        cp = {}
+        x, y = self._place
+        cp['cp'] = self._place
+        cp['left'] = [x, y - step]
+        cp['down'] = [x + step, y]
+        cp['up'] = [x - step, y]
+        cp['right'] = [x, y + step]
+        return cp
