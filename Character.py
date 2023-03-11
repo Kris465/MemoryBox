@@ -1,5 +1,7 @@
 import random
+
 from move import Move
+
 
 class Character:
 
@@ -46,18 +48,22 @@ class Character:
     def __get_damage(self, damage):
         self._hp -= damage
 
-    def move_type(self, field, move):
-        if move == Move.UP:
-            pass
-        elif move == Move.DOWN:
-            pass
-        elif move == Move.LEFT:
-            pass
+    def move_side(self, field, x_cur, y_cur, x_new, y_new):
+        field.field[x_cur][y_cur] = '-'
+        field.field[x_new][y_new] = self._sign
+        self._place = [x_new, y_new]
+        return field
 
     def move(self, field, move):
-
-            position = self._place
-            # print(field.field)
-            field.field[self._place[0]][self._place[1]] = '_'
-            field.field[position[0]-1][position[1]] = self._sign
-        # print(self.place)
+        x_cur, y_cur = self._place
+        x_new = x_cur;
+        y_new = y_cur
+        match move:
+            case Move.LEFT.value:
+                return self.move_side(field, x_cur, y_cur, x_new, y_new - 1)
+            case Move.DOWN.value:
+                return self.move_side(field, x_cur, y_cur, x_new + 1, y_new)
+            case Move.UP.value:
+                return self.move_side(field, x_cur, y_cur, x_new - 1, y_new)
+            case Move.RIGHT.value:
+                return self.move_side(field, x_cur, y_cur, x_new + 1, y_new + 1)

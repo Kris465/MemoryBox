@@ -1,6 +1,4 @@
-import os
 from random import randint
-
 
 
 class Controller:
@@ -11,8 +9,13 @@ class Controller:
         self.field = field
         self.__display_info()
 
-    def move(self, move):
-        self.player.move(self.field, move)
+    def move(self):
+        move = self.view.move()
+        if move == 1:
+            move_side = self.view.movement()
+            self.field = self.player.move(self.field, move_side)
+        elif move == 2:
+            self.player.attack()
         self.__display_info()
 
     def __display_info(self):
