@@ -6,7 +6,7 @@ from move import Move
 class Character:
 
     @property
-    def name(self) -> int:
+    def name(self) -> int:  # возможно тут надо стринг
         return self._name
 
     @property
@@ -67,3 +67,4 @@ class Character:
                 return self.move_side(field, x_cur, y_cur, x_new - 1, y_new)
             case Move.RIGHT.value:
                 return self.move_side(field, x_cur, y_cur, x_new + 1, y_new + 1)
+
