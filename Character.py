@@ -56,7 +56,7 @@ class Character:
 
     def move(self, field, move):
         x_cur, y_cur = self._place
-        x_new = x_cur;
+        x_new = x_cur
         y_new = y_cur
         match move:
             case Move.LEFT.value:
@@ -66,5 +66,5 @@ class Character:
             case Move.UP.value:
                 return self.move_side(field, x_cur, y_cur, x_new - 1, y_new)
             case Move.RIGHT.value:
-                return self.move_side(field, x_cur, y_cur, x_new + 1, y_new + 1)
-
+                return self.move_side(field, x_cur, y_cur, x_new, y_new + 1)
+            
