@@ -39,6 +39,7 @@ class Character:
         self._hp = self._base_hp
         self._attack = character._attack
         self._sign = character._sign
+        self._step = character._step
         self._place = None
 
     def attack(self, character):
@@ -55,16 +56,17 @@ class Character:
         return field
 
     def move(self, field, move):
+        step = self._step
         x_cur, y_cur = self._place
         x_new = x_cur
         y_new = y_cur
         match move:
             case Move.LEFT.value:
-                return self.move_side(field, x_cur, y_cur, x_new, y_new - 1)
+                return self.move_side(field, x_cur, y_cur, x_new, y_new - step)
             case Move.DOWN.value:
-                return self.move_side(field, x_cur, y_cur, x_new + 1, y_new)
+                return self.move_side(field, x_cur, y_cur, x_new + step, y_new)
             case Move.UP.value:
-                return self.move_side(field, x_cur, y_cur, x_new - 1, y_new)
+                return self.move_side(field, x_cur, y_cur, x_new - step, y_new)
             case Move.RIGHT.value:
-                return self.move_side(field, x_cur, y_cur, x_new, y_new + 1)
+                return self.move_side(field, x_cur, y_cur, x_new, y_new + step)
             
