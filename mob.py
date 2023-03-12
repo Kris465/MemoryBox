@@ -6,15 +6,14 @@ class Mob(Character):
     
     def __init__(self, clothes, hat):
         self._name = 'Mob'
-        self._base_hp = 100
-        self._hp = self._base_hp
+        self._hp = 100
         self._attack = 10
         self._sign = "#"
         self._step = 1
         self.clothes = clothes
         self.hat = hat
 
-        super().__init__(self)
+        super().__init__(self._name, self._hp, self._attack, self._sign, self._step)
 
 
     def shout(self):

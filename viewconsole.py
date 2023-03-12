@@ -45,7 +45,7 @@ class ViewConsole:
         print("Ведено неверное значение")
 
     @staticmethod
-    def damage(character: Character):
+    def damage(character):
         if character is not None:
             print(f'{character.name} получил урон: {character.hp}')
         time.sleep(1)
