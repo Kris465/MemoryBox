@@ -46,17 +46,17 @@ class Character:
         for character in characters:
             for key, value in review.items():
                 if key != 'cp' and review[key] == character.place:
-                    return character.__get_damage(damage)
+                    return character._get_damage(damage)
         return None
 
 
-    def __get_damage(self, damage):
+    def _get_damage(self, damage):
         self._hp -= damage
         if self._hp <= 0:
             self._sign = '-'
         return self
 
-    def __move_side(self, field, pos_cur, pos_new):
+    def _move_side(self, field, pos_cur, pos_new):
         if 0 <= pos_new[0] <= field.size -1 and 0 <= pos_new[1] <= field.size -1:
             field.field[pos_new[0]][pos_new[1]] = self._sign
             field.field[pos_cur[0]][pos_cur[1]] = '-'
@@ -68,13 +68,13 @@ class Character:
     def move(self, field, move, review: dict):
         match move:
             case Move.LEFT.value:
-                return self.move_side(field, review['cp'], review['left'])
+                return self._move_side(field, review['cp'], review['left'])
             case Move.DOWN.value:
-                return self.move_side(field, review['cp'], review['down'])
+                return self._move_side(field, review['cp'], review['down'])
             case Move.UP.value:
-                return self.move_side(field, review['cp'], review['up'])
+                return self._move_side(field, review['cp'], review['up'])
             case Move.RIGHT.value:
-                return self.move_side(field, review['cp'], review['right'])
+                return self._move_side(field, review['cp'], review['right'])
 
     def review(self):
         step = self._step
