@@ -1,41 +1,47 @@
 from random import randint
 
+from Field import Field
+from Player import Player
+from characters import Characters
+
 
 class Controller:
-    def __init__(self, vc, player, mobs, field):
-        self.characters = []
-        self.review_attr = None
-        self.view = vc
-        self.player = player
-        self.mobs = mobs
+    def __init__(self, characters: Characters, field: Field):
+        self.characters = characters
         self.field = field
-        self.__display_info()
+        self.init_units()
 
+    def get_field(self):
+        return self.field
+
+    def get_characters(self):
+        return self.characters.team
 
     def review(self):
-        self.review_attr = self.player.review()
-        self.move()
+        for ch in self.get_characters():
+            ch.review_attr = ch.review()
 
-    def move(self):
-        move = self.view.move()
-        if move == 1:
-            move_side = self.view.movement()
-            self.field = self.player.move(self.field, move_side, self.review_attr)
-            self.field_update()
-        elif move == 2:
-            character = self.player.attack(self.characters, self.review_attr)
-            self.view.damage(character)
-            self.field_update()
-            [self.characters.remove(ch) for ch in self.characters if ch.hp <= 0]
-        self.__display_info()
+    def attack(self):
+        self.review()
+        for ch in self.get_characters():
+            if isinstance(ch, Player):
+                return ch.attack(self.get_characters(), ch.review_attr)
+
+    def is_dead(self):
+        self.field_update()
+        [self.get_characters().remove(ch) for ch in self.get_characters() if ch.hp <= 0]
+
+    def move(self, move_side):
+        self.review()
+        for ch in self.get_characters():
+            if isinstance(ch, Player):
+                ch.move(self.field, move_side, ch.review_attr)
+        self.field_update()
 
     def field_update(self):
-        for character in self.characters:
+        for character in self.characters.team:
             place = character.place
             self.field.field[place[0]][place[1]] = character.sign
-
-    def __display_info(self):
-        self.view.display_info(self.field)
 
     def ran(self):
         return randint(0, self.field.size - 1)
@@ -44,11 +50,6 @@ class Controller:
         return [self.ran(), self.ran()]
 
     def init_units(self):
-        self.player.place = self.generate()
-        self.field.field[self.player.place[0]][self.player.place[1]] = self.player.sign
-        for i in self.mobs:
-            i.place = self.generate()
-            self.field.field[i.place[0]][i.place[1]] = i.sign
-        self.characters = [i for i in self.mobs]
-        self.characters.append(self.player)
-        self.__display_info()
+        for ch in self.characters.team:
+            ch.place = self.generate()
+            self.field.field[ch.place[0]][ch.place[1]] = ch.sign

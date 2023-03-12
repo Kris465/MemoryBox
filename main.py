@@ -1,15 +1,14 @@
 from Field import Field
 from Mob import Mob
 from Player import Player
+from characters import Characters
 from controller import Controller
-from viewConsole import ViewConsole
+from viewconsole import ViewConsole
 
-player = Player('lameR')
-mobs = [Mob("Шляпа", "Платье") for _ in range(5)]
+characters = Characters()
+characters.add(Player('lameR'))
+[characters.add(Mob("Шляпа", "Платье")) for _ in range(5)]
 field = Field()
-vc = ViewConsole()
-controller = Controller(vc, player, mobs, field)
-controller.init_units()
-game = True
-while game:
-    controller.review()
+controller = Controller(characters, field)
+vc = ViewConsole(controller)
+vc.start()

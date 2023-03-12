@@ -40,6 +40,7 @@ class Character:
         self._sign = character._sign
         self._step = character._step
         self._place = None
+        self.review_attr = None
 
     def attack(self, characters: list, review: dict):
         damage = random.randint(0, self._attack)
@@ -49,7 +50,6 @@ class Character:
                     return character._get_damage(damage)
         return None
 
-
     def _get_damage(self, damage):
         self._hp -= damage
         if self._hp <= 0:
@@ -57,7 +57,7 @@ class Character:
         return self
 
     def _move_side(self, field, pos_cur, pos_new):
-        if 0 <= pos_new[0] <= field.size -1 and 0 <= pos_new[1] <= field.size -1:
+        if 0 <= pos_new[0] <= field.size - 1 and 0 <= pos_new[1] <= field.size - 1:
             field.field[pos_new[0]][pos_new[1]] = self._sign
             field.field[pos_cur[0]][pos_cur[1]] = '-'
             self._place = pos_new
