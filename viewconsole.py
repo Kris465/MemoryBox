@@ -1,7 +1,7 @@
 import os
 import time
 
-from Character import Character
+from character import Character
 from controller import Controller
 
 

@@ -1,7 +1,7 @@
 from random import randint
 
-from Field import Field
-from Player import Player
+from field import Field
+from player import Player
 from characters import Characters
 
 
