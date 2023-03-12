@@ -1,11 +1,15 @@
 import random
+from typing import Any
 
+from field import Field
 from move import Move
 
 
 class Character:
+    characters = []
+
     @property
-    def name(self) -> int:  # возможно тут надо стринг
+    def name(self) -> str:
         return self._name
 
     @property
@@ -32,31 +36,32 @@ class Character:
     def sign(self):
         return self._sign
 
-    def __init__(self, character) -> None:
-        self._name = '' if character._name is None else character._name
-        self._base_hp = character._hp
+    def __init__(self, name: str, hp: int, attack: int, sing: str, step: int) -> None:
+        self._name = name
+        self._base_hp = hp
         self._hp = self._base_hp
-        self._attack = character._attack
-        self._sign = character._sign
-        self._step = character._step
+        self._attack = attack
+        self._sign = sing
+        self._step = step
         self._place = None
-        self.review_attr = None
+        self.review_attr: dict = {}
+        self.characters.append(self)
 
-    def attack(self, characters: list, review: dict):
+    def attack(self) -> Any | None:
         damage = random.randint(0, self._attack)
-        for character in characters:
-            for key, value in review.items():
-                if key != 'cp' and review[key] == character.place:
-                    return character._get_damage(damage)
+        for character in self.characters:
+            for key in self.review_attr.keys():
+                if key != 'cp' and self.review_attr[key] == character.place:
+                    return character.get_damage(damage)
         return None
 
-    def _get_damage(self, damage):
+    def get_damage(self, damage: int):
         self._hp -= damage
         if self._hp <= 0:
             self._sign = '-'
         return self
 
-    def _move_side(self, field, pos_cur, pos_new):
+    def _move_side(self, field: Field, pos_cur, pos_new):
         if 0 <= pos_new[0] <= field.size - 1 and 0 <= pos_new[1] <= field.size - 1:
             field.field[pos_new[0]][pos_new[1]] = self._sign
             field.field[pos_cur[0]][pos_cur[1]] = '-'

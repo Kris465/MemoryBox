@@ -1,9 +1,3 @@
-import os
-
-
-from Player import Player
-
-
 class Field:
 
     @property
