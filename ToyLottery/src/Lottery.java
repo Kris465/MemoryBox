@@ -5,7 +5,7 @@ public class Lottery {
     
     private List<Toy> toysList;
 
-    public Lottery(List<Toy> toysList) {
+    public Lottery() {
         this.toysList = new ArrayList<Toy>();
     }
 

@@ -5,7 +5,7 @@ public class Mapper {
     }
 
     public Toy map(String line) {
-        String[] lines = line.split(",");
+        String[] lines = line.split(", ");
         return new Toy(Integer.valueOf(lines[0]), lines[1], Integer.valueOf(lines[2]), lines[3]);
     }
 }

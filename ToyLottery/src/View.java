@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -12,15 +13,15 @@ public class View {
         Commands com = Commands.NONE;
     
     while (true) {
-        String command = prompt("Input you command: ");
+        String command = prompt("Input you command: ").toUpperCase();
         com = Commands.valueOf(command);
         if (com == Commands.EXIT) return;
-        Lottery lottery = new Lottery(null);
-        controller.createLottery(lottery);
+        Lottery lottery = new Lottery();
+        controller.addToys(lottery, 30);
         switch (com) {
-            case ADDTOYS:
+            case ADD:
                 int size = Integer.valueOf(prompt("How many toys?"));
-                controller.addToys(lottery);
+                controller.addToys(lottery, size);
                 for(Toy toy : lottery.getToysList()) {
                     System.out.println(toy);
                 }
@@ -30,7 +31,7 @@ public class View {
                 System.out.println(prize);
                 break;
             case PRIZES:
-                controller.showAll();
+                controller.showAll().forEach(System.out::println);
                 break;
             }
         }
