@@ -1,7 +1,7 @@
 public enum Commands {
     
     NONE,
-    ADDTOYS,
+    ADD,
     LOTTERY,
     PRIZES,
     EXIT

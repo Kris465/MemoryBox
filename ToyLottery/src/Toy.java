@@ -1,11 +1,19 @@
 public class Toy {
     
+    public static int count = 0;
     private int id;
     private String name;
     private int size;
     private String colour;
     
-    public Toy(int id, String name, int size, String colour) {
+    public Toy(String name, int size, String colour) {
+        this.id = Toy.count += 1;
+        this.name = name;
+        this.size = size;
+        this.colour = colour;
+    }
+
+    public Toy(Integer id, String name, Integer size, String colour) {
         this.id = id;
         this.name = name;
         this.size = size;
@@ -48,4 +56,5 @@ public class Toy {
     public String toString() {
         return String.format("ID: %d, Name: %s, Size: %d, Colour: %s", id, name, size, colour);
     }
+
 }
