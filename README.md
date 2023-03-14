@@ -2,8 +2,6 @@
 ![GitHub issues](https://img.shields.io/github/issues/Kris465/TheGame)<br>
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Kris465/TheGame)
 #  Простая игра ***TheGame*** #
-<code>![Alt-текст](https://ltdfoto.ru/image/ixRdPB)
-</code>
 
 ### Этот проект выполнен в рамках дополнительных занятий по Python.
 Игра написана на языке программирования Python.
