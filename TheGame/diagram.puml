@@ -1,0 +1,78 @@
+@startuml
+
+'Building <|-- Location
+Character <|-- Player
+Character <|-- Mob
+'Mob <|-- Staff
+'Mob <|-- Patient
+'Mob <|-- Monster
+
+'Staff <|-- Chief
+'Staff <|-- Nurse
+'Staff <|-- Doctor
+
+class Field{
+    --Public getter--
+    +Player
+    +mobs
+
+    --private--
+    -__player
+    -__mobs
+
+    --Public--
+    +size
+    +field
+
+    --Public constructor--
+    Field(self, player, mobs, size=10)
+
+    --Public method--
+    +display_infi(self)
+    +ran(self)
+    +generate(self)
+    +init_units(self)
+}
+
+class Character{
+    --Public getter--
+    +name(self) -> str:
+    +hp(self) -> int:
+    +base_hp(self) -> int:
+    +attack(self) -> int:
+
+    --Protected--
+    -_name: str
+    -_age: int
+    -_base_hp: int
+    -_attack: int
+    -_sing: int
+    -_place: int
+
+    --Public constructor--
+    +Character(self, character) -> None:
+
+    --Private method--
+    -__get_damage(self, damage) -> None:
+
+    --Public method--
+    +attack(self, character: Character) -> None:
+}
+
+
+class Player{
+    --Private--
+
+    --Public constructor--
+    +Player(self) -> None:
+}
+
+class Mob{
+    --Protected--
+    #type_mob: Enum
+
+    --Public constructor--
+    +Mob(self, type_mob: Object) -> None:
+}
+
+@enduml
