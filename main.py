@@ -1,5 +1,7 @@
-import pars
+'''
+A point of enter module
+'''
 
-URL = input("URL: ")
-result = pars.parser_(URL)
-print(result)
+import controller as c
+
+c.operations()
