@@ -12,9 +12,10 @@ import requests
 # print(link)
 
 URL = 'https://www.novelupdates.com/series/sss-grade-cafe-in-front-of-the-dungeon/?pg=8#myTable'
-page = requests.get(URL)
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'}
+page = requests.get(URL, headers=headers)
 print(page.status_code)
 needed_text = []
-
 soup = BeautifulSoup(page.text, "lxml")
-print(soup.find_all("p"))
+table = soup.find_all('a', class_ = 'chp-release')
+print(table)
