@@ -5,7 +5,8 @@ def getter_chapter(URL):
     '''
     This function gets text from the webpage
     '''
-    html_text = requests.get(URL).text # pylint: disable=W3101
-    soup = BeautifulSoup(html_text, 'lxml')
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'}
+    page = requests.get(URL, headers=headers).text # pylint: disable=W3101
+    soup = BeautifulSoup(page, 'lxml')
     ad = soup.find('div', class_ = "entry-content").text
     return ad
