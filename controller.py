@@ -7,14 +7,17 @@ import writer
 import reader
 import write_chapter
 import wordpress_parser
+import translator
 
 def operations():
-    option = int(input("1 - pack_links.\n2 - parse_chapters.\n"))
+    option = int(input("1 - pack_links.\n2 - parse_chapters.\n3 - translator.\n"))
     match (option):
         case 1:
             pack_links()
         case 2:
             parse_chapters()
+        case 3:
+            translator.translate()
 
 def page(URL):
     result = pars.parser_(URL)
@@ -47,9 +50,12 @@ def parse_chapters():
     name = input("Name: ")
     lst = reader.read(name)
     for i in lst:
-        val = i.values()
-        key = i.keys()
-        text = wordpress_parser.getter_chapter(val)
-        write_chapter.write(text, key)
+        for key in i:
+            val = i[key]
+            try:
+                text = wordpress_parser.getter_chapter('https:' + val)
+                write_chapter.write(text, key)
+            except Exception:
+                continue
 
     print("Done, master!")
