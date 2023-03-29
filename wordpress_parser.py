@@ -1,3 +1,6 @@
+'''
+This module parses wordpess pages going by strings in json file
+'''
 import requests
 from bs4 import BeautifulSoup
 
