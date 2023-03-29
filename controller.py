@@ -7,19 +7,22 @@ import writer
 import reader
 import write_chapter
 import wordpress_parser
-import translator
 
 def operations():
+    '''
+    Menu options
+    '''
     option = int(input("1 - pack_links.\n2 - parse_chapters.\n3 - translator.\n"))
     match (option):
         case 1:
             pack_links()
         case 2:
             parse_chapters()
-        case 3:
-            translator.translate()
 
 def page(URL):
+    '''
+    This method takes a link and return the dictionary for json
+    '''
     result = pars.parser_(URL)
     links = [{i['title']: i['href']} for i in result]
     return links
