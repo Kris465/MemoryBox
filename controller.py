@@ -7,12 +7,13 @@ import writer
 import reader
 import write_chapter
 import wordpress_parser
+import os
 
 def operations():
     '''
     Menu options
     '''
-    option = int(input("1 - pack_links.\n2 - parse_chapters.\n3 - translator.\n"))
+    option = int(input("1 - pack_links.\n2 - parse_chapters.\n"))
     match (option):
         case 1:
             pack_links()
@@ -51,6 +52,7 @@ def pack_links():
 
 def parse_chapters():
     name = input("Name: ")
+    os.mkdir(name)
     lst = reader.read(name)
     for i in lst:
         for key in i:
