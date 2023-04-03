@@ -4,12 +4,14 @@ input: string or list of strings
 output string
 '''
 
+import os
 import requests
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 def yandex_tr(texts):
-    IAM_TOKEN = load_dotenv('IAM_TOKEN')
-    folder_id = load_dotenv("folder_id")
+    load_dotenv(find_dotenv())
+    IAM_TOKEN = os.environ.get('IAM_TOKEN')
+    folder_id = os.environ.get("folder_id")
     target_language = 'ru'
 
     body = {
