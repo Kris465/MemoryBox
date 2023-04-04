@@ -3,6 +3,7 @@ This method is a major logic method of my app
 '''
 
 import os
+import time
 import links.pars as pars
 import links.writer as writer
 import chapters.reader as reader
@@ -80,25 +81,19 @@ def translate():
     chapter = input("Chapter: ")
 
     lst = reader.read(name)
-    text = ""
 
     for i in lst:
         for key in i:
             if key == chapter:
                 val = i[key]
                 txt_writer.write(val, name + "_" + key)
-                val = val.replace('\n', '')
-                text = key + '\n' + text
-                print(text)
-                # tr_string = val.split(".")
-                # tr_chapter = yandex_tr(tr_string)
-                # print(tr_chapter)
-                # txt_writer.write(tr_chapter, name + "_tr_" + key)
+                val = val.replace('\n\n', '')
+                ch_lst = val.split('\n')
+                for elem in ch_lst:
+                    tr_chapter = yandex_tr(elem)
+                    time.sleep(25)
+                    text += tr_chapter
+                    print(tr_chapter)
+                txt_writer.write(text, name + "_tr_" + key)
             else:
-                break
-
-def dict_values(lst):
-    for i in lst:
-        for key in i:
-            val = i[key]
-            return key, val
+                continue
