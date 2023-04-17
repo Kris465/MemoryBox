@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv, find_dotenv
-from get_url import read
-from parser_novelupdates import parser_
+import re
+from parser_module import parser_
+from writer_to_json import write
 
 
 def options():
@@ -20,36 +21,33 @@ def parse():
     '''
     title = input("title: ")
     URL = input("URL: ")
-    answer = parser_(URL, 'div', 'digg_pagination')
-    print(answer)
+    pages = parser_(URL, 'div', 'digg_pagination')
+    cycle_flag = False
+    full_dict = {}
+
+    for elem in pages:
+        result = re.findall(r'\d+', elem.text)
+        print(result[-1])
+        cycle_flag = True
+
+    if cycle_flag:
+        URL = URL + '?pg=1#myTable'
+        for i in range(int(result[-1])):
+            links = page(URL, 'a', 'chp-release')
+            full_dict.update(links)
+            URL = URL[0:-9] + str(i + 2) + "#myTable"
+    else:
+        full_dict = page(URL, 'a', 'chp-release')
+    
+    write(full_dict, title)
 
 
-
-    # try:
-    #     if '#myTable' in URL:
-    #         temp_url = URL
-    #     else:
-    #         temp_url = URL + "?pg=" + str(number) + "#myTable"
-
-    #     while lst is not None:
-    #         lst = page(temp_url)
-    #         full_lst.extend(lst)
-    #         temp_url = URL[0:-9] + str(number) + "#myTable"
-    #         number += 1
-    #     return number
-
-    # except Exception:
-    #     return page(URL)
-
-# def page(URL):
-#     result = parser_(URL)
-#     links = [{i['title']: i['href']} for i in result]
-#     return links
+def page(URL, tag, cl):
+    result = parser_(URL, tag, cl)
+    links = {i['title']: i['href'] for i in result}
+    return links
 
 # URL = read(title) хочу использовать для проверки обновлений. Надо по названию брать ссылку на проект из списка и проверять, есть ли новые главы.
-
-def get_link(title):
-    pass
     
 def translate():
     pass
