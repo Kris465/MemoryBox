@@ -17,11 +17,11 @@ class Chapter:
     @property
     def link(self):
         return self.__link
-    
+  
     @link.setter
     def link(self, link):
         self.__link = link
-    
+
     @property
     def rus(self):
         return self.__rus

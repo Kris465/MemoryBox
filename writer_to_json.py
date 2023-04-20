@@ -1,8 +1,11 @@
 import json
+from novel import Novel
 
-def write(data, name):
-    '''
-    This method writes a dictionary with links from one page to json file
-    '''
-    with open(f"projects/{name}.json", "w", encoding="UTF-8") as file:
-        json.dump(data, file)
+class File_operator:
+
+    def __init__(self, novel):
+        with open(f"projects/{Novel.title}.json", "w", encoding="UTF-8") as file:
+            json.dump(data, file)
+
+    def __init__(self, file):
+        pass
