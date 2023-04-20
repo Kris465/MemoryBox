@@ -1,3 +1,12 @@
-import controller as c
+from controller import Controller
+from view import View
 
-c.options()
+
+def main():
+    controller = Controller()
+    view = View(controller)
+    view.start()
+
+
+if __name__ == '__main__':
+    main()

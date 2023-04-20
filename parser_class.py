@@ -46,4 +46,4 @@ class Parser:
         print(page.status_code)
         soup = BeautifulSoup(page.text, "lxml")
         table = soup.find_all(str(self.tag), class_ = str(self.cl))
-        print(table)
+        return table
