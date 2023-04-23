@@ -8,7 +8,7 @@ def cut():
     for elem in lst:
         if 'novelupdates' in elem:
             new_lst.append(elem)
-    
+
     with open(f"new.txt", "w", encoding="utf-8") as file:
         for elem in new_lst:
             file.write(elem + '\n')
