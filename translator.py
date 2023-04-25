@@ -8,7 +8,7 @@ class Translator:
     @property
     def name(self):
         return self.__name
-    
+
     @name.setter
     def name(self, name):
         self.__name = name
@@ -16,7 +16,7 @@ class Translator:
     @property
     def eng(self):
         return self.__eng
-    
+
     @eng.setter
     def eng(self, eng):
         self.__eng = eng
