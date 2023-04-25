@@ -22,14 +22,14 @@ class Librarian():
         return self.__link
 
     @link.setter
-    def link(self, title):
-        for k, v in self.__full_library.items():
-            if k == title:
-                link = v
-            else:
-                link = input("Link?\n")
-
-        return link
+    def link(self):
+        if self.__link is None:
+            for key, value in self.__full_library.items():
+                if key == self.__title:
+                    self.__link = value[0]
+        else:
+            link = input("Link? \n")
+            self.__link = link
 
     @property
     def full_library(self):
@@ -58,6 +58,5 @@ class Librarian():
                 links.update(temp_dict)
                 number += 1
 
-        self.__full_library.update({self.__title: links})
+        self.__full_library.update({self.__title: [self.__link, links]})
         write("librarian", self.__full_library)
-        
