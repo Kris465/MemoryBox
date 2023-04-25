@@ -9,7 +9,7 @@ class Novel:
     @property
     def title(self):
         return self.__title
-    
+
     @title.setter
     def title(self, title):
         self.__title = title
@@ -17,7 +17,7 @@ class Novel:
     @property
     def chapters(self):
         return self.__chapters
-    
+
     @chapters.setter
     def chapters(self, chapters):
         self.__chapters = chapters
