@@ -1,3 +1,4 @@
+import json
 from reader_from_json import read
 from writer_to_json import write
 from parser_class import Parser
@@ -6,8 +7,8 @@ class Librarian():
 
     def __init__(self, title):
         self.__title = title
-        self.__full_library = {}
-        self.__link = None
+        self.__full_library = json.loads(open('librarian.json', encoding="UTF-8").read())
+        self.__link = self.set_link(title)
 
     @property
     def title(self):
@@ -21,23 +22,24 @@ class Librarian():
     def link(self):
         return self.__link
 
-    @link.setter
-    def link(self):
-        if self.__link is None:
-            for key, value in self.__full_library.items():
-                if key == self.__title:
-                    self.__link = value[0]
-        else:
+
+    def set_link(self, title):
+        link = self.__full_library.get(title)
+
+        if link is None:
             link = input("Link? \n")
-            self.__link = link
+        else:
+            link = link.get("url")
+
+        return link
 
     @property
     def full_library(self):
         return self.__full_library
 
     @full_library.setter
-    def full_library(self):
-        self.__full_library = read("library")
+    def full_library(self, full_library):
+        self.__full_library = full_library
 
     def add(self):
         number = 1
@@ -58,5 +60,6 @@ class Librarian():
                 links.update(temp_dict)
                 number += 1
 
-        self.__full_library.update({self.__title: [self.__link, links]})
+        links.update({"url": self.__link})
+        self.__full_library.update({self.__title: links})
         write("librarian", self.__full_library)

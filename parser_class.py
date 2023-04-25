@@ -12,7 +12,7 @@ class Parser:
     @property
     def headers(self):
         return self.__headers
-    
+
     @headers.setter
     def headers(self, headers):
         self.__headers = headers
@@ -20,7 +20,7 @@ class Parser:
     @property
     def URL(self):
         return self.__URL
-    
+
     @URL.setter
     def URL(self, URL):
         self.__URL = URL
@@ -28,7 +28,7 @@ class Parser:
     @property
     def tag(self):
         return self.__tag
-    
+
     @tag.setter
     def tag(self, tag):
         self.__tag = tag
@@ -36,7 +36,7 @@ class Parser:
     @property
     def cl(self):
         return self.__cl
-    
+
     @cl.setter
     def cl(self, cl):
         self.__cl = cl

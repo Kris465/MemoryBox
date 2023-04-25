@@ -2,9 +2,9 @@
 
 class Novel:
 
-    def __init__(self, title, chapters):
+    def __init__(self, title):
         self.__title = title
-        self.__chapters = chapters
+        self.__chapters = None
 
     @property
     def title(self):
