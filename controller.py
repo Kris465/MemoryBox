@@ -1,15 +1,19 @@
-import os
-import re
-from chapter import Chapter
-from novel import Novel
-from parser_class import Parser
-from translator import Translator
 from librarian import Librarian
 
 
 class Controller:
 
-    def librarian(self, title):
-        title = input("Title: \n")
-        librarian = Librarian(title)
-        librarian.add()
+    def __init__(self, title):
+        self.title = title
+
+    def check(self):
+        librarian = Librarian(self.title)
+        librarian.check_title()
+
+    def collect(self):
+        librarian = Librarian(self.title)
+        librarian.collect()
+
+    def translate(self):
+        librarian = Librarian(self.title)
+        librarian.translate()

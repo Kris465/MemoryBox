@@ -1,7 +1,7 @@
 import json
-from reader_from_json import read
 from writer_to_json import write
 from parser_class import Parser
+from translator import Translator
 
 class Librarian():
 
@@ -41,7 +41,7 @@ class Librarian():
     def full_library(self, full_library):
         self.__full_library = full_library
 
-    def add(self):
+    def check_title(self):
         number = 1
         pages = int(input("Pages: \n"))
         links = {}
@@ -63,3 +63,20 @@ class Librarian():
         links.update({"url": self.__link})
         self.__full_library.update({self.__title: links})
         write("librarian", self.__full_library)
+
+    def collect(self):
+        links = self.full_library.get(self.__title)
+        all_chapters = {}
+
+        for k, v in links.items():
+            if k != 'url':
+                pars = Parser('https:' + v, 'div', "entry-content")
+                result = pars.parse()
+                temp_dict = {k: i.text for i in result}
+                all_chapters.update(temp_dict)
+
+        write(f'{self.__title}', all_chapters)
+
+    def translate(self):
+        translator = Translator("Hello")
+        translator.get_key()

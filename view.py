@@ -7,5 +7,12 @@ class View:
 
     def start(self):
         title = input("Title: ")
-        controller = Controller()
-        controller.librarian(title)
+        controller = Controller(title)
+        option = int(input("1. Check.\n2. Collect.\n3. Translate\n"))
+        match option:
+            case 1:
+                controller.check()
+            case 2:
+                controller.collect()
+            case 3:
+                controller.translate()

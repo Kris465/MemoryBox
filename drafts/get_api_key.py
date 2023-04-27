@@ -12,5 +12,8 @@ def get_key():
 
     data = f'{"yandexPassportOauthToken":"{OAuth_token}"}'
 
-    response = requests.post('https://iam.api.cloud.yandex.net/iam/v1/tokens', headers=headers, data=data, timeout=3)
+    response = requests.post('https://iam.api.cloud.yandex.net/iam/v1/tokens',
+                             headers=headers,
+                             data=data,
+                             timeout=3)
     print(response)
