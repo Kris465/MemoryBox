@@ -30,6 +30,28 @@ class Translator:
         print(response)
         write('key', {str(datetime.now()): str(response)})
         return response
-    
-    def translate(self, text):
-        pass
+
+    def translate(self):
+        load_dotenv(find_dotenv())
+        IAM_TOKEN = os.environ.get('IAM_TOKEN')
+        folder_id = os.environ.get('folder_id')
+        target_language = 'ru'
+        texts = self.__text
+
+        body = {
+            "targetLanguageCode": target_language,
+            "texts": texts,
+            "folderId": folder_id,
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {0}".format(IAM_TOKEN)
+        }
+
+        response = requests.post('https://translate.api.cloud.yandex.net/translate/v2/translate',
+                                json = body,
+                                headers = headers,
+                                timeout=300)
+
+        print(response.text)
