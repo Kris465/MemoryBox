@@ -9,28 +9,14 @@ class Librarian():
         self.__title = title
         self.__full_library = json.loads(open('librarian.json', encoding="UTF-8").read())
         self.__link = self.set_link(title)
-        self.novel = self.novel(title)
-
-
-    @property
-    def novel(self):
-        return self.novel
-
-
-    @novel.setter
-    def novel(self, novel):
-        pass
-
 
     @property
     def title(self):
         return self.__title
 
-
     @title.setter
     def title(self, title):
         self.__title = title
-
 
     @property
     def link(self):
@@ -78,7 +64,6 @@ class Librarian():
         self.__full_library.update({self.__title: links})
         write("librarian", self.__full_library)
 
-
     def collect(self):
         links = self.full_library.get(self.__title)
         all_chapters = {}
@@ -92,7 +77,6 @@ class Librarian():
 
         write(f'{self.__title}', all_chapters)
 
-
     def translate(self):
         translator = Translator("Hello")
-        translator.translate()
+        translator.get_key()
