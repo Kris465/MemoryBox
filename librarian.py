@@ -1,5 +1,6 @@
 import json
 from writer_to_json import write
+from reader_from_json import read
 from parser_class import Parser
 from translator import Translator
 
@@ -11,6 +12,11 @@ class Librarian():
         self.__full_library = json.loads(open('librarian.json',
                                               encoding="UTF-8").read())
         self.__link = self.set_link(title)
+        self.__chapters = read(title)
+
+    @property
+    def chapters(self):
+        return self.__chapters
 
     @property
     def title(self):
@@ -79,5 +85,30 @@ class Librarian():
         write(f'{self.__title}', all_chapters)
 
     def translate(self):
-        translator = Translator("Hello")
-        translator.get_key()
+        chapter = input("Chapter: ")
+        text = self.__chapters[chapter]
+
+        max_length = 10000
+        substrings = []
+
+        while len(text) > max_length:
+            index = text.rfind(".", 0, max_length)
+            if index == -1:
+                index = max_length
+            substrings.append(text[:index+1])
+            text = text[index+1:]
+            print(text)
+
+        substrings.append(text)
+
+        transl_strs = []
+        print(substrings)
+
+        translator = Translator()
+
+        for string in substrings:
+            part = translator.translate(string)
+            transl_strs.append(part)
+
+        print("".join(transl_strs))
+        write("TRY", "".join(transl_strs))

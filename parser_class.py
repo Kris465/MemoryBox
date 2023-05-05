@@ -5,7 +5,10 @@ import requests
 class Parser:
 
     def __init__(self, URL, tag, cl):
-        self.__headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'}
+        self.__headers = {'User-Agent':
+                          'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
+                           AppleWebKit/537.36 (KHTML, like Gecko)\
+                           Chrome/111.0.0.0 Safari/537.36'}
         self.__URL = URL
         self.__tag = tag
         self.__cl = cl
