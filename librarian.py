@@ -3,11 +3,13 @@ from writer_to_json import write
 from parser_class import Parser
 from translator import Translator
 
+
 class Librarian():
 
     def __init__(self, title):
         self.__title = title
-        self.__full_library = json.loads(open('librarian.json', encoding="UTF-8").read())
+        self.__full_library = json.loads(open('librarian.json',
+                                              encoding="UTF-8").read())
         self.__link = self.set_link(title)
 
     @property
@@ -21,7 +23,6 @@ class Librarian():
     @property
     def link(self):
         return self.__link
-
 
     def set_link(self, title):
         link = self.__full_library.get(title)

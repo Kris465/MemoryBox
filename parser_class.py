@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+
 class Parser:
 
     def __init__(self, URL, tag, cl):
@@ -42,8 +43,8 @@ class Parser:
         self.__cl = cl
 
     def parse(self):
-        page = requests.get(self.URL, headers=self.headers) # pylint: disable=W3101
+        page = requests.get(self.URL, headers=self.headers)
         print(page.status_code)
         soup = BeautifulSoup(page.text, "lxml")
-        table = soup.find_all(str(self.tag), class_ = str(self.cl))
+        table = soup.find_all(str(self.tag), class_=str(self.cl))
         return table
