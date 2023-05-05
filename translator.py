@@ -21,15 +21,14 @@ class Translator:
             'Content-Type': 'application/x-www-form-urlencoded',
         }
 
-        data = {"yandexPassportOauthToken": OAuth_token}
+        data = '{"yandexPassportOauthToken":"OAuth_token"}'.replace('OAuth_token', OAuth_token)
 
         response = requests.post('https://iam.api.cloud.yandex.net/iam/v1/tokens',
                                  headers=headers,
-                                 data=data,
-                                 timeout=3)
+                                 data=data)
+        response.json()
         print(response)
-        write('key', {str(datetime.now()): str(response)})
         return response
-    
+
     def translate(self, text):
         pass
