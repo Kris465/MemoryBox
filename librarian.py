@@ -3,6 +3,7 @@ from writer_to_json import write
 from reader_from_json import read
 from parser_class import Parser
 from translator import Translator
+from writer_to_txt import write_txt
 
 
 class Librarian():
@@ -12,11 +13,20 @@ class Librarian():
         self.__full_library = json.loads(open('librarian.json',
                                               encoding="UTF-8").read())
         self.__link = self.set_link(title)
-        self.__chapters = read(title)
+        self.__chapters = self.set_chapters(title)
 
     @property
     def chapters(self):
         return self.__chapters
+
+    def set_chapters(self, title):
+        try:
+            chapters = read(title)
+        except Exception:
+            chapters = None
+            print("Глав нет")
+
+        return chapters
 
     @property
     def title(self):
@@ -75,9 +85,18 @@ class Librarian():
         links = self.full_library.get(self.__title)
         all_chapters = {}
 
+        tag = input("tag: ")
+        cl = input("cl: ")
+        if tag == "":
+            tag = 'div'
+            cl = 'entry-content'
+        else:
+            link = input("link: ")
+            write_txt('parser_links', f'{link}, {self.__title}, {tag}, {cl}\n')
+
         for k, v in links.items():
             if k != 'url':
-                pars = Parser('https:' + v, 'div', "entry-content")
+                pars = Parser('https:' + v, tag, cl)
                 result = pars.parse()
                 temp_dict = {k: i.text for i in result}
                 all_chapters.update(temp_dict)
@@ -87,6 +106,7 @@ class Librarian():
     def translate(self):
         chapter = input("Chapter: ")
         text = self.__chapters[chapter]
+        write_txt(chapter, text)
 
         max_length = 10000
         substrings = []
@@ -101,14 +121,10 @@ class Librarian():
 
         substrings.append(text)
 
-        transl_strs = []
         print(substrings)
 
         translator = Translator()
 
         for string in substrings:
             part = translator.translate(string)
-            transl_strs.append(part)
-
-        print("".join(transl_strs))
-        write("TRY", "".join(transl_strs))
+            write_txt(chapter, part)

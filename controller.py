@@ -12,7 +12,6 @@ class Controller:
 
     def collect(self):
         librarian = Librarian(self.title)
-        librarian.check_title()
         librarian.collect()
 
     def translate(self):

@@ -58,5 +58,9 @@ class Translator:
             headers=headers
         )
 
-        write("test", response.text)
-        return response.text
+        print(response.text)
+        data = response.json()
+        lst = data['translations']
+        translation = lst[0]
+
+        return translation['text']
