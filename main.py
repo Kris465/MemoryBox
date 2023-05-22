@@ -3,7 +3,7 @@ from view import View
 
 
 def main():
-    controller = Controller("")
+    controller = Controller()
     view = View(controller)
     view.start()
 
