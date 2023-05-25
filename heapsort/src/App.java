@@ -68,5 +68,6 @@ public class App {
         for (int num : arr) {
             System.out.print(num + " ");
         }
+        scanner.close();
     }
 }
