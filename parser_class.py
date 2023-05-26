@@ -16,7 +16,7 @@ class Parser_:
         self.__tag = 'div'
         self.__cl = 'entry-content'
         self.__word = 'next'
-        self.__chapter = 0
+        self.__chapter = 1
         self.previous_url = ' '
 
     @property
@@ -78,91 +78,29 @@ class Parser_:
         else:
             print("Check datebase!!!")
 
-    # def parse(self, return_url=False):
-    #     page = requests.get(self.__url, headers=self.headers)
-    #     print(page.status_code)
-    #     soup = BeautifulSoup(page.text, "lxml")
-    #     if return_url:
-    #         links = soup.find_all('a')
-    #         for link in links:
-    #             if self.word.upper() in link.text.upper():
-    #                 next_url = link['href']
-    #                 return next_url
-    #         return None
-    #     else:
-    #         text = soup.find_all(self.tag, self.cl)
-    #         return text
-
-    # def parse(self, return_url=False):
-    #     page = requests.get(self.__url, headers=self.headers)
-    #     print(page.status_code)
-    #     soup = BeautifulSoup(page.text, "lxml")
-    #     if return_url:
-    #         links = soup.find_all('a')
-    #         for link in links:
-    #             if self.word.upper() in link.text.upper():
-    #                 next_url = link['href']
-    #                 if next_url == self.previous_url:
-    #                     user_input = input("This link was already parsed. Enter a new link or press enter to exit:")
-    #                     if user_input == '':
-    #                         return None
-    #                     else:
-    #                         next_url = user_input
-    #                 self.previous_url = self.__url
-    #                 self.__chapter = re.findall(r'[-/](\d+(\.\d+)*)/', next_url)[-1][0]
-    #                 return next_url
-    #         return None
-    #     else:
-    #         text = soup.find_all(self.tag, self.cl)
-    #         return text
-
-    # def parse(self, return_url=False):
-    #     page = requests.get(self.__url, headers=self.headers)
-    #     print(page.status_code)
-    #     soup = BeautifulSoup(page.text, "lxml")
-    #     if return_url:
-    #         links = soup.find_all('a')
-    #         found = False
-    #         while not found:
-    #             for link in links:
-    #                 if self.word.upper() in link.text.upper():
-    #                     next_url = link['href']
-    #                     if next_url == self.previous_url:
-    #                         continue
-    #                     self.previous_url = self.__url
-    #                     self.__chapter = re.findall(r'[-/](\d+(\.\d+)*)/', next_url)[-1][0]
-    #                     return next_url
-    #             user_input = input("No matching link found. Enter a new link or press enter to exit:")
-    #             if user_input == '':
-    #                 return None
-    #             else:
-    #                 next_url = user_input
-    #                 found = True
-    #                 self.previous_url = self.__url
-    #                 self.__chapter = re.findall(r'[-/](\d+(\.\d+)*)/', next_url)[-1][0]
-    #                 return next_url
-    #         return None
-    #     else:
-    #         text = soup.find_all(self.tag, self.cl)
-    #         return text
-
     def parse(self, return_url=False):
         page = requests.get(self.__url, headers=self.headers)
         print(page.status_code)
         soup = BeautifulSoup(page.text, "lxml")
-        regex = r'[-/](\d+(\.\d+)*)/'
         if return_url:
             links = soup.find_all('a')
-            for link in links:
-                if self.word.upper() in link.text.upper():
-                    next_url = link['href']
-                    if next_url == self.previous_url:
-                        continue
-                    self.previous_url = self.__url
-                    self.__chapter = re.findall(regex, next_url)[-1][0]
-                    return next_url
+            return self.find_link(links)
+        else:
+            text = soup.find_all(self.tag, self.cl)
+            return text
+
+    def find_link(self, links):
+        regex = r'[-/](\d+(\.\d+)*)/'
+        for link in links:
+            if self.word.upper() in link.text.upper():
+                next_url = link['href']
+                if next_url == self.previous_url:
+                    continue
+                self.previous_url = self.__url
+                self.__chapter = re.findall(regex, next_url)[-1][0]
+                return next_url
             else:
-                user_input = input("No matching link found. Enter a new link or press enter to exit:")
+                user_input = input("Link: \n")
                 if user_input == '':
                     return None
                 else:
@@ -170,7 +108,4 @@ class Parser_:
                     self.previous_url = self.__url
                     self.__chapter = re.findall(regex, next_url)[-1][0]
                     return next_url
-            return None
-        else:
-            text = soup.find_all(self.tag, self.cl)
-            return text
+        return None
