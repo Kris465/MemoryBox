@@ -1,4 +1,6 @@
-# import time
+import time
+from db import get_session
+from models import Novel
 from parser_class import Parser_
 from reader_from_json import read
 from translator import Translator
@@ -15,35 +17,29 @@ class Controller:
         # Если есть новела в бд, предлагаем обновить (задать настройки:
         # ссылка на сайт, порядковый номер главы)
         # Иначе - предлагаем создать проект, получаем все вводные данные.
-        pass
+        session = get_session()
+        result = session.query(Novel).filter(
+            Novel.english_name == self.__title).all()
+        if len(result) == 1:
+            print("I found this novel.")
+            self.update()
+        elif len(result) == 0:
+            print("I couldn't find this novel.")
+            self.create()
+        else:
+            print("Check database")
 
     def create(self):
-        all_chapters = {}
-        number = 1
-        URL = input("URL: ")
-        pars = Parser_(URL)
-        stepper = Parser_(URL)
-        temp_url = stepper.find_button()
-        result = pars.parse()
-        if len(result) < 500:
-            pars.check_tags()
-
-        temp_dict = {number: i.text for i in result}
-        all_chapters.update(temp_dict)
-
-        while temp_url is not None:
-            pars.url = temp_url
-            result = pars.parse()
-            stepper.url = temp_url
-            temp_url = stepper.find_button()
-            temp_dict = {number: i.text for i in result}
-            all_chapters.update(temp_dict)
-            number += 1
-
-        write(self.__title, all_chapters)
+        pass
 
     def update(self):
-        pass
+        URL = input("URL: ")
+        pars = Parser_(URL)
+        pars.tag = ("tag: ")
+        pars.cl = ("class: ")
+        result = pars.parse()
+        lst = [i.text for i in result]
+        write_txt(self.__title, str(lst))
 
     def translate(self):
         chapter = input("Chapter: ")
@@ -71,3 +67,26 @@ class Controller:
         for string in substrings:
             part = translator.translate(string)
             write_txt(chapter, part)
+
+    def collect_chapters(self):
+        all_chapters = {}
+        temp_url = input("URL: ")
+        pars = Parser_(temp_url)
+
+        while temp_url is not None:
+            time.sleep(5)
+            print(pars.chapter)
+            if temp_url[0] != 'h':
+                pars.url = 'https:/' + temp_url
+            else:
+                pars.url = temp_url
+
+            result = pars.parse()
+            if len(result) < 500:
+                pars.check_tags()
+            temp_url = pars.parse(return_url=True)
+            temp_dict = {pars.chapter: i.text for i in result}
+            print(temp_dict)
+            all_chapters.update(temp_dict)
+            write(self.__title, all_chapters)
+            pars.chapter += 1
