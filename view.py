@@ -14,7 +14,7 @@ class View:
                 ))
             match option:
                 case 1:
-                    self.controller.create()
+                    self.controller.collect_chapters()
                 case 2:
                     self.controller.update()
                 case 3:

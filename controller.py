@@ -46,7 +46,6 @@ class Controller:
         project = read(self.__title)
         text = project[chapter]
         write_txt(chapter, text)
-
         max_length = 10000
         substrings = []
 
@@ -57,13 +56,9 @@ class Controller:
             substrings.append(text[:index+1])
             text = text[index+1:]
             print(text)
-
         substrings.append(text)
-
         print(substrings)
-
         translator = Translator()
-
         for string in substrings:
             part = translator.translate(string)
             write_txt(chapter, part)
@@ -81,12 +76,11 @@ class Controller:
             else:
                 pars.url = temp_url
 
+            pars.check_tags()
             result = pars.parse()
-            if len(result) < 500:
-                pars.check_tags()
-            temp_url = pars.parse(return_url=True)
-            temp_dict = {pars.chapter: i.text for i in result}
+            temp_dict = {pars.chapter: pars.url + i.text for i in result}
             print(temp_dict)
             all_chapters.update(temp_dict)
             write(self.__title, all_chapters)
+            temp_url = pars.parse(return_url=True)
             pars.chapter += 1
