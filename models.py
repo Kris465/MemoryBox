@@ -1,6 +1,6 @@
 from sqlalchemy import Date, Text, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import relationship, Session
+from sqlalchemy.orm import relationship
 
 
 class Base(DeclarativeBase):
@@ -14,6 +14,7 @@ class Parser(Base):
     url = Column(String(100), nullable=False)
     tag = Column(String(10), nullable=False)
     cl = Column(String(30))
+    word = Column(String(10))
 
 
 class Status(Base):
@@ -30,7 +31,7 @@ class Workers(Base):
     id = Column(Integer, primary_key=True, index=True)
     nickname = Column(String(30), nullable=False)
     name = Column(String(12), nullable=False)
-    phone_number = Column(String(12))
+    phone = Column(String(12))
     email = Column(String(25))
     vk = Column(String(30))
     birthday = Column(Date)
@@ -74,9 +75,3 @@ class Chapters(Base):
     original_text = Column(Text)
     russian_text = Column(Text)
     novel = relationship("Novel", back_populates='chapters')
-
-
-def connection(table):
-    with Session(autoflush=False, bind=engine) as db:
-        table = db.query(f"{table}").all()
-        print(table)

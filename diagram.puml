@@ -1,56 +1,5 @@
 @startuml
 
-Chapter --|> Controller
-Novel --|> Controller
-Translator --|> Controller
-Parser --|> Controller
-Operator --|> Novel
+Controller ..|> View
 
-class Chapter {
-    String name
-    String link
-    String eng
-    String rus
-
-    SomeMethods()
-}
-
-class Novel {
-    String name
-    Dictionary chapters
-    object Operator
-
-    SomeMethods()
-}
-
-class Translator {
-    String eng
-    String rus
-
-    translate()
-}
-
-class Parser {
-    String headers
-    String tag 
-    String slass_ 
-
-    parse()
-}
-
-class Controller {
-    object Novel
-    object Chapter
-    object Translator
-    object Parser
-
-    logic()
-}
-
-class Operator {
-    ... 
-
-    read_from_json()
-    write_to_json()
-}
 @enduml
