@@ -28,6 +28,8 @@ class Controller:
             self.create()
         else:
             print("Check database")
+        # Stepper_mod - шагающий по ссылкам
+        # Collector_mod - сборщик ссылок, сортировка - опционально, парсинг их
 
     def create(self):
         pass

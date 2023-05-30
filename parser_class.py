@@ -16,7 +16,7 @@ class Parser_:
         self.__tag = 'div'
         self.__cl = 'entry-content'
         self.__word = 'next'
-        self.__chapter = 1
+        self.__chapter = 58
 
     @property
     def headers(self):
