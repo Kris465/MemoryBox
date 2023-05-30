@@ -54,9 +54,3 @@ def collect_chapters():
 
 parse_links()
 collect_chapters()
-
-# def sort_links(links):
-#     numbers = [int(re.search(r'\d+', link).group()) for link in links]
-#     numbers.sort()
-#     sorted_links = ['/85_85206/{}.html'.format(number) for number in numbers]
-#     return sorted_links
