@@ -1,18 +1,20 @@
-
-
+import random
+import re
 import time
 from chapter_class import Chapter
 from novel_class import Novel
 from parser_class import Parser_
 from project_class import Project
-from repository_class import Repository
+from reader_from_json import read
+from translator_class import Translator
+from writer_to_txt import write_txt
 
 
 class Controller:
 
     def __init__(self, repository):
         self.__title = input("Title: ")
-        self.repository = repository
+        self.__repository = repository
 
     @property
     def title(self):
@@ -26,13 +28,13 @@ class Controller:
     def repository(self):
         return self.__repository
 
-    def info(self):
-        language = self.repository.language()
-        chapters_list = self.mod(language)
+    @repository.setter
+    def repository(self, repository):
+        self.__repository = repository
 
+    def info(self):
+        chapters_list = self.mod()
         if self.repository.find(self.__title):
-            self.repository.show_table("....")
-            # Соединение таблиц - Название, последняя глава, переведенная
             self.update(chapters_list)
         else:
             self.create(chapters_list)
@@ -59,19 +61,24 @@ class Controller:
         if decision == "":
             self.repository.save(project, novel, chapters_list)
 
-    def mod(self, language):
+    def mod(self):
+        language = input("language:\n")
         option = input("Collector mod? ")
         if option == "":
             self.collector_mod(language)
         else:
             self.stepper_mod(language)
 
-    def collector_mod(self):
-        pass
+    def collector_mod(self, language):
+        link = input("url: ")
+        pars = Parser_(link)
+        pars.chapter = int(input("Chapter: "))
+        path = re.sub(r'^https?://[^/]+', '', link)
+        pars.parse()
 
-    def stepper_mod(self):
+    def stepper_mod(self, language):
         chapters_list = []
-        link = input("URL: ")
+        link = input("url: ")
         pars = Parser_(link)
         pars.chapter = int(input("Chapter: "))
 
@@ -93,7 +100,30 @@ class Controller:
             link = pars.parse(return_url=True)
             pars.chapter += 1
 
+        self.repository.write(self.title, chapters_list, language)
         return chapters_list
 
     def delete(self):
         pass
+
+    def translate(self):
+        chapter = input("Chapter: ")
+        project = read(self.__title)
+        text = project[chapter]
+        write_txt(chapter, text)
+        max_length = 10000
+        substrings = []
+
+        while len(text) > max_length:
+            index = text.rfind(".", 0, max_length)
+            if index == -1:
+                index = max_length
+            substrings.append(text[:index+1])
+            text = text[index+1:]
+            print(text)
+        substrings.append(text)
+        print(substrings)
+        translator = Translator()
+        for string in substrings:
+            part = translator.translate(string)
+            write_txt(chapter, part)

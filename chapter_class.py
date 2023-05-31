@@ -1,5 +1,9 @@
 class Chapter():
-    def __init__(self, ordinal_number, link, original_text, russian_text="") -> None:
+    def __init__(self,
+                 ordinal_number,
+                 link,
+                 original_text,
+                 russian_text=""):
         self.__ordinal_number = ordinal_number
         self.__link = link
         self.__original_text = original_text

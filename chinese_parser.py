@@ -4,8 +4,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 from parser_class import Parser_
-from reader_from_json import read
-from writer_to_json import write
+from drafts.writer_to_json import write
 
 
 class Chinese(Parser_):
