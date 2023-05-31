@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from writer_to_json import write
+from drafts.writer_to_json import write
 
 title = 'Second Marriage in the 1970s'
 url = 'https://www.shubaow.net/85_85206/'

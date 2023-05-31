@@ -10,7 +10,9 @@ class View:
         option = 35
         while option != 0:
             option = int(input(
-                "1. Change title\n2.Info\n3. Create\n4. Update\n0. Exit\n"
+                "1. Change title\n2. Info\n"
+                "3. Create\n4. Update\n"
+                "5. Translate\n0. Exit\n"
                 ))
             match option:
                 case 1:
@@ -23,3 +25,5 @@ class View:
                     self.controller.create()
                 case 4:
                     self.controller.update()
+                case 5:
+                    self.controller.translate()

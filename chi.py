@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from reader_from_json import read
-from writer_to_json import write, write_chi
+from drafts.writer_to_json import write, write_chi
 
 
 def parse_links():
@@ -27,7 +27,7 @@ def parse_links():
 
     sorted_links = sorted(set(links))
 
-    write("links", {"chapter" + str(i):
+    write("links", {"ch" + str(i):
                     link for i, link in enumerate(sorted_links)})
 
 

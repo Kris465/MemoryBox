@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 from dotenv import load_dotenv, find_dotenv
 
-from writer_to_json import write
+from drafts.writer_to_json import write
 
 
 class Translator:
