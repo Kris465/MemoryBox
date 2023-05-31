@@ -7,15 +7,19 @@ class View:
         self.controller = controller
 
     def start(self):
-        option = 3
+        option = 35
         while option != 0:
             option = int(input(
-                "1. Create\n2. Update\n3. Translate\n0. Exit\n"
+                "1. Change title\n2.Info\n3. Create\n4. Update\n0. Exit\n"
                 ))
             match option:
                 case 1:
-                    self.controller.collect_chapters()
+                    new_title = input()
+                    self.controller.title = new_title
+                    print(self.controller.title)
                 case 2:
-                    self.controller.update()
+                    self.controller.info()
                 case 3:
-                    self.controller.translate()
+                    self.controller.create()
+                case 4:
+                    self.controller.update()

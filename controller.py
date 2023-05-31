@@ -1,88 +1,99 @@
+
+
 import time
-from db import get_session
-from models import Novel
+from chapter_class import Chapter
+from novel_class import Novel
 from parser_class import Parser_
-from reader_from_json import read
-from translator import Translator
-from writer_to_json import write
-from writer_to_txt import write_txt
+from project_class import Project
+from repository_class import Repository
 
 
 class Controller:
 
-    def __init__(self):
+    def __init__(self, repository):
         self.__title = input("Title: ")
+        self.repository = repository
 
-    def find(self):
-        # Если есть новела в бд, предлагаем обновить (задать настройки:
-        # ссылка на сайт, порядковый номер главы)
-        # Иначе - предлагаем создать проект, получаем все вводные данные.
-        session = get_session()
-        result = session.query(Novel).filter(
-            Novel.english_name == self.__title).all()
-        if len(result) == 1:
-            print("I found this novel.")
-            self.update()
-        elif len(result) == 0:
-            print("I couldn't find this novel.")
-            self.create()
+    @property
+    def title(self):
+        return self.__title
+
+    @title.setter
+    def title(self, title):
+        self.__title = title
+
+    @property
+    def repository(self):
+        return self.__repository
+
+    def info(self):
+        language = self.repository.language()
+        chapters_list = self.mod(language)
+
+        if self.repository.find(self.__title):
+            self.repository.show_table("....")
+            # Соединение таблиц - Название, последняя глава, переведенная
+            self.update(chapters_list)
         else:
-            print("Check database")
-        # Stepper_mod - шагающий по ссылкам
-        # Collector_mod - сборщик ссылок, сортировка - опционально, парсинг их
+            self.create(chapters_list)
 
-    def create(self):
+    def update(self, chaptes_list):
         pass
 
-    def update(self):
-        URL = input("URL: ")
-        pars = Parser_(URL)
-        pars.tag = ("tag: ")
-        pars.cl = ("class: ")
-        result = pars.parse()
-        lst = [i.text for i in result]
-        write_txt(self.__title, str(lst))
+    def create(self, chapters_list):
+        self.repository.show_table("status")
+        status_num = input("Status: ")
+        self.repository.show_table("workers")
+        worker = input("Worker: ")
+        rulate = input("Rulate: ")
+        project = Project(status_num, worker, rulate)
 
-    def translate(self):
-        chapter = input("Chapter: ")
-        project = read(self.__title)
-        text = project[chapter]
-        write_txt(chapter, text)
-        max_length = 10000
-        substrings = []
+        russian_name = input("Russian name: ")
+        original_name = input("Original name: ")
+        english_name = input("English name: ")
+        webpage = input("Start page: ")
+        novel = Novel(russian_name, original_name, english_name, webpage)
 
-        while len(text) > max_length:
-            index = text.rfind(".", 0, max_length)
-            if index == -1:
-                index = max_length
-            substrings.append(text[:index+1])
-            text = text[index+1:]
-            print(text)
-        substrings.append(text)
-        print(substrings)
-        translator = Translator()
-        for string in substrings:
-            part = translator.translate(string)
-            write_txt(chapter, part)
+        self.repository.write(project, novel, chapters_list)
+        decision = input("Save to db? ")
+        if decision == "":
+            self.repository.save(project, novel, chapters_list)
 
-    def collect_chapters(self):
-        all_chapters = {}
-        temp_url = input("URL: ")
-        pars = Parser_(temp_url)
+    def mod(self, language):
+        option = input("Collector mod? ")
+        if option == "":
+            self.collector_mod(language)
+        else:
+            self.stepper_mod(language)
 
-        while temp_url is not None:
+    def collector_mod(self):
+        pass
+
+    def stepper_mod(self):
+        chapters_list = []
+        link = input("URL: ")
+        pars = Parser_(link)
+        pars.chapter = int(input("Chapter: "))
+
+        while link is not None:
             time.sleep(5)
-            print(pars.chapter)
-            if temp_url[0] != 'h':
-                pars.url = 'https:/' + temp_url
+            if link[0] != 'h':
+                pars.url = 'https:/' + link
             else:
-                pars.url = temp_url
+                pars.url = link
 
             pars.check_tags()
             result = pars.parse()
-            temp_dict = {pars.chapter: pars.url + i.text for i in result}
-            print(temp_dict)
-            all_chapters.update(temp_dict)
-            write(self.__title, all_chapters)
-            temp_url = pars.parse(return_url=True)
+            chapter = Chapter(pars.chapter,
+                              pars.url,
+                              str([i.text for i in result]))
+            print(chapter.original_text)
+            chapters_list.append(chapter)
+            print(pars.chapter)
+            link = pars.parse(return_url=True)
             pars.chapter += 1
+
+        return chapters_list
+
+    def delete(self):
+        pass
