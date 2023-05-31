@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-from db import get_session
+from db_session import get_session
 from models import Parser
 
 
@@ -16,7 +16,7 @@ class Parser_:
         self.__tag = 'div'
         self.__cl = 'entry-content'
         self.__word = 'next'
-        self.__chapter = 58
+        self.__chapter = 1
 
     @property
     def headers(self):
@@ -84,9 +84,7 @@ class Parser_:
     def parse(self, return_url=False):
         page = requests.get(self.__url, headers=self.headers)
         print(page.status_code)
-        # page.encoding = page.apparent_encoding
         soup = BeautifulSoup(page.text, "lxml")
-        # soup = BeautifulSoup(page.text, "html.parser")
         if return_url:
             links = soup.find_all('a')
             for link in links:

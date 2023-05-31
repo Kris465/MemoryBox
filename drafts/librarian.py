@@ -3,7 +3,7 @@ import json
 from writer_to_json import write
 from reader_from_json import read
 from parser_class import Parser
-from translator import Translator
+from translator_class import Translator
 from writer_to_txt import write_txt
 
 
