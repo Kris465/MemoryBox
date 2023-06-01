@@ -1,7 +1,3 @@
-import random
-import re
-import time
-from chapter_class import Chapter
 from novel_class import Novel
 from parser_class import Parser_
 from project_class import Project
@@ -33,7 +29,9 @@ class Controller:
         self.__repository = repository
 
     def info(self):
-        chapters_list = self.mod()
+        url = input("url: ")
+        pars = Parser_(url)
+        chapters_list = pars.parse("collector", "chi")
         if self.repository.find(self.__title):
             self.update(chapters_list)
         else:
@@ -60,48 +58,6 @@ class Controller:
         decision = input("Save to db? ")
         if decision == "":
             self.repository.save(project, novel, chapters_list)
-
-    def mod(self):
-        language = input("language:\n")
-        option = input("Collector mod? ")
-        if option == "":
-            self.collector_mod(language)
-        else:
-            self.stepper_mod(language)
-
-    def collector_mod(self, language):
-        link = input("url: ")
-        pars = Parser_(link)
-        pars.chapter = int(input("Chapter: "))
-        path = re.sub(r'^https?://[^/]+', '', link)
-        pars.parse()
-
-    def stepper_mod(self, language):
-        chapters_list = []
-        link = input("url: ")
-        pars = Parser_(link)
-        pars.chapter = int(input("Chapter: "))
-
-        while link is not None:
-            time.sleep(5)
-            if link[0] != 'h':
-                pars.url = 'https:/' + link
-            else:
-                pars.url = link
-
-            pars.check_tags()
-            result = pars.parse()
-            chapter = Chapter(pars.chapter,
-                              pars.url,
-                              str([i.text for i in result]))
-            print(chapter.original_text)
-            chapters_list.append(chapter)
-            print(pars.chapter)
-            link = pars.parse(return_url=True)
-            pars.chapter += 1
-
-        self.repository.write(self.title, chapters_list, language)
-        return chapters_list
 
     def delete(self):
         pass

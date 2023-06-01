@@ -3,6 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 import re
+from chapter_class import Chapter
 from db_session import get_session
 from models import Parser
 
@@ -83,80 +84,71 @@ class Parser_:
         else:
             print("Check datebase!!!")
 
-    # def parse(self, mod, language, return_url=False):
-    #     page = requests.get(self.__url, headers=self.__headers)
-    #     print(page.status_code)
-    #     soup = BeautifulSoup(page.text, "lxml")
-
-    #     match mod:
-    #         case "stepper":
-    #             if return_url:
-    #                 next_url = self.get_next_url(soup)
-    #                 return next_url
-    #             else:
-    #                 text = self.get_chapter_text(soup, language)
-    #                 return text
-    #         case "collector":
-    #             links_dict = self.get_all_links(soup)
-    #             for k, v in links_dict.items():
-    #                 time.sleep(random.randint(20, 120))
-    #                 pass
-
-    # def get_next_url(self, soup):
-    #     links = soup.find_all('a')
-    #     for link in links:
-    #         if self.word.upper() in link.text.upper():
-    #             next_url = link['href']
-    #             print(next_url)
-    #             return next_url
-    #     return None
-
-    # def get_chapter_text(self, soup, language):
-    #     if language == "chi":
-    #         text = soup.find('div', class_='content_read').text
-    #     else:
-    #         text = soup.find_all(self.tag, self.cl)
-    #         text = [t.text for t in text]
-    #         text = "\n".join(text)
-    #     return text
-
-    # def get_all_links(self, soup):
-    #     links_dict = {}
-    #     links = soup.find_all('a')
-    #     for link in links:
-    #         if "chapter" in link['href']:
-    #             chapter_number = link.text.split()[1]
-    #             links_dict[chapter_number] = link['href']
-    #     return links_dict
-    
-    # def parse(self, return_url=False):
-    #     page = requests.get(self.__url, headers=self.headers)
-    #     print(page.status_code)
-    #     soup = BeautifulSoup(page.text, "lxml")
-    #     if return_url:
-    #         links = soup.find_all('a')
-    #         for link in links:
-    #             if self.word.upper() in link.text.upper():
-    #                 next_url = link['href']
-    #                 print(next_url)
-    #                 break
-    #             else:
-    #                 next_url = None
-    #         return next_url
-    #     else:
-    #         text = soup.find_all(self.tag, self.cl)
-    #         return text
-
-    def connection(self, language):
-        response = requests.get(self.__url, headers=self.__headers)
+    def connection(self, language, urls=False):
+        response = requests.get(self.url, headers=self.headers)
         print(response.status_code)
-        if language == "chi":  
+        if language == "chi":
             response.encoding = response.apparent_encoding
             time.sleep(random.randint(10, 120))
             soup = BeautifulSoup(response.text, 'html.parser')
+            if urls:
+                links = soup.find_all('a')
+                return links
+            else:
+                text = soup.find_all(self.tag, self.cl)
+                return text
         else:
             soup = BeautifulSoup(response.text, "lxml")
-        return soup
+            if urls:
+                links = soup.find_all('a')
+                return links
+            else:
+                text = soup.find_all(self.tag, self.cl)
+                return text
 
     def parse(self, mod, language):
-        objects = []
+        chapters = []
+        match mod:
+            case "stepper":
+                link = self.url
+                while link is not None:
+                    time.sleep(10)
+                    if link[0] != "h":
+                        self.url = 'https:/' + link
+                    else:
+                        self.url = link
+
+                    self.check_tags()
+                    result = self.connection(language)
+                    chapter = Chapter(self.chapter,
+                                      self.url,
+                                      str([i.text for i in result]))
+                    chapters.append(chapter)
+                    links = self.connection(language, urls=True)
+                    for link in links:
+                        if self.word.upper() in link.text.upper():
+                            link = link['href']
+                            break
+                        else:
+                            link = None
+                return chapters
+            case "collector":
+                path = re.sub(r'^https?://[^/]+', '', self.url)
+                time.sleep(random.randint(10, 120))
+                links = self.connection(language, urls=True)
+                new_links = []
+                for link in links:
+                    href = link.get('href')
+                    if href and href.startswith(path):
+                        new_links.append(href)
+
+                sorted_links = sorted(set(new_links))
+                for link in sorted_links:
+                    time.sleep(random.randint(20, 120))
+                    text = self.connection(language)
+                    chapter = Chapter(sorted_links.index(link) + 1,
+                                      link,
+                                      text)
+                    chapters.append(chapter)
+                return chapters
+        return None
