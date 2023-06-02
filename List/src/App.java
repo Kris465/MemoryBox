@@ -49,11 +49,23 @@ public class App {
             Node current = Head;
             while (current != null){
                 if(current.value == value){
+                    System.out.println(current);
                     return current;
                 }
                 current = current.next;
             }
             return null;
+        }
+
+        public boolean contains(int value){
+            Node node = Head;
+            while (node != null){
+                if (node.value == value){
+                    return true;
+                }
+                node = node.next;
+            }
+            return false;
         }
     }
     public static void main(String[] args) throws Exception {
@@ -72,6 +84,8 @@ public class App {
         mylist.print();
         System.out.println("- - - - - - - - - -");
         mylist.find(2);
-        mylist.print();
+        System.out.println("- - - - - - - - - -");
+        System.out.println(mylist.contains(2));
+        
     }
 }
