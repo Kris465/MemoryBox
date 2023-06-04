@@ -31,16 +31,18 @@ class Controller:
     def info(self):
         url = input("url: ")
         pars = Parser_(url)
-        chapters_list = pars.parse("collector", "chi")
+        mod = input("stepper or collector?\n")
+        language = input("eng or chi?\n")
+        chapters_list = pars.parse(mod, language)
         if self.repository.find(self.__title):
             self.update(chapters_list)
         else:
             self.create(chapters_list)
 
-    def update(self, chaptes_list):
+    def update(self, chaptes_list=None):
         pass
 
-    def create(self, chapters_list):
+    def create(self, chapters_list=None):
         self.repository.show_table("status")
         status_num = input("Status: ")
         self.repository.show_table("workers")
@@ -50,14 +52,13 @@ class Controller:
 
         russian_name = input("Russian name: ")
         original_name = input("Original name: ")
-        english_name = input("English name: ")
-        webpage = input("Start page: ")
+        english_name = self.title
+        webpage = input("Webpage: ")
         novel = Novel(russian_name, original_name, english_name, webpage)
 
-        self.repository.write(project, novel, chapters_list)
         decision = input("Save to db? ")
         if decision == "":
-            self.repository.save(project, novel, chapters_list)
+            self.repository.save_objects(project, novel, chapters_list)
 
     def delete(self):
         pass

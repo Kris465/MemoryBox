@@ -24,3 +24,32 @@
     }
   ]
 }
+
+Ошибка возникает потому, что вы пытаетесь передать строковое имя таблицы в метод query() объекта session, вместо класса таблицы. 
+
+В данном случае, вы можете передать класс таблицы напрямую в метод query(), например:
+
+
+result = self.session.query(models.Status).all()
+
+
+Или, если вы все же хотите передавать имя таблицы как строку, то можно использовать функцию getattr() для получения класса таблицы по имени:
+
+
+table_class = getattr(models, name.capitalize())
+result = self.session.query(table_class).all()
+
+
+Также, обратите внимание, что вы используете переменную table вне цикла for, в котором она определена. Возможно, вам нужно переместить вызов метода show_table() внутрь цикла:
+
+
+def find(self, query):
+        tables = [models.Novel, models.Author, models.Genre]
+        for table in tables:
+            result = self.session.query(table).filter(
+                                                table.name == query).first()
+            if result:
+                self.show_table(table.tablename)
+                self.session.close()
+                return True
+        return False

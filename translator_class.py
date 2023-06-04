@@ -1,9 +1,6 @@
 import os
 import requests
-from datetime import datetime
 from dotenv import load_dotenv, find_dotenv
-
-from drafts.writer_to_json import write
 
 
 class Translator:
@@ -29,9 +26,6 @@ class Translator:
             data=data)
 
         json_response = response.json()
-        write('IAM_TOKEN',
-              {datetime.now().strftime('%H:%M:%S'): json_response['iamToken']})
-
         return json_response['iamToken']
 
     def translate(self, text):
