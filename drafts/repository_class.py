@@ -1,7 +1,6 @@
 import json
 import os
-import pprint
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv, find_dotenv
 import models
@@ -16,7 +15,8 @@ class Repository():
     def session(self):
         return self._session()
 
-    def create_session(self):
+    @staticmethod
+    def create_session():
         load_dotenv(find_dotenv())
         user = os.environ.get('user')
         password = os.environ.get('password')
@@ -43,45 +43,12 @@ class Repository():
                 self.session.close()
                 return True
         return False
-
-    # def save_objects(self, *args):
-    #     for obj in args:
-    #         table_class = type(obj)
-    #         if hasattr(models, table_class.__name__):
-    #             self.session.add(obj)
-    #         else:
-    #             raise ValueError(f"Object {obj} is not a valid database table")
-    #     self.session.commit()
-    #     self.session.close()
-    # def save_objects(self, *args):
-    #     for obj in args:
-    #         table_class = type(obj)
-    #         if hasattr(models, f'{table_class}'):
-    #             table_class_table = getattr(models, f"{table_class.name}Table")
-    #             table_obj = table_class_table(**obj.__dict__)
-    #             self.session.add(table_obj)
-    #         else:
-    #             raise ValueError(f"Object {obj} is not a valid database table")
-    #     self.session.commit()
-    #     self.session.close()
-
-    # def save_objects(self, *args):
-    #     for obj in args:
-    #         table_class = type(obj)
-    #         if hasattr(models, f'{table_class.__name__}'):
-    #             table_class_table = getattr(models, f"{table_class.__name__}Table")
-    #             table_obj = table_class_table(**obj.__dict__)
-    #             self.session.add(table_obj)
-    #         else:
-    #             raise ValueError(f"Object {obj} is not a valid database table")
-    #     self.session.commit()
-    #     self.session.close()
     
     def save_objects(self, *args):
         for obj in args:
             table_class = type(obj)
             table_name = table_class.__name__
-            table_class_table = getattr(models, f"{table_name}Table", None)
+            table_class_table = getattr(models, f"{table_name}", None)
             if table_class_table:
                 obj_dict = obj.__dict__
                 table_obj = table_class_table(**obj_dict)
@@ -90,19 +57,6 @@ class Repository():
                 raise ValueError(f"Object {obj} is not a valid database table")
         self.session.commit()
         self.session.close()
-
-
-    # def save_objects(self, *args):
-    #     for obj in args:
-    #         table_class = type(obj)
-    #         if hasattr(models, f'{table_class.__name__}'):
-    #             table_class_table = getattr(models, f"{table_class.__name__}")
-    #             table_obj = table_class_table(**obj.__dict__)
-    #             self.session.add(table_obj)
-    #         else:
-    #             raise ValueError(f"Object {obj} is not a valid database table")
-    #     self.session.commit()
-    #     self.session.close()
 
     def show_table(self, name):
         tables = [models.Chapters,

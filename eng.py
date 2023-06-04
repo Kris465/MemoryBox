@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-from drafts.writer_to_json import write
+from writer_to_json import write
 
 
 def get_chapters():
