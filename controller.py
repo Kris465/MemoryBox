@@ -1,7 +1,5 @@
-from sqlalchemy import inspect
 from db_session import get_session
-from models import Novel, Projects
-from parser_class import Parser_
+from models import Chapters, Novel, Projects
 from reader_from_json import read
 from translator_class import Translator
 from writer_to_txt import write_txt
@@ -26,15 +24,31 @@ class Controller:
             Novel.english_name == self.title).first()
         if result:
             print("I found the novel. Update?")
-            self.update()
+            self.update(result)
         else:
             print("I didn't find the novel. Create?")
-            self.create()
+            option = input("I didn't find the novel. Create?\n"
+                           "1. Project\n2. Novel")
+            if option == 1:
+                self.create_project()
+            elif option == 2:
+                self.create_novel()
+            else:
+                self.create_project()
+                self.create_novel()
 
-    def update(self):
-        pass
+    def update(self, novel=None):
+        if novel is None:
+            session = get_session()
+            novel = session.query(Novel).filter(
+                Novel.english_name == self.title).first()
+        
+        chapters = session.query(Chapters).filter(
+                Chapters.novel_id == novel.id).all()
+        
+        for
 
-    def create(self):
+    def create_project(self):
         session = get_session()
         status_num = input("Status: ")
         worker = input("Worker: ")
@@ -43,37 +57,26 @@ class Controller:
                                worker_id=worker,
                                rulate=rulate)
         session.add(new_project)
-        russian_name = input("Russian name: ")
-        original_name = input("Original name: ")
-        english_name = self.title
-        webpage = input("Webpage: ")
-        novel = Novel(project_id=new_project,
-                      russian_name=russian_name,
-                      original_name=original_name,
-                      english_name=english_name,
-                      webpage=webpage)
-        
-        session.add(novel)
         session.commit()
         session.close()
 
-    # def create(self, chapters_list=None):
-    #     self.repository.show_table("status")
-    #     status_num = input("Status: ")
-    #     self.repository.show_table("workers")
-    #     worker = input("Worker: ")
-    #     rulate = input("Rulate: ")
-    #     project = Project(status_num, worker, rulate)
-
-    #     russian_name = input("Russian name: ")
-    #     original_name = input("Original name: ")
-    #     english_name = self.title
-    #     webpage = input("Webpage: ")
-    #     novel = Novel(russian_name, original_name, english_name, webpage)
-
-    #     decision = input("Save to db? ")
-    #     if decision == "":
-    #         self.repository.save_objects(project, novel, chapters_list)
+    def create_novel(self):
+        rulate = input("Rulate: ")
+        russian_name = input("Russian name: ")
+        original_name = input("Original name: ")
+        webpage = input("Webpage: ")
+        session = get_session()
+        result = session.query(Projects).filter(
+            Projects.rulate == rulate).all()
+        for project in result:
+            novel = Novel(project_id=project.id,
+                          russian_name=russian_name,
+                          original_name=original_name,
+                          english_name=self.title,
+                          webpage=webpage)
+        session.add(novel)
+        session.commit()
+        session.close()
 
     def delete(self):
         pass
