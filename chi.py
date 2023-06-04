@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from reader_from_json import read
-from drafts.writer_to_json import write, write_chi
+from writer_to_json import write, write_chi
 
 
 def parse_links():
