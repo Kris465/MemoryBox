@@ -144,8 +144,10 @@ class Parser_:
 
                 sorted_links = sorted(set(new_links))
                 for link in sorted_links:
+                    print(link, sorted_links.index(link))
                     time.sleep(random.randint(20, 120))
                     text = self.connection(language)
+                    print(text)
                     chapter = Chapter(sorted_links.index(link) + 1,
                                       link,
                                       text)
