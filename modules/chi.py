@@ -3,8 +3,8 @@ import time
 import requests
 from bs4 import BeautifulSoup
 import re
-from reader_from_json import read
-from writer_to_json import write
+from modules.reader_from_json import read
+from modules.writer_to_json import write
 
 
 def parse_links():

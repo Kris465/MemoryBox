@@ -1,4 +1,4 @@
-from reader_from_json import read
+from modules.reader_from_json import read
 from translator_class import Translator
 from writer_to_txt import write_txt
 

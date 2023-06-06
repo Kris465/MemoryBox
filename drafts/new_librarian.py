@@ -1,5 +1,5 @@
 from parser_class import Parser
-from writer_to_json import write
+from modules.writer_to_json import write
 
 
 def new_librarian():
