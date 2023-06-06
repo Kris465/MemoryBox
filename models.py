@@ -72,7 +72,7 @@ class Chapters(Base):
     novel_id = Column(Integer, ForeignKey('novel.id'), nullable=False)
     ordinal_number = Column(Integer, nullable=False)
     language = Column(String(10))
-    link = Column(String(80))
+    link = Column(String(150))
     original_text = Column(Text)
     russian_text = Column(Text)
     novel = relationship("Novel", back_populates='chapters')

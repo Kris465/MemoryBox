@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from reader_from_json import read
-from writer_to_json import write, write_chi
+from writer_to_json import write
 
 
 def parse_links():
@@ -49,7 +49,7 @@ def collect_chapters():
         temp_dict = {k: chapter_text}
         print(k)
         all_chapters.update(temp_dict)
-        write_chi(title, all_chapters)
+        write(title, all_chapters)
 
 
 parse_links()

@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 class Translator:
 
     def __init__(self):
-        self.__key = self.get_key()
+        self.key = self.get_key()
 
     def get_key(self):
         load_dotenv(find_dotenv())
@@ -30,7 +30,7 @@ class Translator:
 
     def translate(self, text):
         load_dotenv(find_dotenv())
-        IAM_TOKEN = self.__key
+        IAM_TOKEN = self.key
         folder_id = os.environ.get('folder_id')
         target_language = 'ru'
         texts = text

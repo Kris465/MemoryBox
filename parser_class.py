@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 import re
-from drafts.chapter_class import Chapter
+from chapter_class import Chapter
 from db_session import get_session
 from models import Parser
 
@@ -19,7 +19,7 @@ class Parser_:
         self.__tag = 'div'
         self.__cl = 'entry-content'
         self.__word = 'next'
-        self.__chapter = 1
+        self.__chapter = 0
 
     @property
     def headers(self):
@@ -87,6 +87,7 @@ class Parser_:
     def connection(self, language, urls=False):
         response = requests.get(self.url, headers=self.headers)
         print(response.status_code)
+        self.check_tags()
         if language == "chi":
             response.encoding = response.apparent_encoding
             time.sleep(random.randint(10, 120))
@@ -112,18 +113,18 @@ class Parser_:
             case "stepper":
                 link = self.url
                 while link is not None:
-                    time.sleep(10)
                     if link[0] != "h":
                         self.url = 'https:/' + link
                     else:
                         self.url = link
 
-                    self.check_tags()
                     result = self.connection(language)
                     chapter = Chapter(self.chapter,
                                       self.url,
                                       str([i.text for i in result]))
+                    print(self.chapter)
                     chapters.append(chapter)
+                    self.chapter = self.chapter + 1
                     links = self.connection(language, urls=True)
                     for link in links:
                         if self.word.upper() in link.text.upper():
@@ -134,7 +135,6 @@ class Parser_:
                 return chapters
             case "collector":
                 path = re.sub(r'^https?://[^/]+', '', self.url)
-                time.sleep(random.randint(10, 120))
                 links = self.connection(language, urls=True)
                 new_links = []
                 for link in links:
@@ -144,13 +144,16 @@ class Parser_:
 
                 sorted_links = sorted(set(new_links))
                 for link in sorted_links:
+                    if link[0] == "h":
+                        self.url = link
+                    else:
+                        self.url = 'https://www.shubaow.net' + link
                     print(link, sorted_links.index(link))
-                    time.sleep(random.randint(20, 120))
-                    text = self.connection(language)
-                    print(text)
+                    result = self.connection(language)
+                    print(result)
                     chapter = Chapter(sorted_links.index(link) + 1,
                                       link,
-                                      text)
+                                      str([i.text for i in result]))
                     chapters.append(chapter)
                 return chapters
         return None

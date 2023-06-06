@@ -10,7 +10,7 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 1
+    number = 4
     all_chapters = {}
     while url != '':
         response = requests.get(url, headers=headers)
