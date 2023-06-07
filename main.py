@@ -1,21 +1,18 @@
-from aiogram import Bot, Dispatcher
-from aiogram.utils import executor
-from controller import Controller
+import asyncio
+from presenter import Presenter
 from view import View
-import os
-from dotenv import find_dotenv, load_dotenv
+
+view = View()
+presenter = Presenter(view)
+view.presenter = presenter
 
 
-def main():
-    load_dotenv(find_dotenv())
-    TOKEN = os.environ.get('TOKEN')
-    bot = Bot(token=TOKEN)
-    dp = Dispatcher(bot)
-    view = View()
-    controller = Controller(dp, view)
-    controller.test()
-    executor.start_polling(dp)
+async def main():
+    await view.start()
 
+    while True:
+        nickname, name = await view.get_user_input()
+        presenter.add_user(nickname=nickname, name=name)
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
