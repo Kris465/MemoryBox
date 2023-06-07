@@ -54,6 +54,7 @@ class Controller:
         else:
             last_ordinal_number = chapters[-1].ordinal_number
 
+        session.close()
         if mod == 'stepper':
             url = input("First link: ")
         else:
@@ -75,9 +76,11 @@ class Controller:
                                    link=chapter.link,
                                    original_text=chapter.original_text)
             new_chapters.append(new_chapter)
-        session.add_all(new_chapters)
-        session.commit()
-        session.close()
+        session1 = get_session()
+        session1.add_all(new_chapters)
+        print(session1.__dict__)
+        session1.commit()
+        session1.close()
 
     def create_project(self):
         session = get_session()

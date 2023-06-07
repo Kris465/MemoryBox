@@ -105,6 +105,8 @@ class Parser_:
                 return links
             else:
                 text = soup.find_all(self.tag, self.cl)
+                if text[0].text == text[-1].text:
+                    return text[0]
                 return text
 
     def parse(self, mod, language):
@@ -128,10 +130,14 @@ class Parser_:
                     links = self.connection(language, urls=True)
                     for link in links:
                         if self.word.upper() in link.text.upper():
-                            link = link['href']
+                            next_link = link['href']
+                            print(next_link)
                             break
                         else:
-                            link = None
+                            next_link = None
+                    if next_link == self.url:
+                        next_link = None
+                    link = next_link
                 return chapters
             case "collector":
                 path = re.sub(r'^https?://[^/]+', '', self.url)
@@ -148,6 +154,7 @@ class Parser_:
                         self.url = link
                     else:
                         self.url = 'https://www.shubaow.net' + link
+                        # self.url = "https://m.shubaow.net/" + link
                     print(link, sorted_links.index(link))
                     result = self.connection(language)
                     print(result)

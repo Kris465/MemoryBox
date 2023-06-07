@@ -12,6 +12,7 @@ def get_session():
     database = os.environ.get('database')
     engine = create_engine(
         f'mysql+mysqlconnector://{user}:{password}@{host}/{database}',
+        pool_recycle=3600
         )
     Session = sessionmaker(bind=engine)
     return Session()
