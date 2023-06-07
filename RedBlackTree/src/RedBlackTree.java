@@ -93,7 +93,6 @@ public class RedBlackTree {
     public void insert(int value) {
         Node node = new Node(value);
         Node parent = null, current = root;
-
         while (current != null) {
             parent = current;
             if (node.value < current.value) {
@@ -102,7 +101,6 @@ public class RedBlackTree {
                 current = current.right;
             }
         }
-
         node.parent = parent;
         if (parent == null) {
             root = node;
@@ -111,8 +109,10 @@ public class RedBlackTree {
         } else {
             parent.right = node;
         }
-
         fixViolation(node);
+        if (node.parent == null) {
+            node.color = Color.BLACK;
+        }
     }
 
     public Node search(int value) {
@@ -127,6 +127,3 @@ public class RedBlackTree {
         return current;
     }
 }
-    
-    
-
