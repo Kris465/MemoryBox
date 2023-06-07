@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-from modules.writer_to_json import write
+from writer_to_json import write
 
 
 def get_chapters():
@@ -10,7 +10,7 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 4
+    number = 46
     all_chapters = {}
     while url != '':
         response = requests.get(url, headers=headers)

@@ -78,7 +78,6 @@ class Controller:
             new_chapters.append(new_chapter)
         session1 = get_session()
         session1.add_all(new_chapters)
-        print(session1.__dict__)
         session1.commit()
         session1.close()
 
@@ -136,7 +135,8 @@ class Controller:
         max_length = 10000
         substrings = []
         while len(text) > max_length:
-            index = text.rfind(".", 0, max_length)
+            # index = text.rfind(".", 0, max_length)
+            index = text.rfind("。", 0, max_length)
             if index == -1:
                 index = max_length
             substrings.append(text[:index+1])
