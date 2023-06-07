@@ -33,9 +33,12 @@ class Translator:
         IAM_TOKEN = self.key
         folder_id = os.environ.get('folder_id')
         target_language = 'ru'
+        # source_language = 'en'
+        source_language = 'zh'
         texts = text
 
         body = {
+            "sourceLanguageCode": source_language,
             "targetLanguageCode": target_language,
             "texts": texts,
             "folderId": folder_id,
