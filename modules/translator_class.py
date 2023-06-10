@@ -28,11 +28,13 @@ class Translator:
         json_response = response.json()
         return json_response['iamToken']
 
-    def translate(self, text, source_language='en'):
+    def translate(self, text):
         load_dotenv(find_dotenv())
         IAM_TOKEN = self.key
         folder_id = os.environ.get('folder_id')
         target_language = 'ru'
+        # source_language = 'en'
+        source_language = 'zh'
         texts = text
 
         body = {
