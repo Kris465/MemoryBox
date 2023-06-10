@@ -25,7 +25,7 @@ class Controller:
         if result:
             print("I found the novel. Update?")
             mod = input("stepper or collector?\n")
-            language = input("eng or chi?\n")
+            language = input("en or zh?\n")
             self.update(novel=result, mod=mod, language=language)
         else:
             option = int(input("I didn't find the novel. Create?\n"
@@ -45,7 +45,7 @@ class Controller:
                 Novel.english_name == self.title).first()
         if mod is None:
             mod = input("stepper or collector?\n")
-            language = input("eng or chi?\n")
+            language = input("en or zh?\n")
 
         chapters = session.query(Chapters).filter(
                 Chapters.novel_id == novel.id).all()
@@ -135,8 +135,8 @@ class Controller:
         max_length = 10000
         substrings = []
         while len(text) > max_length:
-            # index = text.rfind(".", 0, max_length)
-            index = text.rfind("。", 0, max_length)
+            index = text.rfind(".", 0, max_length)
+            # index = text.rfind("。", 0, max_length)
             if index == -1:
                 index = max_length
             substrings.append(text[:index+1])

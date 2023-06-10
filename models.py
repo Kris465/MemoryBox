@@ -15,6 +15,7 @@ class Parser(Base):
     tag = Column(String(10), nullable=False)
     cl = Column(String(30))
     word = Column(String(10))
+    strategy = Column(String(40))
 
 
 class Status(Base):
