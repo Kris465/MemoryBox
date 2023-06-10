@@ -3,7 +3,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 import requests
-from parser_class import Parser_
+from parser.parser_class import Parser_
 from modules.writer_to_json import write
 
 

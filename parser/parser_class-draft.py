@@ -1,37 +1,17 @@
-import random
-import time
-from bs4 import BeautifulSoup
-import requests
 import re
 from chapter_class import Chapter
 from db_session import get_session
 from models import Parser
+from parser.connection import connection
 
 
 class Parser_:
 
     def __init__(self, URL):
-        self.__headers = {'User-Agent':
-                          'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
-                           AppleWebKit/537.36 (KHTML, like Gecko)\
-                           Chrome/111.0.0.0 Safari/537.36'}
         self.__url = URL
         self.__tag = 'div'
         self.__cl = 'entry-content'
-        self.__word = 'next'
         self.__chapter = 0
-
-    @property
-    def headers(self):
-        return self.__headers
-
-    @headers.setter
-    def headers(self, headers):
-        self.__headers = headers
-
-    @property
-    def tag(self):
-        return self.__tag
 
     @property
     def cl(self):
@@ -84,30 +64,7 @@ class Parser_:
         else:
             print("Check datebase!!!")
 
-    def connection(self, language, urls=False):
-        response = requests.get(self.url, headers=self.headers)
-        print(response.status_code)
-        self.check_tags()
-        if language == "chi":
-            response.encoding = response.apparent_encoding
-            time.sleep(random.randint(10, 120))
-            soup = BeautifulSoup(response.text, 'html.parser')
-            if urls:
-                links = soup.find_all('a')
-                return links
-            else:
-                text = soup.find_all(self.tag, self.cl)
-                return text
-        else:
-            soup = BeautifulSoup(response.text, "lxml")
-            if urls:
-                links = soup.find_all('a')
-                return links
-            else:
-                text = soup.find_all(self.tag, self.cl)
-                if text[0].text == text[-1].text:
-                    return text[0]
-                return text
+
 
     def parse(self, mod, language):
         chapters = []
@@ -120,14 +77,21 @@ class Parser_:
                     else:
                         self.url = link
 
-                    result = self.connection(language)
+                    result = connection(url=self.url,
+                                        language=language,
+                                        tag=self.tag,
+                                        cl=self.cl)
                     chapter = Chapter(self.chapter,
                                       self.url,
                                       str([i.text for i in result]))
                     print(self.chapter)
                     chapters.append(chapter)
                     self.chapter = self.chapter + 1
-                    links = self.connection(language, urls=True)
+                    links = connection(url=self.url,
+                                       language=language,
+                                       tag=self.tag,
+                                       cl=self.cl,
+                                       urls=True)
                     for link in links:
                         if self.word.upper() in link.text.upper():
                             next_link = link['href']
@@ -141,7 +105,11 @@ class Parser_:
                 return chapters
             case "collector":
                 path = re.sub(r'^https?://[^/]+', '', self.url)
-                links = self.connection(language, urls=True)
+                links = connection(url=self.url,
+                                   language=language,
+                                   tag=self.tag,
+                                   cl=self.cl,
+                                   urls=True)
                 new_links = []
                 for link in links:
                     href = link.get('href')
@@ -156,7 +124,10 @@ class Parser_:
                         self.url = 'https://www.shubaow.net' + link
                         # self.url = "https://m.shubaow.net/" + link
                     print(link, sorted_links.index(link))
-                    result = self.connection(language)
+                    result = connection(url=self.url,
+                                        language=language,
+                                        tag=self.tag,
+                                        cl=self.cl)
                     print(result)
                     chapter = Chapter(sorted_links.index(link) + 1,
                                       link,

@@ -1,6 +1,6 @@
 from db_session import get_session
 from models import Chapters, Novel, Projects
-from parser_class import Parser_
+from parser.manager import Manager
 from translator_class import Translator
 from writer_to_txt import write_txt
 
@@ -18,68 +18,72 @@ class Controller:
     def title(self, title):
         self.__title = title
 
-    def info(self):
-        session = get_session()
-        result = session.query(Novel).filter(
-            Novel.english_name == self.title).first()
-        if result:
-            print("I found the novel. Update?")
-            mod = input("stepper or collector?\n")
-            language = input("en or zh?\n")
-            self.update(novel=result, mod=mod, language=language)
-        else:
-            option = int(input("I didn't find the novel. Create?\n"
-                               "1. Project\n2. Novel\n"))
-            if option == 1:
-                self.create_project()
-            elif option == 2:
-                self.create_novel()
-            else:
-                return
+    def parsing(self):
+        pars = Manager(self.title)
+        pars.collect_chapters()
 
-    def update(self, novel=None, session=None, language=None, mod=None):
-        if session is None:
-            session = get_session()
-        if novel is None:
-            novel = session.query(Novel).filter(
-                Novel.english_name == self.title).first()
-        if mod is None:
-            mod = input("stepper or collector?\n")
-            language = input("en or zh?\n")
+    # def info(self):
+    #     session = get_session()
+    #     result = session.query(Novel).filter(
+    #         Novel.english_name == self.title).first()
+    #     if result:
+    #         print("I found the novel. Update?")
+    #         mod = input("stepper or collector?\n")
+    #         language = input("en or zh?\n")
+    #         self.update(novel=result, mod=mod, language=language)
+    #     else:
+    #         option = int(input("I didn't find the novel. Create?\n"
+    #                            "1. Project\n2. Novel\n"))
+    #         if option == 1:
+    #             self.create_project()
+    #         elif option == 2:
+    #             self.create_novel()
+    #         else:
+    #             return
 
-        chapters = session.query(Chapters).filter(
-                Chapters.novel_id == novel.id).all()
-        if not chapters:
-            last_ordinal_number = 0
-        else:
-            last_ordinal_number = chapters[-1].ordinal_number
+    # def update(self, novel=None, session=None, language=None, mod=None):
+    #     if session is None:
+    #         session = get_session()
+    #     if novel is None:
+    #         novel = session.query(Novel).filter(
+    #             Novel.english_name == self.title).first()
+    #     if mod is None:
+    #         mod = input("stepper or collector?\n")
+    #         language = input("en or zh?\n")
 
-        session.close()
-        if mod == 'stepper':
-            url = input("First link: ")
-        else:
-            url = novel.webpage
+    #     chapters = session.query(Chapters).filter(
+    #             Chapters.novel_id == novel.id).all()
+    #     if not chapters:
+    #         last_ordinal_number = 0
+    #     else:
+    #         last_ordinal_number = chapters[-1].ordinal_number
 
-        pars = Parser_(url)
-        pars.chapter = last_ordinal_number + 1
+    #     session.close()
+    #     if mod == 'stepper':
+    #         url = input("First link: ")
+    #     else:
+    #         url = novel.webpage
 
-        parsed_chapters = pars.parse(mod, language)
-        if not parsed_chapters:
-            return
+    #     pars = Parser_(url)
+    #     pars.chapter = last_ordinal_number + 1
 
-        new_chapters = []
-        for chapter in parsed_chapters:
-            # if chapter.link != chapters[-1].link:
-            new_chapter = Chapters(novel_id=novel.id,
-                                   ordinal_number=chapter.ordinal_number,
-                                   language=language,
-                                   link=chapter.link,
-                                   original_text=chapter.original_text)
-            new_chapters.append(new_chapter)
-        session1 = get_session()
-        session1.add_all(new_chapters)
-        session1.commit()
-        session1.close()
+    #     parsed_chapters = pars.parse(mod, language)
+    #     if not parsed_chapters:
+    #         return
+
+    #     new_chapters = []
+    #     for chapter in parsed_chapters:
+    #         # if chapter.link != chapters[-1].link:
+    #         new_chapter = Chapters(novel_id=novel.id,
+    #                                ordinal_number=chapter.ordinal_number,
+    #                                language=language,
+    #                                link=chapter.link,
+    #                                original_text=chapter.original_text)
+    #         new_chapters.append(new_chapter)
+    #     session1 = get_session()
+    #     session1.add_all(new_chapters)
+    #     session1.commit()
+    #     session1.close()
 
     def create_project(self):
         session = get_session()
