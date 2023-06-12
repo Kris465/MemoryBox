@@ -1,17 +1,17 @@
-from chapter_class import Chapter
+from parser.chapter_class import Chapter
 from parser.connection import connection
 
 
 class Stepper:
 
-    def __init__(self, chapter,
+    def __init__(self, chapter, parser,
                  tag='div',
                  cl='entry-content',
                  language='en',
                  word='Next'):
         self.chapter_url = chapter.link
-        self.tag = tag
-        self.cl = cl
+        self.tag = parser.tag
+        self.cl = parser.cl
         self.language = language
         self.chapter = chapter.ordinal_number
         self.word = word
@@ -24,9 +24,10 @@ class Stepper:
                                 language=self.language,
                                 tag=self.tag,
                                 cl=self.cl)
-            chapter = Chapter(self.chapter,
-                              self.chapter_url,
-                              str([i.text for i in result]))
+            chapter = Chapter(ordinal_number=self.chapter,
+                              link=self.chapter_url,
+                              language=self.language,
+                              original_text=str([i.text for i in result]))
             print(chapter.link, chapter.ordinal_number, chapter.original_text)
             chapters.append(chapter)
             self.chapter = self.chapter + 1

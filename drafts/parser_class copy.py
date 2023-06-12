@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 import re
-from chapter_class import Chapter
+from parser.chapter_class import Chapter
 from db_session import get_session
 from models import Parser
 

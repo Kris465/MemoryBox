@@ -51,7 +51,7 @@ def collect_chapters():
         soup = BeautifulSoup(response.text, 'html.parser')
         # chapter_text = soup.find("div", "content_read").text
         chapter_text = soup.find('div', "novelcontent").text
-        temp_dict = {k: chapter_text}
+        temp_dict = {str(int(k) + 38): chapter_text}
         print(k)
         all_chapters.update(temp_dict)
         write(title, all_chapters, language="chi")
