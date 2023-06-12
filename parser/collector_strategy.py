@@ -1,22 +1,22 @@
 import re
-from chapter_class import Chapter
+from parser.chapter_class import Chapter
 from parser.connection import connection
 
 
 class Collector:
 
-    def __init__(self, URL, chapter=None,
+    def __init__(self, URL, chapter, parser,
                  tag='div',
                  cl='entry-content',
                  language='zh',
                  word='Next'):
         self.url = URL
         self.chapter_url = chapter.link
-        self.tag = tag
-        self.cl = cl
-        self.language = language
+        self.tag = parser.tag
+        self.cl = parser.cl
+        self.language = chapter.language
         self.chapter = chapter.ordinal_number
-        self.word = word
+        self.word = parser.word
 
     def collect_chapters(self):
         chapters = []
