@@ -4,7 +4,7 @@ from parser.chapter_class import Chapter
 from db_session import get_session
 from models import Chapters, Novel, Parser
 from parser.collector_strategy import Collector
-from parser.stepper_strategy import Stepper
+from drafts.stepper_strategy import Stepper
 
 
 class Manager:

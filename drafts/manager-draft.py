@@ -4,7 +4,7 @@ from db_session import get_session
 from models import Chapters, Novel, Parser
 from modules.writer_to_json import write
 from parser.collector_strategy import Collector
-from parser.stepper_strategy import Stepper
+from drafts.stepper_strategy import Stepper
 
 
 class Manager():
