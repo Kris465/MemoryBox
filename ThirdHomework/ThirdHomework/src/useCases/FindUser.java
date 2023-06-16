@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javax.sound.sampled.AudioFormat.Encoding;
+
 public class FindUser {
 
     public void findUser() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("Введите фамилию пользователя");
         String lastName = scanner.nextLine();
 
@@ -18,7 +20,7 @@ public class FindUser {
         }
 
         try {
-            Scanner fileScanner = new Scanner(file);
+            Scanner fileScanner = new Scanner(file,"UTF-8");
             while (fileScanner.hasNextLine()) {
                 String userData = fileScanner.nextLine();
                 String[] userDataArray = userData.split(" ");

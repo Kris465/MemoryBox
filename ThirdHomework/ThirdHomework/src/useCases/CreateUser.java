@@ -1,13 +1,16 @@
 package useCases;
 
-import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 public class CreateUser {
 
     public void createUser() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
+        System.setProperty("console.encoding","UTF-8");
         System.out.println("Введите данные пользователя в формате: Фамилия Имя Отчество Дата рождения (ДД.ММ.ГГГГ) Номер телефона Пол");
         String userData = scanner.nextLine();
 
@@ -18,14 +21,14 @@ public class CreateUser {
             return;
         }
 
-        String lastName = userDataArray[0];
+        String surname = userDataArray[0];
         String firstName = userDataArray[1];
-        String middleName = userDataArray[2];
-        String birthDate = userDataArray[3];
+        String patronymic = userDataArray[2];
+        String dateOfBirth = userDataArray[3];
         String phoneNumber = userDataArray[4];
         String gender = userDataArray[5];
 
-        if (!isValidDate(birthDate)) {
+        if (!isValidDate(dateOfBirth)) {
             System.out.println("Некорректный формат даты рождения. Введите дату в формате: ДД.ММ.ГГГГ");
             createUser();
             return;
@@ -44,8 +47,10 @@ public class CreateUser {
         }
 
         try {
-            FileWriter writer = new FileWriter(lastName + ".txt", true);
-            writer.write(lastName + " " + firstName + " " + middleName + " " + birthDate + " " + phoneNumber + " " + gender + "\n");
+            FileOutputStream fos = new FileOutputStream(surname + ".txt", true);
+            OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+            BufferedWriter writer = new BufferedWriter(osw);
+            writer.write(surname + " " + firstName + " " + patronymic + " " + dateOfBirth + " " + phoneNumber + " " + gender + "\n");
             writer.close();
             System.out.println("Пользователь успешно создан");
         } catch (IOException e) {
