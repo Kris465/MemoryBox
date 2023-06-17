@@ -1,30 +1,23 @@
 package domain;
 
+import java.time.LocalDate;
+
 public class User {
-    
-    private String firstName;
+    private String name;
     private String surname;
     private String patronymic;
-    private String dateOfBirth;
-    private long phoneNumber;
-    private char gender;
+    private LocalDate dateOfBirth;
+    private String phoneNumber;
+    private char gender;;
     
-    public User(String firstName, String surname, String patronymic, String dateOfBirth, long phoneNumber,
-            char gender) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.patronymic = patronymic;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
+    public User() {}
+
+    public String getName() {
+        return name;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurname() {
@@ -43,20 +36,24 @@ public class User {
         this.patronymic = patronymic;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber.matches("\\d{10}")) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            throw new IllegalArgumentException("Invalid phone number format.");
+        }
     }
 
     public char getGender() {
@@ -64,8 +61,15 @@ public class User {
     }
 
     public void setGender(char gender) {
+         if (gender == 'm' || gender == 'f') {
         this.gender = gender;
+        } else {
+            throw new IllegalArgumentException("Invalid gender.");
+        }
     }
 
-    
+    @Override
+    public String toString() {
+        return surname + " " + name + " " + patronymic + " " + dateOfBirth + " " + phoneNumber + " " + gender;
+    }
 }

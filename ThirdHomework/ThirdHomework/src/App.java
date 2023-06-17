@@ -1,5 +1,3 @@
-import java.lang.module.FindException;
-
 import interfaceAdapters.ConsoleAdapter;
 import useCases.CreateUser;
 import useCases.FindUser;

@@ -1,80 +1,59 @@
 package useCases;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import domain.User;
 
 public class CreateUser {
 
-    public void createUser() {
+    public static void createUser() {
         Scanner scanner = new Scanner(System.in, "UTF-8");
-        System.setProperty("console.encoding","UTF-8");
-        System.out.println("Input user's data: Surname Name Patronymic Birthday (dd.mm.yyyy) PhoneNumber Gender");
-        String userData = scanner.nextLine();
-
-        String[] userDataArray = userData.split(" ");
+        System.out.println("Enter user data in the following format: Surname Name Patronymic Birthday (dd.mm.yyyy) PhoneNumber (10) Gender");
+        String input = scanner.nextLine();
+        String[] userDataArray = input.split(" ");
         if (userDataArray.length != 6) {
-            System.out.println("Incorrect data. Use format: Surname Name Patronymic Birthday (dd.mm.yyyy) PhoneNumber Gender");
+            System.out.println("One of fields is empty.");
             createUser();
             return;
         }
+        User user = new User();
 
-        String surname = userDataArray[0];
-        String firstName = userDataArray[1];
-        String patronymic = userDataArray[2];
-        String dateOfBirth = userDataArray[3];
-        String phoneNumber = userDataArray[4];
-        String gender = userDataArray[5];
-
-        if (!isValidDate(dateOfBirth)) {
-            System.out.println("Input date if format: ДД.ММ.ГГГГ");
-            createUser();
-            return;
+        for (String data : userDataArray) {
+            try {
+                if (data.matches("[a-zA-Zа-яА-Я]+") && !data.equals("f") && !data.equals("m")) {
+                    if (data.equals(userDataArray[0])) {
+                        user.setSurname(data);
+                    } else if (data.equals(userDataArray[1])) {
+                        user.setName(data);
+                    } else {
+                        user.setPatronymic(data);
+                    }
+                } else if (data.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
+                    LocalDate dateOfBirth = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                    user.setDateOfBirth(dateOfBirth);
+                } else if (data.matches("\\d{10}")) {
+                    user.setPhoneNumber(data);
+                } else if (data.matches("[mf]")) {
+                    user.setGender(data.charAt(0));
+                } else {
+                    System.out.println("Incorrect input. Try again.");
+                    createUser();
+                    return;
+                }
+            } catch (Exception e) {
+                System.out.println("Try again.");
+            }
         }
 
-        if (!isValidPhoneNumber(phoneNumber)) {
-            System.out.println("Input number in format: +7XXXXXXXXXX");
-            createUser();
-            return;
-        }
-
-        if (!isValidGender(gender)) {
-            System.out.println("Input gender in format: m/f");
-            createUser();
-            return;
-        }
-
-        try {
-            FileOutputStream fos = new FileOutputStream(surname + ".txt", true);
-            OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-            BufferedWriter writer = new BufferedWriter(osw);
-            writer.write(surname + " " + firstName + " " + patronymic + " " + dateOfBirth + " " + phoneNumber + " " + gender + "\n");
-            writer.close();
-            System.out.println("User created");
+        try (FileWriter writer = new FileWriter(user.getSurname() + ".txt", true)) {
+            writer.write(user.toString() + "\n");
+            System.out.println("User has been added to the file.");
         } catch (IOException e) {
-            System.out.println("User wasn't saved");
+            System.err.println("Error writing to file: " + e.getMessage());
         }
-    }
-
-    private boolean isValidDate(String date) {
-        String[] dateArray = date.split("\\.");
-        if (dateArray.length != 3) {
-            return false;
-        }
-        int day = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
-        int year = Integer.parseInt(dateArray[2]);
-        return day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2023;
-    }
-
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("\\+7\\d{10}");
-    }
-
-    private boolean isValidGender(String gender) {
-        return gender.equals("m") || gender.equals("f");
-    }
+    } 
 }
-

@@ -27,7 +27,7 @@ public class ConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    createUser.createUser();
+                    CreateUser.createUser();
                     break;
                 case 2:
                     findUser.findUser();
