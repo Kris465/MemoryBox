@@ -11,12 +11,12 @@ public class CreateUser {
     public void createUser() {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         System.setProperty("console.encoding","UTF-8");
-        System.out.println("Введите данные пользователя в формате: Фамилия Имя Отчество Дата рождения (ДД.ММ.ГГГГ) Номер телефона Пол");
+        System.out.println("Input user's data: Surname Name Patronymic Birthday (dd.mm.yyyy) PhoneNumber Gender");
         String userData = scanner.nextLine();
 
         String[] userDataArray = userData.split(" ");
         if (userDataArray.length != 6) {
-            System.out.println("Некорректный формат данных. Введите данные в формате: Фамилия Имя Отчество Дата рождения (ДД.ММ.ГГГГ) Номер телефона Пол");
+            System.out.println("Incorrect data. Use format: Surname Name Patronymic Birthday (dd.mm.yyyy) PhoneNumber Gender");
             createUser();
             return;
         }
@@ -29,19 +29,19 @@ public class CreateUser {
         String gender = userDataArray[5];
 
         if (!isValidDate(dateOfBirth)) {
-            System.out.println("Некорректный формат даты рождения. Введите дату в формате: ДД.ММ.ГГГГ");
+            System.out.println("Input date if format: ДД.ММ.ГГГГ");
             createUser();
             return;
         }
 
         if (!isValidPhoneNumber(phoneNumber)) {
-            System.out.println("Некорректный формат номера телефона. Введите номер в формате: +7XXXXXXXXXX");
+            System.out.println("Input number in format: +7XXXXXXXXXX");
             createUser();
             return;
         }
 
         if (!isValidGender(gender)) {
-            System.out.println("Некорректный формат пола. Введите пол в формате: m/f");
+            System.out.println("Input gender in format: m/f");
             createUser();
             return;
         }
@@ -52,9 +52,9 @@ public class CreateUser {
             BufferedWriter writer = new BufferedWriter(osw);
             writer.write(surname + " " + firstName + " " + patronymic + " " + dateOfBirth + " " + phoneNumber + " " + gender + "\n");
             writer.close();
-            System.out.println("Пользователь успешно создан");
+            System.out.println("User created");
         } catch (IOException e) {
-            System.out.println("Ошибка при сохранении пользователя");
+            System.out.println("User wasn't saved");
         }
     }
 

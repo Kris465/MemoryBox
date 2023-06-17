@@ -17,10 +17,10 @@ public class ConsoleAdapter {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Выберите действие:");
-            System.out.println("1 - Создать пользователя");
-            System.out.println("2 - Найти пользователя");
-            System.out.println("0 - Выход");
+            System.out.println("Menu:");
+            System.out.println("1 - Create user");
+            System.out.println("2 - Find user");
+            System.out.println("0 - Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -35,7 +35,7 @@ public class ConsoleAdapter {
                 case 0:
                     return;
                 default:
-                    System.out.println("Некорректный выбор");
+                    System.out.println("Menu doesn't have such option.");
             }
         }
     }
