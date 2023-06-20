@@ -3,10 +3,11 @@ import re
 from parser.chapter_class import Chapter
 from db_session import get_session
 from models import Chapters, Novel, Parser
+from parser.collector_strategy import Collector
+from drafts.stepper_strategy import Stepper
 
 
 class Manager:
-
     def __init__(self, title: str) -> None:
         self.__title = title
         self.__chapter: Optional[Chapter] = None

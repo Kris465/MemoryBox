@@ -15,7 +15,6 @@ class Parser(Base):
     tag = Column(String(10), nullable=False)
     cl = Column(String(30))
     word = Column(String(10))
-    strategy = Column(String(40))
 
 
 class Status(Base):
@@ -63,6 +62,7 @@ class Novel(Base):
     english_name = Column(String(70))
     notes = Column(String(10))
     webpage = Column(String(80))
+    strategy = Column(String(40))
     projects = relationship("Projects", back_populates='novel')
     chapters = relationship("Chapters", back_populates="novel")
 
