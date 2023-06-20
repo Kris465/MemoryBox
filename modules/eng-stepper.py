@@ -10,15 +10,15 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 38
+    number = 4
     all_chapters = {}
     # while url is not None:
-    while number < 61:
+    while number < 67:
         response = requests.get(url, headers=headers)
         print(response.status_code)
         soup = BeautifulSoup(response.text, 'lxml')
-        result = soup.find_all("div", class_="text-left")
-        temp_dict = {number: i.text for i in result}
+        result = soup.find_all("div", class_="mantine-Paper-root")
+        temp_dict = {number: url + i.text for i in result}
         print(temp_dict)
         all_chapters.update(temp_dict)
         soup = BeautifulSoup(response.text, "lxml")
@@ -36,8 +36,10 @@ def get_chapters():
             if url == '':
                 break
         else:
-            url = next_link
+            # url = next_link
             # url = "https://puretl.com" + next_link
+            # url = "https://travistranslations.com" + next_link
+            url = "https://www.wuxiaworld.eu" + next_link
 
     write(f"{title}", all_chapters)
 
