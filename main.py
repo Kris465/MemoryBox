@@ -5,7 +5,7 @@ from view import View
 def main():
     view = View()
     controller = Controller(view)
-    controller.start()
+    controller.logic()
 
 
 if __name__ == '__main__':
