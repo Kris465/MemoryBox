@@ -1,5 +1,5 @@
 from controller import Controller
-from view import View
+from presenter.user_menu.view import View
 
 
 def main():
