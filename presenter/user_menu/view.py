@@ -4,7 +4,7 @@ from domain.project_class import Project
 
 class View:
 
-    def get_info(arg, self):
+    def get_info(self, arg):
         return input(arg)
 
     def ask_user(self, title):

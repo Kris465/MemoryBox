@@ -16,33 +16,38 @@ class Parser:
         parser = session.query(Parser).filter_by(url=temp_url).first()
         if parser is not None:
             strategy_name = parser.strategy_name
-            chapters = self.run_strategy(strategy_name, parser)
+            chapters = self.run_strategy(strategy_name, parser, self.project)
         else:
-            tag = input("Введите тег: ")
+            params = {}
             cl = input("Введите класс: ")
-            word = input("Введите слово: ")
-            strategy_name = input("Введите название стратегии: ")
-            chapters = self.run_custom_strategy(tag,
-                                                cl,
-                                                word,
-                                                strategy_name)
-        self.project.chapters = chapters
+            strategy = input("Введите название стратегии: ")
+            if all(params.values()):
+                chapters = self.run_custom_strategy(params)
+                self.project.chapters = chapters
+                new_parser = Parser(temp_url, cl, strategy)
+                session.add(new_parser)
+                session.close()
+            else:
+                raise ValueError("Не все параметры заполнены")
+
         return self.project
 
-    def run_strategy(self, strategy_name, parser):
+    def run_strategy(self, strategy_name, parser, project):
         if strategy_name == "stepper":
-            strategy = Stepper(parser, self.project.chapters)
+            sorted_chapters = sorted(project.chapters,
+                                     key=lambda x: x.ordinal_number)
+            strategy = Stepper(parser.cl, sorted_chapters)
         else:
             raise ValueError("Неизвестная стратегия")
 
-        # Запуск стратегии с передачей нужных параметров
+        # Не передавать в метод агргументы!
+        # Передавать все необходимые объекты в конструктор стратеги!
         chapters = strategy.collect_chapters()
         return chapters
 
-    def run_custom_strategy(self, tag, class_name, word, strategy_name):
+    def run_custom_strategy(self, params):
         # Создание экземпляра пользовательской стратегии
-        strategy = CustomStrategy(tag, class_name, word)
-
+        strategy = CustomStrategy(**params)
         # Запуск пользовательской стратегии с передачей нужных параметров
-        chapters = strategy.get_chapters(self.project.webpage)
+        chapters = strategy.get_chapters()
         return chapters

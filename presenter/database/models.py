@@ -12,9 +12,7 @@ class Parser(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     url = Column(String(100), nullable=False)
-    tag = Column(String(10), nullable=False)
     cl = Column(String(30))
-    word = Column(String(10))
     strategy = Column(String(40))
 
 

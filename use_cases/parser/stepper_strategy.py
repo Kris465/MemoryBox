@@ -1,46 +1,52 @@
-from bs4 import BeautifulSoup
 import requests
-
+from bs4 import BeautifulSoup
+from domain.chapter_class import Chapter
 from use_cases.parser.abstract_strategy import ParserStrategy
 
 
 class Stepper(ParserStrategy):
-
-    def __init__(self, chapters):
+    def __init__(self, cl, chapters=[]):
+        self.cl = cl
         self.chapters = chapters
-        self.headers = {'User-Agent':
-                        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
-                        AppleWebKit/537.36 (KHTML, like Gecko)\
-                        Chrome/111.0.0.0 Safari/537.36'}
 
     def collect_chapters(self):
-        
+        # Проверяем, есть ли уже главы в списке
+        if not self.chapters:
+            ordinal_number = input("Введите номер первой главы: ")
+            link = input("Введите ссылку на первую главу: ")
+            chapter = self._parse_chapter(ordinal_number, link)
+            self.chapters.append(chapter)
 
-        number = 30
-        all_chapters = []
-        while number < 105:
-            response = requests.get(url, headers=self.headers)
-            print(response.status_code)
-            soup = BeautifulSoup(response.text, 'lxml')
-            result = soup.find_all("div", class_="entry-content")
-            temp_dict = {number: url + i.text for i in result}
-            print(temp_dict)
-            all_chapters.update(temp_dict)
-            soup = BeautifulSoup(response.text, "lxml")
-            links = soup.find_all("a")
-            for link in links:
-                if "next" in link.text.lower():
-                    next_link = link['href']
-                    print(next_link)
-                    break
-                else:
-                    next_link = None
-            number += 1
+        # Ищем ссылку на следующую главу и продолжаем собирать главы
+        while True:
+            next_link = self._find_next_link(self.chapters[-1].link)
             if next_link is None:
-                url = input("url: ")
-                if url == '':
-                    break
-            else:
-                url = next_link
+                break
+            chapter = self._parse_chapter(len(self.chapters) + 1, next_link)
+            self.chapters.append(chapter)
 
-        return all_chapters
+        return self.chapters
+
+    def _find_next_link(self, current_link):
+        response = requests.get(current_link)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Ищем ссылку на следующую главу
+        next_link = None
+        for a_tag in soup.find_all('a'):
+            if 'Next' in a_tag.text:
+                next_link = a_tag.get('href')
+                break
+
+        return next_link
+
+    def _parse_chapter(self, ordinal_number, link):
+        response = requests.get(link)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Ищем текст главы
+        text = soup.find(self.cl).text
+
+        # Создаем объект главы и возвращаем его
+        chapter = Chapter(ordinal_number, link, self.cl, text)
+        return chapter
