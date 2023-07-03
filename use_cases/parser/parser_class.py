@@ -19,13 +19,12 @@ class Parser:
             chapters = self.run_strategy(strategy_name, parser, self.project)
         else:
             params = {}
-            params['tag'] = input("Введите тег: ")
-            params['class_name'] = input("Введите класс: ")
-            params['strategy_name'] = input("Введите название стратегии: ")
+            cl = input("Введите класс: ")
+            strategy = input("Введите название стратегии: ")
             if all(params.values()):
                 chapters = self.run_custom_strategy(params)
                 self.project.chapters = chapters
-                new_parser = Parser(**params)
+                new_parser = Parser(temp_url, cl, strategy)
                 session.add(new_parser)
                 session.close()
             else:
@@ -37,10 +36,12 @@ class Parser:
         if strategy_name == "stepper":
             sorted_chapters = sorted(project.chapters,
                                      key=lambda x: x.ordinal_number)
-            strategy = Stepper(parser.tag, parser.cl, sorted_chapters)
+            strategy = Stepper(parser.cl, sorted_chapters)
         else:
             raise ValueError("Неизвестная стратегия")
 
+        # Не передавать в метод агргументы!
+        # Передавать все необходимые объекты в конструктор стратеги!
         chapters = strategy.collect_chapters()
         return chapters
 

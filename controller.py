@@ -23,5 +23,5 @@ class Controller:
         # project = trans.translate()
 
         write(project.english_name, str(project.__dict__))
-        # db_manager = DBManager()
-        # db_manager.save(project)
+        db_manager = DBManager()
+        db_manager.save(project)
