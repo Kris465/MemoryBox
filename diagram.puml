@@ -1,5 +1,14 @@
-@startuml
+@startuml zoo
 
-Controller ..|> View
+Animal ..|> Pet
+Animal ..|> PackAnimal
+Pet ..|> Dog
+Pet ..|> Cat
+Pet ..|> Hamster
+PackAnimal ..|> Horse
+PackAnimal ..|> Camel
+PackAnimal ..|> Donkey
 
+abstract class Animal {
+}
 @enduml
