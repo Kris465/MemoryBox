@@ -1,5 +1,5 @@
-@startuml
+@startuml zoo
 
-Controller ..|> View
+Animal ..|> Cow
 
 @enduml
