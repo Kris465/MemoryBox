@@ -1,5 +1,14 @@
 @startuml zoo
 
-Animal ..|> Cow
+Animal ..|> Pet
+Animal ..|> PackAnimal
+Pet ..|> Dog
+Pet ..|> Cat
+Pet ..|> Hamster
+PackAnimal ..|> Horse
+PackAnimal ..|> Camel
+PackAnimal ..|> Donkey
 
+abstract class Animal {
+}
 @enduml

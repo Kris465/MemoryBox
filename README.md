@@ -108,3 +108,7 @@ gpg -k
 
 ![Picture](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Kris465/FinalWork/main/diagram.puml)
 
+**В подключенном MySQL репозитории создать базу данных “Друзья человека**
+
+
+
