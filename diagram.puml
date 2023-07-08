@@ -11,4 +11,5 @@ PackAnimal ..|> Donkey
 
 abstract class Animal {
 }
+
 @enduml
