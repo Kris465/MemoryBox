@@ -1,6 +1,6 @@
-# Итоговая аттестация по блоку специализация.
+# Итоговая аттестация по блоку специализация
 
-## Задание:
+## Задание
 
     1. Используя команду cat в терминале операционной системы Linux, создать два файла Домашние животные (заполнив файл собаками, кошками, хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и ослы), а затем объединить их. Просмотреть содержимое созданного файла. Переименовать файл, дав ему новое имя (Друзья человека).
     
@@ -44,7 +44,7 @@
     
     15.Создайте класс Счетчик, у которого есть метод add(), увеличивающий̆ значение внутренней̆int переменной̆на 1 при нажатие “Завести новое животное” Сделайте так, чтобы с объектом такого типа можно было работать в блоке try-with-resources. Нужно бросить исключение, если работа с объектом типа счетчик была не в ресурсном try и/или ресурс остался открыт. Значение считать в ресурсе try, если при заведения животного заполнены все поля.
 
-## Ход выполнения:
+## Ход выполнения
 
 **Используя команду cat в терминале операционной системы Linux, создать два файла Домашние животные (заполнив файл собаками, кошками, хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и ослы), а затем объединить их. Просмотреть содержимое созданного файла. Переименовать файл, дав ему новое имя (Друзья человека).
 Создать директорию, переместить файл туда.**
@@ -56,6 +56,7 @@ cat > "Домашние животные"
 хомяки
 Ctrl + D
 ```
+
 ```sh
 cat > "Вьючные животные"
 лошади
@@ -63,18 +64,23 @@ cat > "Вьючные животные"
 ослы
 Ctrl + D
 ```
+
 ```sh
 cat "Домашние животные" "Вьючные животные" > "Друзья человека"
 ```
+
 ```sh
 cat "Друзья человека"
 ```
+
 ```sh
 mkdir Зоопарк
 ```
+
 ```sh
 mv "Друзья человека" Зоопарк/
 ```
+
 **Подключить дополнительный репозиторий MySQL. Установить любой пакет из этого репозитория. Установить и удалить deb-пакет с помощью dpkg.**
 
 (Подробный разбор каждого этапа в pdf)
@@ -102,6 +108,7 @@ sudo dpkg -r mysql-apt-config
 
 gpg -k
 ```
+
 Пятый пункт есть в pdf-файле.
 
 **Нарисовать диаграмму, в которой есть класс родительский класс, домашние животные и вьючные животные, в составы которых в случае домашних животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные войдут: Лошади, верблюды и ослы**
@@ -111,192 +118,120 @@ gpg -k
 **В подключенном MySQL репозитории создать базу данных “Друзья человека". Создать таблицы с иерархией из диаграммы в БД. Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу. Создать новую таблицу “молодые животные” в которую попадут все животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью до месяца подсчитать возраст животных в новой таблице. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на прошлую принадлежность к старым таблицам.**
 
 ```sql
-DROP DATABASE IF EXISTS `human_friends`;
-CREATE DATABASE IF NOT EXISTS `human_friends`;
-USE `human_friends`;
 
-CREATE TABLE `animals` (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
-  animals_class VARCHAR(30)
-);
+CREATE DATABASE IF NOT EXISTS human_friends;
+USE human_friends;
 
-CREATE TABLE `dogs` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE Animal (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(40),
+  birth_date DATE);
 
-CREATE TABLE `cats` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE Pet (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  command VARCHAR(40),
+  animal_id INT,
+  FOREIGN KEY (animal_id) REFERENCES Animal(id));
 
-CREATE TABLE `hamsters` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE PackAnimal (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  animal_id INT,
+  FOREIGN KEY (animal_id) REFERENCES Animal(id));
 
-CREATE TABLE `horses` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE Dog (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  pet_id INT,
+  FOREIGN KEY (pet_id) REFERENCES Pet(id));
 
-CREATE TABLE `camels` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE Cat (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  pet_id INT,
+  FOREIGN KEY (pet_id) REFERENCES Pet(id));
 
-CREATE TABLE `donkeys` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`animal_class_id`) REFERENCES `animals` (`id`) ON DELETE CASCADE
-);
+CREATE TABLE Hamster (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  pet_id INT,
+  FOREIGN KEY (pet_id) REFERENCES Pet(id));
 
-INSERT INTO `human_friends`.`animals` (`id`, `animals_class`) VALUES ('1', 'pet'),('2', 'wild');
+CREATE TABLE Horse (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  pack_animal_id INT,
+  FOREIGN KEY (pack_animal_id) REFERENCES PackAnimal(id));
 
-INSERT INTO `human_friends`.`dogs` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Buddy', 'Sit, Stay, Fetch', '2019-02-10', 1),
-  ('Max', 'Roll over, Shake hands', '2018-06-15', 1),
-  ('Bailey', 'Play dead, Jump', '2020-01-05', 1),
-  ('Charlie', 'Speak, Catch', '2017-09-20', 1),
-  ('Luna', 'Bark, Spin', '2016-12-08', 1);
+CREATE TABLE Donkey (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  pack_animal_id INT,
+  FOREIGN KEY (pack_animal_id) REFERENCES PackAnimal(id));
 
-INSERT INTO `human_friends`.`cats` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Oliver', 'Purr, Pounce', '2018-04-25', 1),
-  ('Leo', 'Groom, Sleep', '2019-07-10', 1),
-  ('Milo', 'Climb, Hunt', '2020-03-17', 1),
-  ('Lily', 'Stretch, Chase', '2017-11-30', 1),
-  ('Simba', 'Meow, Play', '2016-09-12', 1);
+INSERT INTO Animal (name, birth_date) VALUES ('Animal1', '2000-01-01');
+INSERT INTO Animal (name, birth_date) VALUES ('Animal2', '2002-05-10');
+INSERT INTO Animal (name, birth_date) VALUES ('Animal3', '2005-12-15');
+INSERT INTO Pet (command, animal_id) VALUES ('Command1', 1);
+INSERT INTO Pet (command, animal_id) VALUES ('Command2', 2);
+INSERT INTO Pet (command, animal_id) VALUES ('Command3', 3);
+INSERT INTO Dog (pet_id) VALUES (1);
+INSERT INTO Cat (pet_id) VALUES (2);
+INSERT INTO Hamster (pet_id) VALUES (3);
+INSERT INTO PackAnimal (animal_id) VALUES (1);
+INSERT INTO PackAnimal (animal_id) VALUES (2);
+INSERT INTO PackAnimal (animal_id) VALUES (3);
+INSERT INTO Horse (pack_animal_id) VALUES (1);
+INSERT INTO Donkey (pack_animal_id) VALUES (2);
 
-INSERT INTO `human_friends`.`hamsters` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Coco', 'Run on the wheel', '2021-01-03', 1),
-  ('Peanut', 'Hide food, Burrow', '2022-02-14', 1),
-  ('Oreo', 'Climb tubes', '2020-11-20', 1),
-  ('Biscuit', 'Cheek pouches, Dig', '2019-10-05', 1),
-  ('Hazel', 'Gnaw, Explore', '2023-04-01', 1);
-
-INSERT INTO `human_friends`.`horses` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Spirit', 'Gallop, Jump', '2015-08-20', 2),
-  ('Daisy', 'Trot, Lunge', '2016-06-10', 2),
-  ('Apollo', 'Dressage, Canter', '2017-03-15', 2),
-  ('Willow', 'Trail riding, Vaulting', '2018-11-25', 2),
-  ('Rocky', 'Western riding, Reining', '2019-09-05', 2);
-
-INSERT INTO `human_friends`.`camels` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Sahara', 'Carry loads, Long trek', '2014-12-01', 2),
-  ('Amir', 'Desert navigation, Endurance', '2015-10-18', 2),
-  ('Zara', 'Pack saddle, Camel race', '2016-07-24', 2),
-  ('Raja', 'Camel ride, Milk production', '2017-04-09', 2),
-  ('Jamal', 'Hump storage, Adaptation', '2018-02-15', 2);
-
-INSERT INTO `human_friends`.`donkeys` (`name`, `skills`, `birth_date`, `animal_class_id`) VALUES
-  ('Jack', 'Carry load, Braying', '2019-08-12', 2),
-  ('Jenny', 'Grazing, Guarding', '2020-05-05', 2),
-  ('Molly', 'Plowing, Companion', '2021-02-20', 2),
-  ('Oscar', 'Stubbornness, Towing', '2022-09-10', 2),
-  ('Rosie', 'Trick training, Therapy', '2023-06-05', 2);
-
-  DROP TABLE `human_friends`.`camels`;
-
-CREATE TABLE `horses_and_donkeys` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  `species` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
-INSERT INTO `horses_and_donkeys` (`name`, `skills`, `birth_date`, `animal_class_id`, `species`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'Horse' AS `species`
-FROM `horses`;
-
-INSERT INTO `horses_and_donkeys` (`name`, `skills`, `birth_date`, `animal_class_id`, `species`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'Donkey' AS `species`
-FROM `donkeys`;
-
-CREATE TABLE `young_animals` (
+CREATE TABLE horses_and_donkeys (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(50) NOT NULL,
-  `species` VARCHAR(20) NOT NULL,
-  `age_months` INT NOT NULL
-);
+  name VARCHAR(50) NOT NULL,
+  command VARCHAR(100) NOT NULL,
+  birth_date DATE NOT NULL,
+  animal_class_id INT UNSIGNED NOT NULL;
 
-INSERT INTO `young_animals` (`name`, `species`, `age_months`)
-SELECT `name`, 'Dog' AS `species`, TIMESTAMPDIFF(MONTH, `birth_date`, CURDATE()) AS `age_months`
-FROM `dogs`
-WHERE `birth_date` <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND `birth_date` >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR);
+CREATE TABLE YoungAnimals (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(40),
+  age_in_months INT);
 
-INSERT INTO `young_animals` (`name`, `species`, `age_months`)
-SELECT `name`, 'Cat' AS `species`, TIMESTAMPDIFF(MONTH, `birth_date`, CURDATE()) AS `age_months`
-FROM `cats`
-WHERE `birth_date` <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND `birth_date` >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR);
+INSERT INTO YoungAnimals (name, age_in_months)
+SELECT name, TIMESTAMPDIFF(MONTH, birth_date, CURDATE()) AS age_in_months
+FROM Animal
+WHERE birth_date >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR)
+AND birth_date <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
 
-INSERT INTO `young_animals` (`name`, `species`, `age_months`)
-SELECT `name`, 'Donkey' AS `species`, TIMESTAMPDIFF(MONTH, `birth_date`, CURDATE()) AS `age_months`
-FROM `donkeys`
-WHERE `birth_date` <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND `birth_date` >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR);
+CREATE TABLE AllAnimals (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(40),
+  birth_date DATE,
+  command VARCHAR(100),
+  pet_id INT,
+  pack_animal_id INT);
 
-INSERT INTO `young_animals` (`name`, `species`, `age_months`)
-SELECT `name`, 'Hamster' AS `species`, TIMESTAMPDIFF(MONTH, `birth_date`, CURDATE()) AS `age_months`
-FROM `hamsters`
-WHERE `birth_date` <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND `birth_date` >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR);
+INSERT INTO AllAnimals (name, birth_date, command, pet_id)
+SELECT a.name, a.birth_date, p.command, p.id
+FROM Animal a
+JOIN Pet p ON a.id = p.animal_id;
 
-INSERT INTO `young_animals` (`name`, `species`, `age_months`)
-SELECT `name`, 'Horse' AS `species`, TIMESTAMPDIFF(MONTH, `birth_date`, CURDATE()) AS `age_months`
-FROM `horses`
-WHERE `birth_date` <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND `birth_date` >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR);
-
-CREATE TABLE `all_animals` (
-   id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `name` VARCHAR(50) NOT NULL,
-  `skills` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `animal_class_id` INT UNSIGNED NOT NULL,
-  `source_table` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
-INSERT INTO `all_animals` (`name`, `skills`, `birth_date`, `animal_class_id`, `source_table`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'dogs' AS `source_table`
-FROM `dogs`;
-
-INSERT INTO `all_animals` (`name`, `skills`, `birth_date`, `animal_class_id`, `source_table`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'cats' AS `source_table`
-FROM `cats`;
-
-INSERT INTO `all_animals` (`name`, `skills`, `birth_date`, `animal_class_id`, `source_table`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'donkeys' AS `source_table`
-FROM `donkeys`;
-
-INSERT INTO `all_animals` (`name`, `skills`, `birth_date`, `animal_class_id`, `source_table`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'hamsters' AS `source_table`
-FROM `hamsters`;
-
-INSERT INTO `all_animals` (`name`, `skills`, `birth_date`, `animal_class_id`, `source_table`)
-SELECT `name`, `skills`, `birth_date`, `animal_class_id`, 'horses' AS `source_table`
-FROM `horses`;
+INSERT INTO AllAnimals (name, birth_date, pack_animal_id)
+SELECT a.name, a.birth_date, pa.id
+FROM Animal a
+JOIN PackAnimal pa ON a.id = pa.animal_id;
 ```
+
+**Создать класс с Инкапсуляцией методов и наследованием по диаграмме**
+
+Боюсь, здравый смысл против этого пункта. Возможно, я чего-то не знаю, потому что не представляю как написать архитектуру с классами внутри бд на sql. Этот пункт явно относится к предыдущему заданию, потому что задание написать приложение на java обозначено только в следующем пункте.
+С другой стороны, если здесь подразумется использование одного шаблона (схемы) для одновременного построения архитектуры бд и архитектуры приложения, то, боюсь, это тоже лишено смысла. Потому что жесткая связь между таблицами бд и классами приложения заблокирует его дальнейшее масштабирование и уничтожит гибкость. При изменении бд, придется переписывать классы в приложении и, наоборот, при малейшем изменении классов, придется переделывать таблицы в бд. Про классы-наследники вообще молчу. В идеале должен быть контейнер, переводящий один набор данных в другой, чтобы вносить правки по необходимости только в этот модуль-переводчик, а не сотрясать основы приложения при малейшем изменении.
+
+**Написать программу, имитирующую работу реестра домашних животных.**
+
+    В программе должен быть реализован следующий функционал:
+    
+    14.1 Завести новое животное
+    
+    14.2 определять животное в правильный класc
+    
+    14.3 увидеть список команд, которое выполняет животное
+    
+    14.4 обучить животное новым командам
+    
+    14.5 Реализовать навигацию по меню
+    
+    15.Создайте класс Счетчик, у которого есть метод add(), увеличивающий̆ значение внутренней̆int переменной̆на 1 при нажатие “Завести новое животное” Сделайте так, чтобы с объектом такого типа можно было работать в блоке try-with-resources. Нужно бросить исключение, если работа с объектом типа счетчик была не в ресурсном try и/или ресурс остался открыт. Значение считать в ресурсе try, если при заведения животного заполнены все поля.
