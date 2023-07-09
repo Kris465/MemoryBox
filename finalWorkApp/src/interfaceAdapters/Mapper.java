@@ -1,7 +1,11 @@
+package interfaceAdapters;
+
+import domain.CurrentAnimal;
+
 public class Mapper {
     
     public String map(CurrentAnimal currentAnimal) {
-        return String.format("%s, %s, %s, %s", currentAnimal.getId(), currentAnimal.getName(), currentAnimal.getAge(), currentAnimal.getAction());
+        return String.format("%s, %s, %s, %s", currentAnimal.getId(), currentAnimal.getName(), currentAnimal.getAge(), currentAnimal.getType());
     }
 
     public CurrentAnimal map(String line) {
