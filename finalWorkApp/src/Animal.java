@@ -59,5 +59,4 @@ public class Animal {
     public String toString() {
         return String.format("ID: %d, Name: %s, age: %d, type: %s", id, name, age, type);
     }
-
 }
