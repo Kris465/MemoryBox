@@ -8,7 +8,7 @@ public class View {
         this.controller = controller;
     }
     
-    public void menu() {
+    public void start() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Menu:");
@@ -23,6 +23,7 @@ public class View {
                     break;
                 case 2:
                     controller.showAllAnimals();
+                    actionsWithAnimal();
                     break;
                 case 0:
                     return;
@@ -37,7 +38,7 @@ public class View {
         System.out.println("Enter the animal's name: ");
         String name = scanner.nextLine();
         
-        Animal animal = controller.getAnimalByid(animal.id);
+        Animal animal = controller.getAnimalByName(name);
         if (animal == null) {
             System.out.println("Animal not found.");
             return;
