@@ -1,49 +1,33 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Controller {
-    private List<Animal> animals;
+    private FileOperation fileOperation;
     
-    public Controller() {
-        animals = new ArrayList<>();
+    public Controller(FileOperation fileOperation) {
+        this.fileOperation = fileOperation;
     }
     
-    public void addAnimal() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the animal's name: ");
-        String name = scanner.nextLine();
-        System.out.println("Enter the animal's type: ");
-        String type = scanner.nextLine();
-        
-        Animal animal = new Animal(0, name, type, 0, null);
-        animals.add(animal);
-        
-        saveAnimalsToFile();
+    public List<Animal> getAllAnimals() {
+        return fileOperation.readFromFile("animals.txt");
     }
     
-    public void showAllAnimals() {
-        readAnimalsFromFile();
+    public List<String> getAllAnimalsInfo() {
+        List<Animal> animals = fileOperation.readFromFile("animals.txt");
+        List<String> animalInfo = new ArrayList<>();
         
         for (Animal animal : animals) {
-            System.out.println("Name: " + animal.getName());
-            System.out.println("Type: " + animal.getType());
-            System.out.println("Skills: " + animal.getSkills());
-            System.out.println();
+            animalInfo.add(animal.getId() + ", " + animal.getName());
         }
+        
+        return animalInfo;
     }
     
-    public Animal getAnimalByName(String name) {
-        readAnimalsFromFile();
+    public Animal findAnimalById(int id) {
+        List<Animal> animals = fileOperation.readFromFile("animals.txt");
         
         for (Animal animal : animals) {
-            if (animal.getName().equals(name)) {
+            if (animal.getId() == id) {
                 return animal;
             }
         }
@@ -51,34 +35,40 @@ public class Controller {
         return null;
     }
     
-    private void saveAnimalsToFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("animals.txt"))) {
-            for (Animal animal : animals) {
-                writer.println(animal.getName() + "," + animal.getType() + "," + animal.getSkills());
+    public void changeAnimalType(int id, String newType) {
+        List<Animal> animals = fileOperation.readFromFile("animals.txt");
+        
+        for (Animal animal : animals) {
+            if (animal.getId() == id) {
+                animal.setType(newType);
+                break;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        
+        fileOperation.writeToFile(animals, "animals.txt");
     }
     
-    private void readAnimalsFromFile() {
-        animals.clear();
+    public void teachAnimalCommand(int id, String command) {
+        List<Animal> animals = fileOperation.readFromFile("animals.txt");
         
-        try (Scanner scanner = new Scanner(new File("animals.txt"))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(",");
-                String name = parts[0];
-                String type = parts[1];
-                List<String> skills = Arrays.asList(parts[2].split(";"));
-                
-                Animal animal = new Animal(0, name, type, 0, skills);
-                animal.setSkills(skills);
-                
-                animals.add(animal);
+        for (Animal animal : animals) {
+            if (animal.getId() == id) {
+                animal.getSkills().add(command);
+                break;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        }
+        
+        fileOperation.writeToFile(animals, "animals.txt");
+    }
+
+    public void addAnimal(Animal newAnimal) {
+        List<Animal> animals = getAllAnimals();
+        
+        if (animals.isEmpty()) {
+            animals.add(newAnimal);
+        } else {
+            animals.add(newAnimal);
+            fileOperation.writeToFile(animals, "animals.txt");
         }
     }
 }
