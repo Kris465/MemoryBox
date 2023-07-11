@@ -1,4 +1,4 @@
-package domain;
+
 public abstract class Animal {
     private int id;
     private String name;
