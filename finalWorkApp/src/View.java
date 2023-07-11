@@ -111,20 +111,19 @@ public class View {
 
     public void addAnimalMenu() {
         System.out.print("Enter animal name: ");
-        String name = scanner.nextLine();
         scanner.nextLine();
+        
+        String name = scanner.nextLine();
         
         System.out.print("Enter animal age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
-    
+        
         System.out.print("Enter animal type: ");
         String type = scanner.nextLine();
-    
+        
         int id = counter.getNextId();
-        
         Animal newAnimal = new Animal(id, name, type, age, null);
-        
         controller.addAnimal(newAnimal);
         
         System.out.println("Animal added successfully.");

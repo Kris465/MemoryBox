@@ -66,6 +66,7 @@ public class Controller {
         
         if (animals.isEmpty()) {
             animals.add(newAnimal);
+            fileOperation.writeToFile(animals, "animals.txt");
         } else {
             animals.add(newAnimal);
             fileOperation.writeToFile(animals, "animals.txt");
