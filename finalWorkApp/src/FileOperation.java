@@ -34,6 +34,10 @@ public class FileOperation {
     }
     
     public void writeToFile(List<Animal> animals, String filename) {
+        if (animals == null) {
+            return;
+        }
+        
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
             for (Animal animal : animals) {
                 writer.println(animal.getId() + "," + animal.getName() + "," + animal.getType() + "," + animal.getAge() + "," + String.join(";", animal.getSkills()));
