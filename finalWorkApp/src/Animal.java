@@ -55,6 +55,9 @@ public class Animal {
         this.skills = skills;
     }
 
-    public void addSkill(String newSkill) {
+    @Override
+    public String toString() {
+        return String.format("ID: %d, Name: %s, age: %d, type: %s", id, name, age, type);
     }
+
 }

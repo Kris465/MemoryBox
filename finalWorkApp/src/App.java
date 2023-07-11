@@ -1,11 +1,9 @@
 public class App {
-    public static void main(String[] args){
-        
-        FileOperation fileOperation = new FileOperationImp("prizes.txt");
-        Action action = new ActionFile(fileOperation);
-        Controller controller = new Controller(action);
-        View view = new View(controller);
-        view.run();
-
+    public static void main(String[] args) {
+        FileOperation FileOperation = new FileOperation();
+        Controller controller = new Controller(FileOperation);
+        Counter counter = new Counter("animals.txt");
+        View view = new View(controller, counter);
+        view.start();
     }
 }
