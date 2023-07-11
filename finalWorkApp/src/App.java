@@ -1,13 +1,16 @@
+import java.util.List;
+
 import interfaceAdapters.ConsoleAdapter;
-import useCases.CreateUser;
-import useCases.FindUser;
+import interfaceAdapters.DatabaseAdapter.Mapper;
+import useCases.AddAnimal;
+import useCases.EditAnimalType;
+import useCases.TeachAnimal;
 
 public class App {
-    
     public static void main(String[] agrs) {
-        CreateUser createUser = new CreateUser();
-        FindUser findUser = new FindUser();
-        ConsoleAdapter consoleAdapter = new ConsoleAdapter(createUser, findUser);
-        consoleAdapter.start();
+        AddAnimal addAnimal = new AddAnimal();
+        EditAnimalType editAnimalType = new EditAnimalType();
+        TeachAnimal teachAnimal = new TeachAnimal();
+        ConsoleAdapter consoleAdapter = new ConsoleAdapter(addAnimal, editAnimalType, teachAnimal);
     }
 }

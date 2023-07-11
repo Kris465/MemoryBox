@@ -1,4 +1,4 @@
-package interfaceAdapters;
+package interfaceAdapters.DatabaseAdapter;
 
 import java.util.List;
 
