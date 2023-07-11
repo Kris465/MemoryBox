@@ -1,15 +1,18 @@
+import java.util.List;
 
-public abstract class Animal {
+public class Animal {
     private int id;
     private String name;
-    private int age;
     private String type;
+    private int age;
+    private List<String> skills;
     
-    public Animal(int id, String name, int age, String type) {
+    public Animal(int id, String name, String type, int age, List<String> skills) {
         this.id = id;
         this.name = name;
-        this.age = age;
         this.type = type;
+        this.age = age;
+        this.skills = skills;
     }
 
     public int getId() {
@@ -28,14 +31,6 @@ public abstract class Animal {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getType() {
         return type;
     }
@@ -44,8 +39,22 @@ public abstract class Animal {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return String.format("ID: %d, Name: %s, Age: %d, Type: %s", id, name, age, type);
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public void addSkill(String newSkill) {
     }
 }
