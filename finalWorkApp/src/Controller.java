@@ -53,7 +53,7 @@ public class Controller {
         
         for (Animal animal : animals) {
             if (animal.getId() == id) {
-                animal.getSkills().add(command);
+                animal.setSkills(command);
                 break;
             }
         }
@@ -63,13 +63,8 @@ public class Controller {
 
     public void addAnimal(Animal newAnimal) {
         List<Animal> animals = getAllAnimals();
-        
-        if (animals.isEmpty()) {
-            animals.add(newAnimal);
-            fileOperation.writeToFile(animals, "animals.txt");
-        } else {
-            animals.add(newAnimal);
-            fileOperation.writeToFile(animals, "animals.txt");
-        }
+
+        animals.add(newAnimal);
+        fileOperation.writeToFile(animals, "animals.txt");
     }
 }
