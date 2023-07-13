@@ -1,1 +1,2 @@
-
+1,lolo,horse,22,
+2,koko,parrot,2,

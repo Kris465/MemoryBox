@@ -21,7 +21,7 @@ public class Counter {
                     lastLine = line;
                 }
                 if (lastLine != null) {
-                    String[] parts = lastLine.split(", ");
+                    String[] parts = lastLine.split(",");
                     int highestId = Integer.parseInt(parts[0]);
                     idCounter = highestId + 1;
                 }

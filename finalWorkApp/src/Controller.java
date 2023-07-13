@@ -53,7 +53,7 @@ public class Controller {
         
         for (Animal animal : animals) {
             if (animal.getId() == id) {
-                animal.getSkills().add(command);
+                animal.setSkills(command);
                 break;
             }
         }
