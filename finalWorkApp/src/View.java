@@ -15,7 +15,7 @@ public class View {
 
     public void start() {
         int choice = 0;
-        
+
         while (choice != 3) {
             System.out.println("Main Menu:");
             System.out.println("1. View all animals");
@@ -23,9 +23,9 @@ public class View {
             System.out.println("3. Add new animal");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            
+
             choice = scanner.nextInt();
-            
+
             switch (choice) {
                 case 1:
                     viewAllAnimalsMenu();
@@ -47,7 +47,7 @@ public class View {
 
     public void viewAllAnimalsMenu() {
         List<String> animalInfo = controller.getAllAnimalsInfo();
-        
+
         System.out.println("Animal List:");
         for (String info : animalInfo) {
             System.out.println(info);
@@ -57,9 +57,9 @@ public class View {
     public void findAnimalMenu() {
         System.out.print("Enter animal ID: ");
         int id = scanner.nextInt();
-        
+
         Animal animal = controller.findAnimalById(id);
-        
+
         if (animal != null) {
             animalDetailsMenu(animal);
         } else {
@@ -69,7 +69,7 @@ public class View {
 
     public void animalDetailsMenu(Animal animal) {
         int choice = 0;
-        
+
         while (choice != 5) {
             System.out.println("Animal Details:");
             System.out.println("ID: " + animal.getId());
@@ -83,9 +83,9 @@ public class View {
             System.out.println("4. Teach animal command");
             System.out.println("5. Back");
             System.out.print("Enter your choice: ");
-            
+
             choice = scanner.nextInt();
-            
+
             switch (choice) {
                 case 1:
                     addAnimalMenu();
@@ -112,32 +112,42 @@ public class View {
     public void addAnimalMenu() {
         System.out.print("Enter animal name: ");
         scanner.nextLine();
-        
+
         String name = scanner.nextLine();
-        
+
         System.out.print("Enter animal age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
-        
+
         System.out.print("Enter animal type: ");
         String type = scanner.nextLine();
-        
+
         int id = counter.getNextId();
         Animal newAnimal = new Animal(id, name, type, age, null);
         controller.addAnimal(newAnimal);
-        
+
         System.out.println("Animal added successfully.");
     }
 
     public void changeAnimalTypeMenu(Animal animal) {
         System.out.print("Enter new animal type: ");
-        String newType = scanner.nextLine();
-        
-        controller.changeAnimalType(animal.getId(), newType);
-        
-        System.out.println("Animal type changed successfully.");
+
+        Thread inputThread = new Thread(() -> {
+            String newType = scanner.nextLine();
+            controller.changeAnimalType(animal.getId(), newType);
+            System.out.println("Animal type changed successfully.");
+        });
+
+        inputThread.start();
+
+        try {
+            inputThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-     public void viewAnimalMenu(Animal animal) {
+
+    public void viewAnimalMenu(Animal animal) {
         System.out.println("Animal Details:");
         System.out.println("ID: " + animal.getId());
         System.out.println("Name: " + animal.getName());
@@ -148,9 +158,9 @@ public class View {
     public void teachAnimalCommandMenu(Animal animal) {
         System.out.print("Enter new command: ");
         String command = scanner.nextLine();
-        
+
         controller.teachAnimalCommand(animal.getId(), command);
-        
+
         System.out.println("Animal command taught successfully.");
     }
 }

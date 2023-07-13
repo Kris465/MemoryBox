@@ -57,6 +57,6 @@ public class Animal {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, Name: %s, age: %d, type: %s", id, name, age, type);
+        return String.format("ID: %d, Name: %s, age: %d, type: %s, skills: %s", id, name, age, type, skills);
     }
 }

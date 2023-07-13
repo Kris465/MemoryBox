@@ -63,13 +63,8 @@ public class Controller {
 
     public void addAnimal(Animal newAnimal) {
         List<Animal> animals = getAllAnimals();
-        
-        if (animals.isEmpty()) {
-            animals.add(newAnimal);
-            fileOperation.writeToFile(animals, "animals.txt");
-        } else {
-            animals.add(newAnimal);
-            fileOperation.writeToFile(animals, "animals.txt");
-        }
+
+        animals.add(newAnimal);
+        fileOperation.writeToFile(animals, "animals.txt");
     }
 }
