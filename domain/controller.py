@@ -1,2 +1,18 @@
+from database.db_manager import DBManager
+from parser.parser import Parser
+
+
 class Controller:
-    pass
+    
+    def logic(self):
+        title = input("Title: ")
+
+        db_manager = DBManager()
+        project = db_manager.find(title)
+        if project:
+            project.update()
+        else:
+            url = input("url: ")
+            language = input("language: ")
+            
+
