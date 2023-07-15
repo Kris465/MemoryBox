@@ -1,6 +1,5 @@
 @startuml
 
-main
 Parser --|> Controller
 Translator --|> Controller
 
