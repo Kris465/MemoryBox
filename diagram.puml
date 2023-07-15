@@ -1,8 +1,8 @@
 @startuml
 
-Controller
-Parser --|> Controller
-Translator --|> Controller
+Class Controller
+Class Parser --|> Class Controller
+Class Translator --|> Class Controller
 
 Class Controller {
 
