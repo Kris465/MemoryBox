@@ -1,5 +1,7 @@
 @startuml
 
-Controller ..|> View
+main
+Parser --|> Controller
+Translator --|> Controller
 
 @enduml
