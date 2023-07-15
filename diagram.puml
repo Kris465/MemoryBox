@@ -1,6 +1,19 @@
 @startuml
 
+Controller
 Parser --|> Controller
 Translator --|> Controller
+
+Class Controller {
+
+}
+
+Class Parser {
+
+}
+
+Class Translator {
+    
+}
 
 @enduml
