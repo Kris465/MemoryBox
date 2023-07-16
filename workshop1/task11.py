@@ -6,7 +6,7 @@
 
 def prime_number():
     number = int(input("Input number: "))
-    if number > 0 and number < 10000:
+    if number > 0 and number < 100000:
         for div in range(2, number):
             if number % div == 0:
                 return "Composite number"
