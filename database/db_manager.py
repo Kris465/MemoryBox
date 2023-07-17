@@ -1,11 +1,11 @@
 from langdetect import detect
-from db_session import get_session
+from database.db_session import get_session
+from database.models import Chapters, Novel, Projects
 from domain.project_class import Project
-from models import Novel, Projects, Chapters
 
 
 class DBManager:
-    def find(title):
+    def find(self, title):
         language = detect(title)
         session = get_session()
 
