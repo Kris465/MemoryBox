@@ -1,19 +1,19 @@
 import re
 
 from database.db_session import get_session
-from parser.collector_strategy import collector
+from parser.collector_strategy import Collector
 
 
 class Parser:
-    def __init__(self, title, chapter, url, project_webpage=None, number=1):
+    def __init__(self, title, chapter=None, url=None, project_webpage=None, number=1):
         self.title = title
-        self.chapter = chapter
         self.url = url
+        self.chapter = chapter
         self.project_webpage = project_webpage
         self.number = number
 
     def parse(self):
-        strategy = collector(self.title, self.project_webpage, self.number)
+        strategy = Collector(self.title, self.project_webpage, self.number)
         strategy.logic()
 
     def check(self, url):

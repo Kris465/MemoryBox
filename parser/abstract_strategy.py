@@ -22,3 +22,7 @@ class ParserStrategy(ABC):
     @abstractmethod
     def get_webpage(self, language):
         pass
+
+    @abstractmethod
+    def check(self):
+        pass
