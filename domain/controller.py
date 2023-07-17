@@ -9,10 +9,11 @@ class Controller:
 
         db_manager = DBManager()
         project = db_manager.find(title)
-        if project:
-            project.update()
-        else:
+        if project is None:
             url = input("url: ")
-            number = int(input("chapter: "))
-            pars = Parser(title, url, number)
+            # номер текущей главы
+            # язык проекта, который собираемся парсить
+            pars = Parser(title=title, project_webpage=url)
             pars.parse()
+        else:
+            project.update()
