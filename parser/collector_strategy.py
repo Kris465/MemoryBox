@@ -9,7 +9,7 @@ class Collector(ParserStrategy):
     Collector, English, Novelupdates, Basic logic without checks
     '''
 
-    def __init__(self, title, project_webpage, number=0) -> None:
+    def __init__(self, title, project_webpage, number=0):
         self.project_webpage = project_webpage
         self.number = number
         self.title = title
