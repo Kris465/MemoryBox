@@ -14,6 +14,8 @@ class Parser(Base):
     url = Column(String(100), nullable=False)
     cl = Column(String(30))
     other = Column(String(30))
+    word = Column(String(12))
+    strategy = Column(String(30))
 
 
 class Status(Base):

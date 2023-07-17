@@ -3,7 +3,7 @@ from parser.parser import Parser
 
 
 class Controller:
-    
+
     def logic(self):
         title = input("Title: ")
 
@@ -13,6 +13,6 @@ class Controller:
             project.update()
         else:
             url = input("url: ")
-            language = input("language: ")
-            
-
+            number = int(input("chapter: "))
+            pars = Parser(title, url, number)
+            pars.parse()
