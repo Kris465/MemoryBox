@@ -4,7 +4,7 @@ from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
 
 
-class Collector(ParserStrategy):
+class NovelUpdates(ParserStrategy):
     '''
     Collector, English, Novelupdates, Basic logic without checks
     '''
@@ -39,13 +39,10 @@ class Collector(ParserStrategy):
         return soup
 
     def collect_chapter(self):
-        return super().collect_chapter()
+        pass
 
     def collect_links(self):
-        return super().collect_links()
+        pass
 
     def check(self):
-        return super().check()
-
-    def get_next_link(self):
-        return super().get_next_link()
+        pass

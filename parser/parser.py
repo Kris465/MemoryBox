@@ -1,6 +1,7 @@
 # import re
 # from database.db_session import get_session
-from parser.collector_strategy import Collector
+from parser.chi_collector_ctrategy import ChiCollector
+from parser.novelupdates_strategy import NovelUpdates
 
 
 class Parser:
@@ -17,8 +18,19 @@ class Parser:
         self.number = number
 
     def parse(self):
-        strategy = Collector(self.title, self.project_webpage, self.number)
+        if "www.novelupdates.com" in self.project_webpage:
+            strategy = NovelUpdates(self.title,
+                                    self.project_webpage,
+                                    self.number)
+        else:
+            strategy = ChiCollector(self.title,
+                                    self.project_webpage,
+                                    self.number)
+
         strategy.logic()
+
+    # def choose_strategy(self):
+    #     return strategy
 
     # def check(self, url):
     #     print("Checking tags...")
