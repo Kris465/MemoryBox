@@ -1,12 +1,9 @@
 import os
 import requests
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv, set_key
 
 
 class Translator:
-
-    def __init__(self):
-        self.key = self.get_key()
 
     def get_key(self):
         load_dotenv(find_dotenv())
@@ -26,19 +23,18 @@ class Translator:
             data=data)
 
         json_response = response.json()
-        return json_response['iamToken']
+        IAM_TOKEN = json_response['iamToken']
+        set_key(".env", "IAM_TOKEN", IAM_TOKEN)
 
-    def translate(self, text):
+    def translate(self, text, sourse_language):
         load_dotenv(find_dotenv())
-        IAM_TOKEN = self.key
+        IAM_TOKEN = os.environ.get('IAM_TOKEN')
         folder_id = os.environ.get('folder_id')
         target_language = 'ru'
-        # source_language = 'en'
-        source_language = 'zh'
         texts = text
 
         body = {
-            "sourceLanguageCode": source_language,
+            "sourceLanguageCode": sourse_language,
             "targetLanguageCode": target_language,
             "texts": texts,
             "folderId": folder_id,
@@ -55,9 +51,12 @@ class Translator:
             headers=headers
         )
 
-        print(response.text)
-        data = response.json()
-        lst = data['translations']
-        translation = lst[0]
-
-        return translation['text']
+        if response.status_code == 200:
+            print(response.text)
+            data = response.json()
+            lst = data['translations']
+            translation = lst[0]
+            return translation['text']
+        else:
+            self.get_key()
+            return None
