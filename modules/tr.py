@@ -34,7 +34,7 @@ def one_chapter(title, chapter=0):
 def tr_from_to(title):
     start_chapter = int(input("From: "))
     last_chapter = int(input("To: "))
-    while start_chapter < last_chapter:
+    while start_chapter <= last_chapter:
         one_chapter(title, start_chapter)
         time.sleep(random.randint(10, 360))
         start_chapter += 1

@@ -12,9 +12,8 @@ def parse_links():
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
                                 Chrome/111.0.0.0 Safari/537.36'}
     url = input("url: ")
-    # path = re.sub(r'^https?://[^/]+', '', url)
-    path = re.search(r'/\d+/\d+', url).group()  # m.shubaow
-    time.sleep(random.randint(10, 120))
+    path = re.sub(r'^https?://[^/]+', '', url)
+    # path = re.search(r'/\d+/\d+', url).group()  # m.shubaow
     response = requests.get(url, headers=headers)
     print(response.status_code)
     response.encoding = response.apparent_encoding
@@ -23,6 +22,7 @@ def parse_links():
     links = []
     for link in soup.find_all('a'):
         href = link.get('href')
+        print(href)
         if href and href.startswith(path):
             links.append(href)
 
@@ -41,17 +41,17 @@ def collect_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
 
     for k, v in links_dict.items():
-        time.sleep(random.randint(20, 120))
-        response = requests.get('https://m.shubaow.net/' + v,
-                                headers=headers)
-        # response = requests.get('https://www.shubaow.net' + v,
+        time.sleep(random.randint(5, 60))
+        # response = requests.get('https://m.shubaow.net/' + v,
         #                         headers=headers)
+        response = requests.get('https://www.shubaow.net' + v,
+                                headers=headers)
         print(response.status_code)
         response.encoding = response.apparent_encoding
         soup = BeautifulSoup(response.text, 'html.parser')
-        # chapter_text = soup.find("div", "content_read").text
-        chapter_text = soup.find('div', "novelcontent").text
-        temp_dict = {str(int(k) + 38): chapter_text}
+        chapter_text = soup.find("div", "content_read").text
+        # chapter_text = soup.find('div', "novelcontent").text
+        temp_dict = {str(int(k) + 1): chapter_text}
         print(k)
         all_chapters.update(temp_dict)
         write(title, all_chapters, language="chi")
