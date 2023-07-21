@@ -1,4 +1,5 @@
 import random
+import re
 import time
 from bs4 import BeautifulSoup
 
@@ -29,16 +30,17 @@ class ChiShuka(ParserStrategy):
         return chapter.text
 
     def collect_links(self, soup):
+        # Регулярка
         links = []
         for link in soup.find_all('a'):
             href = link.get('href')
-            if href and href.startswith("/chapter"):
+            if href and href.startswith(path):
                 links.append(href)
 
         sorted_links = sorted(set(links))
         links = {str(i): link for i, link in enumerate(sorted_links)}
         return links
-    
+
     def get_webpage(self, url):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
