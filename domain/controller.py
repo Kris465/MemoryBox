@@ -11,7 +11,7 @@ class Controller:
         option = int(input("1. Parse\n2. Translate\n"))
         match option:
             case 1:
-                url = input("Url: ")
+                url = input("url: ")
                 # number = int(input("Chapter: "))
                 pars = Parser(title=title, project_webpage=url)
                 # pars = Parser(title=title, number=number, url=url)

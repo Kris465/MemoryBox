@@ -20,13 +20,15 @@ class ChiShuka(ParserStrategy):
         links = self.collect_links(soup)
         chapters = {}
         for k, v in links.items():
-            chapter = {k: self.collect_chapter(v)}
+            text = self.collect_chapter(v)
+            chapter = {k: text}
             print(chapter)
             chapters.update(chapter)
         write(self.title, chapters, language="zh")
 
-    def collect_chapter(self, soup):
-        chapter = soup.find("div", class_="readcontent")
+    def collect_chapter(self, url):
+        soup = self.get_webpage(url)
+        chapter = soup.find("div", class_="book_con fix")
         return chapter.text
 
     def collect_links(self, soup):
@@ -34,7 +36,7 @@ class ChiShuka(ParserStrategy):
         links = []
         for link in soup.find_all('a'):
             href = link.get('href')
-            if href and href.startswith(path):
+            if href and href.startswith("https://www.52shuku.vip/yanqing/b/h7vv"):
                 links.append(href)
 
         sorted_links = sorted(set(links))
