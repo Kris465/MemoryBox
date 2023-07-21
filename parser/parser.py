@@ -1,6 +1,7 @@
 # import re
 # from database.db_session import get_session
 from parser.chi_collector_ctrategy import ChiCollector
+from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
 
 
@@ -8,8 +9,8 @@ class Parser:
     def __init__(self,
                  title,
                  chapter=None,
-                 url=None,
-                 project_webpage=None,
+                 url="",
+                 project_webpage="",
                  number=1):
         self.title = title
         self.url = url
@@ -17,15 +18,19 @@ class Parser:
         self.project_webpage = project_webpage
         self.number = number
 
-    def parse(self):
+    def parse(self):  # Надо доделать класс
         if "www.novelupdates.com" in self.project_webpage:
             strategy = NovelUpdates(self.title,
                                     self.project_webpage,
                                     self.number)
-        else:
+        elif "www.wfxs.com.tw" in self.project_webpage:
             strategy = ChiCollector(self.title,
                                     self.project_webpage,
                                     self.number)
+        else:
+            strategy = ChiShuka(self.title,
+                                self.project_webpage,
+                                self.number)
 
         strategy.logic()
 

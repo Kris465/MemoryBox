@@ -12,7 +12,9 @@ class Controller:
         match option:
             case 1:
                 url = input("Url: ")
+                # number = int(input("Chapter: "))
                 pars = Parser(title=title, project_webpage=url)
+                # pars = Parser(title=title, number=number, url=url)
                 pars.parse()
             case 2:
                 language = input("language: ")
