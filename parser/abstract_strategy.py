@@ -12,7 +12,7 @@ class ParserStrategy():
     def get_next_link(self):
         pass
 
-    def get_webpage(self, language):
+    def get_webpage(self):
         pass
 
     def check(self):
