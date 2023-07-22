@@ -18,8 +18,10 @@ class ChiShuka(ParserStrategy):
     def logic(self):
         soup = self.get_webpage(self.project_webpage)
         links = self.collect_links(soup)
+        print(links)
         chapters = {}
         for k, v in links.items():
+            print(k, v)
             text = self.collect_chapter(v)
             chapter = {k: text}
             print(chapter)
@@ -28,19 +30,21 @@ class ChiShuka(ParserStrategy):
 
     def collect_chapter(self, url):
         soup = self.get_webpage(url)
-        chapter = soup.find("div", class_="book_con fix")
+        chapter = soup.find("article", class_="article-content")
         return chapter.text
 
     def collect_links(self, soup):
-        # Регулярка
-        links = []
-        for link in soup.find_all('a'):
+        links = {}
+        raw_links = soup.find(
+            "article", class_="article-content").find_all("a")
+        for link in raw_links:
             href = link.get('href')
-            if href and href.startswith("https://www.52shuku.vip/yanqing/b/h7vv"):
-                links.append(href)
+            try:
+                number = re.search(r'(\d+)\.html', href).group(1)
+                links.update({int(number) - 1: href})
+            except AttributeError:
+                continue
 
-        sorted_links = sorted(set(links))
-        links = {str(i): link for i, link in enumerate(sorted_links)}
         return links
 
     def get_webpage(self, url):
