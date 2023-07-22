@@ -11,8 +11,6 @@ class TRManager():
         self.language = language
 
     def one_chapter(self, title, chapter=0):
-        if chapter == 0:
-            chapter = int(input("Chapter: "))
         project = read(title)
         text = project[str(chapter)]
         write_txt(chapter, text)

@@ -24,9 +24,12 @@ class NovelUpdates(ParserStrategy):
             url = link["href"]
             # check(rul) - проверить теги(на случай блуждания по разным сайтам)
             new_soup = self.get_webpage("https:" + url)
-            text = new_soup.find("div", class_="entry-content")
-            temp_dict = {link["title"]: link["href"] + text.text}
-            all_chapters.update(temp_dict)
+            try:
+                text = new_soup.find("div", class_="text-left")
+                temp_dict = {link["title"]: link["href"] + text.text}
+                all_chapters.update(temp_dict)
+            except AttributeError:
+                continue
         write(self.title, all_chapters, "en")
 
     def get_webpage(self, url):
