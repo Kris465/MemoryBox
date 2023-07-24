@@ -1,8 +1,9 @@
 # import re
 # from database.db_session import get_session
-from parser.chi_collector_ctrategy import ChiCollector
+from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
+from parser.zhuishukan_strategy import Zhuishukan
 
 
 class Parser:
@@ -24,9 +25,13 @@ class Parser:
                                     self.project_webpage,
                                     self.number)
         elif "www.wfxs.com.tw" in self.project_webpage:
-            strategy = ChiCollector(self.title,
-                                    self.project_webpage,
-                                    self.number)
+            strategy = Wfxs(self.title,
+                            self.project_webpage,
+                            self.number)
+        elif "m.zhuishukan.com" in self.project_webpage:
+            strategy = Zhuishukan(self.title,
+                                  self.project_webpage,
+                                  self.number)
         else:
             strategy = ChiShuka(self.title,
                                 self.project_webpage,

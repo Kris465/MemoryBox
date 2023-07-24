@@ -59,4 +59,4 @@ class Translator:
             return translation['text']
         else:
             self.get_key()
-            return None
+            return
