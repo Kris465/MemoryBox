@@ -34,7 +34,7 @@ class TRManager():
             if part is not None:
                 write_txt(chapter, part)
             else:
-                part = translator.translate(string, self.language)
+                return
 
     def tr_from_to(self, title):
         start_chapter = int(input("From: "))

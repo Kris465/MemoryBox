@@ -6,7 +6,7 @@ from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
 
 
-class ChiCollector(ParserStrategy):
+class Wfxs(ParserStrategy):
     '''
     1. Собирает ссылки со страницей с главами
     2. По списку ссылок собирает в цикле текст + ссылку на следущую главу
