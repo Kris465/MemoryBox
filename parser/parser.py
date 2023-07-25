@@ -1,5 +1,6 @@
 # import re
 # from database.db_session import get_session
+from parser.ranwen_strategy import Ranwen
 from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
@@ -32,10 +33,16 @@ class Parser:
             strategy = Zhuishukan(self.title,
                                   self.project_webpage,
                                   self.number)
-        else:
+        elif "www.ranwen.la" in self.project_webpage:
+            strategy = Ranwen(self.title,
+                              self.project_webpage,
+                              self.number)
+        elif "www.52shuku.vip" in self.project_webpage:
             strategy = ChiShuka(self.title,
                                 self.project_webpage,
                                 self.number)
+        else:
+            return
 
         strategy.logic()
 
