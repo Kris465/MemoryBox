@@ -9,4 +9,24 @@
 # ✔ результат проверки на строку только если он положительный
 # Добавьте в список повторяющиеся элементы и сравните на результаты.
 
-data = []
+import sys
+
+
+data = [1, 2.5, "hello", True]
+
+for i, value in enumerate(data, start=1):
+    print(f"{i}. Значение: {value}")
+    print(f"Адрес в памяти: {id(value)}")
+    print(f"Размер в памяти: {sys.getsizeof(value)} байт")
+    print(f"Хэш объекта: {hash(value)}")
+
+    if isinstance(value, int) and value > 0:
+        print("Это целое положительное число")
+    elif isinstance(value, str):
+        print("Это строка")
+
+data.append(1)
+data.append("hello")
+
+print("\nСписок с повторяющимися элементами:")
+print(data)
