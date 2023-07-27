@@ -1,0 +1,2 @@
+1,lolo,spoon,22,jump
+2,koko,snake,2,
