@@ -15,8 +15,8 @@ def one_chapter(title, chapter=0):
     substrings = []
 
     while len(text) > max_length:
-        # index = text.rfind("。", 0, max_length)
-        index = text.rfind(".", 0, max_length)
+        index = text.rfind("。", 0, max_length)
+        # index = text.rfind(".", 0, max_length)
         if index == -1:
             index = max_length
         substrings.append(text[:index+1])

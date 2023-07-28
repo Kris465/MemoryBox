@@ -12,7 +12,7 @@ def get_chapters():
     title = input("title: ")
     url = input("url: ")
     all_pages = {}
-    number = 1
+    number = 20
     while url is not None:
         response = requests.get(url, headers=headers)
         response.encoding = response.apparent_encoding
@@ -26,9 +26,12 @@ def get_chapters():
         links = soup.find_all("a")
         for link in links:
             if "下壹頁" in link.text:
-                next_link = link['href']
-                print(next_link)
-                break
+                try:
+                    next_link = link['href']
+                    print(next_link)
+                    break
+                except KeyError:
+                    next_link = None
             else:
                 next_link = None
         number += 1
