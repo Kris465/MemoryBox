@@ -18,6 +18,7 @@ def count_words(text):
     sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
     return sorted_words[:10]
 
+
 text = '''In times of hardship, a well-led rebellion was infectious. Whether it was to survive or simply to vent their anger, many people were easily convinced to join the uprising.
 
 The rebels first suppressed the local officers and took over the county governor’s office. They then went on to rob the rich and distributed food and gold among the poor. As they only robbed from people with a bad reputation and did not kill indiscriminately, many more supported their cause wholeheartedly. At the peak of their influence, the people had called them the “Common Men’s Army”.
@@ -35,5 +36,6 @@ Now that a rebellion had arisen, an event which Emperor An Qing believed to be t
 Although he had already followed his instructions to build the pagoda, Emperor An Qing was still not pacified. He hurriedly called for the Taoist Master to divine for him on who would help him ward off this disaster.
 
 The Taoist Master who went by the name of Master Liao, had lived past the age of seventy; a longevity that earned him the respect of many. Although his hair and beard were all white, there was no weakness in his steps. He exuded divinity when walking into the room.'''
+
 # text = input("Введите текст: ")
 print(count_words(text))
