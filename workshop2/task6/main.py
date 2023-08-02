@@ -9,9 +9,9 @@
 # операцией, даже ошибочной
 # ✔ Любое действие выводит сумму денег
 
-from workshop2.task6.model import BankAccount
-from workshop2.task6.controller import ATMController
-from workshop2.task6.view import ATMView
+from model import BankAccount
+from controller import ATMController
+from view import ATMView
 
 
 def main():
@@ -19,3 +19,6 @@ def main():
     controller = ATMController(model)
     view = ATMView(controller)
     view.run()
+
+
+main()
