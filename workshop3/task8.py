@@ -9,12 +9,11 @@
 # с множествами. Код должен расширяться
 # на любое большее количество друзей.
 
-friends = {}
 
-
-def missing_items():
+def missing_items(friends):
     missing_dict = {}
-    for item in set.union(*[set(items) for items in friends.values()]):
+    list_of_common = set.union(*[set(items) for items in friends.values()])
+    for item in list_of_common:
         missing_dict[item] = []
         for friend, items in friends.items():
             if item not in items:
@@ -24,7 +23,7 @@ def missing_items():
             print(item, "есть у всех друзей кроме", friends[0])
 
 
-def add_friend():
+def add_friend(friends):
     name = input("Введите имя друга: ")
     items = tuple(input(
         "Введите вещи, которые он взял через запятую: ").split(","))
@@ -32,7 +31,7 @@ def add_friend():
     print("Друг", name, "добавлен в список.")
 
 
-def add_items():
+def add_items(friends):
     name = input("Введите имя друга: ")
     if name in friends:
         items = tuple(input(
@@ -44,13 +43,13 @@ def add_items():
         print("Такого друга нет в списке.")
 
 
-def show_friends():
+def show_friends(friends):
     print("Список друзей и их вещей:")
     for friend in friends:
         print(friend, ":", friends[friend])
 
 
-def common_items():
+def common_items(friends):
     common = set.intersection(*[set(items) for items in friends.values()])
     if len(common) > 0:
         print("Все друзья взяли следующие вещи:", ", ".join(common))
@@ -58,7 +57,7 @@ def common_items():
         print("Нет общих вещей у всех друзей.")
 
 
-def unique_items():
+def unique_items(friends):
     unique = set()
     for items in friends.values():
         unique.update(set(items))
@@ -68,7 +67,10 @@ def unique_items():
             print(item, "есть только у одного друга.")
 
 
-while True:
+friends = {}
+choice = ""
+
+while choice != "0":
     print("\nМеню:")
     print("1. Добавить друга")
     print("2. Добавить вещи другу")
@@ -79,19 +81,18 @@ while True:
     print("0. Выход")
     choice = input("Выберите пункт меню: ")
 
-    if choice == "1":
-        add_friend()
-    elif choice == "2":
-        add_items()
-    elif choice == "3":
-        show_friends()
-    elif choice == "4":
-        common_items()
-    elif choice == "5":
-        unique_items()
-    elif choice == "6":
-        missing_items()
-    elif choice == "0":
-        break
-    else:
-        print("Неверный выбор. Попробуйте еще раз.")
+    match choice:
+        case "1":
+            add_friend(friends)
+        case "2":
+            add_items(friends)
+        case "3":
+            show_friends(friends)
+        case "4":
+            common_items(friends)
+        case "5":
+            unique_items(friends)
+        case "6":
+            missing_items(friends)
+        case _:
+            print("Неверный выбор. Попробуйте еще раз.")
