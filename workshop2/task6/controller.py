@@ -2,8 +2,8 @@ from model import BankAccount
 
 
 class ATMController:
-    def __init__(self):
-        self.model = BankAccount()
+    def __init__(self, BankAccount: BankAccount):
+        self.model = BankAccount
 
     def deposit(self, amount):
         self.model.deposit(amount)
