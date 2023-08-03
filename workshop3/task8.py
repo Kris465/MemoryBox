@@ -18,9 +18,9 @@ def missing_items(friends):
         for friend, items in friends.items():
             if item not in items:
                 missing_dict[item].append(friend)
-    for item, friends in missing_dict.items():
-        if len(friends) == len(friends.keys()) - 1:
-            print(item, "есть у всех друзей кроме", friends[0])
+    for item, friends_list in missing_dict.items():
+        if len(friends_list) == len(friends) - 1:
+            print(item, "есть у всех друзей кроме", friends_list[0])
 
 
 def add_friend(friends):
