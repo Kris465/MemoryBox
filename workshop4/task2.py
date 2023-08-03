@@ -2,6 +2,8 @@
 # Сформируйте список с уникальными кодами Unicode каждого
 # символа введённой строки отсортированный по убыванию.
 
+# https://habr.com/ru/articles/485148/
+
 def unicode_codes(text):
     code_points = set()
 
