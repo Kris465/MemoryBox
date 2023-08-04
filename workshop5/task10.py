@@ -1,4 +1,5 @@
 # Создайте функцию генератор чисел Фибоначчи (см. Википедию)
+# https://ejudge.179.ru/tasks/python/2017b1/pgm23__Generators.html
 
 
 def fib(n):
