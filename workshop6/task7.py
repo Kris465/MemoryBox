@@ -8,6 +8,7 @@
 # Проверку года на високосность вынести в отдельную защищённую функцию.
 
 
+@staticmethod
 def is_leap_year(year):
     if year % 4 != 0:
         return False
