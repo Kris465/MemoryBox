@@ -8,6 +8,8 @@
 
 # Этот модуль можно запускать из main.py
 
+__all__ = ['play_game']
+
 import json
 import random
 
