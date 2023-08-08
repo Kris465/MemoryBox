@@ -30,10 +30,6 @@ def guess_riddle(riddle, options, max_attempts):
 
 
 def add_riddle(riddle, options):
-    # data = json.load(open("riddles.json", "r+", encoding="UTF-8")).read()
-    # data.update({riddle: options})
-    # json.dump("riddles", data)
-
     with open("riddles.json", "r+", encoding="UTF-8") as f:
         riddles = json.load(f)
         riddles[riddle] = options
