@@ -42,8 +42,9 @@ class Mammal(Animal):
               self.name, "и я питаюсь", self.diet)
 
 
-class Farm():
-    def create_animal(self, type_animal, name, feature):
+class Farm:
+    @staticmethod
+    def create_animal(type_animal, name, feature):
         match type_animal.lower():
             case "fish" | "рыба":
                 return Fish(name, feature)
@@ -57,6 +58,5 @@ class Farm():
 
 type_animal, name, feature = input(
     "Введите через пробел: тип, имя, особенность животного\n").split()
-farm = Farm()
-created_animal = farm.create_animal(type_animal, name, feature)
+created_animal = Farm.create_animal(type_animal, name, feature)
 created_animal.info()
