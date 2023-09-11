@@ -40,3 +40,12 @@ class Mammal(Animal):
     def info(self):
         print("Я млекопитающее, меня зовут",
               self.name, "и я питаюсь", self.diet)
+
+
+fish = Fish("Карась", "пруду")
+bird = Bird("Сокол", 80)
+mammal = Mammal("Лев", "мясом")
+
+fish.info()
+bird.info()
+mammal.info()
