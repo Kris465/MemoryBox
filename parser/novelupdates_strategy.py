@@ -22,10 +22,11 @@ class NovelUpdates(ParserStrategy):
         for link in result:
             # collect_chapter
             url = link["href"]
-            # check(rul) - проверить теги(на случай блуждания по разным сайтам)
+            # check(url) - проверить теги(на случай блуждания по разным сайтам)
             new_soup = self.get_webpage("https:" + url)
             try:
-                text = new_soup.find("div", class_="text-left")
+                text = new_soup.find("div", class_="entry-content")
+                # text = new_soup.find("div", class_="text-left")
                 temp_dict = {link["title"]: link["href"] + text.text}
                 all_chapters.update(temp_dict)
             except AttributeError:
