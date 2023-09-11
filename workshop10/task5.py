@@ -6,26 +6,18 @@
 # информацию специфичную для данного класса.
 
 
-class Animal:
-    def __init__(self, name):
-        self.name = name
-
-    def info(self):
-        print("Я животное, меня зовут", self.name)
-
-
-class Fish(Animal):
+class Fish():
     def __init__(self, name, habitat):
-        super().__init__(name)
+        self.name = name
         self.habitat = habitat
 
     def info(self):
         print("Я рыба, меня зовут", self.name, "и я обитаю в", self.habitat)
 
 
-class Bird(Animal):
+class Bird():
     def __init__(self, name, wingspan):
-        super().__init__(name)
+        self.name = name
         self.wingspan = wingspan
 
     def info(self):
@@ -33,9 +25,9 @@ class Bird(Animal):
               "и мой размах крыльев составляет", self.wingspan, "см")
 
 
-class Mammal(Animal):
+class Mammal():
     def __init__(self, name, diet):
-        super().__init__(name)
+        self.name = name
         self.diet = diet
 
     def info(self):
