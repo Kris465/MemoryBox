@@ -1,6 +1,5 @@
-# import re
-# from database.db_session import get_session
-from parser.ranwen_strategy import Ranwen
+from parser.wx256_strategy import Wx256
+from parser.mtlnovel_strategy import MtlNovel
 from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
@@ -33,46 +32,19 @@ class Parser:
             strategy = Zhuishukan(self.title,
                                   self.project_webpage,
                                   self.number)
-        elif "www.ranwen.la" in self.project_webpage:
-            strategy = Ranwen(self.title,
-                              self.project_webpage,
-                              self.number)
         elif "www.52shuku.vip" in self.project_webpage:
             strategy = ChiShuka(self.title,
+                                self.project_webpage,
+                                self.number)
+        elif "www.256wx.net" in self.project_webpage:
+            strategy = Wx256(self.title,
+                             self.project_webpage,
+                             self.number)
+        elif "www.mtlnovel.com" in self.project_webpage:
+            strategy = MtlNovel(self.title,
                                 self.project_webpage,
                                 self.number)
         else:
             return
 
         strategy.logic()
-
-    # def choose_strategy(self):
-    #     return strategy
-
-    # def check(self, url):
-    #     print("Checking tags...")
-    #     temp_url = re.sub(r'^https?://(?:www\.)?(.*?)/.*$',
-    #                       r'\1',
-    #                       url)
-    #     print(temp_url)
-    #     session = get_session()
-    #     result = session.query(Parser).filter(Parser.url == temp_url).all()
-    #     if result:
-    #         for webpage in result:
-    #             cl = webpage.cl
-    #             other = webpage.other
-    #             word = webpage.word
-    #             best_strategy = webpage.strategy
-    #             print(cl, other, word, best_strategy)
-    #     else:
-    #         cl = input("class: ")
-    #         other = input("other sings: ")
-    #         word = input("word: ")
-    #         strategy = input("best strategy: ")
-    #         new_webpage = Parser(url=temp_url,
-    #                              cl=cl,
-    #                              other=other,
-    #                              word=word,
-    #                              strategy=strategy)
-    #         session.add(new_webpage)
-    #         session.commit()
