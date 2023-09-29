@@ -1,4 +1,5 @@
-from parser.Wx256 import Wx256
+from parser.wx256_strategy import Wx256
+from parser.mtlnovel_strategy import MtlNovel
 from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
@@ -39,6 +40,10 @@ class Parser:
             strategy = Wx256(self.title,
                              self.project_webpage,
                              self.number)
+        elif "www.mtlnovel.com" in self.project_webpage:
+            strategy = MtlNovel(self.title,
+                                self.project_webpage,
+                                self.number)
         else:
             return
 

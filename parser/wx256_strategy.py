@@ -17,14 +17,14 @@ class Wx256(ParserStrategy):
         chapters = {}
         for link in links:
             text = self.collect_chapter(link)
-            chapter = {self.number: link + text}
+            chapter = {self.number: 'https://www.256wx.net' + link + text}
             self.number += 1
             chapters.update(chapter)
 
         write(self.title, chapters, "zh")
 
     def collect_chapter(self, url):
-        page = self.get_webpage(url)
+        page = self.get_webpage('https://www.256wx.net' + url)
         text = page.find("div", class_="article fix").text
         return text
 
@@ -33,7 +33,6 @@ class Wx256(ParserStrategy):
 
         raw_links = [link.get('href') for link in page.find_all("a")
                      if re.match(r'/read/\d+/\d+', link.get('href'))]
-        write(self.title, {i: link for i, link in enumerate(raw_links)}, "zh")
         return raw_links
 
     def get_next_link(self):
