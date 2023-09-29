@@ -15,7 +15,7 @@ def one_chapter():
     print(response.status_code)
     response.encoding = response.apparent_encoding
     soup = BeautifulSoup(response.text, 'html.parser')
-    chapter_text = soup.find('div', class_="container").text
+    chapter_text = soup.find('dd', id="contents").text
     print(chapter_text)
     write(number, {number: chapter_text}, language="chi")
 

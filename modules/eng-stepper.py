@@ -12,10 +12,10 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 34
+    number = 21
     all_chapters = {}
     while url is not None:
-    # while number <= 90:
+    # while number <= 165:
         response = requests.get(url, headers=headers)
         print(response.status_code)
         soup = BeautifulSoup(response.text, 'lxml')
@@ -26,7 +26,9 @@ def get_chapters():
         all_chapters.update(temp_dict)
         links = soup.find_all("a")
         for link in links:
+            # if "Next" in link.text:
             if "next" in link.text.lower() and link["href"] != "#":
+            # if "next chapter" in link.text.lower():
                 try:
                     next_link = link['href']
                 except Exception:
