@@ -1,9 +1,0 @@
-{
-    "files.autoSave": "afterDelay",
-    "workbench.editor.closeOnFileDelete": true,
-    "terminal.integrated.env.windows": {
-
-    },
-    "python.terminal.activateEnvironment": true,
-    "python.terminal.activateEnvInCurrentTerminal": true
-}

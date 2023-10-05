@@ -4,6 +4,8 @@ from dotenv import load_dotenv, find_dotenv, set_key
 
 
 class Translator:
+    def __init__(self):
+        self.key = self.get_data("IAM_TOKEN")
 
     def get_key(self):
         load_dotenv(find_dotenv())
@@ -23,13 +25,17 @@ class Translator:
             data=data)
 
         json_response = response.json()
-        IAM_TOKEN = json_response['iamToken']
-        set_key(".env", "IAM_TOKEN", IAM_TOKEN)
+        TOKEN = json_response['iamToken']
+        set_key(".env", "IAM_TOKEN", TOKEN)
+        self.key = TOKEN
+
+    def get_data(self, name: str):
+        load_dotenv(find_dotenv())
+        return os.environ.get(name)
 
     def translate(self, text, sourse_language):
-        load_dotenv(find_dotenv())
-        IAM_TOKEN = os.environ.get('IAM_TOKEN')
-        folder_id = os.environ.get('folder_id')
+        IAM_TOKEN = self.key
+        folder_id = self.get_data('folder_id')
         target_language = 'ru'
         texts = text
 
