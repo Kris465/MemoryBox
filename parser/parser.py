@@ -1,5 +1,4 @@
 from parser.wx256_strategy import Wx256
-from parser.mtlnovel_strategy import MtlNovel
 from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
@@ -19,7 +18,7 @@ class Parser:
         self.project_webpage = project_webpage
         self.number = number
 
-    def parse(self):  # Надо доделать класс
+    def parse(self):
         if "www.novelupdates.com" in self.project_webpage:
             strategy = NovelUpdates(self.title,
                                     self.project_webpage,
@@ -40,10 +39,10 @@ class Parser:
             strategy = Wx256(self.title,
                              self.project_webpage,
                              self.number)
-        elif "www.mtlnovel.com" in self.project_webpage:
-            strategy = MtlNovel(self.title,
-                                self.project_webpage,
-                                self.number)
+        elif "www.82zg.com" in self.project_webpage:
+            strategy = Wx256(self.title,
+                             self.project_webpage,
+                             self.number)
         else:
             return
 

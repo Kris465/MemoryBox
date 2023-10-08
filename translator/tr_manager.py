@@ -41,7 +41,7 @@ class TRManager():
         last_chapter = int(input("To: "))
         while start_chapter <= last_chapter:
             self.one_chapter(title, start_chapter)
-            time.sleep(random.randint(10, 360))
+            time.sleep(random.randint(5, 20))
             start_chapter += 1
 
     def get_sign(self, language):
