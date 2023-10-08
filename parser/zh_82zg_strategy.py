@@ -5,9 +5,8 @@ from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
 
 
-class Wx256(ParserStrategy):
-
-    def __init__(self, title, project_webpage, number=0):
+class Zg(ParserStrategy):
+    def __init__(self, title, project_webpage, number):
         self.title = title
         self.project_webpage = project_webpage
         self.number = number
@@ -17,20 +16,19 @@ class Wx256(ParserStrategy):
         chapters = {}
         for link in links:
             text = self.collect_chapter(link)
-            chapter = {self.number: 'https://www.256wx.net' + link + text}
+            chapter = {self.number: 'https://www.82zg.com' + link + text}
             self.number += 1
             chapters.update(chapter)
 
         write(self.title, chapters, "zh")
 
     def collect_chapter(self, url):
-        page = self.get_webpage('https://www.256wx.net' + url)
+        page = self.get_webpage('https://www.82zg.com' + url)
         text = page.find("div", class_="article fix").text
         return text
 
     def collect_links(self):
         page = self.get_webpage(self.project_webpage)
-        print(page)
 
         raw_links = [link.get('href') for link in page.find_all("a")
                      if re.match(r'/read/\d+/\d+', link.get('href'))]
