@@ -2,6 +2,7 @@ from parser.wx256_strategy import Wx256
 from parser.wfxs_strategy import Wfxs
 from parser.chi_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
+from parser.zh_82zg_strategy import Zg
 from parser.zhuishukan_strategy import Zhuishukan
 
 
@@ -40,9 +41,8 @@ class Parser:
                              self.project_webpage,
                              self.number)
         elif "www.82zg.com" in self.project_webpage:
-            strategy = Wx256(self.title,
-                             self.project_webpage,
-                             self.number)
+            strategy = Zg(self.title,
+                          self.project_webpage)
         else:
             return
 

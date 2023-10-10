@@ -30,7 +30,6 @@ class Wx256(ParserStrategy):
 
     def collect_links(self):
         page = self.get_webpage(self.project_webpage)
-        print(page)
 
         raw_links = [link.get('href') for link in page.find_all("a")
                      if re.match(r'/read/\d+/\d+', link.get('href'))]

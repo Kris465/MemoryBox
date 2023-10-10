@@ -1,3 +1,5 @@
+import random
+import time
 import re
 from bs4 import BeautifulSoup
 import requests
@@ -6,33 +8,37 @@ from write_to_json import write
 
 
 class Zg(ParserStrategy):
-    def __init__(self, title, project_webpage, number):
+
+    # https://www.82zg.com/book/25485/
+    def __init__(self, title, project_webpage):
         self.title = title
         self.project_webpage = project_webpage
-        self.number = number
 
     def logic(self):
         links = self.collect_links()
+        write(self.title, links, "zh")
         chapters = {}
-        for link in links:
-            text = self.collect_chapter(link)
-            chapter = {self.number: 'https://www.82zg.com' + link + text}
-            self.number += 1
+        for chapter, link in links.items():
+            time.sleep(random.randint(10, 30))
+            text = self.collect_chapter(link.strip())
+            match = re.search(r'\d+', chapter)
+            chapter = {match:
+                       chapter + link + text}
             chapters.update(chapter)
 
         write(self.title, chapters, "zh")
 
     def collect_chapter(self, url):
-        page = self.get_webpage('https://www.82zg.com' + url)
-        text = page.find("div", class_="article fix").text
+        page = self.get_webpage(url)
+        print(page.text)
+        text = page.find("div", id="content").text
         return text
 
     def collect_links(self):
         page = self.get_webpage(self.project_webpage)
-
-        raw_links = [link.get('href') for link in page.find_all("a")
-                     if re.match(r'/read/\d+/\d+', link.get('href'))]
-        return raw_links
+        links = {link.text: 'https://www.82zg.com' + link.get("href")
+                 for link in page.find('div', id='list').find_all("a")}
+        return links
 
     def get_next_link(self):
         pass
