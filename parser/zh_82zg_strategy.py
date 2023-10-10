@@ -22,15 +22,15 @@ class Zg(ParserStrategy):
             time.sleep(random.randint(10, 30))
             text = self.collect_chapter(link.strip())
             match = re.search(r'\d+', chapter)
-            chapter = {match:
-                       chapter + link + text}
+            chapter = {match.group(0):
+                       chapter + "/n" + link + text}
             chapters.update(chapter)
 
         write(self.title, chapters, "zh")
 
     def collect_chapter(self, url):
         page = self.get_webpage(url)
-        print(page.text)
+        print(url)
         text = page.find("div", id="content").text
         return text
 
