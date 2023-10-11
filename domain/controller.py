@@ -1,6 +1,8 @@
 # from database.db_manager import DBManager
 from parser.parser import Parser
+from reader_from_json import read
 from translator.tr_manager import TRManager
+from writer_to_txt import write_txt
 
 
 class Controller:
@@ -8,7 +10,7 @@ class Controller:
     def logic(self):
         title = input("Title: ")
 
-        option = int(input("1. Parse\n2. Translate\n"))
+        option = int(input("1. Parse\n2. Translate\n3. Write.\n"))
         match option:
             case 1:
                 url = input("url: ")
@@ -20,22 +22,10 @@ class Controller:
                 language = input("language: ")
                 trans = TRManager(language)
                 trans.tr_from_to(title)
-
-        # db_manager = DBManager()
-        # project = db_manager.find(title)
-        # if project is None:
-        #     url = input("url: ")
-        #     # номер текущей главы
-        #     # язык проекта, который собираемся парсить
-        #     pars = Parser(title=title, project_webpage=url)
-        #     pars.parse()
-        #     trans = TRManager(title)
-        #     option = int(input(
-        #         "1. Translate one chapter.\n2. Translate from-to.\n"))
-        #     match option:
-        #         case 1:
-        #             trans.one_chapter(title)
-        #         case 2:
-        #             trans.tr_from_to(title)
-        # else:
-        #     project.update()
+            case 3:
+                project = read(title + "_translation")
+                translated_text = ''
+                for chapter in project.values():
+                    for text in chapter:
+                        translated_text += text.get("translation", '')
+                write_txt(title, translated_text)
