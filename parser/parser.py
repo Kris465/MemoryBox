@@ -1,6 +1,6 @@
 from parser.wx256_strategy import Wx256
 from parser.wfxs_strategy import Wfxs
-from parser.chi_shuka import ChiShuka
+from parser.zh_shuka import ChiShuka
 from parser.novelupdates_strategy import NovelUpdates
 from parser.zh_82zg_strategy import Zg
 from parser.zhuishukan_strategy import Zhuishukan
