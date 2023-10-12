@@ -23,6 +23,8 @@ class Controller:
                 trans = TRManager(language)
                 trans.tr_from_to(title)
             case 3:
+                # Сделать так, чтобы писал перевод только в json,
+                # а дальше уже запись в файл
                 project = read(title + "_translation")
                 translated_text = ''
                 for chapter in project.values():

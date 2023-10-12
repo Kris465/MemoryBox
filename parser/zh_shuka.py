@@ -23,7 +23,7 @@ class ChiShuka(ParserStrategy):
         for k, v in links.items():
             print(k, v)
             text = self.collect_chapter(v)
-            chapter = {k: text}
+            chapter = {k: v + text}
             print(chapter)
             chapters.update(chapter)
         write(self.title, chapters, language="zh")
