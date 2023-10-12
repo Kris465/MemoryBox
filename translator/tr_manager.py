@@ -1,6 +1,6 @@
 import random
 import time
-from reader_from_json import read
+from reader import read
 from translator.translator_class import Translator
 from write_to_json import write
 from writer_to_txt import write_txt

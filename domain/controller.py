@@ -1,6 +1,6 @@
 # from database.db_manager import DBManager
 from parser.parser import Parser
-from reader_from_json import read
+from reader import read
 from translator.tr_manager import TRManager
 from writer_to_txt import write_txt
 
