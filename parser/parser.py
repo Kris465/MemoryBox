@@ -1,3 +1,4 @@
+from parser.en_stepper import EnStepper
 from parser.wx256_strategy import Wx256
 from parser.wfxs_strategy import Wfxs
 from parser.zh_shuka import ChiShuka
@@ -43,6 +44,9 @@ class Parser:
         elif "www.82zg.com" in self.project_webpage:
             strategy = Zg(self.title,
                           self.project_webpage)
+        elif self.project_webpage in []:
+            strategy = EnStepper(self.title,
+                                 self.project_webpage)
         else:
             return
 
