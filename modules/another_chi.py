@@ -11,16 +11,18 @@ def parse_links():
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
                                 Chrome/111.0.0.0 Safari/537.36'}
     url = input("url: ")
+    time.sleep(random.randint(10, 120))
     response = requests.get(url, headers=headers)
     print(response.status_code)
     response.encoding = response.apparent_encoding
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = []
-    for link in soup.find_all('a'):
+    for link in soup.find("div", class_="ml_list").find_all('a'):
         href = link.get('href')
         print(href)
-        links.append(href)
+        if href is not None:
+            links.append(href)
 
     sorted_links = sorted(set(links))
 
@@ -37,16 +39,13 @@ def collect_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
 
     for k, v in links_dict.items():
-        time.sleep(random.randint(5, 60))
-        response = requests.get('https://www.82zg.com/' + v, headers=headers)
+        time.sleep(random.randint(10, 120))
+        response = requests.get('https://www.diyibanzhu.buzz/0/633/' + v,
+                                headers=headers)
         print(response.status_code)
         response.encoding = response.apparent_encoding
         soup = BeautifulSoup(response.text, 'html.parser')
-        try:
-            chapter_text = soup.find("div", id="content_read").text
-        except Exception:
-            chapter_text = " "
-        # chapter_text = soup.find('div', "novelcontent").text
+        chapter_text = soup.find("div", "novelcontent").text
         temp_dict = {str(int(k) + 1): chapter_text}
         print(k)
         all_chapters.update(temp_dict)
@@ -54,4 +53,4 @@ def collect_chapters():
 
 
 parse_links()
-collect_chapters()
+# collect_chapters()

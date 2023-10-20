@@ -1,10 +1,11 @@
 from typing import Optional
 import re
-from parser.chapter_class import Chapter
+
+from parser-draft.chapter_class import Chapter
+from parser-draft.collector_strategy import Collector
+from parser-draft.stepper_strategy import Stepper
 from db_session import get_session
 from models import Chapters, Novel, Parser
-from parser.collector_strategy import Collector
-from drafts.stepper_strategy import Stepper
 
 
 class Manager:
