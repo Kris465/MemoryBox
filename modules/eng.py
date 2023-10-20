@@ -10,13 +10,13 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 39
+    number = 78
     all_chapters = {}
     while url != '':
         response = requests.get(url, headers=headers)
         print(response.status_code)
         soup = BeautifulSoup(response.text, 'lxml')
-        result = soup.find_all("div", class_="entry-content")
+        result = soup.find_all("div", class_="zoomdesc-cont")
         temp_dict = {number: url + i.text for i in result}
         print(temp_dict)
         all_chapters.update(temp_dict)

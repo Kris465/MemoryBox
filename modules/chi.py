@@ -38,12 +38,12 @@ def collect_chapters():
 
     for k, v in links_dict.items():
         time.sleep(random.randint(5, 60))
-        response = requests.get('https://www.ddxs.com' + v, headers=headers)
+        response = requests.get('https://www.82zg.com/' + v, headers=headers)
         print(response.status_code)
         response.encoding = response.apparent_encoding
         soup = BeautifulSoup(response.text, 'html.parser')
         try:
-            chapter_text = soup.find("dd", id="contents").text
+            chapter_text = soup.find("div", id="content_read").text
         except Exception:
             chapter_text = " "
         # chapter_text = soup.find('div', "novelcontent").text
@@ -54,4 +54,4 @@ def collect_chapters():
 
 
 parse_links()
-# collect_chapters()
+collect_chapters()

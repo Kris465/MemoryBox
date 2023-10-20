@@ -12,10 +12,10 @@ def get_chapters():
                                 Chrome/111.0.0.0 Safari/537.36'}
     title = input("title: ")
     url = input("url: ")
-    number = 21
+    number = 45
     all_chapters = {}
     while url is not None:
-    # while number <= 165:
+    # while number <= 4:
         response = requests.get(url, headers=headers)
         print(response.status_code)
         soup = BeautifulSoup(response.text, 'lxml')
@@ -36,6 +36,7 @@ def get_chapters():
                 break
             else:
                 next_link = None
+                # next_link = ''
         number += 1
         url = next_link
         # url = "https://www.wuxiap.com" + next_link
