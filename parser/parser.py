@@ -44,7 +44,8 @@ class Parser:
         elif "www.82zg.com" in self.project_webpage:
             strategy = Zg(self.title,
                           self.project_webpage)
-        elif self.project_webpage in []:
+        # Получить список сайтов из json!
+        elif "www.wuxiap.com" in self.project_webpage:
             strategy = EnStepper(self.title,
                                  self.project_webpage)
         else:
