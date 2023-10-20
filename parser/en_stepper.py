@@ -11,9 +11,6 @@ class EnStepper(ParserStrategy):
     def __init__(self, title, webpage):
         self.title = title
         self.webpage = webpage
-        self.tag = "div"
-        self.extra_tag = "chapter-content"
-        self.word = "next"
         self.number = 1
         self.library = read("library.json")
 
@@ -70,6 +67,7 @@ class EnStepper(ParserStrategy):
         try:
             tag_sets = self.library[url]
         except KeyError:
+            # Формат json?
             tag_sets = {url: [{"tag": input("tag: "), "extra_tag": input("extra_tag: "), "word": input("word: ")}]}
             self.library.update(tag_sets)
         return tag_sets
