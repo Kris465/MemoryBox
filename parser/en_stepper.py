@@ -19,31 +19,39 @@ class EnStepper(ParserStrategy):
         chapters = {}
         next_link = " "
         self.number = int(input("chapter: "))
+        webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
+                              self.webpage)
+        tag_sets = self.check(webpage_name)
         while next_link is not None:
             page = self.get_webpage(url)
-            text = self.collect_chapter(page)
+            text = self.collect_chapter(page, tag_sets[0]["tag"],
+                                        tag_sets[0]["extra_tag"])
             chapter = {self.number: url + text}
-            next_link = self.get_next_link(page)
+            next_link = self.get_next_link(page, tag_sets[0]["word"],
+                                           webpage_name)
             chapters.update(chapter)
             print(self.number)
             self.number += 1
             url = next_link
         write(self.title, chapters)
 
-    def collect_chapter(self, page):
-        text = "".join(page.find(self.tag).find_all(self.extra_tag))
+    def collect_chapter(self, page, tag, extra_tag):
+        text = "".join(page.find_all(tag=tag, class_=extra_tag))
         print(text)
         return text
 
     def collect_links(self):
         pass
 
-    def get_next_link(self, page):
+    def get_next_link(self, page, word, webpage_name):
         links = page.find_all("a")
         for link in links:
-            if "next" in link.text.lower() and link["href"] != "#":
+            if word in link.text.lower() and link["href"] != "#":
                 try:
-                    next_link = "https://www.wuxiap.com/" + link['href']
+                    if webpage_name in link["href"]:
+                        next_link = link['href']
+                    else:
+                        next_link = f"https://{webpage_name}/{link['href']}"
                     logging.info(f"link: {next_link}")
                 except Exception:
                     next_link = input("url: ")
@@ -62,12 +70,14 @@ class EnStepper(ParserStrategy):
         soup = BeautifulSoup(response.text, 'lxml')
         return soup
 
-    def check(self):
-        url = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1', self.webpage)
+    def check(self, webpage_name):
         try:
-            tag_sets = self.library[url]
+            tag_sets = self.library[webpage_name]
         except KeyError:
-            # Формат json?
-            tag_sets = {url: [{"tag": input("tag: "), "extra_tag": input("extra_tag: "), "word": input("word: ")}]}
-            self.library.update(tag_sets)
+            tag_sets = {webpage_name: [{"tag": input("tag: "),
+                                        "extra_tag": input("extra_tag: "),
+                                        "word": input("word: ")}]}
+            dictionary = self.library
+            dictionary.update(tag_sets)
+            write("library", dictionary)
         return tag_sets
