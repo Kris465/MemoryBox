@@ -1,4 +1,3 @@
-import logging
 import re
 from bs4 import BeautifulSoup
 import requests
@@ -36,7 +35,8 @@ class EnStepper(ParserStrategy):
         write(self.title, chapters)
 
     def collect_chapter(self, page, tag, extra_tag):
-        text = "".join(page.find_all(tag=tag, class_=extra_tag))
+        result = page.find_all(tag, class_=extra_tag)
+        text = "".join([i.text for i in result])
         print(text)
         return text
 
@@ -52,10 +52,8 @@ class EnStepper(ParserStrategy):
                         next_link = link['href']
                     else:
                         next_link = f"https://{webpage_name}/{link['href']}"
-                    logging.info(f"link: {next_link}")
                 except Exception:
                     next_link = input("url: ")
-                    logging.error(f"User inputs a link: {next_link}")
                 break
             else:
                 next_link = None
@@ -74,10 +72,11 @@ class EnStepper(ParserStrategy):
         try:
             tag_sets = self.library[webpage_name]
         except KeyError:
-            tag_sets = {webpage_name: [{"tag": input("tag: "),
-                                        "extra_tag": input("extra_tag: "),
-                                        "word": input("word: ")}]}
+            temp_dict = {webpage_name: [{"tag": input("tag: "),
+                                         "extra_tag": input("extra_tag: "),
+                                         "word": input("word: ")}]}
             dictionary = self.library
-            dictionary.update(tag_sets)
+            dictionary.update(temp_dict)
             write("library", dictionary)
+            tag_sets = temp_dict[webpage_name]
         return tag_sets

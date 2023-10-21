@@ -1,10 +1,12 @@
+import re
 from parser.en_stepper import EnStepper
 from parser.wx256_strategy import Wx256
 from parser.wfxs_strategy import Wfxs
 from parser.zh_shuka import ChiShuka
-from parser.novelupdates_strategy import NovelUpdates
+# from parser.novelupdates_strategy import NovelUpdates
 from parser.zh_82zg_strategy import Zg
 from parser.zhuishukan_strategy import Zhuishukan
+from reader import read
 
 
 class Parser:
@@ -21,10 +23,17 @@ class Parser:
         self.number = number
 
     def parse(self):
-        if "www.novelupdates.com" in self.project_webpage:
-            strategy = NovelUpdates(self.title,
-                                    self.project_webpage,
-                                    self.number)
+        # систематизировать этот метод
+        webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
+                              self.project_webpage)
+        common_sites = read("library").keys()
+        if webpage_name in common_sites:
+            strategy = EnStepper(self.title, self.project_webpage)
+        # переписать модуль
+        # if "www.novelupdates.com" in self.project_webpage:
+        #     strategy = NovelUpdates(self.title,
+        #                             self.project_webpage,
+        #                             self.number)
         elif "www.wfxs.com.tw" in self.project_webpage:
             strategy = Wfxs(self.title,
                             self.project_webpage,
@@ -44,11 +53,10 @@ class Parser:
         elif "www.82zg.com" in self.project_webpage:
             strategy = Zg(self.title,
                           self.project_webpage)
-        # Получить список сайтов из json!
-        elif "www.wuxiap.com" in self.project_webpage:
-            strategy = EnStepper(self.title,
-                                 self.project_webpage)
         else:
-            return
+            if input("Add?\n") == "":
+                strategy = EnStepper(self.title, self.project_webpage)
+            else:
+                return
 
         strategy.logic()
