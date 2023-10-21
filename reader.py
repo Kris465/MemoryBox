@@ -7,13 +7,13 @@ def read(title):
     full_name = find_file(title)
     _, ext = os.path.splitext(full_name)
     if ext == '.json':
-        with open(f'{title}', encoding="UTF-8") as file:
+        with open(f'{full_name}', encoding="UTF-8") as file:
             data = json.load(file)
     elif ext == '.txt':
-        with open(f'{title}', encoding="UTF-8") as file:
+        with open(f'{full_name}', encoding="UTF-8") as file:
             data = file.read()
     elif ext == '.docx':
-        doc = docx.Document(f'{title}')
+        doc = docx.Document(f'{full_name}')
         data = '\n'.join([paragraph.text for paragraph in doc.paragraphs])
     else:
         raise ValueError('Unsupported format')

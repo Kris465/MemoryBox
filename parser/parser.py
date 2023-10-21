@@ -54,6 +54,9 @@ class Parser:
             strategy = Zg(self.title,
                           self.project_webpage)
         else:
-            return
+            if input("Add?\n") == "":
+                strategy = EnStepper(self.title, self.project_webpage)
+            else:
+                return
 
         strategy.logic()
