@@ -1,4 +1,5 @@
 # from database.db_manager import DBManager
+from loguru import logger
 from parser.parser import Parser
 from reader import read
 from translator.tr_manager import TRManager
@@ -14,15 +15,16 @@ class Controller:
         match option:
             case 1:
                 url = input("url: ")
-                # number = int(input("Chapter: "))
                 pars = Parser(title=title, project_webpage=url)
-                # pars = Parser(title=title, number=number, url=url)
+                logger.info(f"title: {title}, url: {url}")
                 pars.parse()
             case 2:
                 language = input("language: ")
                 trans = TRManager(language)
                 trans.tr_from_to(title)
+                logger.info(f"title: {title}, language: {language}")
             case 3:
+                # ???
                 # Сделать так, чтобы писал перевод только в json,
                 # а дальше уже запись в файл
                 project = read(title + "_translation")

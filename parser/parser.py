@@ -1,4 +1,6 @@
 import re
+
+from loguru import logger
 from parser.en_stepper import EnStepper
 from parser.wx256_strategy import Wx256
 from parser.wfxs_strategy import Wfxs
@@ -29,11 +31,6 @@ class Parser:
         common_sites = read("library").keys()
         if webpage_name in common_sites:
             strategy = EnStepper(self.title, self.project_webpage)
-        # переписать модуль
-        # if "www.novelupdates.com" in self.project_webpage:
-        #     strategy = NovelUpdates(self.title,
-        #                             self.project_webpage,
-        #                             self.number)
         elif "www.wfxs.com.tw" in self.project_webpage:
             strategy = Wfxs(self.title,
                             self.project_webpage,
@@ -56,7 +53,10 @@ class Parser:
         else:
             if input("Add?\n") == "":
                 strategy = EnStepper(self.title, self.project_webpage)
+                logger.info(f"adding a new webpage \
+                            {self.project_webpage} for {self.title}")
             else:
                 return
 
+        logger.info(f"Object of strategy {strategy} is created")
         strategy.logic()
