@@ -47,5 +47,12 @@
             "extra_tag": "article",
             "word": "next"
         }
+    ],
+    "tnovelodyssey.blogspot.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-body post-content",
+            "word": "nothing"
+        }
     ]
 }
