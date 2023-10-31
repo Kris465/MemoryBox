@@ -17,11 +17,12 @@ class EnStepper(ParserStrategy):
         url = self.webpage
         chapters = {}
         next_link = " "
+        page = " "
         self.number = int(input("chapter: "))
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.webpage)
         tag_sets = self.check(webpage_name)
-        while next_link is not None:
+        while next_link and page is not None:
             page = self.get_webpage(url)
             text = self.collect_chapter(page, tag_sets[0]["tag"],
                                         tag_sets[0]["extra_tag"])
@@ -64,9 +65,11 @@ class EnStepper(ParserStrategy):
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
                                 Chrome/111.0.0.0 Safari/537.36'}
         response = requests.get(url, headers=headers)
-        print(response.status_code)
-        soup = BeautifulSoup(response.text, 'lxml')
-        return soup
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'lxml')
+            return soup
+        else:
+            return
 
     def check(self, webpage_name):
         try:
