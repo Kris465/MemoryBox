@@ -1,5 +1,6 @@
 import re
 from bs4 import BeautifulSoup
+from loguru import logger
 import requests
 from parser.abstract_strategy import ParserStrategy
 from reader import read
@@ -24,21 +25,27 @@ class EnStepper(ParserStrategy):
         tag_sets = self.check(webpage_name)
         while next_link and page is not None:
             page = self.get_webpage(url)
-            text = self.collect_chapter(page, tag_sets[0]["tag"],
-                                        tag_sets[0]["extra_tag"])
-            chapter = {self.number: url + text}
-            next_link = self.get_next_link(page, tag_sets[0]["word"],
-                                           webpage_name)
-            chapters.update(chapter)
-            print(self.number)
-            self.number += 1
-            url = next_link
+            try:
+                text = self.collect_chapter(page, tag_sets[0]["tag"],
+                                            tag_sets[0]["extra_tag"])
+                chapter = {self.number: url + text}
+                next_link = self.get_next_link(page, tag_sets[0]["word"],
+                                               webpage_name)
+                chapters.update(chapter)
+                self.number += 1
+                url = next_link
+            except AttributeError:
+                logger.add("errors.log", backtrace=True, diagnose=True)
+                logger.warning("AttributeError")
+                break
         write(self.title, chapters)
 
     def collect_chapter(self, page, tag, extra_tag):
-        result = page.find_all(tag, class_=extra_tag)
+        try:
+            result = page.find_all(tag, class_=extra_tag)
+        except ValueError:
+            result = page.find_all(tag, id=extra_tag)
         text = "".join([i.text for i in result])
-        print(text)
         return text
 
     def collect_links(self):
