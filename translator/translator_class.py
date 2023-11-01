@@ -1,4 +1,5 @@
 import os
+from loguru import logger
 import requests
 from dotenv import load_dotenv, find_dotenv, set_key
 
@@ -58,11 +59,11 @@ class Translator:
         )
 
         if response.status_code == 200:
-            print(response.text)
             data = response.json()
             lst = data['translations']
             translation = lst[0]
             return translation['text']
         else:
             self.get_key()
+            logger.info("New IAM_TOKEN is asked and set")
             return

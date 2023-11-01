@@ -1,5 +1,7 @@
 import random
 import time
+
+from loguru import logger
 from reader import read
 from translator.translator_class import Translator
 from write_to_json import write
@@ -13,7 +15,7 @@ class TRManager():
 
     def one_chapter(self, title, chapter=0):
         project = read(title)
-        text = project[str(chapter)]
+        text = project[str(chapter).strip()]
         write_txt(chapter, text)
         max_length = 10000
         substrings = []
@@ -38,6 +40,9 @@ class TRManager():
                 tr_txt += part
             else:
                 break
+        logger.info(f"{title} / {chapter} / \
+                    {text[0:15]} - {text[-1:-15]} / \
+                          {tr_txt[0:15]} - {tr_txt[-1:-15]}")
         return {chapter: [{"origin": text}, {"translation": tr_txt}]}
 
     def tr_from_to(self, title):

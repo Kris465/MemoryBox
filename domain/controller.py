@@ -16,13 +16,13 @@ class Controller:
             case 1:
                 url = input("url: ")
                 pars = Parser(title=title, project_webpage=url)
-                logger.info(f"title: {title}, url: {url}")
+                logger.info(f"Parsing / {title} / {url}")
                 pars.parse()
             case 2:
                 language = input("language: ")
                 trans = TRManager(language)
                 trans.tr_from_to(title)
-                logger.info(f"title: {title}, language: {language}")
+                logger.info(f"translating / {title} / {language}")
             case 3:
                 # ???
                 # Сделать так, чтобы писал перевод только в json,
