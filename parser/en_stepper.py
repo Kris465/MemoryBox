@@ -88,7 +88,8 @@ class EnStepper(ParserStrategy):
         except KeyError:
             temp_dict = {webpage_name: [{"tag": input("tag: "),
                                          "extra_tag": input("extra_tag: "),
-                                         "word": input("word: ")}]}
+                                         "word": input("word: ")},
+                                        {"strategy": "EnStepper"}]}
             dictionary = self.library
             dictionary.update(temp_dict)
             write("library", dictionary)
