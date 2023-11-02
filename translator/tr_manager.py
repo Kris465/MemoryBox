@@ -40,9 +40,9 @@ class TRManager():
                 tr_txt += part
             else:
                 break
-        logger.info(f"{title} / {chapter} / \
-                    {text[0:15]} - {text[-1:-15]} / \
-                          {tr_txt[0:15]} - {tr_txt[-1:-15]}")
+        logger.info(f"{title} / {chapter} /"
+                    f"{text[:30]}...{text[-30:]} / "
+                    f"{tr_txt[:30]}...{tr_txt[-30:]}")
         return {chapter: [{"origin": text}, {"translation": tr_txt}]}
 
     def tr_from_to(self, title):
