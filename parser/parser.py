@@ -7,6 +7,7 @@ from parser.wfxs_strategy import Wfxs
 from parser.zh_shuka import ChiShuka
 from parser.zh_82zg_strategy import Zg
 from parser.zhuishukan_strategy import Zhuishukan
+from reader import read
 
 
 class Parser:
@@ -17,38 +18,22 @@ class Parser:
     def parse(self):
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.project_webpage)
+        logger.info(f"Webpage name is {webpage_name}")
+        library = read("library")
 
-        strategies = {
-            EnStepper: ["wuxiap.com",
-                        "vmnovels.com",
-                        "mysticalmerries.com",
-                        "sleepytranslations.com",
-                        "salmonlatte.com",
-                        "novelbin.org",
-                        "akknovel.com",
-                        "tnovelodyssey.blogspot.com",
-                        "view.ridibooks.com",
-                        "rainofsnow.com"],
-            Wfxs: ["www.wfxs.com.tw"],
-            Zhuishukan: ["m.zhuishukan.com"],
-            ChiShuka: ["www.52shuku.vip"],
-            Wx256: ["www.256wx.net"],
-            Zg: ["www.82zg.com"]
-        }
-        for strategy, webpages in strategies.items():
-            if webpage_name in webpages:
-                strategy_instance = strategy(self.title, self.project_webpage)
-                logger.info(f"Object of strategy {strategy} is created")
-            else:
-                strategy = input("Strategy?\n")
-                try:
-                    strategy_instance = strategy(self.title,
-                                                 self.project_webpage)
-                    strategies[strategy].append(webpage_name)
-                    logger.info(f"Object of strategy {strategy} is created"
-                                f"{webpage_name} added to webpages")
-                except Exception:
-                    logger.warning("We need a new strategy!")
-                    return
+        if webpage_name in library:
+            val = library[webpage_name]
+            strategy_class = val[1].get("strategy")
+            logger.info(f"{self.project_webpage} / {val} / {strategy_class}")
+            strategy = strategy_class(self.title, self.project_webpage)
+            logger.info(f"Object {strategy.__class__.__name__} is created")
+        else:
+            strategy_name = {"strategy": input("Strategy?\n")}
+            try:
+                strategy_class = strategy_name.get("strategy")
+                strategy = strategy_class(self.title, self.project_webpage)
+            except Exception:
+                logger.debug(f"Create strategy for {self.project_webpage}")
+                return
 
-            strategy_instance.logic()
+        strategy.logic()
