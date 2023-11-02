@@ -1,9 +1,0 @@
-@startuml
-
-Class Controller
-
-Class Controller {
-
-}
-
-@enduml
