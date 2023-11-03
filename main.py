@@ -12,10 +12,15 @@ def main():
                backtrace=True, diagnose=True)
 
     queue = TaskQueue()
+    logger.info(f"Queue object is created / {queue.__class__.__name__}")
 
-    for _ in range(2):
-        controller = Controller()
+    print("Novels:")
+    novels = list(map(str.strip, iter(input, '')))
+
+    for order, title in enumerate(novels):
+        controller = Controller(title)
         queue.add_task(lambda: run_controller(controller))
+        logger.info(f"Task {order} with {title} is created")
 
     asyncio.run(queue.run_tasks())
 
