@@ -1,5 +1,6 @@
 import re
 from bs4 import BeautifulSoup
+from loguru import logger
 import requests
 from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
@@ -26,13 +27,15 @@ class Wx256(ParserStrategy):
     def collect_chapter(self, url):
         page = self.get_webpage('https://www.256wx.net' + url)
         text = page.find("div", class_="article fix").text
+        logger.info(f"{self.number} / {url} / {text[30:]}")
         return text
 
     def collect_links(self):
         page = self.get_webpage(self.project_webpage)
-
         raw_links = [link.get('href') for link in page.find_all("a")
                      if re.match(r'/read/\d+/\d+', link.get('href'))]
+        logger.info(f"links are collected / "
+                    f"{raw_links[0]}...{raw_links[-1]}")
         return raw_links
 
     def get_next_link(self):
@@ -43,7 +46,7 @@ class Wx256(ParserStrategy):
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
                                 Chrome/111.0.0.0 Safari/537.36'}
         response = requests.get(url, headers=headers)
-        print(response.status_code)
+        logger.info(f"{self.title} / {url} / {response.status_code}")
         response.encoding = response.apparent_encoding
         soup = BeautifulSoup(response.text, 'html.parser')
         return soup

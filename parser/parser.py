@@ -1,13 +1,8 @@
 import re
 
 from loguru import logger
-from parser.en_stepper import EnStepper
-from parser.wx256_strategy import Wx256
-from parser.wfxs_strategy import Wfxs
-from parser.zh_shuka import ChiShuka
-from parser.zh_82zg_strategy import Zg
-from parser.zhuishukan_strategy import Zhuishukan
 from reader import read
+from .strategies import strategy_class
 
 
 class Parser:
@@ -22,17 +17,19 @@ class Parser:
         library = read("library")
 
         if webpage_name in library:
-            val = library[webpage_name]
-            strategy_class = val[1].get("strategy")
-            logger.info(f"{self.project_webpage} / {val} / {strategy_class}")
-            strategy = strategy_class(self.title, self.project_webpage)
+            strategy_name = library[webpage_name][1]["strategy"]
+            logger.info(f"{self.project_webpage} / {strategy_name}")
+            strategy = strategy_class(strategy_name,
+                                      self.title,
+                                      self.project_webpage)
             logger.info(f"Object {strategy.__class__.__name__} is created")
         else:
-            strategy_name = {"strategy": input("Strategy?\n")}
+            strategy_name = input("Strategy?\n")
             try:
-                strategy_class = strategy_name.get("strategy")
-                strategy = strategy_class(self.title, self.project_webpage)
-            except Exception:
+                strategy = strategy_class(strategy_name,
+                                          self.title,
+                                          self.project_webpage)
+            except KeyError:
                 logger.debug(f"Create strategy for {self.project_webpage}")
                 return
 
