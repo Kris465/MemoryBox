@@ -1,6 +1,3 @@
-import asyncio
-
-
 class TaskQueue:
     def __init__(self):
         self.queue = []
@@ -23,4 +20,4 @@ class TaskQueue:
 
 
 async def run_controller(controller):
-    await asyncio.run(controller.logic())
+    await controller.logic()
