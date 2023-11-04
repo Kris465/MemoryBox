@@ -1,5 +1,4 @@
 # from database.db_manager import DBManager
-import asyncio
 from loguru import logger
 from parser.parser import Parser
 from reader import read
@@ -12,23 +11,22 @@ class Controller:
         self.title = title
 
     async def logic(self):
-        while True:
-            option = int(input("1. Parse\n2. Translate\n3. Write\n4. Exit\n"))
-            if option == 1:
+        option = int(input("1. Parse\n2. Translate\n3. Write\n4. Exit\n"))
+        match option:
+            case 1:
                 await self.parse()
-            elif option == 2:
+            case 2:
                 await self.translate()
-            elif option == 3:
+            case 3:
                 await self.write()
-            elif option == 4:
-                break
+            case _:
+                return
 
     async def parse(self):
         print(self.title)
         url = input("url: ")
         pars = Parser(title=self.title, project_webpage=url)
         logger.info(f"Parsing / {self.title} / {url}")
-        await asyncio.sleep(20)
         pars.parse()
 
     async def translate(self):
