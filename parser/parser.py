@@ -1,3 +1,4 @@
+import asyncio
 import re
 
 from loguru import logger
@@ -10,11 +11,11 @@ class Parser:
         self.title = title
         self.project_webpage = project_webpage
 
-    def parse(self):
+    async def parse(self):
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.project_webpage)
         logger.info(f"Webpage name is {webpage_name}")
-        library = read("library")
+        library = await asyncio.to_thread(read, "library")
 
         if webpage_name in library:
             strategy_name = library[webpage_name][1]["strategy"]
@@ -33,4 +34,4 @@ class Parser:
                 logger.debug(f"Create strategy for {self.project_webpage}")
                 return
 
-        strategy.logic()
+        await strategy.logic()
