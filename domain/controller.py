@@ -11,6 +11,7 @@ class Controller:
         self.title = title
 
     async def logic(self):
+        print(self.title)
         option = int(input("1. Parse\n2. Translate\n3. Write\n4. Exit\n"))
         match option:
             case 1:
@@ -27,7 +28,7 @@ class Controller:
         url = input("url: ")
         pars = Parser(title=self.title, project_webpage=url)
         logger.info(f"Parsing / {self.title} / {url}")
-        pars.parse()
+        await pars.parse()
 
     async def translate(self):
         print(self.title)
