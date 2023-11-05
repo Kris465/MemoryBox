@@ -1,3 +1,4 @@
+import asyncio
 import re
 from bs4 import BeautifulSoup
 from loguru import logger
@@ -14,7 +15,7 @@ class EnStepper(ParserStrategy):
         self.number = 1
         self.library = read("library.json")
 
-    def logic(self):
+    async def logic(self):
         url = self.webpage
         chapters = {}
         next_link = " "
@@ -24,7 +25,7 @@ class EnStepper(ParserStrategy):
                               self.webpage)
         tag_sets = self.check(webpage_name)
         while next_link and page is not None:
-            page = self.get_webpage(url)
+            page = await asyncio.to_thread(self.get_webpage, url)
             try:
                 text = self.collect_chapter(page, tag_sets[0]["tag"],
                                             tag_sets[0]["extra_tag"])
