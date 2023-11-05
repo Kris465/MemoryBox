@@ -55,7 +55,7 @@ class TRManager():
         while start_chapter <= last_chapter:
             one_chapter = self.one_chapter(title, start_chapter)
             full_chapters.update(one_chapter)
-            time.sleep(random.randint(5, 20))
+            time.sleep(random.randint(10, 30))
             start_chapter += 1
         write(title + "_translation", full_chapters, self.language)
 
