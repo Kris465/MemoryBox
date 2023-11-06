@@ -29,6 +29,7 @@ class Translator:
         TOKEN = json_response['iamToken']
         set_key(".env", "IAM_TOKEN", TOKEN)
         self.key = TOKEN
+        os.environ['IAM_TOKEN'] = TOKEN
 
     def get_data(self, name: str):
         load_dotenv(find_dotenv())

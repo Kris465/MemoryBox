@@ -13,11 +13,7 @@ class TaskQueue:
         self.running = True
 
         while self.queue:
-            task = self.queue.pop(0)
-            await task()
+            controller = self.queue.pop(0)
+            await controller.logic()
 
         self.running = False
-
-
-async def run_controller(controller):
-    await controller.logic()
