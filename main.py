@@ -2,7 +2,7 @@ import asyncio
 from domain.controller import Controller
 from loguru import logger
 
-from domain.task_queue import TaskQueue, run_controller
+from domain.task_queue import TaskQueue
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
 
     for order, title in enumerate(novels):
         controller = Controller(title)
-        queue.add_task(lambda: run_controller(controller))
+        queue.add_task(controller)
         logger.info(f"Task {order} with {title} is created")
 
     asyncio.run(queue.run_tasks())
