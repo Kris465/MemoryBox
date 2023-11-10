@@ -34,7 +34,7 @@ class Controller:
         print(self.title)
         language = input("language: ")
         trans = TRManager(language)
-        trans.tr_from_to(self.title)
+        await trans.tr_from_to(self.title)
         logger.info(f"translating / {self.title} / {language}")
 
     async def write(self):
