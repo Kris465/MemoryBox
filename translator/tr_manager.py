@@ -1,6 +1,3 @@
-import random
-import time
-
 from loguru import logger
 from reader import read
 from translator.translator_class import Translator
@@ -8,12 +5,12 @@ from write_to_json import write
 from writer_to_txt import write_txt
 
 
-class TRManager():
+class TRManager:
 
     def __init__(self, language):
         self.language = language
 
-    def one_chapter(self, title, chapter=0):
+    async def one_chapter(self, title, chapter=0):
         project = read(title)
         text = project[str(chapter).strip()]
         write_txt(chapter, text)
@@ -34,7 +31,7 @@ class TRManager():
         translator = Translator()
         for string in substrings:
             tr_txt = ""
-            part = translator.translate(string, self.language)
+            part = await translator.translate(string, self.language)
             if part is not None:
                 write_txt(chapter, part)
                 tr_txt += part
@@ -48,14 +45,13 @@ class TRManager():
                                                trans[:30], trans[-30:]))
         return {chapter: [{"origin": text}, {"translation": tr_txt}]}
 
-    def tr_from_to(self, title):
+    async def tr_from_to(self, title):
         start_chapter = int(input("From: "))
         last_chapter = int(input("To: "))
         full_chapters = {}
         while start_chapter <= last_chapter:
-            one_chapter = self.one_chapter(title, start_chapter)
+            one_chapter = await self.one_chapter(title, start_chapter)
             full_chapters.update(one_chapter)
-            time.sleep(random.randint(5, 10))
             start_chapter += 1
         write(title + "_translation", full_chapters, self.language)
 

@@ -3,6 +3,7 @@ import random
 import re
 import aiohttp
 from bs4 import BeautifulSoup
+from loguru import logger
 from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
 
@@ -19,10 +20,8 @@ class ChiShuka(ParserStrategy):
         print(links)
         chapters = {}
         for k, v in links.items():
-            print(k, v)
             text = await self.collect_chapter(v)
             chapter = {k: v + text}
-            print(chapter)
             chapters.update(chapter)
         write(self.title, chapters, language="zh")
 
@@ -31,6 +30,7 @@ class ChiShuka(ParserStrategy):
             async with session.get(url) as response:
                 page = BeautifulSoup(await response.text(), 'html.parser')
                 chapter = page.find("article", class_="article-content").text
+                logger.info(f"text is collected {chapter[30:]}")
                 return chapter
 
     async def collect_links(self, soup):
@@ -45,6 +45,7 @@ class ChiShuka(ParserStrategy):
             except AttributeError:
                 continue
 
+        logger.info(f"{links}")
         return links
 
     async def get_webpage(self, url):

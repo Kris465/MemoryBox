@@ -8,7 +8,7 @@ class Translator:
     def __init__(self):
         self.key = self.get_data("IAM_TOKEN")
 
-    def get_key(self):
+    async def get_key(self):
         load_dotenv(find_dotenv())
         OAuth_token = os.environ.get('AOuth_token')
 
@@ -35,7 +35,7 @@ class Translator:
         load_dotenv(find_dotenv())
         return os.environ.get(name)
 
-    def translate(self, text, sourse_language):
+    async def translate(self, text, sourse_language):
         IAM_TOKEN = self.key
         folder_id = self.get_data('folder_id')
         target_language = 'ru'
@@ -65,6 +65,5 @@ class Translator:
             translation = lst[0]
             return translation['text']
         else:
-            self.get_key()
+            await self.get_key()
             logger.info("New IAM_TOKEN is asked and set")
-            return
