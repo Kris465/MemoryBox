@@ -1,1 +1,192 @@
-{"wuxiap.com": [{"tag": "div", "extra_tag": "chapter-content", "word": "next"}, {"strategy": "EnStepper"}], "vmnovels.com": [{"tag": "div", "extra_tag": "entry-content", "word": "next"}, {"strategy": "EnStepper"}], "mysticalmerries.com": [{"tag": "div", "extra_tag": "entry-content", "word": "next"}, {"strategy": "EnStepper"}], "sleepytranslations.com": [{"tag": "div", "extra_tag": "entry-content", "word": "next"}, {"strategy": "EnStepper"}], "salmonlatte.com": [{"tag": "div", "extra_tag": "entry-content", "word": "next"}, {"strategy": "EnStepper"}], "novelbin.org": [{"tag": "div", "extra_tag": "chr-c", "word": "next chapter"}, {"strategy": "EnStepper"}], "akknovel.com": [{"tag": "article", "extra_tag": "article", "word": "next"}, {"strategy": "EnStepper"}], "tnovelodyssey.blogspot.com": [{"tag": "div", "extra_tag": "post-body post-content", "word": "nothing"}, {"strategy": "EnStepper"}], "rainofsnow.com": [{"tag": "div", "extra_tag": "zoomdesc-cont", "word": "next"}, {"strategy": "EnStepper"}], "www.wfxs.com.tw": [{"tag": "", "extra_tag": "", "word": ""}, {"strategy": "Wfxs"}], "m.zhuishukan.com": [{"tag": "", "extra_tag": "", "word": ""}, {"strategy": "Zhuishukan"}], "www.52shuku.vip": [{"tag": "", "extra_tag": "", "word": ""}, {"strategy": "ChiShuka"}], "256wx.net": [{"tag": "", "extra_tag": "", "word": ""}, {"strategy": "Wx256"}], "www.82zg.com": [{"tag": "", "extra_tag": "", "word": ""}, {"strategy": "Zg"}], "knoxt.space": [{"tag": "div", "extra_tag": "epcontent entry-content", "word": "next"}, {"strategy": "EnStepper"}], "secondlifetranslations.com": [{"tag": "div", "extra_tag": "entry-content clr", "word": "next"}, {"strategy": "EnStepper"}]}
+{
+    "wuxiap.com": [
+        {
+            "tag": "div",
+            "extra_tag": "chapter-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "vmnovels.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "mysticalmerries.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "sleepytranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "salmonlatte.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "novelbin.org": [
+        {
+            "tag": "div",
+            "extra_tag": "chr-c",
+            "word": "next chapter"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "akknovel.com": [
+        {
+            "tag": "article",
+            "extra_tag": "article",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "tnovelodyssey.blogspot.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-body post-content",
+            "word": "nothing"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "rainofsnow.com": [
+        {
+            "tag": "div",
+            "extra_tag": "zoomdesc-cont",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "www.wfxs.com.tw": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "Wfxs"
+        }
+    ],
+    "m.zhuishukan.com": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "Zhuishukan"
+        }
+    ],
+    "www.52shuku.vip": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "ChiShuka"
+        }
+    ],
+    "256wx.net": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "Wx256"
+        }
+    ],
+    "www.82zg.com": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "Zg"
+        }
+    ],
+    "knoxt.space": [
+        {
+            "tag": "div",
+            "extra_tag": "epcontent entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "secondlifetranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content clr",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "fourseasonsforest.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "NEXT"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "mesmerizingmemoirs.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "hadese.io": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ]
+}
