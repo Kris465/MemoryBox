@@ -1,6 +1,9 @@
+import asyncio
+import random
+import re
+import aiohttp
 from bs4 import BeautifulSoup
 from loguru import logger
-import requests
 from write_to_json import write
 
 
@@ -20,26 +23,35 @@ class ParserStrategy():
             chapters.update(chapter)
         write(self.title, chapters, language="zh")
 
-    async def collect_chapter(self):
-        pass
+    async def collect_chapter(self, url):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                page = BeautifulSoup(await response.text(), 'html.parser')
+                chapter = page.find("article", class_="article-content").text
+                logger.info(f"text is collected {chapter[30:]}")
+                return chapter
 
-    async def collect_links(self):
-        pass
+    async def collect_links(self, soup):
+        links = {}
+        raw_links = soup.find(
+            "entry-content").find_all("a")
+        for link in raw_links:
+            href = link.get('href')
+            try:
+                number = re.search(r'(\d+)\.html', href).group(1)
+                links.update({int(number) - 1: href})
+            except AttributeError:
+                continue
 
-    async def get_next_link(self):
-        pass
+        logger.info(f"{links}")
+        return links
 
     async def get_webpage(self, url):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
                                 AppleWebKit/537.36 (KHTML, like Gecko)\
                                 Chrome/111.0.0.0 Safari/537.36'}
-        response = requests.get(url, headers=headers)
-        logger.info(f"{self.title} / {url} / {response.status_code}")
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'lxml')
-            return soup
-        else:
-            return
-
-    async def check(self):
-        pass
+        await asyncio.sleep(random.randint(10, 40))
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers) as response:
+                page = BeautifulSoup(await response.text(), 'html.parser')
+                return page
