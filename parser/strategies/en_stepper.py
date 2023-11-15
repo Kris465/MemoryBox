@@ -58,6 +58,7 @@ class EnStepper(ParserStrategy):
     def get_next_link(self, page, word, webpage_name):
         links = page.find_all("a")
         for link in links:
+            # if word in link.text:
             if word in link.text.lower() and link["href"] != "#":
                 try:
                     if webpage_name in link["href"]:
