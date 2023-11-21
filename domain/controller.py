@@ -7,8 +7,8 @@ from writer_to_txt import write_txt
 
 
 class Controller:
-    def __init__(self, title):
-        self.title = title
+    def __init__(self, tasks):
+        self.tasks = tasks
 
     async def logic(self):
         print(self.title)
