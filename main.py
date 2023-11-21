@@ -1,8 +1,6 @@
-import asyncio
 from domain.controller import Controller
 from loguru import logger
-
-from domain.task_queue import TaskQueue
+from user.user_menu import UserMenu
 
 
 def main():
@@ -11,19 +9,14 @@ def main():
                rotation="3 days",
                backtrace=True, diagnose=True)
 
-    queue = TaskQueue()
-    logger.info(f"Queue object is created / {queue.__class__.__name__}")
+    user_menu = UserMenu()
+    tasks = user_menu.collect_user_input()
+    logger.info(f"Pack of tasks is created: \n"
+                f"{[print(task) for task in tasks]}")
 
-    print("Novels:")
-    novels = list(map(str.strip, iter(input, '')))
-
-    for order, title in enumerate(novels):
-        controller = Controller(title)
-        queue.add_task(controller)
-        logger.info(f"Task {order} with {title} is created")
-
-    asyncio.run(queue.run_tasks())
+    controller = Controller(tasks)
+    controller.logic()
 
 
-if __name__ == '__main__':
+if __name__ == 'main':
     main()

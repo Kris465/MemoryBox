@@ -1,13 +1,13 @@
 import asyncio
 import random
-import re
 import aiohttp
 from bs4 import BeautifulSoup
 from loguru import logger
+from parser.abstract_strategy import ParserStrategy
 from write_to_json import write
 
 
-class ParserStrategy():
+class EnCollector(ParserStrategy):
     def __init__(self, title, webpage) -> None:
         self.title = title
         self.webpage = webpage
@@ -36,11 +36,10 @@ class ParserStrategy():
         raw_links = soup.find(
             "entry-content").find_all("a")
         for link in raw_links:
-            href = link.get('href')
-            try:
-                number = re.search(r'(\d+)\.html', href).group(1)
-                links.update({int(number) - 1: href})
-            except AttributeError:
+            if "Continue reading " in link.text:
+                href = link.get('href')
+                links.update({link.find('span').text: href})
+            else:
                 continue
 
         logger.info(f"{links}")
