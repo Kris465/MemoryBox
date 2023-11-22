@@ -39,12 +39,14 @@ class Controller:
         logger.info(f"Text saved as {file_type}")
 
     async def execute_task(self, task: Task) -> None:
-        if task.option == 1:
-            await self.parse(task.title, task.url)
-        elif task.option == 2:
-            await self.translate(task.title, task.language, task.config)
-        elif task.option == 3:
-            await self.save(task.title, task.file_type)
+        if task.action == 1:
+            await self.parse(task.title, url=task.extra)
+        elif task.action == 2:
+            await self.translate(task.title,
+                                 language=task.extra,
+                                 config=task.config)
+        elif task.action == 3:
+            await self.save(task.title, file_type=task.extra)
 
     async def run(self) -> None:
         tasks = [self.execute_task(task) for task in self.tasks]

@@ -17,7 +17,6 @@ class ChiShuka(ParserStrategy):
     async def logic(self):
         soup = await self.get_webpage(self.project_webpage)
         links = await self.collect_links(soup)
-        print(links)
         chapters = {}
         for k, v in links.items():
             text = await self.collect_chapter(v)
