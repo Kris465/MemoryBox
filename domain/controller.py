@@ -1,5 +1,8 @@
-# from database.db_manager import DBManager
+import asyncio
+from typing import List
+
 from loguru import logger
+from domain.task import Task
 from parser.parser import Parser
 from reader import read
 from translator.tr_manager import TRManager
@@ -7,41 +10,42 @@ from writer_to_txt import write_txt
 
 
 class Controller:
-    def __init__(self, tasks):
+    def __init__(self, tasks: List[Task]) -> None:
         self.tasks = tasks
 
-    async def logic(self):
-        print(self.title)
-        option = int(input("1. Parse\n2. Translate\n3. Write\n4. Exit\n"))
-        match option:
-            case 1:
-                await self.parse()
-            case 2:
-                await self.translate()
-            case 3:
-                await self.write()
-            case _:
-                return
-
-    async def parse(self):
-        print(self.title)
-        url = input("url: ")
-        pars = Parser(title=self.title, project_webpage=url)
-        logger.info(f"Parsing / {self.title} / {url}")
+    async def parse(self, title: str, url: str) -> None:
+        pars = Parser(title, url)
         await pars.parse()
+        await asyncio.sleep(5)
+        logger.info(f"Parsing {title} / {url} completed")
 
-    async def translate(self):
-        print(self.title)
-        language = input("language: ")
-        trans = TRManager(language)
-        await trans.tr_from_to(self.title)
-        logger.info(f"translating / {self.title} / {language}")
+    async def translate(self, title: str, language: str, config: int) -> None:
+        # видоизменить классы переводчика и переписать метод translate()
+        trans = TRManager(language, config)
+        await trans.translate(title)
+        await asyncio.sleep(3)
+        logger.info(f"Translation to {language} / {title} completed")
 
-    async def write(self):
-        project = read(self.title + "_translation")
+    async def save(self, title: str, file_type: int) -> None:
+        # обратить внимание на запись в файл в классе переводчика
+        project = read(title + "_translation")
         translated_text = ''
         for chapter in project.values():
             for text in chapter:
                 translated_text += text.get("translation", '')
-        write_txt(self.title, translated_text)
-        logger.info(f"{self.title} has written to file")
+        write_txt(title, translated_text)
+        logger.info(f"{title} has written to file")
+        await asyncio.sleep(2)
+        logger.info(f"Text saved as {file_type}")
+
+    async def execute_task(self, task: Task) -> None:
+        if task.option == 1:
+            await self.parse(task.title, task.url)
+        elif task.option == 2:
+            await self.translate(task.title, task.language, task.config)
+        elif task.option == 3:
+            await self.save(task.title, task.file_type)
+
+    async def run(self) -> None:
+        tasks = [self.execute_task(task) for task in self.tasks]
+        await asyncio.gather(*tasks)

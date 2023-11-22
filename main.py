@@ -15,7 +15,7 @@ def main():
                 f"{[print(task) for task in tasks]}")
 
     controller = Controller(tasks)
-    controller.logic()
+    controller.run()
 
 
 if __name__ == 'main':
