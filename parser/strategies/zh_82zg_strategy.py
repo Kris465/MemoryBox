@@ -3,8 +3,8 @@ import random
 import re
 import aiohttp
 from bs4 import BeautifulSoup
+from domain.file_tools import write
 from parser.abstract_strategy import ParserStrategy
-from write_to_json import write
 
 
 class Zg(ParserStrategy):
@@ -15,7 +15,7 @@ class Zg(ParserStrategy):
 
     async def logic(self):
         links = await self.collect_links()
-        write(self.title, links, "zh")
+        await write(self.title, links, "zh")
         chapters = {}
         for chapter, link in links.items():
             await asyncio.sleep(random.randint(10, 30))
@@ -25,7 +25,7 @@ class Zg(ParserStrategy):
                        chapter + "/n" + link + text}
             chapters.update(chapter)
 
-        write(self.title, chapters, "zh")
+        await write(self.title, chapters, "zh")
 
     async def collect_chapter(self, url):
         async with aiohttp.ClientSession() as session:
@@ -37,8 +37,10 @@ class Zg(ParserStrategy):
     async def collect_links(self):
         async with aiohttp.ClientSession() as session:
             async with session.get(self.project_webpage) as response:
-                page = BeautifulSoup(await response.text(), 'html.parser')
-                links = {link.text: 'https://www.82zg.com' + link.get("href")
+                response_text = await response.text()
+                page = BeautifulSoup(response_text, 'html.parser')
+                links = {link.text:
+                         'https://www.82zg.com' + link.get("href")
                          for link in page.find('div', id='list').find_all("a")}
                 return links
 

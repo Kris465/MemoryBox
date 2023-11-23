@@ -2,11 +2,10 @@ import asyncio
 from typing import List
 
 from loguru import logger
+from domain.file_tools import read, write_txt
 from domain.task import Task
 from parser.parser import Parser
-from reader import read
 from translator.tr_manager import TRManager
-from writer_to_txt import write_txt
 
 
 class Controller:
@@ -28,12 +27,12 @@ class Controller:
 
     async def save(self, title: str, file_type: int) -> None:
         # обратить внимание на запись в файл в классе переводчика
-        project = read(title + "_translation")
+        project = await read(title + "_translation")
         translated_text = ''
         for chapter in project.values():
             for text in chapter:
                 translated_text += text.get("translation", '')
-        write_txt(title, translated_text)
+        await write_txt(title, translated_text)
         logger.info(f"{title} has written to file")
         await asyncio.sleep(2)
         logger.info(f"Text saved as {file_type}")

@@ -1,8 +1,8 @@
-import asyncio
 import re
 
 from loguru import logger
-from reader import read
+
+from domain.file_tools import read
 from .strategies import strategy_class
 
 
@@ -15,7 +15,7 @@ class Parser:
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.project_webpage)
         logger.info(f"Webpage name is {webpage_name}")
-        library = await asyncio.to_thread(read, "library")
+        library = await read("library")
 
         if webpage_name in library:
             strategy_name = library[webpage_name][1]["strategy"]

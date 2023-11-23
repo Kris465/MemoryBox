@@ -4,8 +4,8 @@ import re
 import aiohttp
 from bs4 import BeautifulSoup
 from loguru import logger
+from domain.file_tools import write
 from parser.abstract_strategy import ParserStrategy
-from write_to_json import write
 
 
 class ChiShuka(ParserStrategy):
@@ -19,18 +19,20 @@ class ChiShuka(ParserStrategy):
         links = await self.collect_links(soup)
         chapters = {}
         for k, v in links.items():
-            text = await self.collect_chapter(v)
+            temp_soup = await self.get_webpage(v)
+            text = await self.collect_chapter(temp_soup)
             chapter = {k: v + text}
             chapters.update(chapter)
-        write(self.title, chapters, language="zh")
+        await write(self.title, chapters, language="zh")
 
-    async def collect_chapter(self, url):
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                page = BeautifulSoup(await response.text(), 'html.parser')
-                chapter = page.find("article", class_="article-content").text
-                logger.info(f"text is collected {chapter[30:]}")
-                return chapter
+    async def collect_chapter(self, soup):
+        try:
+            chapter = soup.find("article", class_="article-content").text
+            logger.info(f"text is collected {chapter[10:]}")
+        except AttributeError:
+            chapter = " "
+            logger.error("Page doesn't have text")
+        return chapter
 
     async def collect_links(self, soup):
         links = {}
@@ -49,10 +51,13 @@ class ChiShuka(ParserStrategy):
 
     async def get_webpage(self, url):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
-                                AppleWebKit/537.36 (KHTML, like Gecko)\
-                                Chrome/111.0.0.0 Safari/537.36'}
+                            AppleWebKit/537.36 (KHTML, like Gecko)\
+                            Chrome/111.0.0.0 Safari/537.36'}
         await asyncio.sleep(random.randint(10, 40))
         async with aiohttp.ClientSession() as session:
             async with session.get(url, headers=headers) as response:
-                page = BeautifulSoup(await response.text(), 'html.parser')
-                return page
+                page = await response.text()
+                encoding = response.charset or 'utf-8'
+                soup = BeautifulSoup(page, 'html.parser',
+                                     from_encoding=encoding)
+                return soup

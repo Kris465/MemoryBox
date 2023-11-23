@@ -1,5 +1,7 @@
-class ParserStrategy():
+from parser.abstract_strategy import ParserStrategy
 
+
+class ZhSeleniumCollector(ParserStrategy):
     async def logic(self):
         pass
 
