@@ -188,5 +188,15 @@
         {
             "strategy": "EnStepper"
         }
+    ],
+    "147xiaoshuo.com": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "XiaoShuo"
+        }
     ]
 }
