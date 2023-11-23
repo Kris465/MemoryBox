@@ -1,5 +1,5 @@
 from parser.strategies.en_collector_ import EnCollector
-from parser.strategies.zh_sel_collector import ZhSeleniumCollector
+from parser.strategies.zh_xiaoshuo import XiaoShuo
 from .en_stepper import EnStepper
 from .wfxs_strategy_ import Wfxs
 from .wx256_strategy import Wx256
@@ -14,7 +14,7 @@ def strategy_class(class_name, *args, **kwargs):
         'Wx256': Wx256,
         'Zg': Zg,
         'ChiShuka': ChiShuka,
-        'ZhSeleniumCollector': ZhSeleniumCollector,
+        'XiaoShuo': XiaoShuo,
         'EnCollector': EnCollector
     }
     cls = classes[class_name]
