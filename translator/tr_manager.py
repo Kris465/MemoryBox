@@ -1,8 +1,7 @@
+import asyncio
 from loguru import logger
-from reader import read
+from domain.file_tools import read, write, write_txt
 from translator.translator_class import Translator
-from write_to_json import write
-from writer_to_txt import write_txt
 
 
 class TRManager:
@@ -11,9 +10,9 @@ class TRManager:
         self.language = language
 
     async def one_chapter(self, title, chapter=0):
-        project = read(title)
+        project = await asyncio.to_thread(read, f"{title}")
         text = project[str(chapter).strip()]
-        write_txt(chapter, text)
+        await write_txt(chapter, text)
         max_length = 10000
         substrings = []
         sign = self.get_sign(self.language)
@@ -53,7 +52,7 @@ class TRManager:
             one_chapter = await self.one_chapter(title, start_chapter)
             full_chapters.update(one_chapter)
             start_chapter += 1
-        write(title + "_translation", full_chapters, self.language)
+        await write(title + "_translation", full_chapters, self.language)
 
     def get_sign(self, language):
         match language:

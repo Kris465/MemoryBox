@@ -2,9 +2,8 @@ import asyncio
 from bs4 import BeautifulSoup
 from loguru import logger
 import requests
+from domain.file_tools import read, write
 from parser.abstract_strategy import ParserStrategy
-from reader import read
-from write_to_json import write
 
 
 class Wfxs(ParserStrategy):
@@ -33,7 +32,7 @@ class Wfxs(ParserStrategy):
                 url = next_link
             temp_dict = {k: text}
             chapters.update(temp_dict)
-        write(self.title, chapters, language="zh")
+        await write(self.title, chapters, language="zh")
 
     def collect_chapter(self, soup):
         chapter = soup.find("div", class_="readcontent")

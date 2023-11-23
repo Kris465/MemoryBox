@@ -7,8 +7,7 @@ from domain.file_tools import write
 from parser.abstract_strategy import ParserStrategy
 
 
-class Zg(ParserStrategy):
-    # https://www.82zg.com/book/25485/
+class XiaoShuo(ParserStrategy):
     def __init__(self, title, project_webpage):
         self.title = title
         self.project_webpage = project_webpage
@@ -30,6 +29,7 @@ class Zg(ParserStrategy):
     async def collect_chapter(self, url):
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
+                response.encoding = response.apparent_encoding
                 page = BeautifulSoup(await response.text(), 'html.parser')
                 text = page.find("div", id="content").text
                 return text
@@ -40,7 +40,7 @@ class Zg(ParserStrategy):
                 response_text = await response.text()
                 page = BeautifulSoup(response_text, 'html.parser')
                 links = {link.text:
-                         'https://www.82zg.com' + link.get("href")
+                         'https://www.147xiaoshuo.com/' + link.get("href")
                          for link in page.find('div', id='list').find_all("a")}
                 return links
 

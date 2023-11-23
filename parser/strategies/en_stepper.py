@@ -3,9 +3,8 @@ import re
 from bs4 import BeautifulSoup
 from loguru import logger
 import requests
+from domain.file_tools import read, write
 from parser.abstract_strategy import ParserStrategy
-from reader import read
-from write_to_json import write
 
 
 class EnStepper(ParserStrategy):
@@ -13,14 +12,14 @@ class EnStepper(ParserStrategy):
         self.title = title
         self.webpage = webpage
         self.number = 1
-        self.library = read("library.json")
+        self.library = {}
 
     async def logic(self):
+        self.library = await read("library.json")
         url = self.webpage
         chapters = {}
         next_link = " "
         page = " "
-        self.number = int(input("chapter: "))
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.webpage)
         tag_sets = self.check(webpage_name)
@@ -41,7 +40,7 @@ class EnStepper(ParserStrategy):
             except AttributeError:
                 logger.warning("AttributeError")
                 break
-        write(self.title, chapters)
+        await write(self.title, chapters)
 
     def collect_chapter(self, page, tag, extra_tag):
         try:

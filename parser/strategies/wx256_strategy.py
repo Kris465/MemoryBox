@@ -2,8 +2,8 @@ import re
 import aiohttp
 from bs4 import BeautifulSoup
 from loguru import logger
+from domain.file_tools import write
 from parser.abstract_strategy import ParserStrategy
-from write_to_json import write
 
 
 class Wx256(ParserStrategy):
@@ -21,7 +21,7 @@ class Wx256(ParserStrategy):
             self.number += 1
             chapters.update(chapter)
 
-        write(self.title, chapters, "zh")
+        await write(self.title, chapters, "zh")
 
     async def collect_chapter(self, url):
         async with aiohttp.ClientSession() as session:

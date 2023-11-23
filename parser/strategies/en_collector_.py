@@ -3,8 +3,8 @@ import random
 import aiohttp
 from bs4 import BeautifulSoup
 from loguru import logger
+from domain.file_tools import write
 from parser.abstract_strategy import ParserStrategy
-from write_to_json import write
 
 
 class EnCollector(ParserStrategy):
@@ -21,7 +21,7 @@ class EnCollector(ParserStrategy):
             text = await self.collect_chapter(v)
             chapter = {k: v + text}
             chapters.update(chapter)
-        write(self.title, chapters, language="zh")
+        await write(self.title, chapters, language="zh")
 
     async def collect_chapter(self, url):
         async with aiohttp.ClientSession() as session:
