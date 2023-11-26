@@ -28,7 +28,7 @@ class ChiShuka(ParserStrategy):
     async def collect_chapter(self, soup):
         try:
             chapter = soup.find("article", class_="article-content").text
-            logger.info(f"text is collected {chapter[10:]}")
+            logger.info(f"text is collected {chapter[:10]}")
         except AttributeError:
             chapter = " "
             logger.error("Page doesn't have text")
@@ -53,7 +53,7 @@ class ChiShuka(ParserStrategy):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
                             AppleWebKit/537.36 (KHTML, like Gecko)\
                             Chrome/111.0.0.0 Safari/537.36'}
-        await asyncio.sleep(random.randint(10, 40))
+        await asyncio.sleep(random.randint(5, 15))
         async with aiohttp.ClientSession() as session:
             async with session.get(url, headers=headers) as response:
                 page = await response.text()

@@ -32,7 +32,7 @@ class XiaoShuo(ParserStrategy):
                 except Exception:
                     if self.browser:
                         self.browser.quit()
-                        await asyncio.sleep(random.randint(360, 600))
+                        await asyncio.sleep(random.randint(10, 360))
                         self.browser = webdriver.Chrome()
                         self.browser.set_window_size(1920, 1080)
 
@@ -43,7 +43,7 @@ class XiaoShuo(ParserStrategy):
 
     async def collect_chapter(self, soup):
         chapter = soup.find("div", id="content").text
-        logger.info(f"Text is collected {chapter[10:]}")
+        logger.info(f"Text is collected {chapter[:10]}")
         return chapter
 
     async def collect_links(self, soup):
@@ -64,11 +64,13 @@ class XiaoShuo(ParserStrategy):
 class WebPageGetter:
     def __init__(self):
         service = Service(ChromeDriverManager().install())
-        self.browser = webdriver.Chrome(service=service)
+        options = webdriver.ChromeOptions()
+        options.add_argument('ignore-certificate-errors')
+        self.browser = webdriver.Chrome(options=options, service=service)
 
     async def get_webpage(self, url):
         self.browser.get(url)
-        await asyncio.sleep(random.randint(10, 360))
+        await asyncio.sleep(random.randint(15, 120))
         html = self.browser.page_source
         soup = BeautifulSoup(html, 'html.parser')
         return soup
