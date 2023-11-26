@@ -13,8 +13,10 @@ class UserMenu:
         while task is not None and option != 4:
             title = input("Title: \n")
             option = int(input("1.Parse\n2.Translate\n3.Save\n4.Exit\n"))
-            task = self.create_task(title, option)
-            if task is not None:
+            if option == 4 or title == "":
+                break
+            else:
+                task = self.create_task(title, option)
                 self.tasks.append(task)
         return self.tasks
 
@@ -31,7 +33,9 @@ class UserMenu:
                 return task
             case 2:
                 language = input("language: ")
-                config = int(input("1.All\n2.From\n3.From-To\n"))
+                print("Input config data in spaces\n"
+                      "1.All\n2.From\n3.From-To\n")
+                config = [int(num) for num in input().split()]
                 task = Task(title, option, language, config)
                 logger.info(f"task is created: {title} / translate /"
                             f"{language} / {config}")
@@ -39,7 +43,6 @@ class UserMenu:
             case 3:
                 file_type = int(input("1.For chapters\n2.In one file\n"))
                 task = Task(title, option, file_type)
-                self.tasks.append(task)
                 logger.info(f"task is created: {title} / save /"
                             f"{file_type}")
                 return task
