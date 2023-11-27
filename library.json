@@ -198,5 +198,15 @@
         {
             "strategy": "XiaoShuo"
         }
+    ],
+    "that1villainess.com": [
+        {
+            "tag": "",
+            "extra_tag": "",
+            "word": ""
+        },
+        {
+            "strategy": "EnCollector"
+        }
     ]
 }

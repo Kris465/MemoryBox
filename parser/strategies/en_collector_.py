@@ -36,13 +36,13 @@ class EnCollector(ParserStrategy):
         raw_links = soup.find(
             "entry-content").find_all("a")
         for link in raw_links:
-            if "Continue reading " in link.text:
+            if "Continue reading" in link.text:
                 href = link.get('href')
                 links.update({link.find('span').text: href})
             else:
                 continue
 
-        logger.info(f"{links}")
+        logger.info(f"For {self.title} collected {links}")
         return links
 
     async def get_webpage(self, url):

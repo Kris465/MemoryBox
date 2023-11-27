@@ -30,17 +30,40 @@ class Controller:
         except Exception as e:
             logger.error(f"Error while translating {title} to {language}: {e}")
 
-    async def save(self, title: str, file_type: str) -> None:
-        # обратить внимание на запись в файл в классе переводчика
-        project = await read(title + "_translation")
-        translated_text = ''
-        for chapter in project.values():
-            for text in chapter:
-                translated_text += text.get("translation", '')
-        await write_txt(title, translated_text)
-        logger.info(f"{title} has written to file")
-        await asyncio.sleep(2)
-        logger.info(f"Text saved as {file_type}")
+    async def save(self, title: str, language: str,
+                   config_for_writing: int) -> None:
+        text = ''
+        try:
+            project = await read(title + "_translation")
+            flag = True
+        except ValueError:
+            project = await read(title)
+            flag = False
+
+        match config_for_writing:
+            case 1:
+                if flag:
+                    for chapter, data in project.items():
+                        text += chapter + '\n'.join(
+                            str(value) for dictionary in data
+                            for value in dictionary.values())
+                else:
+                    for k, v in project.items():
+                        text += k + "\n" + v + "\n"
+
+                await write_txt(title, text)
+            case 2:
+                for chapter, data in project.items():
+                    if flag:
+                        text = '\n'.join(str(value) for dictionary in data
+                                         for value in dictionary.values())
+                    else:
+                        text += chapter + "\n" + data + "\n"
+
+                    await write_txt(chapter + title, text)
+            case 3:
+                # database
+                pass
 
     async def execute_task(self, task: Task) -> None:
         if task.action == 1:
@@ -50,8 +73,9 @@ class Controller:
                                  language=task.extra,
                                  config=task.config)
         elif task.action == 3:
-            await self.save(task.title, file_type=task.extra)
+            await self.save(task.title, language=task.extra,
+                            config_for_writing=task.config)
 
     async def run(self) -> None:
         tasks = [self.execute_task(task) for task in self.tasks]
-        await asyncio.gather(*tasks)
+        await asyncio.gather(*tasks)  # !!!

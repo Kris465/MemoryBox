@@ -17,12 +17,15 @@ class TrManager:
         self.option = option
 
     async def translate(self):
-        func = int(self.option[0])
+        func = self.option[0]
         if func == 1:
+            logger.info(f"translate all / {self.title} / {self.language}")
             await self.translate_all()
         elif func == 2:
+            logger.info(f"translate from / {self.title} / {self.language}")
             await self.translate_from()
         elif func == 3:
+            logger.info(f"translate from-to / {self.title} / {self.language}")
             await self.translate_from_to()
 
     async def translate_all(self):
@@ -33,32 +36,37 @@ class TrManager:
             tr_txt = await self.translate_text(text)
             full_chapters[chapter] = [{"origin": text},
                                       {"translation": tr_txt}]
+            logger.info(f"{self.title} / {chapter} is translated")
         await write(self.title + "_translation", full_chapters, self.language)
+        logger.info(f"json file with translation for {self.title} is written")
 
     async def translate_from(self):
         start_chapter = self.option[1]
         full_chapters = {}
         project = await read(self.title)
         for chapter in project:
-            if chapter >= str(start_chapter):
+            if int(chapter) >= start_chapter:
                 text = project[chapter]
                 tr_txt = await self.translate_text(text)
                 full_chapters[chapter] = [{"origin": text},
                                           {"translation": tr_txt}]
+                logger.info(f"{self.title} / {chapter} is translated")
         await write(self.title + "_translation", full_chapters, self.language)
+        logger.info(f"json file with translation for {self.title} is written")
 
     async def translate_from_to(self):
         start_chapter = self.option[1]
         last_chapter = self.option[2]
         full_chapters = {}
         project = await read(self.title)
-        for chapter in project:
-            if str(start_chapter) <= chapter <= str(last_chapter):
-                text = project[chapter]
+        for chapter, text in project.items():
+            if start_chapter <= int(chapter) <= last_chapter:
                 tr_txt = await self.translate_text(text)
                 full_chapters[chapter] = [{"origin": text},
                                           {"translation": tr_txt}]
+                logger.info(f"{self.title} / {chapter} is translated")
         await write(self.title + "_translation", full_chapters, self.language)
+        logger.info(f"json file with translation for {self.title} is written")
 
     async def translate_text(self, text):
         max_length = 10000
