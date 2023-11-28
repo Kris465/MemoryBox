@@ -12,9 +12,9 @@ class Controller:
     def __init__(self, tasks: List[Task]) -> None:
         self.tasks = tasks
 
-    async def parse(self, title: str, url: str) -> None:
+    async def parse(self, title: str, url: str, chapter: int) -> None:
         try:
-            pars = Parser(title, url)
+            pars = Parser(title, url, chapter)
             await pars.parse()
             await asyncio.sleep(5)
             logger.info(f"Parsing {title} / {url} completed")
@@ -67,7 +67,7 @@ class Controller:
 
     async def execute_task(self, task: Task) -> None:
         if task.action == 1:
-            await self.parse(task.title, url=task.extra)
+            await self.parse(task.title, url=task.extra, chapter=task.config)
         elif task.action == 2:
             await self.translate(task.title,
                                  language=task.extra,

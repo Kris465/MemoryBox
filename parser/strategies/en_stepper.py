@@ -8,10 +8,10 @@ from parser.abstract_strategy import ParserStrategy
 
 
 class EnStepper(ParserStrategy):
-    def __init__(self, title, webpage):
+    def __init__(self, title, webpage, number):
         self.title = title
         self.webpage = webpage
-        self.number = 1
+        self.number = number
         self.library = {}
 
     async def logic(self):
