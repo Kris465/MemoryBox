@@ -201,8 +201,8 @@
     ],
     "that1villainess.com": [
         {
-            "tag": "",
-            "extra_tag": "",
+            "tag": "div",
+            "extra_tag": "entry-content",
             "word": ""
         },
         {
