@@ -34,17 +34,20 @@ class UserMenu:
             case 2:
                 language = input("language: ")
                 print("Input config data in spaces\n"
-                      "1.All\n2.From\n3.From-To\n")
+                      "1.All\n2.From\n3.From-To")
                 config = [int(num) for num in input().split()]
                 task = Task(title, option, language, config)
                 logger.info(f"task is created: {title} / translate /"
                             f"{language} / {config}")
                 return task
             case 3:
-                file_type = int(input("1.For chapters\n2.In one file\n"))
-                task = Task(title, option, file_type)
+                language = input("Language: \n")
+                config_for_writing = int(input("1.in-one-file\n"
+                                               "2.for-chapters\n"
+                                               "3.database\n"))
+                task = Task(title, option, language, config_for_writing)
                 logger.info(f"task is created: {title} / save /"
-                            f"{file_type}")
+                            f"{config_for_writing}")
                 return task
             case 4:
                 return

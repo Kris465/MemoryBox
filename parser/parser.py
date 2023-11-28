@@ -7,9 +7,10 @@ from .strategies import strategy_class
 
 
 class Parser:
-    def __init__(self, title: str, project_webpage: str):
+    def __init__(self, title: str, project_webpage: str, chapter: int):
         self.title = title
         self.project_webpage = project_webpage
+        self.chapter = chapter
 
     async def parse(self):
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
@@ -22,7 +23,8 @@ class Parser:
             logger.info(f"{self.project_webpage} / {strategy_name}")
             strategy = strategy_class(strategy_name,
                                       self.title,
-                                      self.project_webpage)
+                                      self.project_webpage,
+                                      self.chapter)
             logger.info(f"Object {strategy.__class__.__name__} is created")
         else:
             strategy_name = input("Strategy?\n")
