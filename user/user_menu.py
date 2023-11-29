@@ -1,10 +1,13 @@
+import re
 from loguru import logger
+from domain.file_tools import read
 from domain.task import Task
 
 
 class UserMenu:
     def __init__(self):
         self.tasks = []
+        self.library = read("library")
 
     def menu(self):
         print("What do you want to do, Master?\n")
@@ -24,6 +27,16 @@ class UserMenu:
         match option:
             case 1:
                 url = input("url: ")
+                webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
+                                      url)
+                tag_sets = self.check(webpage_name)
+                '''
+                логика:
+                None - делаем новую запись в библиотеку, возможно,
+                создать пробную задачу с какой-нибудь стратегией.
+                если есть набор - пропускаем дальше
+                если стратегия - ручной сбор, просим для задачи список ссылок.
+                '''
                 try:
                     chapter = int(input("chapter: "))
                     task = Task(title, option, url, chapter)
@@ -56,3 +69,6 @@ class UserMenu:
                 return self.create_task(
                     title, int(
                         input("1.Parse\n2.Translate\n3.Save\n4.Exit\n")))
+
+    def check(self, webpage_name):
+        pass
