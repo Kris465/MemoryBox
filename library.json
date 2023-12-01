@@ -201,12 +201,92 @@
     ],
     "that1villainess.com": [
         {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": ""
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "moonlightnovel.com": [
+        {
+            "tag": "div",
+            "extra_tag": "epcontent entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "citrusaurora.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "capriciousonline.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next chapter"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "phoenixwalktranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "elementor-widget-container",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "wooksteahouse.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "guavaread.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "ranobelib.me": [
+        {
             "tag": "",
             "extra_tag": "",
             "word": ""
         },
         {
             "strategy": "EnCollector"
+        }
+    ],
+    "translatingboredom.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": ""
+        },
+        {
+            "strategy": "DIY"
         }
     ]
 }
