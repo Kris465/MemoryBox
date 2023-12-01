@@ -1,13 +1,13 @@
 import re
 from loguru import logger
-from domain.file_tools import read
+from domain.file_tools import read, write
 from domain.task import Task
 
 
 class UserMenu:
     def __init__(self):
         self.tasks = []
-        self.library = read("library")
+        self.library = self.librarian
 
     def menu(self):
         print("What do you want to do, Master?\n")
@@ -27,18 +27,15 @@ class UserMenu:
         match option:
             case 1:
                 url = input("url: ")
+                chapter = int(input("chapter: "))
                 webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                                       url)
                 tag_sets = self.check(webpage_name)
-                '''
-                логика:
-                None - делаем новую запись в библиотеку, возможно,
-                создать пробную задачу с какой-нибудь стратегией.
-                если есть набор - пропускаем дальше
-                если стратегия - ручной сбор, просим для задачи список ссылок.
-                '''
+                if tag_sets[1]["strategy"] == 'DIY':
+                    links = [input("url: ") for _ in iter(int, 1)]
+                    task = Task(title, option, chapter, links)
+
                 try:
-                    chapter = int(input("chapter: "))
                     task = Task(title, option, url, chapter)
                 except ValueError:
                     task = Task(title, option, url)
@@ -70,5 +67,19 @@ class UserMenu:
                     title, int(
                         input("1.Parse\n2.Translate\n3.Save\n4.Exit\n")))
 
-    def check(self, webpage_name):
-        pass
+    async def check(self, webpage_name):
+        try:
+            tag_sets = self.library[webpage_name]
+        except KeyError:
+            temp_dict = {webpage_name: [{"tag": input("tag: "),
+                                         "extra_tag": input("extra_tag: "),
+                                         "word": input("word: ")},
+                                        {"strategy": "EnStepper"}]}
+            dictionary = self.library
+            dictionary.update(temp_dict)
+            await write("library", dictionary)
+            tag_sets = temp_dict[webpage_name]
+        return tag_sets
+
+    async def librarian(self):
+        return await read("library")

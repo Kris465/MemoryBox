@@ -22,7 +22,7 @@ class EnCollector(ParserStrategy):
         self.library = await read("library")
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.project_webpage)
-        tag_sets = self.check(webpage_name)
+        tag_sets = self.library[webpage_name]
 
         getter = WebPageGetter()
         soup = await getter.get_webpage(self.project_webpage)
@@ -73,20 +73,6 @@ class EnCollector(ParserStrategy):
                 continue
         logger.info(f"Links are collected: {links}")
         return links
-
-    def check(self, webpage_name):
-        try:
-            tag_sets = self.library[webpage_name]
-        except KeyError:
-            temp_dict = {webpage_name: [{"tag": input("tag: "),
-                                         "extra_tag": input("extra_tag: "),
-                                         "word": input("word: ")},
-                                        {"strategy": "EnStepper"}]}
-            dictionary = self.library
-            dictionary.update(temp_dict)
-            write("library", dictionary)
-            tag_sets = temp_dict[webpage_name]
-        return tag_sets
 
 
 class WebPageGetter:
