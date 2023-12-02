@@ -14,7 +14,7 @@ async def main():
     user_menu = UserMenu()
     tasks = user_menu.menu()
     logger.info(f"Pack of tasks is created: \n"
-                f"{[print(task.title) for task in tasks]}")
+                f"{[task.title for task in tasks]}")
 
     controller = Controller(tasks)
     await controller.run()

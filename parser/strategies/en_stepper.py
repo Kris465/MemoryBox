@@ -22,7 +22,7 @@ class EnStepper(ParserStrategy):
         page = " "
         webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                               self.webpage)
-        tag_sets = self.check(webpage_name)
+        tag_sets = self.library[webpage_name]
         while next_link and page is not None:
             page = await asyncio.to_thread(self.get_webpage, url)
             try:
@@ -59,13 +59,10 @@ class EnStepper(ParserStrategy):
         for link in links:
             # if word in link.text:
             if word in link.text.lower() and link["href"] != "#":
-                try:
-                    if webpage_name in link["href"]:
-                        next_link = link['href']
-                    else:
-                        next_link = f"https://{webpage_name}/{link['href']}"
-                except Exception:
-                    next_link = input("url: ")
+                if webpage_name in link["href"]:
+                    next_link = link['href']
+                else:
+                    next_link = f"https://{webpage_name}/{link['href']}"
                 break
             else:
                 next_link = None
@@ -82,17 +79,3 @@ class EnStepper(ParserStrategy):
             return soup
         else:
             return
-
-    def check(self, webpage_name):
-        try:
-            tag_sets = self.library[webpage_name]
-        except KeyError:
-            temp_dict = {webpage_name: [{"tag": input("tag: "),
-                                         "extra_tag": input("extra_tag: "),
-                                         "word": input("word: ")},
-                                        {"strategy": "EnStepper"}]}
-            dictionary = self.library
-            dictionary.update(temp_dict)
-            write("library", dictionary)
-            tag_sets = temp_dict[webpage_name]
-        return tag_sets
