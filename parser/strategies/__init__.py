@@ -17,7 +17,7 @@ def strategy_class(class_name, *args, **kwargs):
         'ChiShuka': ChiShuka,
         'XiaoShuo': XiaoShuo,
         'EnCollector': EnCollector,
-        'DIY': DIYStrategy
+        'DIYStrategy': DIYStrategy
     }
     cls = classes[class_name]
     return cls(*args, **kwargs)

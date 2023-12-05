@@ -286,7 +286,7 @@
             "word": ""
         },
         {
-            "strategy": "DIY"
+            "strategy": "DIYStrategy"
         }
     ]
 }

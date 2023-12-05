@@ -7,7 +7,7 @@ from parser.abstract_strategy import ParserStrategy
 
 
 class DIYStrategy(ParserStrategy):
-    def __init__(self, title, number, links) -> None:
+    def __init__(self, title, links, number) -> None:
         self.title = title
         self.number = number
         self.links = links
@@ -18,12 +18,12 @@ class DIYStrategy(ParserStrategy):
         novel = {}
 
         for link in self.links:
-            page = self.get_webpage(link)
+            page = await self.get_webpage(link)
             webpage_name = re.sub(r'^https?://(?:www\.)?(.*?)/.*$', r'\1',
                                   link)
             tag_sets = self.library[webpage_name]
-            text = self.collect_chapter(page, tag_sets[0]["tag"],
-                                        tag_sets[0]["extra_tag"])
+            text = await self.collect_chapter(page, tag_sets[0]["tag"],
+                                              tag_sets[0]["extra_tag"])
             chapter = {self.number: link + text}
             novel.update(chapter)
             self.number += 1
