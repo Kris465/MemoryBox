@@ -1,5 +1,4 @@
 from parser.strategies.en_collector_ import EnCollector
-from parser.strategies.en_diy import DIYStrategy
 from parser.strategies.zh_xiaoshuo import XiaoShuo
 from .en_stepper import EnStepper
 from .wfxs_strategy_ import Wfxs
@@ -16,8 +15,7 @@ def strategy_class(class_name, *args, **kwargs):
         'Zg': Zg,
         'ChiShuka': ChiShuka,
         'XiaoShuo': XiaoShuo,
-        'EnCollector': EnCollector,
-        'DIYStrategy': DIYStrategy
+        'EnCollector': EnCollector
     }
     cls = classes[class_name]
     return cls(*args, **kwargs)

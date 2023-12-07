@@ -23,13 +23,7 @@ class UserMenu:
     def create_task(self, title, option):
         match option:
             case 1:
-                print("url: ")
-                url = []
-                while input() != '':
-                    user_input = input()
-                    url.append(user_input)
-                if len(url) == 1:
-                    url = url[0]
+                url = input("url: ")
                 chapter = int(input("chapter: \n"))
                 try:
                     task = Task(title, option, url, chapter)
