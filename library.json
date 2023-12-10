@@ -61,8 +61,8 @@
     ],
     "akknovel.com": [
         {
-            "tag": "article",
-            "extra_tag": "article",
+            "tag": "div",
+            "extra_tag": "font-mono",
             "word": "next"
         },
         {
@@ -286,7 +286,37 @@
             "word": ""
         },
         {
-            "strategy": "DIY"
+            "strategy": "EnStepper"
+        }
+    ],
+    "purread.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "storyseedling.com": [
+        {
+            "tag": "div",
+            "extra_tag": "mb-4",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "justforfuntrans.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
         }
     ]
 }

@@ -12,7 +12,7 @@ class Controller:
     def __init__(self, tasks: List[Task]) -> None:
         self.tasks = tasks
 
-    async def parse(self, title: str, url: str, chapter: int) -> None:
+    async def parse(self, title, url, chapter) -> None:
         try:
             pars = Parser(title, url, chapter)
             await pars.parse()
