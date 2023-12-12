@@ -318,5 +318,65 @@
         {
             "strategy": "EnStepper"
         }
+    ],
+    "scribblehub.com": [
+        {
+            "tag": "div",
+            "extra_tag": "chp_raw",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "shafuscan.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "shanghaifantasy.com": [
+        {
+            "tag": "div",
+            "extra_tag": "contenta",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "travistranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "my-4 reader-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "novellive.com": [
+        {
+            "tag": "div",
+            "extra_tag": "txt",
+            "word": "next chapter"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "skydemonorder.com": [
+        {
+            "tag": "body",
+            "extra_tag": "font-sans antialiased",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
     ]
 }
