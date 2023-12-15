@@ -378,5 +378,15 @@
         {
             "strategy": "EnStepper"
         }
+    ],
+    "azurecoven.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
     ]
 }
