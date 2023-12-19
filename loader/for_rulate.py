@@ -1,14 +1,12 @@
 from selenium import webdriver
-# from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome()
 
-
 driver.get('https://tl.rulate.ru/')
 
-
-avatar = driver.find_elements_by_link_text()
+driver.implicitly_wait(100)
+avatar = driver.find_elements(By.CLASS_NAME, 'main-header-avatar')[0].click()
 print(*avatar)
 
 # actions = ActionChains(driver)
