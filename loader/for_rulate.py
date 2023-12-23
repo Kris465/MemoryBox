@@ -5,7 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
-# title = input("title: ")
+'''
+Загрузчик
+
+1. Идет по ссылке на сайт
+2. Логинится
+3. Загружает текст
+'''
+
+title = 'Стать возлюбленной богатой семьи после возрождения'
 url = input("url: ")
 load_dotenv(find_dotenv())
 login = os.environ.get('rulate_login')
@@ -57,15 +65,13 @@ next_button = driver.find_element(By.XPATH,
                                   "//button[contains(text(), 'Далее')]")
 next_button.click()
 
-avatar = driver.find_element(
-    By.XPATH, '//*[@id="form-chop-text"]/div[3]/button[2]').click()
-avatar = driver.find_element(
-    By.XPATH, '//*[@id="o49659548"]/td[3]/a').click()
-rus_text = driver.find_element(By.CLASS_NAME, 'text')
-rus_text.send_keys('Сюда вставлен перевод')
-avatar = driver.find_element(By.XPATH, '//*[@id="sendTranslate"]').click()
+save_button = driver.find_element(By.CSS_SELECTOR, 'button.save')
+save_button.click()
 
-avatar = driver.find_element(
-    By.XPATH,
-    '//*[@id="Tr"]/tbody/tr[2]/td/div/div[4]/form/div[1]/div[1]/button'
-    ).click()
+u_element = driver.find_element(By.CSS_SELECTOR, "td.u a")
+u_element.click()
+
+t_element = driver.find_element(By.CSS_SELECTOR, "td.t textarea")
+t_element.send_keys("Сюда вставлен перевод")
+
+t_element.submit()
