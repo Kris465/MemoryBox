@@ -41,10 +41,11 @@ class UserMenu:
                             f"{language} / {config}")
                 return task
             case 3:
-                language = input("Language: \n")
+                language = input("option: \n")
                 config_for_writing = int(input("1.in-one-file\n"
                                                "2.for-chapters\n"
-                                               "3.database\n"))
+                                               "3.database\n"
+                                               "4.for-rulate\n"))
                 task = Task(title, option, language, config_for_writing)
                 logger.info(f"task is created: {title} / save /"
                             f"{config_for_writing}")

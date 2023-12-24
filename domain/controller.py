@@ -4,6 +4,7 @@ from typing import List
 from loguru import logger
 from domain.file_tools import read, write_txt
 from domain.task import Task
+from loader.for_rulate import ForRulate
 from parser.parser import Parser
 from translator.translator import TrManager
 
@@ -30,7 +31,7 @@ class Controller:
         except Exception as e:
             logger.error(f"Error while translating {title} to {language}: {e}")
 
-    async def save(self, title: str, language: str,
+    async def save(self, title: str, url: str,
                    config_for_writing: int) -> None:
         text = ''
         try:
@@ -64,6 +65,9 @@ class Controller:
             case 3:
                 # database
                 pass
+            case 4:
+                for_rulate = ForRulate(title, url, project)
+                for_rulate.logic()
 
     async def execute_task(self, task: Task) -> None:
         if task.action == 1:
@@ -73,7 +77,7 @@ class Controller:
                                  language=task.extra,
                                  config=task.config)
         elif task.action == 3:
-            await self.save(task.title, language=task.extra,
+            await self.save(task.title, url=task.extra,
                             config_for_writing=task.config)
 
     async def run(self) -> None:
