@@ -7,7 +7,7 @@ from .strategies import strategy_class
 
 
 class Parser:
-    def __init__(self, title: str, project_webpage: str, chapter: int):
+    def __init__(self, title, project_webpage, chapter):
         self.title = title
         self.project_webpage = project_webpage
         self.chapter = chapter

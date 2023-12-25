@@ -1,4 +1,5 @@
 import asyncio
+import random
 import re
 from bs4 import BeautifulSoup
 from loguru import logger
@@ -24,8 +25,9 @@ class EnStepper(ParserStrategy):
                               self.webpage)
         tag_sets = self.library[webpage_name]
         while next_link and page is not None:
-            page = await asyncio.to_thread(self.get_webpage, url)
+            await asyncio.sleep(random.randint(5, 15))
             try:
+                page = await asyncio.to_thread(self.get_webpage, url)
                 text = self.collect_chapter(page, tag_sets[0]["tag"],
                                             tag_sets[0]["extra_tag"])
                 chapter = {self.number: url + text}
@@ -37,8 +39,8 @@ class EnStepper(ParserStrategy):
                 chapters.update(chapter)
                 self.number += 1
                 url = next_link
-            except AttributeError:
-                logger.warning("AttributeError")
+            except Exception as e:
+                logger.error(e)
                 break
         await write(self.title, chapters)
 

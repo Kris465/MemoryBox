@@ -61,8 +61,8 @@
     ],
     "akknovel.com": [
         {
-            "tag": "article",
-            "extra_tag": "article",
+            "tag": "div",
+            "extra_tag": "font-mono",
             "word": "next"
         },
         {
@@ -166,7 +166,7 @@
             "word": "NEXT"
         },
         {
-            "strategy": "EnStepper"
+            "strategy": "StepperSel"
         }
     ],
     "mesmerizingmemoirs.com": [
@@ -286,7 +286,137 @@
             "word": ""
         },
         {
-            "strategy": "DIY"
+            "strategy": "EnStepper"
+        }
+    ],
+    "purread.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "storyseedling.com": [
+        {
+            "tag": "div",
+            "extra_tag": "mb-4",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "justforfuntrans.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "scribblehub.com": [
+        {
+            "tag": "div",
+            "extra_tag": "chp_raw",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "shafuscan.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "shanghaifantasy.com": [
+        {
+            "tag": "div",
+            "extra_tag": "contenta",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "travistranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "my-4 reader-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "novellive.com": [
+        {
+            "tag": "div",
+            "extra_tag": "txt",
+            "word": "next chapter"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "skydemonorder.com": [
+        {
+            "tag": "body",
+            "extra_tag": "font-sans antialiased",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "azurecoven.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "teatranslations.blogspot.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-body post-content",
+            "word": ""
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "18.foxaholic.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "Next"
+        },
+        {
+            "strategy": "StepperSel"
+        }
+    ],
+    "wattpad.com": [
+        {
+            "tag": "div",
+            "extra_tag": "row part-content",
+            "word": "Continue to next part"
+        },
+        {
+            "strategy": "StepperSel"
         }
     ]
 }

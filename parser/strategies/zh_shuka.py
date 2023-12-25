@@ -20,15 +20,20 @@ class ChiShuka(ParserStrategy):
         chapters = {}
         for k, v in links.items():
             temp_soup = await self.get_webpage(v)
-            text = await self.collect_chapter(temp_soup)
+            try:
+                text = await self.collect_chapter(temp_soup)
+            except Exception as e:
+                logger.error(f"Couldn't collect chapter {k} in {self.title}"
+                             f"{e}")
             chapter = {k: v + text}
             chapters.update(chapter)
+            logger.info(f"{k} / {v} / {self.title}")
         await write(self.title, chapters, language="zh")
 
     async def collect_chapter(self, soup):
         try:
             chapter = soup.find("article", class_="article-content").text
-            logger.info(f"text is collected {chapter[:10]}")
+            logger.info(f"{chapter[:10]}")
         except AttributeError:
             chapter = " "
             logger.error("Page doesn't have text")
@@ -54,10 +59,15 @@ class ChiShuka(ParserStrategy):
                             AppleWebKit/537.36 (KHTML, like Gecko)\
                             Chrome/111.0.0.0 Safari/537.36'}
         await asyncio.sleep(random.randint(5, 15))
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, headers=headers) as response:
-                page = await response.text()
-                encoding = response.charset or 'utf-8'
-                soup = BeautifulSoup(page, 'html.parser',
-                                     from_encoding=encoding)
-                return soup
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=headers) as response:
+                    page = await response.text()
+                    encoding = response.charset or 'utf-8'
+                    soup = BeautifulSoup(page, 'html.parser',
+                                         from_encoding=encoding)
+        except Exception as e:
+            logger.error(f"Shuka / {url} / couldn't collect / {e}")
+            soup = None
+
+        return soup
