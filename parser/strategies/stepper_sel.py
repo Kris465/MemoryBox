@@ -6,16 +6,20 @@ from loguru import logger
 from domain.file_tools import read, write
 from parser.abstract_strategy import ParserStrategy
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class StepperSel(ParserStrategy):
+
     def __init__(self, title, webpage, number):
         self.title = title
         self.webpage = webpage
-        self.number = number
         self.library = {}
+        self.number = number
         self.getter = WebPageGetter()
 
     async def logic(self):
@@ -30,14 +34,10 @@ class StepperSel(ParserStrategy):
         while next_link and page is not None:
             await asyncio.sleep(random.randint(5, 15))
             try:
-                page = await self.getter.get_webpage(url)
+                page, next_link = await self.getter.get_webpage(url)
                 text = self.collect_chapter(page, tag_sets[0]["tag"],
                                             tag_sets[0]["extra_tag"])
                 chapter = {self.number: url + text}
-                next_link = self.get_next_link(page, tag_sets[0]["word"],
-                                               webpage_name)
-                if next_link == url:
-                    break
                 logger.info(f"text is collected - {self.number} - {next_link}")
                 chapters.update(chapter)
                 self.number += 1
@@ -56,22 +56,6 @@ class StepperSel(ParserStrategy):
         text = "".join(set([i.text for i in result]))
         return text
 
-    def collect_links(self):
-        pass
-
-    def get_next_link(self, page, word, webpage_name):
-        links = page.find_all("a")
-        for link in links:
-            if word in link.text:
-                if webpage_name in link["href"]:
-                    next_link = link['href']
-                else:
-                    next_link = f"https://{webpage_name}/{link['href']}"
-                break
-            else:
-                next_link = None
-        return next_link
-
 
 class WebPageGetter:
     def __init__(self):
@@ -82,7 +66,24 @@ class WebPageGetter:
 
     async def get_webpage(self, url):
         self.browser.get(url)
-        await asyncio.sleep(random.randint(15, 120))
+        self.browser.maximize_window()
+        try:
+            next_button = self.browser.find_elements(
+                By.CLASS_NAME, 'wp-block-button__link')[2]
+            next_button.location_once_scrolled_into_view
+            self.browser.execute_script("arguments[0].click()", next_button)
+            # next_button = WebDriverWait(self.browser, 10).until(
+            #     EC.presence_of_element_located((
+            #         By.XPATH,
+            #         "//div[@class='wp-block-button']/a[text()='NEXT']")))
+            # self.browser.execute_script("arguments[0].scrollIntoView();",
+            #                             next_button)
+            # await asyncio.sleep(random.randint(15, 120))
+            # next_button.click()
+            next_link = self.browser.current_url
+        except Exception as e:
+            logger.error(e)
+            next_link = None
         html = self.browser.page_source
         soup = BeautifulSoup(html, 'html.parser')
-        return soup
+        return soup, next_link
