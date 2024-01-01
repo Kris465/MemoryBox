@@ -88,10 +88,10 @@ class TrManager:
         for string in substrings:
             try:
                 part = await translator.translate(string, self.language)
-            except Exception as e:
+            except TypeError as e:
                 logger.error(f"Error while translating {string}"
                              f"to {self.language}: {e}")
-                part = ""
+                part = " "
             tr_txt += part
         return tr_txt
 
