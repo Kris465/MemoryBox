@@ -4,9 +4,8 @@ from domain.task import Task
 
 
 class UserMenu:
-    def __init__(self, storage):
+    def __init__(self):
         self.tasks = []
-        self.storage = storage
         self.window = tk.Tk()
         self.window.title("Task Manager")
 
