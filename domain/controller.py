@@ -82,4 +82,4 @@ class Controller:
 
     async def run(self) -> None:
         tasks = [self.execute_task(task) for task in self.tasks]
-        await asyncio.gather(*tasks)  # !!!
+        await asyncio.gather(*tasks)
