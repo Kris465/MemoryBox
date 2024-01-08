@@ -156,3 +156,4 @@ cython_debug/
 
 chromedriver_win32
 chromeprofile
+/novels
