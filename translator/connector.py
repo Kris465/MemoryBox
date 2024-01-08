@@ -68,4 +68,4 @@ class Translator:
                     await self.get_key()
                     logger.info("New IAM_TOKEN is asked and set")
 
-        await asyncio.sleep(1)
+        await asyncio.sleep(10)
