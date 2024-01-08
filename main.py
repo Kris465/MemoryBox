@@ -1,4 +1,3 @@
-import asyncio
 from loguru import logger
 
 from domain.controller import Controller
@@ -12,13 +11,7 @@ async def main():
                backtrace=True, diagnose=True)
 
     user_menu = UserMenu()
-    tasks = user_menu.menu()
-    logger.info(f"Pack of tasks is created: \n"
-                f"{[task.title for task in tasks]}")
+    tasks = await user_menu.menu()
 
     controller = Controller(tasks)
     await controller.run()
-
-
-if __name__ == '__main__':
-    asyncio.run(main())

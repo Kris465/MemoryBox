@@ -22,17 +22,19 @@ async def read(title):
 
 
 async def find_file(name):
-    for file in os.listdir('.'):
-        if file.startswith(name):
+    for file in os.listdir('novels'):
+        if file.startswith(name) and file != 'library':
             return file
     raise ValueError('File not found')
 
 
 async def write_txt(name, data):
-    with open(f"{name}.txt", "a", encoding="UTF-8") as file:
+    with open(os.path.join('novels', f"{name}.txt"),
+              "a", encoding="UTF-8") as file:
         file.write(data)
 
 
 async def write(name, data, language=None):
-    with open(f"{name}.json", "w", encoding='UTF-8') as file:
+    with open(os.path.join('novels', f"{name}.json"),
+              "w", encoding='UTF-8') as file:
         json.dump(data, file, ensure_ascii=False)

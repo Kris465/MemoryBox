@@ -65,6 +65,7 @@ class EnStepper(ParserStrategy):
                     next_link = link['href']
                 else:
                     next_link = f"https://{webpage_name}/{link['href']}"
+                    # next_link = f"https://{webpage_name}{link['href']}"
                 break
             else:
                 next_link = None
