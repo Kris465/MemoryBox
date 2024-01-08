@@ -419,6 +419,26 @@
             "strategy": "StepperSel"
         }
     ],
+    "lazygirltranslations.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next chapter"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "bluebellsinbloom.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
     "novel543.com": [
         {
             "tag": "div",
