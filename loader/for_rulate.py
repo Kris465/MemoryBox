@@ -4,13 +4,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+import nltk
 
 
 class ForRulate:
     def __init__(self, title, url, project):
         self.title = title
         self.url = url
-        self.project = project
+        self.project = self.saw(project)
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(100)
@@ -73,3 +74,36 @@ class ForRulate:
         t_element = self.driver.find_element(By.CSS_SELECTOR, "td.t textarea")
         t_element.send_keys(texts[1]['translation'])
         t_element.submit()
+
+    def saw(self, data):
+        for key in data:
+            for i in range(len(data[key])):
+                for sub_key in data[key][i]:
+                    if len(data[key][i][sub_key]) > 5000:
+                        # разделяем строку на предложения
+                        sentences = nltk.sent_tokenize(data[key][i][sub_key])
+                        new_list = []
+                        current_chapter = {}
+                        current_sentence = ""
+                        chapter_number = 1
+                        for sentence in sentences:
+                            if len(current_sentence) + len(sentence) + 2 > 5000:
+                                # добавляем текущее предложение в главу
+                                # и начинаем новую главу
+                                current_chapter[sub_key] = current_sentence
+                                new_list.append(current_chapter)
+                                current_chapter = {}
+                                current_sentence = sentence
+                                chapter_number += 1
+                            else:
+                                # добавляем предложение к текущей главе
+                                if current_sentence == "":
+                                    current_sentence = sentence
+                                else:
+                                    current_sentence += ". " + sentence
+                        # добавляем последнюю главу в список
+                        current_chapter[sub_key] = current_sentence
+                        new_list.append(current_chapter)
+                        # заменяем исходную главу на список глав
+                        data[key][i] = new_list
+        return data
