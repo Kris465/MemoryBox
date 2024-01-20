@@ -42,7 +42,7 @@ class UserMenu:
                             f"{language} / {config}")
                 return task
             case 3:
-                language = input("option: \n")
+                language = input("rulate url: \n")
                 config_for_writing = int(input("1.in-one-file\n"
                                                "2.for-chapters\n"
                                                "3.database\n"

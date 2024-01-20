@@ -1,10 +1,12 @@
 import os
 from dotenv import find_dotenv, load_dotenv
+from loguru import logger
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-import nltk
 
 
 class ForRulate:
@@ -15,13 +17,20 @@ class ForRulate:
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(100)
+        self.wait = WebDriverWait(self.driver, 10)
 
     def logic(self):
+        # start_number = input("Chapter: ")
         self.log_in()
         for chapter_number, texts in self.project.items():
-            self.driver.get(self.url)
-            self.create_chapter(chapter_number)
-            self.upload_text(texts)
+            if chapter_number == 'Глава 185.1':
+                self.driver.get(self.url)
+                self.create_chapter(chapter_number)
+                self.upload_text(texts)
+                logger.info(f"{chapter_number} is added")
+            else:
+                logger.info(f"{chapter_number} is less than needed")
+                continue
 
     def log_in(self):
         load_dotenv(find_dotenv())
@@ -30,22 +39,30 @@ class ForRulate:
         self.driver.get(self.url)
         avatar = self.driver.find_elements(
             By.CLASS_NAME, 'main-header-avatar')[0].click()
-        login_input = self.driver.find_element(By.NAME, 'login[login]')
-        password_input = self.driver.find_element(By.NAME, 'login[pass]')
+        login_input = self.wait.until(
+            EC.presence_of_element_located((By.NAME, 'login[login]')))
+        password_input = self.wait.until(
+            EC.presence_of_element_located((By.NAME, 'login[pass]')))
         login_input.send_keys(login)
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
 
     def create_chapter(self, chapter_number):
-        avatar = self.driver.find_element(By.CLASS_NAME, 'icon-plus').click()
-        chapter_number_input = self.driver.find_element(By.ID, 'Chapter_title')
+        avatar = self.wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, 'icon-plus'))).click()
+        chapter_number_input = self.wait.until(
+            EC.presence_of_element_located((By.ID, 'Chapter_title')))
         chapter_number_input.send_keys(chapter_number)
-        first_tick_input = self.driver.find_element(
-            By.NAME, 'Chapter[has_override]')
-        second_tick_input = self.driver.find_elements(
-            By.NAME, 'Chapter[ac_read]')[1]
-        third_tick_input = self.driver.find_element(By.ID, 'subscription_')
+
+        first_tick_input = self.wait.until(
+            EC.presence_of_element_located((By.NAME, 'Chapter[has_override]')))
+        second_tick_input = self.wait.until(
+            EC.presence_of_all_elements_located(
+                (By.NAME, 'Chapter[ac_read]')))[1]
+        third_tick_input = self.wait.until(
+            EC.presence_of_element_located((By.ID, 'subscription_')))
         button = self.driver.find_element(By.NAME, 'yt0')
+
         self.driver.execute_script("arguments[0].checked = true;",
                                    first_tick_input)
         self.driver.execute_script("arguments[0].checked = true;",
@@ -67,6 +84,7 @@ class ForRulate:
         next_button = self.driver.find_element(
             By.XPATH, "//button[contains(text(), 'Далее')]")
         next_button.click()
+        self.driver.implicitly_wait(100)
         save_button = self.driver.find_element(By.CSS_SELECTOR, 'button.save')
         save_button.click()
         u_element = self.driver.find_element(By.CSS_SELECTOR, "td.u a")
@@ -76,34 +94,35 @@ class ForRulate:
         t_element.submit()
 
     def saw(self, data):
-        for key in data:
-            for i in range(len(data[key])):
-                for sub_key in data[key][i]:
-                    if len(data[key][i][sub_key]) > 5000:
-                        # разделяем строку на предложения
-                        sentences = nltk.sent_tokenize(data[key][i][sub_key])
-                        new_list = []
-                        current_chapter = {}
-                        current_sentence = ""
-                        chapter_number = 1
-                        for sentence in sentences:
-                            if len(current_sentence) + len(sentence) + 2 > 5000:
-                                # добавляем текущее предложение в главу
-                                # и начинаем новую главу
-                                current_chapter[sub_key] = current_sentence
-                                new_list.append(current_chapter)
-                                current_chapter = {}
-                                current_sentence = sentence
-                                chapter_number += 1
-                            else:
-                                # добавляем предложение к текущей главе
-                                if current_sentence == "":
-                                    current_sentence = sentence
-                                else:
-                                    current_sentence += ". " + sentence
-                        # добавляем последнюю главу в список
-                        current_chapter[sub_key] = current_sentence
-                        new_list.append(current_chapter)
-                        # заменяем исходную главу на список глав
-                        data[key][i] = new_list
-        return data
+        cutted_dict = {}
+        for key, value in data.items():
+            origin_text = value[0]['origin']
+            trans_text = value[1]['translation']
+            if len(origin_text) > 5000 or len(trans_text) > 5000:
+                # Разбиваем тексты на подглавы
+                origin_chunks = []
+                trans_chunks = []
+                while len(origin_text) > 5000 or len(trans_text) > 5000:
+                    # Находим ближайшую точку, где длина текста
+                    # не превышает 5000 символов
+                    origin_cut = origin_text[:5000].rfind('. ') + 1
+                    trans_cut = trans_text[:5000].rfind('. ') + 1
+                    # Добавляем подглаву в список
+                    origin_chunks.append(origin_text[:origin_cut])
+                    trans_chunks.append(trans_text[:trans_cut])
+                    # Обрезаем тексты до следующей точки
+                    origin_text = origin_text[origin_cut:]
+                    trans_text = trans_text[trans_cut:]
+                # Добавляем последнюю подглаву
+                origin_chunks.append(origin_text)
+                trans_chunks.append(trans_text)
+                # Создаем ключи для новых глав
+                num_parts = len(origin_chunks)
+                new_keys = [f"Глава {key}.{i}" for i in range(num_parts)]
+                # Заполняем новый словарь
+                for i, new_key in enumerate(new_keys):
+                    cutted_dict[new_key] = [{'origin': origin_chunks[i]},
+                                            {'translation': trans_chunks[i]}]
+            else:
+                cutted_dict[key] = value
+        return cutted_dict
