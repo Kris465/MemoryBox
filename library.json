@@ -448,5 +448,25 @@
         {
             "strategy": "EnStepper"
         }
+    ],
+    "theblmuse.wordpress.com": [
+        {
+            "tag": "div",
+            "extra_tag": "entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
+    ],
+    "dianxiaqingcheng.blogspot.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-body entry-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnStepper"
+        }
     ]
 }
