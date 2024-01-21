@@ -1,21 +1,24 @@
-from domain.task import Task
+from domain.old_task import Task
 
 from loguru import logger
 
 
 class UserMenu:
-    def __init__(self):
+    def __init__(self) -> None:
         self.tasks = []
 
     def menu(self):
         print("What do you want to do, Master?\n")
-        title = "something"
-        kind = 0
-        while title != "" or kind != 4:
+        task = ""
+        option = ""
+        while task is not None and option != 4:
             title = input("Title: \n")
-            kind = int(input("1.Parse\n2.Translate\n3.Save\n4.Exit\n"))
-            task = self.create_task(title, kind)
-            self.tasks.append(task)
+            option = int(input("1.Parse\n2.Translate\n3.Save\n4.Exit\n"))
+            if option == 4 or title == "":
+                break
+            else:
+                task = self.create_task(title, option)
+                self.tasks.append(task)
         return self.tasks
 
     def create_task(self, title, option):
@@ -23,24 +26,28 @@ class UserMenu:
             case 1:
                 url = input("url: ")
                 chapter = int(input("chapter: \n"))
-                task = Task(title, option, {"url": url, "chapter": chapter})
+                try:
+                    task = Task(title, option, url, chapter)
+                except ValueError:
+                    task = Task(title, option, url)
                 logger.info(f"task is created: {title} / parse / {url}")
                 return task
             case 2:
                 language = input("language: ")
-                temp = int(input("1.All\n2.From\n3.From-To"))
-                if temp == 1:
-                    task = Task(title, option, {"part": "all"})
+                print("Input config data in spaces\n"
+                      "1.All\n2.From\n3.From-To")
+                config = [int(num) for num in input().split()]
+                task = Task(title, option, language, config)
                 logger.info(f"task is created: {title} / translate /"
-                            f"{language}")
+                            f"{language} / {config}")
                 return task
             case 3:
+                language = input("rulate url: \n")
                 config_for_writing = int(input("1.in-one-file\n"
                                                "2.for-chapters\n"
                                                "3.database\n"
                                                "4.for-rulate\n"))
-                task = Task(title, {"option": "save",
-                                    "config_for_writing": config_for_writing})
+                task = Task(title, option, language, config_for_writing)
                 logger.info(f"task is created: {title} / save /"
                             f"{config_for_writing}")
                 return task

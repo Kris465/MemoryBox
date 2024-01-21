@@ -3,7 +3,7 @@ from typing import List
 
 from loguru import logger
 from domain.file_tools import read, write_txt
-from domain.task import Task
+from domain.old_task import Task
 from loader.for_rulate import ForRulate
 from parser.parser import Parser
 from translator.translator import TrManager

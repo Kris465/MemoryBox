@@ -1,5 +1,4 @@
 class Task:
-    def __init__(self, title: str, kind: int, description: dict) -> None:
-        self.title = title
-        self.kind = kind
+    def __init__(self, id: int, description: dict) -> None:
+        self.id = id
         self.description = description
