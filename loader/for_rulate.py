@@ -13,6 +13,8 @@ class ForRulate:
     def __init__(self, title, url, project):
         self.title = title
         self.url = url
+        # Номера глав, которые нужно залить
+        self.chapters = ["24", "30", "31"]
         self.project = self.saw(project)
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
@@ -20,17 +22,12 @@ class ForRulate:
         self.wait = WebDriverWait(self.driver, 10)
 
     def logic(self):
-        # start_number = input("Chapter: ")
         self.log_in()
         for chapter_number, texts in self.project.items():
-            if chapter_number == 'Глава 185.1':
-                self.driver.get(self.url)
-                self.create_chapter(chapter_number)
-                self.upload_text(texts)
-                logger.info(f"{chapter_number} is added")
-            else:
-                logger.info(f"{chapter_number} is less than needed")
-                continue
+            self.driver.get(self.url)
+            self.create_chapter(chapter_number)
+            self.upload_text(texts)
+            logger.info(f"{chapter_number} is added")
 
     def log_in(self):
         load_dotenv(find_dotenv())
@@ -84,7 +81,6 @@ class ForRulate:
         next_button = self.driver.find_element(
             By.XPATH, "//button[contains(text(), 'Далее')]")
         next_button.click()
-        self.driver.implicitly_wait(100)
         save_button = self.driver.find_element(By.CSS_SELECTOR, 'button.save')
         save_button.click()
         u_element = self.driver.find_element(By.CSS_SELECTOR, "td.u a")
@@ -96,33 +92,38 @@ class ForRulate:
     def saw(self, data):
         cutted_dict = {}
         for key, value in data.items():
-            origin_text = value[0]['origin']
-            trans_text = value[1]['translation']
-            if len(origin_text) > 5000 or len(trans_text) > 5000:
-                # Разбиваем тексты на подглавы
-                origin_chunks = []
-                trans_chunks = []
-                while len(origin_text) > 5000 or len(trans_text) > 5000:
-                    # Находим ближайшую точку, где длина текста
-                    # не превышает 5000 символов
-                    origin_cut = origin_text[:5000].rfind('. ') + 1
-                    trans_cut = trans_text[:5000].rfind('. ') + 1
-                    # Добавляем подглаву в список
-                    origin_chunks.append(origin_text[:origin_cut])
-                    trans_chunks.append(trans_text[:trans_cut])
-                    # Обрезаем тексты до следующей точки
-                    origin_text = origin_text[origin_cut:]
-                    trans_text = trans_text[trans_cut:]
-                # Добавляем последнюю подглаву
-                origin_chunks.append(origin_text)
-                trans_chunks.append(trans_text)
-                # Создаем ключи для новых глав
-                num_parts = len(origin_chunks)
-                new_keys = [f"Глава {key}.{i}" for i in range(num_parts)]
-                # Заполняем новый словарь
-                for i, new_key in enumerate(new_keys):
-                    cutted_dict[new_key] = [{'origin': origin_chunks[i]},
-                                            {'translation': trans_chunks[i]}]
+            if key in self.chapters:
+                origin_text = value[0]['origin']
+                trans_text = value[1]['translation']
+                if len(origin_text) > 5000 or len(trans_text) > 5000:
+
+                    origin_chunks = []
+                    trans_chunks = []
+                    while len(origin_text) > 5000 or len(trans_text) > 5000:
+
+                        origin_cut = origin_text[:5000].rfind('. ') + 1
+                        trans_cut = trans_text[:5000].rfind('. ') + 1
+
+                        origin_chunks.append(origin_text[:origin_cut])
+                        trans_chunks.append(trans_text[:trans_cut])
+
+                        origin_text = origin_text[origin_cut:]
+                        trans_text = trans_text[trans_cut:]
+
+                    origin_chunks.append(origin_text)
+                    trans_chunks.append(trans_text)
+
+                    num_parts = len(origin_chunks)
+                    new_keys = [f"Глава {key}.{i + 1}" for i
+                                in range(num_parts)]
+
+                    for i, new_key in enumerate(new_keys):
+                        cutted_dict[new_key] = [{'origin':
+                                                 origin_chunks[i]},
+                                                {'translation':
+                                                 trans_chunks[i]}]
+                else:
+                    cutted_dict[key] = value
             else:
-                cutted_dict[key] = value
+                continue
         return cutted_dict
