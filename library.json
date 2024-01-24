@@ -468,5 +468,15 @@
         {
             "strategy": "EnStepper"
         }
+    ],
+    "mtlnovel.com": [
+        {
+            "tag": "div",
+            "extra_tag": "post-content",
+            "word": "next"
+        },
+        {
+            "strategy": "EnCollector"
+        }
     ]
 }
