@@ -1,7 +1,8 @@
 #!/bin/bash
 
+source passwords.cfg
 url="https://tl.rulate.ru/book/95179"
-login="Leastro"
-password="a_cx8Vbqr7u!6sx"
+login=$login
+password=$password
 
 curl -c cookies.txt $url
