@@ -1,3 +1,4 @@
+import itertools
 import random
 
 
@@ -7,8 +8,10 @@ class TaskGenerator:
         self.tasks = tasks
 
     def choose_tasks(self):
-        all_keys = list(self.tasks.keys())
-        random_keys = random.sample(all_keys, self.number)
+        shuffled_keys = list(self.tasks.keys())
+        random.shuffle(shuffled_keys)
+        self.tasks = {key: self.tasks[key] for key in shuffled_keys}
 
-        new_dict = {key: self.tasks[key] for key in random_keys}
+        new_dict = dict(itertools.islice(self.tasks.items(), self.number))
+
         return new_dict
