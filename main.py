@@ -13,7 +13,8 @@ dp.middleware.setup(LoggingMiddleware())
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply("Привет! Я бот-анекдотист. Напиши /anekdot, чтобы получить анекдот.")
+    await message.reply(
+        "Привет! Я бот-анекдотист. Напиши /anekdot, чтобы получить анекдот.")
 
 
 @dp.message_handler(commands=['anekdot'])
