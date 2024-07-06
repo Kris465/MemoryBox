@@ -1,30 +1,55 @@
 import tkinter as tk
+from tkinter import ttk
 
 
-class CustomMenu:
+class Task:
+    def __init__(self, task_type, title, link=None,
+                 chapter=None, options=None, language=None):
+        self.task_type = task_type
+        self.title = title
+        self.link = link
+        self.chapter = chapter
+        self.options = options
+        self.language = language
+
+
+class UserMenu:
     def __init__(self):
+        self.tasks = []
         self.root = tk.Tk()
         self.root.title("Цербер")
-        self.root.geometry("600x500+400+200")
         self.root.iconbitmap("user_menu/dog.ico")
+        self.root.geometry("800x600+400+300")
+        self.create_widgets()
 
-        self.menu = tk.Menu(self.root)
-        self.root.config(menu=self.menu)
+    def create_widgets(self):
+        self.left_frame = tk.Frame(self.root, bg='#FFCC99',
+                                   width=600, height=800)
+        self.left_frame.pack_propagate(False)
+        self.left_frame.pack(side='left', fill='y')
 
-        submenu = tk.Menu(self.menu)
-        self.menu.add_cascade(label="Опции", menu=submenu)
-        submenu.add_command(label="Опция 1", command=self.option1)
-        submenu.add_command(label="Опция 2", command=self.option2)
-        submenu.add_separator()
-        submenu.add_command(label="Выход", command=self.root.quit)
+        menu = tk.Menu(self.left_frame)
+        menu.add_command(label="Собрать", command=self.collect)
+        menu.add_command(label="Перевести", command=self.translate)
+        self.left_frame.config(menu=menu)
 
-    def option1(self):
-        print("Вы выбрали опцию 1")
-        # Здесь можно добавить код для обработки опции 1
+        self.right_frame = tk.Frame(self.root, bg='#CC9966',
+                                    width=200, height=400)
+        self.right_frame.pack_propagate(False)
+        self.right_frame.pack(side='right', fill='both', expand=True)
 
-    def option2(self):
-        print("Вы выбрали опцию 2")
-        # Здесь можно добавить код для обработки опции 2
+    def collect(self):
+        # Действия при выборе "Собрать"
+        pass
+
+    def translate(self):
+        # Действия при выборе "Перевести"
+        pass
+
+    # def submit_task(self):
+    #     # Здесь можно добавить логику для обработки данных из полей ввода и выбранных опций
+    #     pass
 
     def run(self):
         self.root.mainloop()
+        return self.tasks
