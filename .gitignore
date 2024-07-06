@@ -19,3 +19,6 @@ chromeprofile
 __pycache__/
 *.py[cod]
 *$py.class
+
+# pictures
+dog.ico
