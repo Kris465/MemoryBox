@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 
 class Task:
@@ -18,37 +19,34 @@ class UserMenu:
         self.tasks = []
         self.root = tk.Tk()
         self.root.title("Цербер")
-        self.root.iconbitmap("user_menu/dog.ico")
         self.root.geometry("800x600+400+300")
         self.create_widgets()
 
     def create_widgets(self):
-        self.left_frame = tk.Frame(self.root, bg='#FFCC99',
-                                   width=600, height=800)
+        self.left_frame = tk.Frame(self.root, bg='#FFCC99', width=600, height=800)
         self.left_frame.pack_propagate(False)
         self.left_frame.pack(side='left', fill='y')
 
-        menu = tk.Menu(self.left_frame)
-        menu.add_command(label="Собрать", command=self.collect)
-        menu.add_command(label="Перевести", command=self.translate)
-        self.left_frame.config(menu=menu)
+        # Добавляем внутренний фрейм для разделения по горизонтали
+        inner_frame_top = tk.Frame(self.left_frame, bg='#FFCC99', width=600, height=400)
+        inner_frame_top.pack_propagate(False)
+        inner_frame_top.pack(side='top', fill='both', expand=True)
 
-        self.right_frame = tk.Frame(self.root, bg='#CC9966',
-                                    width=200, height=400)
-        self.right_frame.pack_propagate(False)
-        self.right_frame.pack(side='right', fill='both', expand=True)
+        inner_frame_bottom = tk.Frame(self.left_frame, bg='#FFCC99', width=600, height=400)
+        inner_frame_bottom.pack_propagate(False)
+        inner_frame_bottom.pack(side='top', fill='both', expand=True)
+
+        # Ваши существующие виджеты могут быть добавлены в один из внутренних фреймов
+
+    def toggle_blocks(self):
+        pass
 
     def collect(self):
-        # Действия при выборе "Собрать"
-        pass
+        messagebox.showinfo("Действие", "Функция 'Собрать' вызвана")
 
     def translate(self):
-        # Действия при выборе "Перевести"
-        pass
+        messagebox.showinfo("Действие", "Функция 'Перевести' вызвана")
 
-    # def submit_task(self):
-    #     # Здесь можно добавить логику для обработки данных из полей ввода и выбранных опций
-    #     pass
 
     def run(self):
         self.root.mainloop()
