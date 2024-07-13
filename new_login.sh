@@ -1,23 +1,17 @@
 #!/bin/bash
 
-# Указываем URL для авторизации и получения страницы
-login_url="https://tl.rulate.ru/"
-dashboard_url="https://tl.rulate.ru/register/settings"
+# URL для отправки POST-запроса
+url="https://tl.rulate.ru/register"
 
-# Читаем логин и пароль из файла credentials.txt
-readarray -t credentials < credentials.txt
-username="${credentials[0]}"
-password="${credentials[1]}"
+# Данные для авторизации (пример)
+username="your_username"
+password="your_password"
 
-# Определяем заголовки
-headers="User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-# Другие заголовки можно добавить по аналогии
-
-# Отправляем POST-запрос для авторизации и сохраняем куки в файл
-curl -c cookies.txt -d "username=$username&password=$password" -H "$headers" $login_url
-
-# Отправляем GET-запрос для получения страницы после авторизации
-response=$(curl -b cookies.txt -L -H "$headers" $dashboard_url)
+# Отправляем POST-запрос для авторизации и сохраняем ответ в переменной response
+response=$(curl -s -X POST -d "username=$username&password=$password" $url)
 
 # Печатаем HTML-ответ
 echo "$response" > output.html
+
+# Выводим HTML-ответ в консоль
+echo "$response"
