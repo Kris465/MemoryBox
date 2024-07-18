@@ -6,7 +6,7 @@ body {
 .game-area {
     width: 100vw;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #fbfbfb;
     position: relative;
 }
 
@@ -21,5 +21,7 @@ body {
     width: 10px;
     height: 10px;
     background-color: red;
+    background-size: cover;
     position: absolute;
 }
+
