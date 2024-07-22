@@ -1,0 +1,22 @@
+[
+    {
+        "image": "image1.jpg",
+        "answers": [
+            {"text": "Ответ 1"},
+            {"text": "Ответ 2"},
+            {"text": "Правильный ответ"},
+            {"text": "Ответ 4"}
+        ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "image": "image2.jpg",
+        "answers": [
+            {"text": "Ответ A"},
+            {"text": "Правильный ответ"},
+            {"text": "Ответ C"},
+            {"text": "Ответ D"}
+        ],
+        "correctAnswerIndex": 1
+    }
+]
