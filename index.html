@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упрощенный Paint</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu">
+        <label for="color">Цвет:</label>
+        <input type="color" id="color" value="#000000">
+
+        <label for="brushSize">Размер кисти:</label>
+        <input type="range" id="brushSize" min="1" max="100" value="5">
+
+        <button id="pencil">Карандаш</button>
+        <button id="squareOutline">Контур квадрата</button>
+        <button id="circleOutline">Контур круга</button>
+        <button id="filledSquare">Залитый квадрат</button>
+        <button id="filledCircle">Залитый круг</button>
+        <button id="eraser">Ластик</button>
+        <button id="save">Сохранить</button> <!-- Кнопка сохранения -->
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
