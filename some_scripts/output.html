@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head> <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11007885970"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-11007885970'); </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7Z7S0MKQQQ"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-7Z7S0MKQQQ'); </script>
+    <!-- Yandex.Metrika counter -->
+    <script
+        type="text/javascript"> (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; var z = null; m[i].l = 1 * new Date(); for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } } k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(54950062, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true, ecommerce: "dataLayer" }); </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/54950062" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript> <!-- /Yandex.Metrika counter --> <!-- Top.Mail.Ru counter -->
+    <script
+        type="text/javascript"> var _tmr = window._tmr || (window._tmr = []); _tmr.push({ id: "3368798", type: "pageView", start: (new Date()).getTime() }); (function (d, w, id) { if (d.getElementById(id)) return; var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id; ts.src = "https://top-fwz1.mail.ru/js/code.js"; var f = function () { var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s); }; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "tmr-code"); </script>
+    <noscript>
+        <div><img src="https://top-fwz1.mail.ru/counter?id=3368798;js=na" style="position:absolute;left:-9999px;"
+                alt="Top.Mail.Ru" /></div>
+    </noscript> <!-- /Top.Mail.Ru counter -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/assets/4644322/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/4644322/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/4644322/css/bootstrap-yii.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/3ef62b9d/v3.1.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/3ef62b9d/v3.1.mob.css" />
+    <link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/3ef62b9d/new_css.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/146314e0/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/146314e0/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/7df82b62/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/js/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/72bd9473/books_swiper_widget.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/cd910626/css/styles.css?10" />
+    <style type="text/css">
+        /*<![CDATA[*/
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        body,
+        label,
+        input,
+        button,
+        select,
+        textarea {
+            font-size: 13px;
+            line-height: 18px;
+        }
+
+        #chat-box {
+            height: 300px;
+        }
+
+        .comments .comment .meta,
+        .comments .comment .meta a,
+        .translator .info,
+        .translator .info a {
+            color: #bbb;
+        }
+
+        .comments .comment:hover .meta,
+        .comments .comment:hover .meta a,
+        .translator tr:hover .info,
+        .translator tr:hover .info a {
+            color: #888;
+        }
+
+        /*]]>*/
+    </style>
+    <script type="text/javascript" src="/assets/a58aa6ed/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/4644322/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery.auto-complete.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="/assets/146314e0/slick.min.js"></script>
+    <script type="text/javascript" src="/assets/7df82b62/script.js"></script>
+    <script type="text/javascript" src="/js/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="/assets/72bd9473/books_swiper_widget.js"></script>
+    <script type="text/javascript" src="/assets/cd910626/js/comments.js?10"></script>
+    <script
+        type="text/javascript"> /*<![CDATA[*/ var User = new CUser({ id: 0, login: 'anonymous' }); var Book = new CBook({ id: 95179, owner_id: 265988, facecontrol: 1, s_lang: 2, t_lang: 1, n_verses: 378, n_vars: 378, d_vars: 378, typ: 'A', s_title: 'Rebirth to 80s: Daughter-in-law is a Bit Spicy', t_title: 'Возрождение в 80-е: невестка немного пикантна', }); /*]]>*/ </script>
+    <title>Возрождение в 80-е: невестка немного пикантна читать онлайн: ранобэ, новеллы на русском Tl.Rulate.ru</title>
+    <meta name="description"
+        content="Читать онлайн ранобэ Возрождение в 80-е: невестка немного пикантна (Rebirth to 80s: Daughter-in-law is a Bit Spicy) на русском. 🔥 Новые главы! Скачать бесплатно электронную книгу ранобэ Возрождение в 80-е: невестка немного пикантна в fb2." />
+    <meta name="keywords"
+        content="читать Возрождение в 80-е: невестка немного пикантна, скачать Возрождение в 80-е: невестка немного пикантна, читать Rebirth to 80s: Daughter-in-law is a Bit Spicy, скачать Rebirth to 80s: Daughter-in-law is a Bit Spicy, читать возрождение в 80-е: невестка немного пикантна, скачать возрождение в 80-е: невестка немного пикантна, читать rebirth to 80s: daughter-in-law is a bit spicy, скачать rebirth to 80s: daughter-in-law is a bit spicy" />
+    <script src="/js/swiped-events.js"></script>
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="Tl.Rulate.ru - новеллы и ранобэ читать онлайн - Book">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://tl.rulate.ru/i/book/23/8/4071.jpg">
+    <meta property="ranobe:description"
+        content="Ее родители умерли молодыми, ее семья была бедной, а внешность посредственной. Ся Сяолань была на краю пропасти и боролась в течение 20 лет. Она стала руководителем транснациональной компании и, наконец, справилась с невзгодами своей жизни…Когда я проснулась, я обнаружила, что переродилась в 1980-е, меня также звали Ся Сяолань, и у меня было лицо, которое стало катастрофой для страны и людей.“Ся Сяолань”, у которой были те же имя и фамилия, взяла хороший набор карточек, но решила покончить с собой под давлением слухов.Ся Сяолань воспользовалась этим безобразием, наступила на лучшее, оскорбила отбросов общества и держалась за руки с красивым негодяем, который влюбился в нее с первого взгляда, и в 1980-е все превратилось в бардак!">
+    <meta name="language" content="ru" />
+    <meta name="csrf-param" content="YII_CSRF_TOKEN">
+    <meta name="csrf-token"
+        content="VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw==">
+    <meta name="yandex-verification" content="1d727d37fb200242" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/i/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/i/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/i/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/i/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/i/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/i/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!--[if IE]> <script type="text/javascript" src="/js/jquery.input-placeholder.js"></script> <link rel="stylesheet" href="/css/jquery.input-placeholder.css"/> <script type="text/javascript"> $(function () { $('input[placeholder]').inputDefault(); }); </script> <![endif]-->
+    <script> $(document).ready(function () { $("body").on("click", "a.dropdown-toggle:not(.multiselect)", function (e) { $("ul.dropdown-menu:not(.multiselect-container)").css("display", "none"); $(this).next("ul.dropdown-menu").css("display", "block"); e.stopPropagation(); return false; }) }); $(document).on('click click.dropdown.data-api', function (e) { if (!$(e.target).closest('.dropdown, .multiselect-container').length) { return $("ul.dropdown-menu:not(.multiselect-container)").css("display", "none"); } }); </script>
+    <script
+        type="application/ld+json"> { "@context": "https://schema.org", "@type": "WebSite", "url": "https://tl.rulate.ru/", "potentialAction": { "@type": "SearchAction", "target": "https://tl.rulate.ru/search?t={search_term_string}", "query-input": "required name=search_term_string" } } </script>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="main-header-inner">
+            <div class="main-header-left_menu">
+                <div class="logo" style="display: flex;"> <a href="/" style="text-decoration: none;"> <img
+                            src="/i/logo/rulate-24.png" width="36" height="36"
+                            alt="Tl.Rulate.ru - новеллы и ранобэ читать онлайн" id="header-logo-img"
+                            style="height: unset; max-width: unset;" /> </a> </div>
+                <div class="main-header-menu_nav-container">
+                    <div class="header-item_dropdown"> <button class="header-item_dropbtn">Каталог</button>
+                        <div class="header-item_dropdown-content"> <a href="/search/?cat=5">Китайские</a> <a
+                                href="/search/?cat=7">Корейские</a> <a href="/search/?cat=6">Японские</a> <a
+                                href="/search/?cat=28">Английские</a> <a href="/search/?cat=18">Авторские</a>
+                            <div class="header-item_menu-divider"></div> <a href="/search/?cat=19">Переводы фанфиков</a>
+                            <a href="/search/?cat=51">Авторские фанфики</a>
+                            <div class="header-item_menu-divider"></div> <a href="/collection">Коллекции</a> <a
+                                href="/abandon">Брошенные</a>
+                            <div class="header-item_menu-divider"></div> <a href="/search/">Полный список</a>
+                        </div>
+                    </div> <a href="/site/top"
+                        style="padding: 0.25rem 0.5rem; color: var(--primary); font-size: 1rem; font-family: 'Exo 2'; font-weight: 600; text-decoration: none;">
+                        Топ </a>
+                    <div class="header-item_dropdown"> <button class="header-item_dropbtn">Сообщество</button>
+                        <div class="header-item_dropdown-content"> <a href="/blog/?topic=64">Новости</a> <a
+                                href="/reviews">Рецензии</a> <a href="/announces">Анонсы</a>
+                            <div class="header-item_menu-divider"></div> <a href="/users">Пользователи</a> <a
+                                href="/team/all">Команды</a> <a href="/site/help">Помощь</a>
+                            <div class="header-item_menu-divider"></div> <a
+                                href="https://vk.com/rulate_project">ВКонтакте</a> <a
+                                href="https://t.me/rulated">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header-menu"></div>
+            <div class="main-header-right_menu">
+                <div class="header-item">
+                    <form class="form-search" method="get" action="/search" style="display: flex; margin: 0;"> <input
+                            type="hidden" name="from" value="header"> <input type="text" name="t"
+                            class="input-medium search-query span3" placeholder="Что-то потеряли?"
+                            title="Кстати, отсюда можно найти и переводчика, если собаку (@), а потом сразу его ник." />
+                        <input type="submit" value="&raquo;" class="btn" style="border-radius: 20px;" /> </form>
+                </div>
+                <div class="main-header-profile">
+                    <div class="header-item_dropdown"> <button class="main-header-avatar"> <svg
+                                class="main-header-avatar_icon" focusable="false" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+                                </path>
+                            </svg> </button>
+                        <div style="direction: rtl;">
+                            <div class="main-header-avatar_dropdown-menu">
+                                <div id="header-login" style="height: auto;">
+                                    <form method="post" action="/" class="form-inline btn-toolbar"> <input type="text"
+                                            name="login[login]" placeholder="Логин" class="span1 header-login-input"
+                                            style="width: auto;" /> <input type="password" name="login[pass]"
+                                            placeholder="Пароль" class="span1 header-login-input"
+                                            style="width: auto;" /> <input type="submit" value="Войти" class="btn"
+                                            style="margin: 5px 0;" /> </form>
+                                </div>
+                                <div><a href="/register"><strong>Зарегистрироваться</strong></a></div>
+                                <div><a href="/register/remind"><strong>Напомнить пароль</strong></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script> let dropdowns = document.querySelectorAll('.header-item_dropbtn, .main-header-avatar, .main-header-create, .main-header-notifications'); let dropdownContents = document.querySelectorAll('.header-item_dropdown-content, .main-header-avatar_dropdown-menu, .main-header-create_dropdown-menu, .main-header-notifications_dropdown-menu'); for (let i = 0; i < dropdowns.length; i++) { dropdowns[i].addEventListener('click', function () { this.classList.toggle('active'); dropdownContents[i].classList.toggle('active'); if (dropdownContents[i].style.visibility === 'visible') { dropdownContents[i].style.visibility = 'hidden'; } else { dropdownContents[i].style.visibility = 'visible'; } for (let j = 0; j < dropdowns.length; j++) { if (dropdowns[j] !== this) { try { dropdowns[j].classList.remove('active'); dropdownContents[j].classList.remove('active'); dropdownContents[j].style.visibility = 'hidden'; } catch { continue; } } } }); dropdowns[i].addEventListener('mouseover', function () { for (let j = 0; j < dropdowns.length; j++) { if (dropdowns[j] !== this) { try { dropdowns[j].classList.remove('active'); dropdownContents[j].classList.remove('active'); dropdownContents[j].style.visibility = 'hidden'; } catch { continue; } } } }); } window.onclick = function (event) { if (event.target.matches('.header-login-input')) { document.querySelector('.main-header-avatar_dropdown-menu').style.visibility = 'visible'; } if (!event.target.matches('.header-item_dropbtn, .main-header-avatar, .main-header-create, .main-header-notifications, .header-login-input')) { for (let i = 0; i < dropdowns.length; i++) { try { dropdowns[i].classList.remove('active'); dropdownContents[i].classList.remove('active'); dropdownContents[i].style.visibility = 'hidden'; } catch { continue; } } } }; </script>
+    <div class="container header-indent">
+        <div class="alert alert-success" data-id="ef2c3a9f27ad830d1a5c177a125a5d82"> <a class="close"
+                data-dismiss="alert" href="#">&times;</a> <a
+                href="https://tl.rulate.ru/blog/192993">Правильно-Неправильно "Бесплатная реклама в группе ВК"</a>
+        </div>
+        <div id="yw1"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12"> </div>
+        </div>
+        <div class="row">
+            <div class="span12"> </div>
+        </div>
+        <div class="row">
+            <div class="span8">
+                <style>
+                    #Info .images {
+                        width: 200px;
+                        height: 285px;
+                        display: inline-block;
+                        margin-right: 20px;
+                        position: relative;
+                    }
+
+                    #Info .images img {
+                        float: left;
+                        margin: 0 20px 20px 0;
+                    }
+
+                    #Info .cat span {
+                        display: none;
+                    }
+
+                    #Info .cat:hover span {
+                        display: inline;
+                    }
+
+                    #Chapters {
+                        width: 100%;
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    #Chapters td.r {
+                        text-align: right;
+                    }
+
+                    #Chapters .disabled {
+                        text-decoration: line-through;
+                        color: #aaa;
+                    }
+
+                    #Chapters td.editing {
+                        border-top: 10px solid black;
+                        border-bottom: 10px solid black;
+                        background: #fff;
+                        margin-right: -10px;
+                    }
+
+                    #Chapters td.loading {
+                        padding: 50px;
+                        color: #444;
+                        background: #d0d0d0 url("/i/pacman-d0d0d0.gif") no-repeat center center;
+                    }
+
+                    #Chapters td,
+                    #Chapters th {
+                        white-space: nowrap;
+                    }
+
+                    #Chapters td.t {
+                        white-space: normal;
+                    }
+
+                    #Chapters .editing .b select {
+                        height: 24px;
+                        font-size: 14px;
+                    }
+
+                    .images>.icons {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+
+                    .total_price,
+                    .total_price_cnt {
+                        font-weight: bold;
+                    }
+
+                    body.night-mode {
+                        background-color: #171717;
+                        color: #ddd;
+                    }
+
+                    body.night-mode .tools {
+                        background-color: #222223;
+                        border-color: #444;
+                        color: #ddd;
+                    }
+
+                    body.night-mode .tools .progress {
+                        color: #000;
+                    }
+
+                    body.night-mode .comment-footer,
+                    body.night-mode .spoiler-trigger,
+                    body.night-mode .comment-link,
+                    body.night-mode textarea,
+                    body.night-mode .form-actions {
+                        background-color: #222223;
+                    }
+
+                    body.night-mode textarea {
+                        color: #ddd;
+                    }
+
+                    body.night-mode td {
+                        background-color: #222223 !important;
+                        border-color: #444;
+                    }
+
+                    body.night-mode h4 {
+                        color: #ddd;
+                    }
+
+                    body.night-mode li.active a {
+                        color: #1976d2 !important;
+                    }
+
+                    body.night-mode .container a:not(.btn) {
+                        color: hsla(0, 0%, 100%, .64);
+                        text-decoration: none;
+                    }
+
+                    body.night-mode .container a:not(.btn):hover {
+                        color: #1976d2;
+                    }
+
+                    body.night-mode .alert a {
+                        color: #005580;
+                    }
+
+                    body.night-mode .badge {
+                        background-color: hsla(240, 4%, 49%, .07);
+                        color: #ddd;
+                    }
+                </style>
+                <script> if (getCookie('night_mode')) { document.body.classList.add('night-mode'); } else { document.body.classList.remove('night-mode'); } document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll("button[name='buyVolume']").forEach(button => { button.addEventListener('click', function () { buyVolume(this.dataset.vol); }); }); function buyVolume(volume) { $.ajax({ url: '/book/' + Book.id + '/buyVolume', method: 'post', data: { volume: volume, csrf: 'VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw==' }, success: (resp) => { document.location.reload(); } }); } }); </script>
+                <ul class="nav nav-tabs book-header">
+                    <li class="active"> <a href='/book/95179/'>оглавление</a> </li>
+                    <li class=""> <a href='/book/95179/members'>переводчики</a> </li>
+                    <li class=""> <a href='/book/95179/blog'>блог</a> </li>
+                    <li class=""> <a href='/book/95179/announces'>анонсы</a> </li>
+                </ul>
+                <h1>Rebirth to 80s: Daughter-in-law is a Bit Spicy / Возрождение в 80-е: невестка немного пикантна</h1>
+                <div id="Info">
+                    <div class="row">
+                        <div class="span2" style="width: 200px;">
+                            <div class="images">
+                                <div class="slick">
+                                    <div style="width: 200px; height: 285px; text-align: center; overflow: hidden"> <img
+                                            src="/i/book/23/8/4071.jpg" alt=""> </div>
+                                </div>
+                                <div class="icons"> </div>
+                            </div>
+                        </div>
+                        <div class="span5">
+                            <p class='cat'> <a href='/catalog/2'>Книги</a> / <a href='/search?cat=12'>Новеллы и
+                                    ранобэ</a> / <a href='/search?cat=5'>Китайские</a> </p>
+                            <div style="margin: 10px 0;"> <span style="display: inline-block; width: 140px;">
+                                    <strong>Произведение:</strong> </span>
+                                <div class="rating-block disabled" data-action="/book/95179/rate"> <a href="#"
+                                        class="star active " data-num="0"></a> <a href="#" class="star active "
+                                        data-num="1"></a> <a href="#" class="star active " data-num="2"></a> <a href="#"
+                                        class="star active " data-num="3"></a> <a href="#" class="star active "
+                                        data-num="4"></a> 4.79 / 19 голосов </div>
+                            </div>
+                            <div style="margin: 10px 0;"> <span style="display: inline-block; width: 140px;">
+                                    <strong>Качество перевода:</strong> </span>
+                                <div class="rating-block disabled" data-action="/book/95179/quality_rate"> <a href="#"
+                                        class="star active " data-num="0"></a> <a href="#" class="star active "
+                                        data-num="1"></a> <a href="#" class="star active " data-num="2"></a> <a href="#"
+                                        class="star active " data-num="3"></a> <a href="#" class="star active "
+                                        data-num="4"></a> 4.24 / 21 голос </div>
+                            </div>
+                            <p>
+                            <div id="liker"> <span class="btn btn-success disabled"><i class="icon-thumbs-up"></i>
+                                    29</span> </div>
+                            </p>
+                            <p> <strong>Автор:</strong> <em><a
+                                        href='/search?from=book&t=%D0%91%D0%B0%D0%BE%D1%87%D0%B6%D1%83%D0%B0%D0%BD%D1%87%D1%8D%D0%BD'>Баочжуанчэн</a></em>
+                            </p>
+                            <p> <strong>Год выпуска:</strong> <em>2021</em> </p>
+                            <p> <strong>Количество глав:</strong> <em>2358</em> </p>
+                            <p> <strong>Выпуск:</strong> <em> завершён </em> </p>
+                            <p> <strong>Группа:</strong> <em><a href='/team/1723'>ИНЬ - ЯН (Свет)</a></em> </p>
+                            <p> <strong>Альтернативное название:</strong> <em>重生八零：媳妇有点辣</em> </p>
+                            <p> <strong>Жанры:</strong> <em><a href="/search?genres%5B0%5D=9" class="badge">дзёсэй</a>
+                                    <a href="/search?genres%5B0%5D=11" class="badge">драма</a> <a
+                                        href="/search?genres%5B0%5D=13" class="badge">история</a> <a
+                                        href="/search?genres%5B0%5D=49" class="badge">мелодрама</a></em> </p>
+                            <p> <strong>Тэги:</strong> <em><a href="/search?tags%5B0%5D=186" class="badge">красивая
+                                        главная героиня</a> <a href="/search?tags%5B0%5D=7753" class="badge">любовный
+                                        интерес влюбляется первым</a> <a href="/search?tags%5B0%5D=813"
+                                        class="badge">переселение</a> <a href="/search?tags%5B0%5D=988"
+                                        class="badge">современные знания</a> <a href="/search?tags%5B0%5D=1071"
+                                        class="badge">трансмиграция</a> <a href="/search?tags%5B0%5D=1381"
+                                        class="badge">умная главная героиня</a> <a href="/search?tags%5B0%5D=2093"
+                                        class="badge">умный главный герой</a></em> </p>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar" style="margin: 10px 10px 10px 0px;"> <!-- продолжить чтение --> <a
+                            href='/book/95179/3207542/ready_new' class='btn btn-info'>Начать чтение</a>
+                        <!-- закладки --> <!-- поделиться -->
+                        <div class="btn-group"> <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"
+                                rel="tooltip" title="Поделиться"> <i class="icon-share"></i> </a>
+                            <ul class="dropdown-menu">
+                                <li> <a href="javascript: void(0)" title="Поделиться Вконтакте" rel="nofollow"
+                                        onClick="window.open('https://vk.com/share.php?url=https://tl.rulate.ru/book/95179&title=Rebirth+to+80s%3A+Daughter-in-law+is+a+Bit+Spicy+%2F+%D0%92%D0%BE%D0%B7%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5+%D0%B2+80-%D0%B5%3A+%D0%BD%D0%B5%D0%B2%D0%B5%D1%81%D1%82%D0%BA%D0%B0+%D0%BD%D0%B5%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE+%D0%BF%D0%B8%D0%BA%D0%B0%D0%BD%D1%82%D0%BD%D0%B0&image=https://tl.rulate.ru/i/book/23/8/4071.jpg','sharer','status=0,toolbar=0,width=650,height=500');">
+                                        <img src="/i/vk.png" width="18" /> ВКонтакте </a> </li>
+                                <li> <a href="javascript: void(0)" title="Поделиться в Телеграм" rel="nofollow"
+                                        onClick="window.open('https://telegram.me/share/url?url=https://tl.rulate.ru/book/95179&text=Rebirth+to+80s%3A+Daughter-in-law+is+a+Bit+Spicy+%2F+%D0%92%D0%BE%D0%B7%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5+%D0%B2+80-%D0%B5%3A+%D0%BD%D0%B5%D0%B2%D0%B5%D1%81%D1%82%D0%BA%D0%B0+%D0%BD%D0%B5%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE+%D0%BF%D0%B8%D0%BA%D0%B0%D0%BD%D1%82%D0%BD%D0%B0','sharer','status=0,toolbar=0,width=650,height=500');">
+                                        <img src="/i/telegram.png" width="18" /> Телеграм </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin: 20px 0 0 0">
+                        <p>Ее родители умерли молодыми, ее семья была бедной, а внешность посредственной. Ся Сяолань
+                            была на краю пропасти и боролась в течение 20 лет. Она стала руководителем транснациональной
+                            компании и, наконец, справилась с невзгодами своей жизни…</p>
+                        <p>Когда я проснулась, я обнаружила, что переродилась в 1980-е, меня также звали Ся Сяолань, и у
+                            меня было лицо, которое стало катастрофой для страны и людей.</p>
+                        <p>“Ся Сяолань”, у которой были те же имя и фамилия, взяла хороший набор карточек, но решила
+                            покончить с собой под давлением слухов.</p>
+                        <p>Ся Сяолань воспользовалась этим безобразием, наступила на лучшее, оскорбила отбросов общества
+                            и держалась за руки с красивым негодяем, который влюбился в нее с первого взгляда, и в
+                            1980-е все превратилось в бардак!</p>
+                    </div>
+                    <h3>Рецензии</h3>
+                    <div class="alert alert-info">Рецензий пока нет. <a href="/book/95179/blog/edit?topic=4">Вы можете
+                            написать первую</a>.</div>
+                </div>
+                <div class="book-rows-swiper ">
+                    <div class="row-books">
+                        <h3 rel="tooltip"> Другие переводы команды </h3>
+                        <div class="books_swiper_widget swiper"
+                            data-swiper='{ "loop": false, "centerInsufficientSlides": true }'>
+                            <div class="swiper-wrapper">
+                                <div class="row-book swiper-slide"> <a href="/book/43306">
+                                        <div class="image-container" title="Похоже, я попала в игру с обратным гаремом">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/4/19447-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Я ответила на телефонный вызов, когда вдруг на другом конце линии послышался автоматический голос:[Сброс.][Начало игры.]После этого все потемнело, как будто кто-то нажал на кнопку отключения моего сознания.Через несколько секунд я открыла глаза и увидела странных мужчин, лежащих в моей постели.— Что ты тут делаешь?— Я здесь потому, что я... я на..."
+                                            data-placement="bottom">
+                                            <h4>Похоже, я попала в игру с обратным гаремом</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/33347">
+                                        <div class="image-container"
+                                            title="Ежедневные пощечины по лицу императрицы фильмов">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/9/23322-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Когда в большой квартире осталась только она одна, Су Шень внезапно встала и подошла к окну, затем раздвинула шторы. Перед ее взором неожиданно раскинулся широкий зелёный пояс жилого района. Она взглянула на безжизненное небо, глубоко вздохнула, затем повернулась и задернула шторы.Су Шень не могла понять, почему, и как она попала в этот странный..."
+                                            data-placement="bottom">
+                                            <h4>Ежедневные пощечины по лицу императрицы фильмов</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/33123">
+                                        <div class="image-container" title="Дорогой, почему ты сожалеешь об этом?">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/22/4/14508-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Я вселилась во второстепенную героиню, которая пыталась откупиться деньгами от любовницы её мужа. Но я не хотела умирать от стресса из-за мужа и его любовницы. Поэтому...— Я-я не могу принять что-то подобное. Неважно, как много вы мне дадите, я не расстанусь с герцогом!— Вот и молодец.Я тайно встретилась с любовницей.И, так же, как и в оригиналь..."
+                                            data-placement="bottom">
+                                            <h4>Дорогой, почему ты сожалеешь об этом?</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/55743">
+                                        <div class="image-container" title="Я исчезну, Великий герцог">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/9/16612-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Фернан Цезарь, правитель Севера, вернувшийся с войны.Мужчина, идеальный во всем, был единственным хорошим воспоминанием несчастливого детства Юлии.Когда ей сообщили, что она выйдет за него замуж, Юлия впервые уверовала в бога.Но…— Можешь делать что хочешь: переделать замок, купить драгоценности, устроить бал.— …— Но я не хочу видеть тебя по утра..."
+                                            data-placement="bottom">
+                                            <h4>Я исчезну, Великий герцог</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/52972">
+                                        <div class="image-container" title="Приручила очерненного раба">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/2/28029-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Мне удалось взять под свое крыло человека, который в будущем станет лучшим в фехтовании.Он теперь мне, как младший брат.Я дорожу им гораздо больше, чем кем-либо другим, хотя, мы - не одной крови.Я хорошо кормила его и воспитывала.Он станет младшим братом, который будет защищать меня от проклятого жениха, убившего меня в прошлой жизни.В конце кон..."
+                                            data-placement="bottom">
+                                            <h4>Приручила очерненного раба</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/53527">
+                                        <div class="image-container" title="Дорогой, почему мы не можем развестись?">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/3/54-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Она оказалась в теле злой женщины, которая полюбила главного героя и убила своего мужа.К счастью, она оказалась здесь до того, как убила его.Но, к сожалению, все знают, что она любит главного героя.Как только это произойдет, она должна немедленно развестись.Но почему…- С ума сойти, сойти с ума. Я только что услышал. Я не знал... - сказал мой муж..."
+                                            data-placement="bottom">
+                                            <h4>Дорогой, почему мы не можем развестись?</h4>
+                                        </div>
+                                    </a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-rows-swiper ">
+                    <div class="row-books">
+                        <h3 rel="tooltip"> Другие работы автора </h3>
+                        <div class="books_swiper_widget swiper"
+                            data-swiper='{ "loop": false, "centerInsufficientSlides": true }'>
+                            <div class="swiper-wrapper">
+                                <div class="row-book swiper-slide"> <a href="/book/65332">
+                                        <div class="image-container" title="Перерождение в 70-е">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/22/3/23157-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Цзян Суйсуй в прошлой жизни умерла от врожденного порока сердца, и ей всегда было жаль, что она не познала настоящей любви. Когда в оцепенении она снова очнулась, то влюбилась с первого взгляда в мужчину, которого она видела впервые.Как-то раз её спросили: - Суйсуй, хочешь ли ты выйти за него замуж?Цзян Суйсуй яростно кивнула: - Хочу!Проснувшись..."
+                                            data-placement="bottom">
+                                            <h4>Перерождение в 70-е</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/47252">
+                                        <div class="image-container" title="Делать все, что заблагорассудится">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/8/14847-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Мать Су Цюцзы умерла рано. Отец женился вновь, ведь он не дорожил её матерью и не любил её так, чтобы &quot;жить долго и счастливо&quot;.Но на дне рождения своей сводной сестры она была сосватана за мужчину, за которого мечтала выйти её сестра.Этот мужчина: энергичный, высокоуважаемый и элегантный - был самым завидным женихом города Ся.Как бы то ни было, ..."
+                                            data-placement="bottom">
+                                            <h4>Делать все, что заблагорассудится</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/103545">
+                                        <div class="image-container" title="Жестокий демон зовет меня малышкой">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/24/3/11725-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Яо Яо закончила играть в волшебную игру в палате неизлечимой болезни и закрыла глаза только для того, чтобы оказаться перенесенной в игру. Хотя у нее было хрупкое и слабое телосложение и она потерпела неудачу в борьбе с болезнью, ее кровь оказалась универсальным сокровищем. После того, как ее жених, который посвятил себя искоренению демонов и от..."
+                                            data-placement="bottom">
+                                            <h4>Жестокий демон зовет меня малышкой</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/102350">
+                                        <div class="image-container" title="Маленькая вдова зеленого чая 70-х годов">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/24/1/13099-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Су Цуй поняла, что она тонет, и ее спасают. Она была так напугана, что вцепилась в человека, который ее спас. Когда она проснулась, она обнаружила, что попала в книгу.Безмозглая второстепенная героиня романа завидовала, подставила свою молодую и симпатичную невестку и в итоге трагически погибла.Глядя на стоявшего перед ней одинокого и грубого му..."
+                                            data-placement="bottom">
+                                            <h4>Маленькая вдова зеленого чая 70-х годов</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/59595">
+                                        <div class="image-container" title="Дверь к возрождению в апокалипсисе">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/21/7/1583-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="С начала апокалипсиса история в параллельных мирах идет разными путями. Одна из них стала раем, другая — адом. В одной мирное время с развевающимися красными флагами. В другой — конец света, в котором свирепствуют зомби, и уничтожается любая жизнь.Гу Нин пыталась выжить в постапокалиптическом мире, изо всех сил стараясь защитить свою семью и бли..."
+                                            data-placement="bottom">
+                                            <h4>Дверь к возрождению в апокалипсисе</h4>
+                                        </div>
+                                    </a> </div>
+                                <div class="row-book swiper-slide"> <a href="/book/56888">
+                                        <div class="image-container"
+                                            title="Сладкая запретная любовь и сексуальные совпадения">
+                                            <div class="gloss"></div>
+                                            <div class="lazy image-wrapper swiper-lazy"
+                                                data-background="/i/book/24/1/514-220220.jpg"
+                                                style="background-image: url('/img/placeholder.jpg');"></div>
+                                            <div class='icons'> </div>
+                                        </div>
+                                        <div class="title" rel="tooltip"
+                                            title="Каждая сотрудница компании жаждала стать госпожой Чжоу. Все они думали о том, насколько же прекрасно тело Чжоу И под его узким костюмом.Но переспать с ним удалось только Су Наньсин.Ей хотелось рассказать всем: когда выключается свет, босс Чжоу становится даже мощнее, чем они думают.Однако после той случайной ночи, он больше не был тем же невозму..."
+                                            data-placement="bottom">
+                                            <h4>Сладкая запретная любовь и сексуальные совпадения</h4>
+                                        </div>
+                                    </a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions"> <input type="submit" onclick="$('input[name=buy]').click(); return false;"
+                        class="btn btn-primary" value="Подписаться" /> (общая стоимость подписки: <span
+                        class="total_price">0</span>, вы покупаете <span class="total_price_cnt">0</span> глав) <div
+                        style="margin: 20px 0 0 0"> <b>Купить абонемент: </b> <a
+                            href="/book/95179/ticket/1?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                            class="btn btn-warning ticket-btn" data-id="1" data-cnt="5" data-price="28"> 5 глав / 28 RC
+                        </a> <a
+                            href="/book/95179/ticket/2?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                            class="btn btn-warning ticket-btn" data-id="2" data-cnt="10" data-price="53"> 10 глав / 53
+                            RC </a> <a
+                            href="/book/95179/ticket/3?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                            class="btn btn-warning ticket-btn" data-id="3" data-cnt="20" data-price="100"> 20 глав / 100
+                            RC </a> </div>
+                </div>
+                <h2>Оглавление:</h2>
+                <div class="row">
+                    <div class="span6">
+                        <form class="form-inline" action="/book/95179" method="post"> <label
+                                class="control-label">Выводить главы по:</label> <select
+                                class="C_paginationSelector input-mini" name="c_countOnPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="500">500</option>
+                                <option selected value="0">Все</option>
+                            </select> <input type="submit" class='btn btn-default' value="Установить"> </form>
+                    </div>
+                    <div class="span">
+                        <form class="form-inline" action="/book/95179" method="post"> <input type="hidden"
+                                name="C_sortChapters" value="1"> <input type="submit" class='btn btn-default'
+                                value="показывать с конца"> </form>
+                    </div>
+                </div>
+                <div class="checkbox"> <label> <input type="checkbox"
+                            onchange="if ( this.checked ) check_all('chapter[]'); else uncheck_all('chapter[]'); recalc_price();" />
+                        выделить все главы </label> </div>
+                <form action="/book/95179/subscribe" method="post" id="subscribe"> <input type="hidden" name="csrf"
+                        value="VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw==" />
+                    <div class="for_table_container">
+                        <table class="table table-condensed table-striped" id="Chapters">
+                            <thead>
+                                <tr>
+                                    <th><i class="icon-book" title="Подписка" alt="Подписка"></i></th>
+                                    <th class='t'>Название</th>
+                                    <th title='Статус устанавливается модераторами.' style='cursor:help;'>Стат.</th>
+                                    <th title='Когда в последний раз была добавлена, удалена или отредактирована последняя версия перевода или изменился оригинальный текст.'
+                                        style='cursor:help;'>Актив.</th>
+                                    <th title='Фрагментов переведено / всего. Наведите курсор на цифры, чтобы узнать Коэффициент Плюрализма, среднее количество вариантов перевода одного фрагмента.'
+                                        style='cursor:help; text-align:center;' colspan='2'>Готово</th>
+                                    <th title='Click - выбрать все, Shift+Click - выбрать не прочитанные'><a href="#"
+                                            onclick="toggle_all('download_chapter[]', event); return false;"><img
+                                                src="/i/download.jpg" width="16" height="16" /></a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id='c_3207542' data-id='3207542' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3207542/ready_new'>Глава 1. Ты сломала мои туфли,
+                                            убирайся!</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:29'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3207542/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3207542'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3211266' data-id='3211266' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3211266/ready_new'>Глава 2. Тогда выгони
+                                            меня!</a></td>
+                                    <td>редактируется</td>
+                                    <td><span title='02 марта 2024 г., 22:32'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3211266/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3211266'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3211273' data-id='3211273' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3211273/ready_new'>Глава 3. Как быть справедливой
+                                            к тебе</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:33'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3211273/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3211273'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3211586' data-id='3211586' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3211586/ready_new'>Глава 4. Разная судьба</a>
+                                    </td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:35'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3211586/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3211586'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3211588' data-id='3211588' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3211588/ready_new'>Глава 5. Продажа утиных яиц в
+                                            округе</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:42'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3211588/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3211588'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3218757' data-id='3218757' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3218757/ready_new'>Глава 6. Ароматный суп с
+                                            лапшой</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:46'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3218757/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3218757'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3218758' data-id='3218758' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3218758/ready_new'>Глава 7. Серьезно?</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:50'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3218758/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3218758'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3218759' data-id='3218759' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3218759/ready_new'>Глава 8. Дядя здесь!</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:53'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3218759/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3218759'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3218761' data-id='3218761' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3218761/ready_new'>Глава 9. Я передумала!</a>
+                                    </td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 22:57'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3218761/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3218761'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3218762' data-id='3218762' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3218762/ready_new'>Глава 10. Возвращение Ся
+                                            Дайюнь</a></td>
+                                    <td>готово</td>
+                                    <td><span title='02 марта 2024 г., 23:00'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3218762/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3218762'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3220688' data-id='3220688' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3220688/ready_new'>Глава 11. Кролик тоже
+                                            кусается</a></td>
+                                    <td>готово</td>
+                                    <td><span title='07 июня 2024 г., 18:28'>1 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3220688/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3220688'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3230999' data-id='3230999' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3230999/ready_new'>Глава 12. Бизнес-план</a></td>
+                                    <td>готово</td>
+                                    <td><span title='19 авг. 2023 г., 14:20'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3230999/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3230999'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3231000' data-id='3231000' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3231000/ready_new'>Глава 13. Начните работу
+                                            бойскаутов!</a></td>
+                                    <td>готово</td>
+                                    <td><span title='19 авг. 2023 г., 14:29'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3231000/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3231000'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3231001' data-id='3231001' class='chapter_row '>
+                                    <td></td>
+                                    <td class='t'><a href='/book/95179/3231001/ready_new'>Глава 14. Яйцо Ши-тцу</a></td>
+                                    <td>готово</td>
+                                    <td><span title='19 авг. 2023 г., 14:53'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><a href='/book/95179/3231001/ready_new' class='btn btn-small btn-info'
+                                            title='Получить готовый перевод.'>читать</a></td>
+                                    <td><input type='checkbox' name='download_chapter[]' value='3231001'
+                                            class='download_chapter' /></td>
+                                </tr>
+                                <tr id='c_3231023' data-id='3231023' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3231023'
+                                            onchange='recalc_price();' data-price='4' /> 4</td>
+                                    <td class='t'><a href='/book/95179/3231023/ready_new'>Глава 15. Мишенью стал
+                                            бандит</a></td>
+                                    <td>редактируется</td>
+                                    <td><span title='19 авг. 2023 г., 15:06'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3231143' data-id='3231143' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3231143'
+                                            onchange='recalc_price();' data-price='4' /> 4</td>
+                                    <td class='t'><a href='/book/95179/3231143/ready_new'>Глава 16. Герои падают с
+                                            небес!</a></td>
+                                    <td>готово</td>
+                                    <td><span title='21 авг. 2023 г., 21:05'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3231144' data-id='3231144' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3231144'
+                                            onchange='recalc_price();' data-price='4' /> 4</td>
+                                    <td class='t'><a href='/book/95179/3231144/ready_new'>Глава 17. Брат, ты влюбился с
+                                            первого взгляда?</a></td>
+                                    <td>готово</td>
+                                    <td><span title='22 авг. 2023 г., 9:04'>11 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3241194' data-id='3241194' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3241194'
+                                            onchange='recalc_price();' data-price='4' /> 4</td>
+                                    <td class='t'><a href='/book/95179/3241194/ready_new'>Глава 18. Клецки из кислой
+                                            редьки и свинины</a></td>
+                                    <td>переводится</td>
+                                    <td><span title='02 марта 2024 г., 23:06'>4 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3659941' data-id='3659941' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3659941'
+                                            onchange='recalc_price();' data-price='6' /> </td>
+                                    <td class='t'><a href='/book/95179/3659941/ready_new'>Глава 19. Сяолань, ты такая
+                                            странная!</a>&nbsp;<i class='ac_read m'></i></td>
+                                    <td>переводится</td>
+                                    <td><span title='26 мая 2024 г., 17:38'>2 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3659990' data-id='3659990' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3659990'
+                                            onchange='recalc_price();' data-price='6' /> </td>
+                                    <td class='t'><a href='/book/95179/3659990/ready_new'>Глава 20. Рано или поздно она
+                                            станет твоей невесткой</a>&nbsp;<i class='ac_read m'></i></td>
+                                    <td>переводится</td>
+                                    <td><span title='26 мая 2024 г., 17:39'>2 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3659995' data-id='3659995' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3659995'
+                                            onchange='recalc_price();' data-price='6' /> </td>
+                                    <td class='t'><a href='/book/95179/3659995/ready_new'>Глава 21. Полный
+                                            искренности</a>&nbsp;<i class='ac_read m'></i></td>
+                                    <td>переводится</td>
+                                    <td><span title='26 мая 2024 г., 17:39'>2 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_3660001' data-id='3660001' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='3660001'
+                                            onchange='recalc_price();' data-price='6' /> </td>
+                                    <td class='t'><a href='/book/95179/3660001/ready_new'>Глава 22. Занимаетесь
+                                            контрабандой?</a>&nbsp;<i class='ac_read m'></i></td>
+                                    <td>переводится</td>
+                                    <td><span title='26 мая 2024 г., 17:39'>2 мес.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr id='c_4321530' data-id='4321530' class='chapter_row '>
+                                    <td><input type='checkbox' name='chapter[]' value='4321530'
+                                            onchange='recalc_price();' data-price='6' /> </td>
+                                    <td class='t'><a href='/book/95179/4321530/ready_new'>Глава 23</a>&nbsp;<i
+                                            class='ac_read m'></i></td>
+                                    <td>переводится</td>
+                                    <td><span title='06 июля 2024 г., 12:37'>7 дней.</span></td>
+                                    <td title='КП=1.0' class='r'>100% </td>
+                                    <td><span class='disabled'
+                                            title='Вы не можете скачивать перевод этой главы.'>читать</span></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination"> </div>
+                    <div class="checkbox"> <label> <input type="checkbox"
+                                onchange="if ( this.checked ) check_all('chapter[]'); else uncheck_all('chapter[]'); recalc_price();" />выделить
+                            все главы </label> </div>
+                    <div class="form-actions"> <input type="submit" name="buy" class="btn btn-primary"
+                            value="Подписаться" /> (общая стоимость подписки: <span class="total_price">0</span>, вы
+                        покупаете <span class="total_price_cnt">0</span> глав) <div style="margin: 20px 0 0 0">
+                            <b>Купить абонемент: </b> <a
+                                href="/book/95179/ticket/1?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                                class="btn btn-warning ticket-btn" data-id="1" data-cnt="5" data-price="28"> 5 глав / 28
+                                RC </a> <a
+                                href="/book/95179/ticket/2?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                                class="btn btn-warning ticket-btn" data-id="2" data-cnt="10" data-price="53"> 10 глав /
+                                53 RC </a> <a
+                                href="/book/95179/ticket/3?csrf=VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw=="
+                                class="btn btn-warning ticket-btn" data-id="3" data-cnt="20" data-price="100"> 20 глав /
+                                100 RC </a> </div> <br /> <br /><br /> <label style="display:inline;">Скачать одним
+                            файлом <input type="checkbox" id="onefile" onchange="dis();" name="onefile" /></label>
+                        &nbsp;&nbsp;&nbsp; <input type="submit" name="download_d" class="btn btn-info"
+                            value="Скачать .docx" /> <input type="submit" name="download_f" class="btn btn-info"
+                            value="Скачать fb2" /> <input type="submit" name="download_p" class="btn btn-info dis"
+                            value="Скачать pdf" /> (<a href="#"
+                            onclick="toggle_all('download_chapter[]', event); return false;">выбрать все</a>) </div>
+                </form>
+                <script> var $download_p = $('.form-actions input[name=download_p]'); var $onefile = $('#onefile'); function dis() { $download_p.prop('disabled', $onefile.prop('checked')) } dis(); function check_all(input_name) { $("input[name='" + input_name + "']").each(function () { $(this).prop('checked', true); }); return true; } function uncheck_all(input_name) { $("input[name='" + input_name + "']").each(function () { $(this).prop('checked', false); }); return true; } function toggle_all(input_name, event) { $("input[name='" + input_name + "']").each(function () { if ((event.shiftKey && $(this).parents('tr').hasClass('info')) || !event.shiftKey) { if ($(this).prop('checked')) $(this).prop('checked', false); else $(this).prop('checked', true); } }); return true; } function updateAutoEditPrice() { var chapterIds = []; $("input[name='download_chapter[]']:checked").each(function () { chapterIds.push($(this).val()); }); if (chapterIds.length > 0) { $('#auto_edit_price').text('Подождите...').show(); var batches = []; for (var i = 0; i < chapterIds.length; i += 50) { batches.push(chapterIds.slice(i, i + 50)); } var promises = batches.map(function (batch) { return $.ajax({ url: '/book/calculateAutoEditPrice/id/95179', type: 'POST', data: { chapterIds: batch } }); }); Promise.all(promises).then(function (responses) { var totalPrice = responses.reduce(function (sum, response) { return sum + parseFloat(response); }, 0); $('#auto_edit_price').text(' (Цена: ' + totalPrice.toFixed(2) + ' руб.)').show(); }).catch(function (err) { console.log(err); $('#auto_edit_price').text('Ошибка расчета цены').show(); }); } else { $('#auto_edit_price').text('Выберите главы').show(); } } function recalc_price() {
+                        var cnt = 0; var discount = 0; var total = 0; var price = 6; $("input[name='chapter[]']").each(function () {
+                            if ($(this).prop('checked')) {
+                                total += $(this).data('price'); // price; cnt += 1; } }); if (cnt >= 10 && discount) { total -= total README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh discount / 100; } $(".total_price").html(total); $(".total_price_cnt").html(cnt); } function recalc_audio_price() { var cnt = 0; var discount = 0; var total = 0; var price = 0; $("input[name='chapter_audio[]']").each(function() { if ( $(this).prop('checked') ) { total += $(this).data('price'); // price; cnt += 1; } }); if (cnt >= 10 && discount) { total -= total README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh discount / 100; } $(".total_audio_price").html(total); } var lastChecked = null; $(document).ready(function() { var $chkboxes = $('.download_chapter'); $chkboxes.click(function(e) { if(!lastChecked) { lastChecked = this; return; } if(e.shiftKey) { var start = $chkboxes.index(this); var end = $chkboxes.index(lastChecked); $chkboxes.slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', lastChecked.checked); } lastChecked = this; }); $('.utc_hourly, .utc_min').each(function(id, el) { var value = el.dataset.utc; var date = new Date(); var now_utc; if ($(el).hasClass('utc_hourly')) { now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), value, date.getUTCMinutes(), date.getUTCSeconds()); el.innerHTML = new Date(now_utc).getHours(); } else { now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), value, date.getUTCSeconds()); el.innerHTML = new Date(now_utc).getMinutes(); } }) }); </script>
+                <h2>Обсуждение:</h2>
+                <div class="row-fluid comments-block">
+                    <div class="btn-toolbar comments-control">
+                        <div class="btn-group"> <span class="btn btn-link">Всего комментариев: 2</span> </div>
+                        <div class="btn-group pull-right"> <a class="btn dropdown-toggle btn-small"
+                                data-toggle="dropdown" href="#"> Фильтр <span class="caret"></span> </a>
+                            <ul class="dropdown-menu type-filter">
+                                <li><a href="#" data-filter="0">Все</a></li>
+                                <li><a href="#" data-filter="1">Оффтоп</a></li>
+                                <li><a href="#" data-filter="2">Отзывы</a></li>
+                                <li><a href="#" data-filter="3">Полезные</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="comment_5183654" title="" class="single-comment comment-offset-0" data-id="5183654">
+                        <div class="mark pull-right"> <a href="#comment_5183654" class="comment-link">#</a> </div>
+                        <div class="comment-body"
+                            data-orig="Спасибо переводчику, что взялся за эту новеллу. Начинала читать ещё на английском. Интересно, но на любителя. И уж ооочень много глав, я не смогла дочитать. надеюсь перевод не забросят.">
+                            Спасибо переводчику, что взялся за эту новеллу. Начинала читать ещё на английском.
+                            Интересно, но на любителя. И уж ооочень много глав, я не смогла дочитать. надеюсь перевод не
+                            забросят. </div>
+                        <div class="uncollapser"><span class="badge badge-info"><i
+                                    class="icon-chevron-down icon-white"></i> Развернуть <i
+                                    class="icon-chevron-down icon-white"></i></span></div>
+                        <div class="comment-footer"> <img class="comment-avatar" src="/i/upic/148/148862-9516.jpg"
+                                alt="avatar"
+                                onerror="this.src = 'https://www.gravatar.com/avatar/aeb2c026b23ce6bfc950153b36c99e0f';">
+                            <a href="/users/148862">Mmaarriinnaa (читатель/заложение основ)</a> <span>27 апреля 2024 в
+                                16:13</span> <span class="pull-right voter up"> <a href=""
+                                    class="icon-thumbs-up vote-up"></a> <span> 1 </span> <a href=""
+                                    class="icon-thumbs-down vote-down"></a> </span> <br /> рейтинг читателя <span
+                                class="badge badge-info">4</span> </div>
+                    </div>
+                    <div id="comment_5204545" title="" class="single-comment comment-offset-0" data-id="5204545">
+                        <div class="mark pull-right"> <a href="#comment_5204545" class="comment-link">#</a> </div>
+                        <div class="comment-body"
+                            data-orig="Всегда хорошо, когда беруться за перевод, правда пока перевод подхрамывает, приходиться переодически перестраевать предложения, чтобы понять в чем смысл">
+                            Всегда хорошо, когда беруться за перевод, правда пока перевод подхрамывает, приходиться
+                            переодически перестраевать предложения, чтобы понять в чем смысл </div>
+                        <div class="uncollapser"><span class="badge badge-info"><i
+                                    class="icon-chevron-down icon-white"></i> Развернуть <i
+                                    class="icon-chevron-down icon-white"></i></span></div>
+                        <div class="comment-footer"> <img class="comment-avatar" src="/i/upic/0.jpg" alt="avatar"
+                                onerror="this.src = 'https://www.gravatar.com/avatar/5013f405370f048add8a583813ad53c0';">
+                            <a href="/users/186548">MayaK (читатель/заложение основ)</a> <span>15 мая 2024 в
+                                00:08</span> <span class="pull-right voter"> <a href=""
+                                    class="icon-thumbs-up vote-up"></a> <span> 0 </span> <a href=""
+                                    class="icon-thumbs-down vote-down"></a> </span> <br /> рейтинг читателя <span
+                                class="badge badge-info">13</span> </div>
+                    </div> <!-- Форма отправки комментария -->
+                    <div class="alert alert-danger"> Чтобы оставлять комментарии <a href="/">Войдите</a> или <a
+                            href="/register">Зарегистрируйтесь</a> </div>
+                    <div class="alert alert-danger" style="display: none"> Чтобы оставлять комментарии необходимо
+                        подтвердить ваш email. </div>
+                </div>
+            </div>
+            <div class="span4 sr">
+                <div class="tools">
+                    <h5>Оценки людей</h5>
+                    <dl class="info">
+                        <div class="assessing-container"> <span class="blue-line-container"> <span class="blue-line"
+                                    style="width: 100%; opacity: 1.2"> <span class="">18</span> </span> </span> <span
+                                class="blue-line-counter">5</span> </div>
+                        <div class="assessing-container"> <span class="blue-line-container"> <span class="blue-line"
+                                    style="width: 10%; opacity: 0.25"> <span class="">1</span> </span> </span> <span
+                                class="blue-line-counter">1</span> </div>
+                    </dl>
+                </div>
+                <div class='tools'>
+                    <h5>Перевод</h5>
+                    <dl class='info'>
+                        <dt>Состояние перевода:</dt>
+                        <dd> <span>В работе</span> </dd>
+                        <dt>Перевод:</dt>
+                        <dd>текст с английского на русский</dd>
+                        <dt>Создан:</dt>
+                        <dd> 14 авг. 2023 г., владелец: <a href='/users/265988' class='user user-inactive'>meti_ad</a>
+                            (<a href="/users/265988/karma" style="color: green">карма: 48</a>, <a
+                                href="/users/265988/blog">блог: 0</a>) <br /> </dd>
+                        <dt>Скачали:</dt>
+                        <dd> <span rel='popover'
+                                data-content='Учитываются только загрузки с уникальных IP-адресов. Иногда компьютеры из одной домашней или корпоративной сети имеют один и тот же IP-адрес, поэтому относитесь к этим цифрам как к примерной заниженной оценке.'
+                                data-title="Откуда берутся эти цифры?"> 213 чел. </span>
+                            <script type='text/javascript'>$("span[rel=popover]").popover();</script>
+                        </dd>
+                        <dt>В закладках:</dt>
+                        <dd> <a href="#" id="bookmark_stat">104 чел. (в избранном - 5)</a>
+                            <div class="bookmark-result" style="display: none;"></div>
+                            <script> $(function () { $('#bookmark_stat').on('click', function (e) { e.preventDefault(); var link = $(this); if (link.hasClass('disabled')) { return; } var result = $(this).next('.bookmark-result'); if (!result.text().trim()) { $.ajax({ url: '/book/95179/BookmarksStat', dataType: 'json', beforeSend: function () { link.addClass('disabled'); }, success: function (json) { link.removeClass('disabled'); $.each(json, function (label, count) { result.append($('<div />').text(label + ' - ' + count)) }); result.slideDown(); }, error: function (xhr) { link.removeClass('disabled'); alert('Извините, Попробуйте позже...'); } }) } else { result.slideToggle(); } }); }); </script>
+                        </dd>
+                        <dt>Просмотров:</dt>
+                        <dd> 6 605 </dd>
+                        <dt>Средний размер глав:</dt>
+                        <dd> 8 494 символов / 4.72 страниц </dd>
+                        <dt>Размер перевода:</dt>
+                        <dd> 23 глав / 102 страниц </dd>
+                        <dt>Права доступа:</dt>
+                        <dd>
+                            <div id="ac_icons"> <i class='ac_read a'></i> <i class='ac_trread a'></i> <i
+                                    class='ac_gen a'></i> <i class='ac_rate a'></i> <i class='ac_comment a'></i> <i
+                                    class='ac_tr g'></i> <a href="#" class='more_btn'
+                                    onclick="$('#side_ac_more').show(); $('#ac_icons').hide(); $(this.parentNode).hide(); return false;">подробнее...</a>
+                            </div>
+                            <div class="more" id="side_ac_more" style="display:none;">
+                                <table class="t">
+                                    <tr>
+                                        <td><i class='ac_read a'></i> войти</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class='ac_trread a'></i> видеть все версии</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class='ac_gen a'></i> скачивать</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class='ac_rate a'></i> оценивать</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class='ac_comment a'></i> комментировать</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class='ac_tr g'></i> переводить</td>
+                                        <td class='d'>группа</td>
+                                    </tr>
+                                    <tr>
+                                        <td>читать блог</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td>комментировать в блоге</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td>писать посты в блоге</td>
+                                        <td class='d'>группа</td>
+                                    </tr>
+                                    <tr>
+                                        <td>создавать анонсы перевода</td>
+                                        <td class='d'>модераторы</td>
+                                    </tr>
+                                    <tr>
+                                        <td>управлять членством в группе перевода</td>
+                                        <td class='d'>модераторы</td>
+                                    </tr>
+                                    <tr>
+                                        <td>редактировать оригинал</td>
+                                        <td class='d'>модераторы</td>
+                                    </tr>
+                                    <tr>
+                                        <td>редактировать описание перевода</td>
+                                        <td class='d'>модераторы</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Участие в группе</td>
+                                        <td class='d'>после подтверждения модераторами</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Обсуждать книгу</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Обсуждать главы</td>
+                                        <td class='d'>все</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </dd>
+                        <dt>Готово:</dt>
+                        <dd>
+                            <div class='progress progress-striped progress-success' style='margin-bottom:2px;'>
+                                <div class='bar' style='width: 100%;'></div>
+                                <div class='text'><span
+                                        title='глав: 23, фрагментов: 378, переведено: 378'>100.00%</span></div>
+                            </div>
+                        </dd>
+                        <dt>Социальные сети</dt>
+                        <dd>Группа VK: <a rel="nofollow" target="_blank"
+                                href="https://vk.com/yinyanmanga">https://vk.com/yinyanmanga</a></dd>
+                        <dd> <a href='#' data-toggle='modal' data-target='#claim' class='btn btn-danger'>Написать жалобу
+                                на проект</a> </dd>
+                        <div id="presentsModal" role="dialog" class="modal hide">
+                            <form method="post" class="form-horizontal" action="/users/265988/buyPresent"
+                                style="margin:0">
+                                <div class="modal-header" style='padding-bottom:0;'> <a class="close"
+                                        data-dismiss="modal">×</a>
+                                    <h3>Каталог подарков</h3>
+                                </div>
+                                <div class="modal-body" style="max-height:300px"> </div>
+                                <div class="modal-footer"> <span class="cart"> Выбрано: <span class="count">0</span> на
+                                        сумму: <span class="sum">0</span> </span> <button type="submit"
+                                        class="btn btn-success"><i class="icon-ok icon-white"></i> Подарить</button> <a
+                                        class="btn" data-dismiss="modal"><i class="icon-ban-circle"></i> Отмена</a>
+                                </div>
+                            </form>
+                        </div>
+                        <style>
+                            #presentsModal .thumbnails li {
+                                text-align: center;
+                            }
+
+                            #presentsModal .thumbnails li.checked>a {
+                                background: #006dcc;
+                                color: white;
+                            }
+
+                            #presentsModal .alert-error {
+                                margin-top: 10px;
+                                margin-bottom: 0;
+                            }
+                        </style>
+                        <script> $(function () { var modal = $('#presentsModal'); modal.on('click', '.presentItem', function () { $(this).toggleClass('checked'); var sum = 0; $('.presentItem.checked').each(function () { sum += Number($(this).data('price')); }); sum = String(sum).indexOf('.') !== -1 ? sum.toFixed(2) : sum; $('#presentsModal .cart').find('.count').text($('.presentItem.checked').length); $('#presentsModal .cart').find('.sum').text(sum); $('#presentsModal .alert-error').remove(); return false; }); modal.on('show', function () { var modalBody = modal.find('.modal-body'); $.ajax({ url: '/present/getList', dataType: 'json', beforeSend: function () { modalBody.html('Загрузка списка подарков...'); }, success: function (data) { if (data.presents != null) { var ul = $('<ul class="thumbnails" />'); $.each(data.presents, function (i, one) { var li = $('<li class="presentItem" title="Выбрать: ' + one.name + '" />'); li.data('price', one.price); li.data('present_id', one.id); li.html('<a href="#" class="thumbnail">' + one.tagImg + '<small>Цена: ' + one.price + '</small>' + '</a>'); ul.append(li); }); $('#presentsModal .cart').find('.count, .sum').text(0); modalBody.html(ul); } else { modalBody.html('Извините, но что-то пошло не так...'); } }, error: function () { modalBody.html('Извините, но что-то пошло не так...'); } }) }); modal.find('form').submit(function (e) { e.preventDefault(); var modalFooter = modal.find('.modal-footer'); var submit = $(this); var ids = []; $('.presentItem.checked').each(function () { ids.push($(this).data('present_id')); }); if (!ids.length) { alert('Выберите хотя бы 1 подарок!'); return false; } $.ajax({ type: 'post', url: $(this).attr('action'), data: { 'present_ids': ids, 'csrf_token': $('meta[name="csrf-token"]').attr('content') }, dataType: 'json', beforeSend: function () { modalFooter.find('.alert-error').remove(); submit.prop('disabled', true); }, success: function (data) { submit.prop('disabled', false); if (data.error) { modalFooter.append('<div class="alert alert-error">' + data.error + '<button type="button" class="close" data-dismiss="alert">×</button></div>'); } else { location.href = '/users/265988'; } }, error: function () { alert('Извините, Попробуйте позже...'); submit.prop('disabled', false); } }); }); }); </script>
+                    </dl>
+                </div>
+                <div class='tools'>
+                    <h5>Информация по подписке</h5>
+                    <dl class='info'>
+                        <dt>Цена за главу:</dt>
+                        <dd>6</dd>
+                        <dt>Абонемент:</dt>
+                        <dd>5 глав за 28 RC</dd>
+                        <dd>10 глав за 53 RC</dd>
+                        <dd>20 глав за 100 RC</dd>
+                    </dl>
+                </div>
+                <div class="tools">
+                    <h5>Ссылки</h5>
+                    <dd>
+                        <ul>
+                            <li> <a href="https://vk.com/yinyanmanga" rel="nofollow" target="_blank">Проект на сайте
+                                    vk.com</a> </li>
+                        </ul>
+                    <dd>
+                </div>
+                <div class='tools'>
+                    <h5>Похожие переводы</h5>
+                    <ul>
+                        <li><a href='/book/11876'>The Rebirth of an Ill-Fated Consort / Возрождение злополучной
+                                супруги</a></li>
+                        <li><a href='/book/21174'>Rebirth of Spoiled Crown Princess / Возрождение испорченной
+                                кронпринцессы</a></li>
+                        <li><a href='/book/23650'>Rebirth Of The General’s Granddaughter / Возрождение внучки
+                                генерала</a></li>
+                        <li><a href='/book/39349'>Rebirth of the Film Emperor’s Beloved Wife / Возрождение любимой жены
+                                императора кино</a></li>
+                        <li><a href='/book/4760'>Rebirth of an Abandoned Lady / Возрождение одинокой леди</a></li>
+                    </ul>
+                </div>
+                <div class='tools'>
+                    <h5>Также читают</h5>
+                    <ul class="thumbnails">
+                        <li class="span1 row-book"> <a href="/book/62659" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/21/10/20274.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Дон Цзяхуэй, дочь семьи Дон, была изгнана из дома семьи Лу, поскольку, пробыв в браке три года, не смогла забеременеть. В поисках смерти, опозоренная девушка прыгнула в реку. Сразу после того как ее спасли, ее душа стала иной.***Цзяхуэй из семьи Дон находилась в пяти милях от деревни Шанхэ. Жена Чжао Дунлина была образованной молодой женщиной, которая оставила двоих своих детей, чтобы вернуться в город. Ради заботы о малышах Чжао Дунлин, который вот-вот мог стать командиром батальона, вернулся в деревню.— Эта чертова маленькая сучка со слезами на глазах кричала о свадьбе, чтобы выйти за нашего Дунлина. А теперь ей наплевать даже на собственных детей — в город ей захотелось!***Ради своей шестимесячной дочери, Инбао, Чжао Дунлин хотел дать двум своим детям мачеху. Он отказался от сватовства к семнадцати- и восемнадцатилетним девушкам, которых ему подобрали, и, наконец, остановился на бесплодной Дон Цзяхуэй. Чжао Дунлин считал, раз та не может родить, конечно же, она будет обращаться с Хайдано и Инбао, как с собственными детьми.Он навел справки и выяснил, что Дон Цзяхуэй - покорная женщина, которая ведет размеренную жизнь. Если она будет хорошо обращаться с детьми, то и он будет к ней добр до конца своей жизни.В брачную ночь Дон Цзяхуэй, наконец, раскрыла секрет бесплодия прежней владелицы тела. Оказалось, что она все еще была девственницей!"
+                                    data-placement="bottom"> Второй брак в 1970-х годах </div>
+                            </a> </li>
+                        <li class="span1 row-book"> <a href="/book/58509" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/24/5/10733.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Лю Вэйвэй перерождается в эпоху межгалактических путешествий в качестве старшеклассницы с наихудшей успеваемостью в Межзвездной средней школе.Никто во всей школе не упускал возможности поиздеваться над ней из-за плохих оценок, что уж говорить о факте беременности.Кстати, кто отец?Чуть позднее Лю Вэйвэй поняла, что в этом мире все завязано на еде.[Изучен рецепт Мапо Тофу] [Изучен рецепт рыбы с квашеной капустой] [Изучен рецепт Сяо Лун бао]И вскоре вся Вселенная устремилась к ней, пуская слюну!Маршал: «Как же хороша эта лапша с улитками! Переходи работать в столовую моего военного округа, тебе будет положен соцпакет и бесплатное проживание!».Ученый: «Твой жареный цыпленок — просто пальчики оближешь! Можно еще одного, пожааааалуйста? Не заставляй меня становиться на колени и умолять тебя!».Разбойник: «Я ведь тоже хочу есть... Эм, я кто? Где я? Что я здесь делаю?».Главный герой (сдержанно): «Моя жена плохо готовит, лучше бы вам не приходить к нам на ужин»."
+                                    data-placement="bottom"> Межзвездный шеф-повар воспитывает ребенка </div>
+                            </a> </li>
+                        <li class="span1 row-book"> <a href="/book/55591" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/21/12/18871.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Младенцев из двух разных семей перепутали практически сразу же после рождения. Один ребенок — из семьи торговца, а другой — из семьи маркиза. Между ними — пропасть.Увы, Ю Сян переселилась в дочь купца, которую вырастили в резиденции маркиза. Как только она попала в новое тело, открылась правда о происхождении этого ребенка. Ее ноги были изувечены, и она снискала репутацию родившейся под несчастливой звездой. В отчаянии ей пришлось пытаться жить своей жизнью, полагаясь на поддержку старшего брата. Когда вернется настоящая дочь маркиза, Ю Сян уступит ей свое место.Это произошло через несколько лет. Но тут она обнаружила, что просто не может уйти: старший брат отказывается отпускать ее!Маркиз скрыл улыбку за бокалом вина. Как может его изнеженная жена, выросшая вместе с ним, уйти, когда ей захочется? Подписывайся на группу ВК, участвуй в конкурсах и выигрывайромокоды на бесплатное чтение глав."
+                                    data-placement="bottom"> Яндере пришел ночью </div>
+                            </a> </li>
+                        <li class="span1 row-book"> <a href="/book/52860" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/24/1/19721.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Она растратила семейное состояние на излишества и предметы роскоши, подведя семью к черте бедности.А пытаясь выяснить, как расплатиться с долгами, нашла листовку от герцога, разыскивающего пропавшего ребенка.Размер денежного вознаграждения был настолько велик, что после погашения долгов можно будет кутить и развлекаться сколько душе угодно!Следуя воспоминаниям о прочтенной книге, Лизель сразу же подобрала мальчика, попавшего на мусорную свалку в бедной деревне.Она забрала оттуда Лапеля и пришла к герцогу.— Это ребенок, которого ищет герцог.— Мне нужно подтверждение, так что ты пока останешься с этим ребенком в моем доме, — сказал герцог Честер, с сомнением глядя на нее.Так началось странное совместное проживание этих троих.Однако Лапель продолжает думать о ней, как о матери и не отпускает ее.***— Давай поженимся.Лизель была поражена неожиданными словами.— Вы с ума сошли? Вы пили?— Один год. Если ты подпишешь брачный контракт со мной на один год, я заплачу́ в десять раз больше того вознаграждения, что ты получила.***— Можно, я буду называть тебя «милая»?Вот так начался договорный брак и супружеская жизнь.Но почему твой взгляд постоянно меняется?И почему ты продолжаешь приходить каждую ночь?Подписывайся на группу ВК, участвуй в конкурсах и выигрывайпромокоды на бесплатное чтение глав."
+                                    data-placement="bottom"> Я нашла мужа, когда подобрала главного героя </div>
+                            </a> </li>
+                        <li class="span1 row-book"> <a href="/book/45860" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/21/6/3243.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Линь Вэй Си после своей смерти обнаружила, что в романе она была просто пушечным мясом, используемым в качестве контраста с нежной, внимательной и добродетельной женской ролью.Главным героем был её бывший муж, достойный наследник Янь Вана, его семья была превосходной и блестящей, но героиней была не она.Главной героиней была ее младшая сестра, рожденная наложницей, и белый лунный свет её мужа, его киноварная родинка, неудивительно! После смерти Линь Вэй Си, её муж наконец женился на её сестре, как ему и хотелось.Она холодно смотрела на них обоих, как мед в масле, влюбленных и гармоничных, и каждый использовал успех её младшей сестры, чтобы противопоставить неуместность первой жены.&quot;Ладно, раз твоя любовь движет миром, то эта сестра вернется и станет твоей мачехой!&quot;Поэтому она вышла замуж за отца своего бывшего мужа, тестя, которого она никогда не встречала в предыдущей жизни, бога войны, который не женился после потери жены, того, кто обладает военной властью, блестящего Янь Вана.Позже Янь Ван, который был в расцвете лет и привык действовать решительно, посмотрел на свою маленькую, хрупкую, гораздо более молодую жену, и у него разболелась голова.Неважно, она еще молода, он должен её баловать, баловать и учить.=//=Приобретайте книгу целиком со скидкой в нашей группе ВКонтакте https://vk.com/yinyanmanga  "
+                                    data-placement="bottom"> Я стала мачехой своего бывшего мужа </div>
+                            </a> </li>
+                        <li class="span1 row-book"> <a href="/book/95418" class="thumbnail" style="width: 90px;"> <img
+                                    src="/i/book/24/2/8255.jpg" alt="">
+                                <div class="title" style="height: 40px; margin-top: -40px;" rel="tooltip"
+                                    title="Линь Сяовань и Хо Чжэн были женаты три года.В последнее время Хо Чжэн был все время занят на работе. Однако Линь Сяовань все это время ощущала странный аромат духов на его одежде.Линь Сяовань не хотела сомневаться в своем муже. К сожалению, за день до их годовщины она обнаружила, что Хо Чжэн был со своей первой любовью и выбирал ей кольцо. Он даже солгал ей, сказав, что будет работать сверхурочно.Чувствуя себя подавленной, она ушла, но только для того, чтобы попасть в аварию со смертельным исходом.Когда она снова открыла глаза, то обнаружила, что вернулась во времени, когда  все еще была с Хо Чжэном, но еще не вышла за него замуж.Внезапно на пороге их дома появилась его первая любовь, которую Линь Сяовань никогда не встречала в своей предыдущей жизни...– Свадебной церемонии не будет. – С холодным видом Лин Сяовань обсуждала расставание с Хо Чжэном.«Снова выйти замуж за Хо Чжэна? Хах. Если только он не превратится в собакау!»– ...Гав, гав. – Хо Чжэн залаял."
+                                    data-placement="bottom"> После возрождения она стала любимицей богатой семьи </div>
+                            </a> </li>
+                    </ul>
+                </div>
+                <style>
+                    .row-book {
+                        width: 21%;
+                        padding-left: 10px;
+                        padding-right: 0;
+                    }
+
+                    .row-book img {
+                        box-shadow: 0 1px 3px 0 #4a4a4a;
+                        min-height: 60px;
+                        display: block;
+                        max-width: 100%;
+                        width: 112px !important;
+                        height: 150px !important;
+                    }
+
+                    .row-book .title {
+                        border-top: 2px solid white;
+                        text-shadow: 0 0 4px black;
+                        font-size: 14px;
+                        color: white;
+                        position: relative;
+                        margin-top: -60px;
+                        height: 60px;
+                        overflow: hidden;
+                        background-image: url(/i/grey.png);
+                        max-width: 115px;
+                    }
+
+                    .row-book .title strong {
+                        font-size: 16px;
+                        text-shadow: 0 0 4px blue;
+                    }
+
+                    .row-book .bimg .icons {
+                        text-align: right;
+                        padding: 0 5px 0 0;
+                    }
+
+                    .row-book .slick .icons,
+                    .slick2 .icons {
+                        top: 0;
+                        position: absolute;
+                    }
+
+                    .row-book .slick2 .icons {
+                        margin-left: 6px;
+                    }
+
+                    .row-book .slick2 img {
+                        border-radius: 35px;
+                        width: 75px !important;
+                        height: 90px !important;
+                    }
+                </style>
+                <div class='tools'>
+                    <h5>Коллекции</h5>
+                    <ul>
+                        <li><a href="/collection/1082">Новеллы. Китай. Переселение в прошлое: 50-90 годы.</a></li>
+                    </ul>
+                </div>
+                <div class='tools'>
+                    <h5>Поддержать переводчика</h5>
+                    <dd>
+                        <form class="form-inline" action="/book/95179/aid" method="post" id="donate_translator"> <input
+                                type="hidden" name="csrf"
+                                value="VW1zUVFPcjZJbWh1M2wwfmNRVzM1eGdVYndBNzhoNGof6PqDw7WBtsHaf6XxaYp-wfr-TBqhG96sjUUtYmdjPw==" />
+                            <input type="number" name="amount" class="input-small" required> <button type="submit"
+                                class="btn">Отправить</button> </form>
+                    </dd>
+                </div>
+                <div class="tools">
+                    <h5>RSS</h5>
+                    <dl class="info"> <a href="/book/95179/rss" class="btn btn-small btn-warning">Книга в RSS</a> </dl>
+                </div>
+                <script> function save_note() { var text = $("#book_note").val(); $.ajax({ url: '/book/95179/note', method: 'post', data: { text: text } }); } </script>
+                <div id="claim" class="modal hide">
+                    <form method="post" class="form-horizontal" action="/book/95179/claim" style="margin:0">
+                        <div class="modal-header" style='padding-bottom:0;'> <a class="close" data-dismiss="modal">×</a>
+                            <h3>Пожаловаться на проект</h3>
+                        </div>
+                        <div class="modal-body" style="max-height:350px">
+                            <div class="control-group"> <label class="control-label">Жалоба:</label>
+                                <div class="controls"> <label class="radio"> <input type="radio" name="type" value="1"
+                                            checked /> на проект (эротика и т.п.) </label> <label class="radio"> <input
+                                            type="radio" name="type" value="2" /> на перевод </label> </div>
+                            </div>
+                            <div class="control-group"> <label class="control-label">Описание:</label>
+                                <div class="controls"> <textarea name="description" class="input-xlarge"></textarea>
+                                    <span class="help-block">минимум 30 символов</span> </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"> <button type="submit" class="btn btn-success"><i
+                                    class="icon-ok icon-white"></i> Отправить</button> <button type="button" class="btn"
+                                data-dismiss="modal"><i class="icon-ban-circle"></i> Отмена</button> </div>
+                    </form>
+                </div> <!--Двухфакторная авторизация-->
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content"> <span class="copy">© Rulate.Ru 2012-2024</span>
+                <ul class="footer-menu">
+                    <li><a href="/blog/1319" rel="nofollow">Для правообладателей</a>|</li>
+                    <li><a href="/site/tos" rel="nofollow">Пользовательское соглашение</a>|</li>
+                    <li><a href="/blog/120" rel="nofollow">Правила сайта</a>|</li>
+                    <li><a href="/site/help">Справка</a>|</li>
+                    <li><a href="/blog/2271">Не пополнился баланс?</a>|</li>
+                    <li><a href="/blog/59">Услуги</a>|</li>
+                    <li><a href="/team/all">Команды переводчиков</a></li>
+                </ul>
+                <ul class="footer-menu dbl" style="margin-bottom: 0px;">
+                    <li><a href="/feedback">Предложить улучшение</a>|</li>
+                    <li><a href="/site/contacts">Контакты</a>|</li>
+                    <li><a href="/site/about">О нас</a>|</li>
+                    <li><a href="/messages/write?to=realizm">Написать в поддержку</a>|</li>
+                    <li><a href="/blog/163244">Правила оформления книг</a>|</li>
+                    <li><a href="/i/privacy.docx">Политика конфединциальности</a>|</li>
+                    <li><a href="/sitemap">Карта сайта</a></li>
+                </ul>
+                <div style="margin: 10px 0"> <a href="https://vk.com/rulate_project"><img src="/i/vk.png"
+                            width="32" /></a> <a href="https://t.me/rulated"><img src="/i/telegram.png"
+                            width="32" /></a> <a href="https://discord.gg/9VZhv5pyY8"><img src="/i/discord.png"
+                            width="32" /></a> </div>
+                <p> Авторские права переводчиков - их интеллектуальная собственность. <br> Копирование материалов сайта
+                    с платной подписки запрещено к распространению. <br> Для жалоб и предложений: <a
+                        href="/cdn-cgi/l/email-protection#dea9bbb2bdb1babbef9ea7bfb0babba6f0acab"><span
+                            class="__cf_email__"
+                            data-cfemail="8afdefe6e9e5eeefbbcaf3ebe4eeeff2a4f8ff">[email&#160;protected]</span></a> </p>
+            </div>
+        </div>
+    </footer>
+    <div class="modal hide fade" id="external-link-popup">
+        <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+            <h3>Переход на внешний сайт</h3>
+        </div>
+        <div class="modal-body">
+            <p>Вы покидаете сайт <span class="label label-info">tl.rulate.ru</span> и переходите по внешней ссылке.</p>
+            <p> Убедитесь, что данная ссылка полностью является доверенной и ограждена от вредоносных влияний. Если же
+                ссылка показалась вам подозрительной, убедительная просьба сообщить об этом <a
+                    href="/messages/write?to=realizm">администрации</a>. </p>
+            <p>Нажмите на <a class="label label-warning ext-link" href=""></a> чтоб перейти.</p>
+        </div>
+    </div>
+    <style>
+        #up {
+            width: 48px;
+            height: 48px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .autocomplete-suggestions {
+            position: absolute;
+            background-color: white;
+            /*border: 1px solid #1f6377;*/
+            -webkit-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.75);
+            box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.75);
+            font-size: 10px;
+            max-height: 500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .autocomplete-suggestion {
+            padding: 2px;
+            height: 40px;
+            border-bottom: 1px solid #eeeeee;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .autocomplete-suggestion:hover {
+            background-color: #EEEEEE;
+        }
+
+        .autocomplete-suggestion .title {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 240px;
+        }
+
+        .autocomplete-suggestion .autocomplete-suggestion-img {
+            height: 38px;
+            width: 28px;
+        }
+
+        .autocomplete-suggestion img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .autocomplete-suggestion table {
+            width: 100%;
+        }
+    </style>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script> $(document).ready(function () { $("#up").click(function () { var curPos = $(document).scrollTop(); var scrollTime = curPos / 200; $("body,html").animate({ "scrollTop": 0 }, scrollTime); }); $("#down").click(function () { var curPos = $(document).height(); var scrollTime = curPos / 200; $("body,html").animate({ "scrollTop": $(document).height() }, scrollTime); }); $('.search-query').autoComplete({ source: function (term, suggest) { $.ajax({ url: '/search/autocomplete', data: { query: term }, complete: function (data) { suggest(data.responseJSON) } }) }, renderItem: function (item, search) { search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); let re = new RegExp("(" + search.split(' ').join('|') + ")", "gi"); return ` <div class="autocomplete-suggestion" data-url="${item.url}"> <table> <tr> <td> <div class="autocomplete-suggestion-img"> <img src="${item.img}"> </div> </td> <td> <div class="title">${item.title_one.replace(re, "<mark>$1</mark>")}</div> <div class="title">${item.title_two.replace(re, "<mark>$1</mark>")}</div> </td> </tr> </table> </div>`; }, onSelect: function (e, term, item) { document.location.href = $(item).data('url'); } }); $("[rel='tooltip']").tooltip(); $('a[data-dismiss="alert"]').on('click', (e) => { const id = $(e.target.parentElement).data('id'); const date = new Date(new Date().getTime() + 30 README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh 24 README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh 60 README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh 60 README.md cookie.sh cookies.txt credentials.txt login.sh new_login.sh new_login1.sh output.html passwords.cfg updator.sh 1000); document.cookie = `alert_${id}=true; expires=${date.toUTCString()}; path=/`; }); $("a[href^='/site/proxy']").on('click', function (e) { e.preventDefault(); const modal = $('#external-link-popup'); const link = new URL(this.href); const url = link.pathname + link.search + link.hash; const href = url.replace('/site/proxy?l=', ''); modal.find('.ext-link').attr('href', href); modal.find('.ext-link').html(href); modal.modal('show'); }); }); </script>
+    <div id="up" class="visible-desktop" title="Вверх"><img src="/img/up-icon.png" /></div>
+    <div id="down" class="visible-desktop" title="Вниз"><img src="/img/up-icon.png" /></div>
+    <script
+        type="text/javascript"> /*<![CDATA[*/ jQuery(function ($) { jQuery('a.tooltip').tooltip({ 'placement': 'bottom' }); jQuery('a[rel="popover"]').popover(); $(() => { $(document).on('click', '.like-btn', function (e) { e.preventDefault(); $.post($(this).data('href'), { csrf_token: $('meta[name=csrf-token]').attr('content') }).done(function (resp) { $('#liker').fadeOut(function () { $('#liker').replaceWith(resp).fadeIn(); }) }); }) }) jQuery('#yw1 .alert').alert(); }); /*]]>*/ </script>
+</body>
+
+</html>
