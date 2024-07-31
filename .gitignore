@@ -11,6 +11,7 @@ venv.bak/
 .vscode
 
 #project files
+*.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
