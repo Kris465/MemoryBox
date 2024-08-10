@@ -11,7 +11,7 @@ venv.bak/
 .vscode
 
 #project files
-chromedriver_win32
+# chromedriver_win64
 chromeprofile
 
 # Byte-compiled / optimized / DLL files
