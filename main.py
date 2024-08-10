@@ -1,5 +1,20 @@
-user_string = input('Введите последовательность чисел: ')
-user_list = user_string.split()
-number = input('Введите порядковый номкр числа: ')
+from loguru import logger
+from parser import WebParser
 
-print(user_list[int(number) - 1])
+
+def main():
+    logger.add("file.log",
+               format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
+               rotation="3 days",
+               backtrace=True, diagnose=True)
+
+    url = input("Введите адрес сайта: ")
+    pars = WebParser(url)
+    pars.fetch()
+
+    pars.save_html()
+    print(pars.get_status_code())
+
+
+if __name__ == "__main__":
+    main()
