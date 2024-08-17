@@ -21,37 +21,13 @@
         if (!isset($_POST['number']) || !is_numeric($_POST['number']) || $_POST['number'] < 1) {
             echo "<h2 style='color: red;'>Ошибка: Введите корректное положительное число.</h2>";
         } else {
-            $number = (int)$_POST['number'];
+            $number = (int)htmlspecialchars($_POST['number']);
 
             // Массив для хранения результатов
             $mirrorNumbers = [];
             $evenNumbers = [];
             $oddNumbers = [];
             $decreasingNumbers = [];
-
-            // Проверяем числа от 1 до введенного числа
-            for ($i = 1; $i < $number; $i++) {
-                // Преобразуем число в строку для проверки
-                $strNum = (string)$i;
-                $reversedNum = strrev($strNum);
-
-                // Проверка на зеркальное число
-                if ($strNum === $reversedNum) {
-                    $mirrorNumbers[] = $i;
-                }
-
-                // Проверка на четность и нечетность
-                if ($i % 2 === 0) {
-                    $evenNumbers[] = $i;
-                } else {
-                    $oddNumbers[] = $i;
-                }
-
-                // Проверка на убывание
-                if (isDecreasing($strNum)) {
-                    $decreasingNumbers[] = $i;
-                }
-            }
 
             // Функция для проверки убывающей последовательности
             function isDecreasing($num) {
@@ -63,14 +39,39 @@
                 return true;
             }
 
+            // Проверяем числа от 1 до введенного числа
+            for ($i = 1; $i < $number; $i++) {
+                // Преобразуем число в строку для проверки
+                $strNum = (string)$i;
+                $reversedNum = strrev($strNum);
+
+                // Проверка на зеркальное число (исключаем однозначные)
+                if (strlen($strNum) > 1 && $strNum === $reversedNum) {
+                    $mirrorNumbers[] = $i;
+                }
+
+                // Проверка на четность и нечетность
+                if ($i % 2 === 0) {
+                    $evenNumbers[] = $i;
+                } else {
+                    $oddNumbers[] = $i;
+                }
+
+                // Проверка на убывание (исключаем однозначные)
+                if (strlen($strNum) > 1 && isDecreasing($strNum)) {
+                    $decreasingNumbers[] = $i;
+                }
+            }
+
             // Вывод результатов
-            echo "<h2>Зеркальные числа: " . implode(", ", $mirrorNumbers) . "</h2>";
-            echo "<h2>Четные числа: " . implode(", ", $evenNumbers) . "</h2>";
-            echo "<h2>Нечетные числа: " . implode(", ", $oddNumbers) . "</h2>";
-            echo "<h2>Числа с убывающими цифрами: " . implode(", ", $decreasingNumbers) . "</h2>";
+            echo "<h2>Зеркальные числа: " . (!empty($mirrorNumbers) ? implode(", ", $mirrorNumbers) : "Нет") . "</h2>";
+            echo "<h2>Четные числа: " . (!empty($evenNumbers) ? implode(", ", $evenNumbers) : "Нет") . "</h2>";
+            echo "<h2>Нечетные числа: " . (!empty($oddNumbers) ? implode(", ", $oddNumbers) : "Нет") . "</h2>";
+            echo "<h2>Числа с убывающими цифрами: " . (!empty($decreasingNumbers) ? implode(", ", $decreasingNumbers) : "Нет") . "</h2>";
         }
     }
     ?>
+
 </div>
 
 </body>
