@@ -5,4 +5,8 @@
 *.png
 *.jpeg
 *.jpg
- 
+
+# venv
+.venv
+.env
+venv
