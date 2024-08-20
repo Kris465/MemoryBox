@@ -12,8 +12,8 @@ logger.add("file.log",
            format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
            rotation='3 days', backtrace=True, diagnose=True)
 
-url = 'https://tl.rulate.ru/'
-# url = 'https://tl.rulate.ru/register/settings'
+# url = 'https://tl.rulate.ru/'
+url = 'https://tl.rulate.ru/register/settings'
 response = requests.get(url)
 if response.ok:
     with open('page.html', 'w', encoding='utf-8') as file:
@@ -25,15 +25,24 @@ else:
 soup = BeautifulSoup(response.text, 'html.parser')
 
 login_field = soup.find('input', attrs={'name': 'login[login]'})
-password_field = soup.find('input', attrs={'name: login[pass]'})
+password_field = soup.find('input', attrs={'name': 'login[pass]'})
 
-# if login_field and password_field:
-#     login_field['value'] = login
-#     password_field['value'] = password
+if login_field and password_field:
+    login_field['value'] = login
+    password_field['value'] = password
 
-#     with open('modified_page.html', 'w', encoding='utf-8') as file:
-#         file.write(str(soup))
+    with open('modified_page.html', 'w', encoding='utf-8') as file:
+        file.write(str(soup))
 
-#     logger.info("Логин и пароль успешно вставлены в 'modified_page.html'.")
-# else:
-#     logger.error("Не удалось найти поля для логина или пароля.")
+    logger.info("Логин и пароль успешно вставлены в 'modified_page.html'.")
+else:
+    logger.error("Не удалось найти поля для логина или пароля.")
+
+with open('modified_page.html', 'r', encoding='utf-8') as file:
+    html_content = file.read()
+
+response = requests.post(url, data=html_content,
+                         headers={'Content-Type': 'text/html'})
+
+with open('endfile.html', 'w', encoding='utf-8') as file:
+    file.write(response.text)
