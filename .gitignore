@@ -1,2 +1,8 @@
 # vs code
 .vscode
+
+# pictures
+*.png
+*.jpeg
+*.jpg
+ 
