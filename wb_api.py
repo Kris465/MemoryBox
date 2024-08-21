@@ -2,8 +2,7 @@ import os
 from dotenv import load_dotenv
 import requests
 from loguru import logger
-
-from file_handler import save_to_json
+import pandas as pd
 
 
 class WbApi:
@@ -21,6 +20,7 @@ class WbApi:
         response = requests.get(endpoint, headers=headers, params=params)
         if response.status_code == 200:
             logger.info(f"status_code: {response.status_code}")
-            save_to_json(response.text, "output.json")
+            df = pd.DataFrame(response.json)
+            df.to_excel('output.xlsx', index=False)
         else:
             logger.error(f"Ошибка: {response.status_code} - {response.text}")
