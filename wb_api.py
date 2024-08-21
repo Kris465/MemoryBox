@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import requests
 from loguru import logger
 
+from file_handler import save_to_json
+
 
 class WbApi:
     def __init__(self, date) -> None:
@@ -12,7 +14,6 @@ class WbApi:
         self.date = date
 
     def get_sales_statistics(self):
-        print(self.API_KEY)
         headers = {'Authorization': self.API_KEY,
                    'Content-Type': 'application/json'}
         endpoint = f"{self.BASE_URL}/api/v1/supplier/sales"
@@ -20,7 +21,6 @@ class WbApi:
         response = requests.get(endpoint, headers=headers, params=params)
         if response.status_code == 200:
             logger.info(f"status_code: {response.status_code}")
-            return response.json()
+            save_to_json(response.text, "output.json")
         else:
             logger.error(f"Ошибка: {response.status_code} - {response.text}")
-            return None
