@@ -20,7 +20,8 @@ class WbApi:
         response = requests.get(endpoint, headers=headers, params=params)
         if response.status_code == 200:
             logger.info(f"status_code: {response.status_code}")
-            df = pd.DataFrame(response.json)
+            data = response.json()
+            df = pd.DataFrame(data)
             df.to_excel('output.xlsx', index=False)
         else:
             logger.error(f"Ошибка: {response.status_code} - {response.text}")

@@ -8,6 +8,7 @@ venv
 
 # project files
 *.json
+*.xlsx
 
 # python
 __pycache__
