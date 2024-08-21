@@ -3,4 +3,7 @@
 venv
 .env
 
+# vs code
+.vscode
+
 # project files
