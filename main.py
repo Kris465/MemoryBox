@@ -12,7 +12,7 @@ def main():
     print("Hello")
     date = input("Введите дату (YYYY-MM-DD): ")
     wb_api = WbApi(date)
-    wb_api.get_statistics()
+    wb_api.get_sales_statistics()
 
 
 if __name__ == '__main__':

@@ -7,3 +7,6 @@ venv
 .vscode
 
 # project files
+
+# python
+__pycache__
