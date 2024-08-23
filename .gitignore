@@ -13,6 +13,7 @@ venv.bak/
 #project files
 *.html
 *.log
+*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

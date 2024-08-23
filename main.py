@@ -8,7 +8,8 @@ def main():
                rotation='3 days', backtrace=True, diagnose=True)
 
     bot = BotUpdator()
-    bot.update()
+    bot.login()
+    bot.fetch_chapters()
 
 
 if __name__ == '__main__':
