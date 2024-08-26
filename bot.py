@@ -34,7 +34,7 @@ class BotUpdator:
             login_field['value'] = login
             password_field['value'] = password
 
-            form_action = soup.find('form').attrs['action']
+            form_action = soup.find('input').attrs['action']
 
             # Создаем данные для отправки
             data = {
@@ -42,7 +42,7 @@ class BotUpdator:
                 'login[pass]': password
             }
 
-            # Отправляем POST-запрос
+            # БАГ ЗДЕСЬ!!!
             response = self.session.post(form_action, data=data)
 
             if response.ok:
@@ -78,4 +78,3 @@ class BotUpdator:
                     file.write(response.text)
             else:
                 logger.error(f"Ошибка при получении главы: {chapter}")
-
