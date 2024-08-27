@@ -1,5 +1,6 @@
+from tkinter import Tk
 from loguru import logger
-from wb_api import WbApi
+from menu_class import UserMenu
 
 
 def main():
@@ -9,10 +10,12 @@ def main():
                format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
                rotation='3 days', backtrace=True, diagnose=True)
 
-    print("Hello")
-    date = input("Введите дату (YYYY-MM-DD): ")
-    wb_api = WbApi(date)
-    wb_api.get_sales_statistics()
+    root = Tk()
+    user_menu = UserMenu(root)
+    root.wait_window()  # Ожидаем закрытия окна
+    data_dict = user_menu.get_data()  # Получаем данные после закрытия окна
+
+    print(data_dict)  # Печатаем полученные данные
 
 
 if __name__ == '__main__':
