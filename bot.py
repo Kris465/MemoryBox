@@ -1,4 +1,5 @@
 import os
+from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from loguru import logger
@@ -9,14 +10,13 @@ class BotUpdator:
     def __init__(self) -> None:
         self.session = requests.Session()
         self.base_url = 'https://tl.rulate.ru/'
-        self.chapters = []  # Список для хранения ссылок на главы
+        self.chapters = []
 
     def login(self):
         load_dotenv()
         login = os.environ['login']
         password = os.environ['password']
 
-        # Получаем страницу для аутентификации
         response = self.session.get(self.base_url)
         if response.ok:
             logger.info("Получена страница для логина.")
@@ -26,32 +26,39 @@ class BotUpdator:
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Заполняем поля логина и пароля
         login_field = soup.find('input', attrs={'name': 'login[login]'})
         password_field = soup.find('input', attrs={'name': 'login[pass]'})
-
+        
         if login_field and password_field:
             login_field['value'] = login
             password_field['value'] = password
+            
+            form_action = urljoin(self.base_url, soup.find('form')['action'])
 
-            form_action = soup.find('input').attrs['action']
-
-            # Создаем данные для отправки
             data = {
                 'login[login]': login,
                 'login[pass]': password
             }
 
-            # БАГ ЗДЕСЬ!!!
+            # Проверка на CSRF-токен
+            csrf_token = soup.find('input', attrs={'name': 'csrf_token'})
+            if csrf_token:
+                data['csrf_token'] = csrf_token['value']
+
             response = self.session.post(form_action, data=data)
 
             if response.ok:
                 logger.info("Успешный вход в систему.")
+                # Дополнительная проверка успешной авторизации
+                if "138621" in response.text:  # Замените на реальное значение
+                    logger.info("Авторизация прошла успешно.")
+                else:
+                    logger.error("Авторизация не удалась, проверьте логин и пароль.")
             else:
-                logger.error("Ошибка входа.")
-                return
+                logger.error(f"Ошибка входа: {response.text}")
         else:
             logger.error("Не удалось найти поля для логина или пароля.")
+
 
     def fetch_chapters(self):
         # Здесь вы можете добавить логику для получения ссылок на главы
