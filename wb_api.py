@@ -36,12 +36,10 @@ class WbApi:
             case 'Отчет о продажах по реализации':
                 self.endpoint = 'https://statistics-api.wildberries.ru/api/v5/supplier/reportDetailByPeriod'
 
-    def get_sales_statistics(self):
         headers = {'Authorization': self.API_KEY,
                    'Content-Type': 'application/json'}
-        endpoint = f"{self.BASE_URL}/api/v1/supplier/sales"
-        params = {'dateFrom': self.date}
-        response = requests.get(endpoint, headers=headers, params=params)
+        params = {'dateFrom': self.data['date_from']}
+        response = requests.get(self.endpoint, headers=headers, params=params)
         if response.status_code == 200:
             logger.info(f"status_code: {response.status_code}")
             data = response.json()

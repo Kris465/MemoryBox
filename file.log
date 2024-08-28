@@ -7,3 +7,5 @@
 2024-08-27 at 15:03:38 | INFO | {'date_from': '2024-08-27', 'date_to': '2024-08-27', 'report_type': 'Продажи', 'save_path': 'C:/Users/Nata/Desktop'}
 2024-08-27 at 15:03:40 | INFO | status_code: 200
 2024-08-27 at 15:21:38 | INFO | {}
+2024-08-28 at 20:43:25 | INFO | {'date_from': '2024-08-27', 'date_to': '2024-08-27', 'report_type': 'Склад', 'save_path': 'C:/Users/Nata/Desktop'}
+2024-08-28 at 20:43:26 | INFO | status_code: 200
