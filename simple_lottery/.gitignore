@@ -1,0 +1,12 @@
+# vs code
+.vscode
+
+# pictures
+*.png
+*.jpeg
+*.jpg
+
+# venv
+.venv
+.env
+venv
