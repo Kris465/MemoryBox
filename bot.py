@@ -9,7 +9,7 @@ import requests
 class BotUpdator:
     def __init__(self) -> None:
         self.session = requests.Session()
-        self.base_url = 'https://tl.rulate.ru/'
+        self.base_url = 'https://tl.rulate.ru/register/settings'
         self.chapters = []
 
     def login(self):
@@ -28,11 +28,11 @@ class BotUpdator:
 
         login_field = soup.find('input', attrs={'name': 'login[login]'})
         password_field = soup.find('input', attrs={'name': 'login[pass]'})
-        
+
         if login_field and password_field:
             login_field['value'] = login
             password_field['value'] = password
-            
+
             form_action = urljoin(self.base_url, soup.find('form')['action'])
 
             data = {
@@ -40,20 +40,10 @@ class BotUpdator:
                 'login[pass]': password
             }
 
-            # Проверка на CSRF-токен
-            csrf_token = soup.find('input', attrs={'name': 'csrf_token'})
-            if csrf_token:
-                data['csrf_token'] = csrf_token['value']
-
             response = self.session.post(form_action, data=data)
 
             if response.ok:
                 logger.info("Успешный вход в систему.")
-                # Дополнительная проверка успешной авторизации
-                if "138621" in response.text:  # Замените на реальное значение
-                    logger.info("Авторизация прошла успешно.")
-                else:
-                    logger.error("Авторизация не удалась, проверьте логин и пароль.")
             else:
                 logger.error(f"Ошибка входа: {response.text}")
         else:
