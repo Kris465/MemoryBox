@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cards_styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card" onclick="flipCard(this)" data-character="1">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <p>Описание персонажа 1</p>
+                </div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)" data-character="2">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <p>Описание персонажа 2</p>
+                </div>
+            </div>
+        </div>
+        <!-- Добавьте еще 8 карточек по аналогии -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
