@@ -9,6 +9,7 @@ def main():
 
     bot = BotUpdator()
     bot.login()
+    bot.fetch_chapters()
 
 
 if __name__ == '__main__':

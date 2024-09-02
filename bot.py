@@ -9,7 +9,7 @@ import requests
 class BotUpdator:
     def __init__(self) -> None:
         self.session = requests.Session()
-        self.base_url = 'https://tl.rulate.ru/register/settings'
+        self.base_url = 'https://tl.rulate.ru/'
         self.chapters = []
 
     def login(self):
@@ -49,11 +49,8 @@ class BotUpdator:
         else:
             logger.error("Не удалось найти поля для логина или пароля.")
 
-
     def fetch_chapters(self):
-        # Здесь вы можете добавить логику для получения ссылок на главы
-        # Например, можно парсить главную страницу новеллы
-        response = self.session.get(self.base_url + 'book/95179')
+        response = self.session.get(self.base_url + 'book/32354')
         if response.ok:
             logger.info("Получены главы новеллы.")
             soup = BeautifulSoup(response.text, 'html.parser')
