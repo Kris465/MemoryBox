@@ -9,7 +9,6 @@ load_dotenv(find_dotenv())
 
 from handlers.user_private import user_private_router
 
-
 ALLOWED_UPDATES = ['message, edited_message']
 
 bot = Bot(token=os.getenv('TOKEN'))
