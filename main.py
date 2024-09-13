@@ -2,8 +2,8 @@ import json
 import os
 import random
 from aiogram import Bot, Dispatcher, types
-from aiogram.dispatcher import FSMContext
-from aiogram.utils import executor
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,7 +14,7 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
-# Состояния для FSM
+# FSM
 class Form:
     topic = "topic"
     question = "question"
@@ -95,4 +95,4 @@ async def cmd_rating(message: types.Message):
         await message.answer("Нет данных о пользователях.")
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    asyncio.run(main())
