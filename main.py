@@ -1,18 +1,15 @@
 import asyncio
 from loguru import logger
 from os import getenv
-from typing import Any, Dict
 
-from aiogram import Bot, Dispatcher, F, Router, html
+from aiogram import Bot, Dispatcher, F, Router
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import (
-    KeyboardButton,
     Message,
-    ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
 )
 
@@ -43,22 +40,22 @@ async def command_start(message: Message, state: FSMContext) -> None:
     )
 
 
-# @form_router.message(Command("cancel"))
-# @form_router.message(F.text.casefold() == "cancel")
-# async def cancel_handler(message: Message, state: FSMContext) -> None:
-#     """
-#     Allow user to cancel any action
-#     """
-#     current_state = await state.get_state()
-#     if current_state is None:
-#         return
+@form_router.message(Command("cancel"))
+@form_router.message(F.text.casefold() == "cancel")
+async def cancel_handler(message: Message, state: FSMContext) -> None:
+    """
+    Allow user to cancel any action
+    """
+    current_state = await state.get_state()
+    if current_state is None:
+        return
 
-#     logger.info("Cancelling state %r", current_state)
-#     await state.clear()
-#     await message.answer(
-#         "Пока-пока",
-#         reply_markup=ReplyKeyboardRemove(),
-#     )
+    logger.info("Cancelling state %r", current_state)
+    await state.clear()
+    await message.answer(
+        "Пока-пока",
+        reply_markup=ReplyKeyboardRemove(),
+    )
 
 
 @form_router.message(Form.name)
@@ -78,7 +75,7 @@ async def process_answer(message: Message, state: FSMContext) -> None:
     data = await state.get_data()
     score = data.get("score", 0)
 
-    current_question_index = score  # Текущий индекс - это счет правильных ответов
+    current_question_index = score
 
     if current_question_index < len(questions):
         correct_answer = questions[current_question_index]["answer"]
@@ -89,14 +86,18 @@ async def process_answer(message: Message, state: FSMContext) -> None:
         await state.update_data(score=score)  # Сохраняем текущий счет
 
         if current_question_index + 1 < len(questions):
-            await ask_question(message.chat.id, current_question_index + 1, state)  # Задаем следующий вопрос
+            await ask_question(message.chat.id,
+                               current_question_index + 1,
+                               state)  # Задаем следующий вопрос
         else:
             await state.set_state(Form.results)  # Переходим к результатам
             await show_results(message.chat.id, score)  # Показываем результаты
 
 
 async def show_results(chat_id, score):
-    await bot.send_message(chat_id, f"Тест завершен! Ваши баллы: {score}/{len(questions)}")
+    await bot.send_message(
+        chat_id,
+        f"Тест завершен! Ваши баллы: {score}/{len(questions)}")
 
 
 @form_router.message(Form.results)
