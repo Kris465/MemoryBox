@@ -18,11 +18,7 @@ bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher()
 form_router = Router()
 
-questions = [
-    {"question": "Что такое Python?", "answer": "язык программирования"},
-    {"question": "Что такое переменная?", "answer": "хранение данных"},
-    # Добавьте больше вопросов по мере необходимости
-]
+# Здесь создать функцию для считывания вопросв тестов из папки
 
 
 class Form(StatesGroup):
@@ -35,7 +31,7 @@ class Form(StatesGroup):
 async def command_start(message: Message, state: FSMContext) -> None:
     await state.set_state(Form.name)
     await message.answer(
-        "Привет! Как зовут?",
+        "Привет! Как тебя зовут?",
         reply_markup=ReplyKeyboardRemove(),
     )
 
