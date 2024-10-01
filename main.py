@@ -20,7 +20,6 @@ form_router = Router()
 
 # Здесь создать функцию для считывания вопросв тестов из папки
 
-
 class Form(StatesGroup):
     name = State()
     ask_question = State()
