@@ -16,9 +16,11 @@ dp = Dispatcher()
 form_router = Router()
 dp.include_router(form_router)
 
+
 class Form(StatesGroup):
     topic = State()
     question = State()
+
 
 def load_tests():
     tests = {}
@@ -28,13 +30,16 @@ def load_tests():
                 tests[filename[:-5]] = json.load(f)
     return tests
 
+
 tests = load_tests()
+
 
 @dp.message(Command("/start"))
 async def start_test(message: Message):
     topics = "\n".join(tests.keys())
     await message.answer(f'Выберите тему:\n{topics}')
     await Form.topic.set()
+
 
 @form_router.message(StateFilter(Form.topic))
 async def choose_topic(message: Message, state: FSMContext):
@@ -45,25 +50,27 @@ async def choose_topic(message: Message, state: FSMContext):
     else:
         await message.answer("Такой темы нет. Пожалуйста, выберите из списка.")
 
+
 async def ask_question(chat_id, topic, question_index):
     question_data = tests[topic][question_index]
     question_text = question_data['question']
-    
+
     # Создаем инлайн-клавиатуру для вариантов ответов
     keyboard = InlineKeyboardMarkup(row_width=2)
     for idx, option in enumerate(question_data['options']):
         button = InlineKeyboardButton(text=option, callback_data=f"answer_{idx}")
         keyboard.add(button)
-    
+
     await bot.send_message(chat_id, question_text, reply_markup=keyboard)
     await Form.question.set()
+
 
 @form_router.callback_query(lambda c: c.data.startswith('answer_'))
 async def answer_question(callback_query, state: FSMContext):
     user_data = await state.get_data()
     topic = user_data.get('topic')
     question_index = user_data.get('question_index')
-    
+
     # Получаем текущий вопрос и правильный ответ
     question_data = tests[topic][question_index]
     correct_answer_index = question_data['answer_index']  # Индекс правильного ответа
@@ -86,7 +93,9 @@ async def answer_question(callback_query, state: FSMContext):
         await callback_query.message.answer(f"Тест завершен! Ваш рейтинг: {rating}. Напишите /start, чтобы начать снова.")
         await state.finish()
 
+
 async def main():
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
