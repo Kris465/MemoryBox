@@ -1,11 +1,13 @@
+import os
 import asyncio
-from os import getenv
+from dotenv import find_dotenv, load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 
+load_dotenv(find_dotenv())
+ALLOWED_UPDATES = ["message", "edited_message"]  # Ограничение апдейтов
 
-TOKEN = getenv("TOKEN")
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+bot = Bot(token=os.getenv("TOKEN"))
 dp = Dispatcher()
 dp = Dispatcher()
 
@@ -23,7 +25,7 @@ async def echo(message: types.Message):
 
 async def main() -> None:
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
 
 
 asyncio.run(main())
