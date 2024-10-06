@@ -59,7 +59,8 @@ class Form(StatesGroup):
 async def command_start(message: Message, state: FSMContext) -> None:
     await state.set_state(Form.name)
     await message.answer(
-        "Привет! Как тебя зовут?",
+        f"Привет! Твой id: {message.chat.id}."
+        "Напиши 'начать', чтобы выбрать тему",
         reply_markup=ReplyKeyboardRemove(),
     )
 
@@ -103,7 +104,6 @@ async def process_answer(message: Message, state: FSMContext) -> None:
         if message.text.casefold() == correct_answer.casefold():
             score += 1
 
-        # Обновляем данные в состоянии
         await state.update_data(score=score,
                                 question_index=current_question_index + 1)
 
@@ -117,7 +117,6 @@ async def process_answer(message: Message, state: FSMContext) -> None:
 async def show_results(chat_id, score):
     results = load_results()
 
-    # Если ID чата уже есть в результатах, увеличиваем счет
     if str(chat_id) in results:
         results[str(chat_id)] += score
     else:
@@ -133,27 +132,7 @@ async def show_results(chat_id, score):
 
 @form_router.message(Form.results)
 async def end_test(message: Message, state: FSMContext) -> None:
-    await state.clear()  # Очищаем состояние
-
-
-@dp.message(Command("rating"))
-async def show_rating(message: Message) -> None:
-    results = load_results()
-
-    # Сортируем результаты по убыванию баллов
-    sorted_results = sorted(results.items(), key=lambda item: item[1],
-                            reverse=True)
-
-    # Формируем сообщение с рейтингом
-    rating_message = "Рейтинг:\n"
-
-    for idx, (chat_id, score) in enumerate(sorted_results, start=1):
-        rating_message += f"{idx}. Пользователь {chat_id}: {score} баллов\n"
-
-    if not sorted_results:
-        rating_message = "Рейтинг пуст."
-        
-    await message.answer(rating_message)
+    await state.clear()
 
 
 async def main():
