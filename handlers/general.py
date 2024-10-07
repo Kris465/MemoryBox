@@ -1,4 +1,4 @@
 from aiogram import types, Router
 from aiogram.filters import Command
 
-admin_private_router = Router()
+general_router = Router()
