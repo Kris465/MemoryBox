@@ -1,8 +1,7 @@
 import os
 import asyncio
 
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters import CommandStart
+from aiogram import Bot, Dispatcher
 
 from dotenv import find_dotenv, load_dotenv
 
