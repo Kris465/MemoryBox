@@ -1,5 +1,5 @@
 import random
-from aiogram import types, Router
+from aiogram import F, types, Router
 from aiogram.filters import Command
 from bs4 import BeautifulSoup
 import requests
@@ -7,6 +7,7 @@ import requests
 general_router = Router()
 
 
+@general_router.message(F.text.contains("анекдот"))
 @general_router.message(Command("joke"))
 async def tell_joke(message: types.Message):
     response = requests.get('https://www.anekdot.ru/random/anekdot/')
@@ -16,6 +17,6 @@ async def tell_joke(message: types.Message):
         random_joke = random.choice(jokes).text.strip()
         anekdot = random_joke
     else:
-        anekdot = "Не удалось получить анекдот"
+        anekdot = "Не удалось найти анекдот"
 
     await message.answer(anekdot)
