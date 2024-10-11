@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    background-color: white;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+}
+
+.cell {
+    background-color: blue;
+    color: yellow;
+}
