@@ -1,0 +1,30 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif; /* Шрифт для всего тела */
+}
+
+.horizontal-menu {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
+    margin: 0; /* Убираем отступы */
+    display: flex; /* Делаем меню горизонтальным */
+}
+
+.horizontal-menu li {
+    margin-right: 20px; /* Отступ между элементами */
+}
+
+.horizontal-menu a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: black; /* Цвет текста */
+    font-size: 18px; /* Размер шрифта */
+    padding: 10px; /* Отступ внутри ссылок */
+    transition: background-color 0.3s, font-style 0.3s; /* Плавный переход */
+}
+
+.horizontal-menu a:hover {
+    background-color: rgb(255, 255, 255); /* Цвет фона при наведении */
+    color: rgb(9, 255, 0); /* Цвет текста при наведении */
+    font-style: italic; /* Курсив при наведении */
+}
