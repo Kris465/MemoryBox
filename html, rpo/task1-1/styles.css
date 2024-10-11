@@ -1,0 +1,32 @@
+/* styles.css */
+
+/* Стили для таблицы */
+table {
+    width: 100%; /* Ширина таблицы 100% */
+    background-color: white; /* Белый фон таблицы */
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+}
+
+/* Стили для ячеек таблицы */
+td {
+    padding: 15px; /* Отступы внутри ячеек */
+    text-align: center; /* Центрирование текста */
+    border: 1px solid gray; /* Серебристая рамка вокруг ячеек */
+}
+
+/* Цвета для ячеек */
+.cell-blue {
+    background-color: blue;
+    color: white;
+}
+
+.cell-green {
+    background-color: green;
+    color: white; 
+}
+
+.cell-red {
+    background-color: red;
+    color: white;
+}
+

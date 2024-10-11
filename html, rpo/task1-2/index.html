@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вложенная таблица</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Подключение файла стилей -->
+</head>
+<body>
+
+    <h1>Пример вложенной таблицы</h1>
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <table class="inner-table">
+                    <tr>
+                        <td class="inner-cell">Ячейка 1</td>
+                        <td class="inner-cell">Ячейка 2</td>
+                        <td class="inner-cell">Ячейка 3</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="middle-cell">Ячейка 4</td>
+            <td class="middle-cell">Ячейка 5</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="bottom-cell">Ячейка 6</td>
+        </tr>
+    </table>
+
+</body>
+</html>
