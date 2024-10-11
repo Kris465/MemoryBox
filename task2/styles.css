@@ -1,0 +1,25 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    background-color: green;
+}
+
+.color-list {
+    list-style-type: none;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.blue {
+    color: blue;
+}
+
+.purple {
+    color: purple;
+}
