@@ -8,7 +8,6 @@ from dotenv import find_dotenv, load_dotenv
 from handlers.user_private import user_private_router
 from handlers.admin_private import admin_private_router
 from handlers.user_group import user_group_router
-from handlers.general import general_router
 from common.bot_cmds_list import private
 
 load_dotenv(find_dotenv())
@@ -17,10 +16,8 @@ ALLOWED_UPDATES = ["message", "edited_message"]  # Ограничение апд
 bot = Bot(token=os.getenv("TOKEN"))
 dp = Dispatcher()
 
-dp.include_routers(general_router,
-                   user_private_router,
-                   admin_private_router,
-                   user_group_router)
+dp.include_router(user_private_router)
+dp.include_router(user_group_router)
 
 
 async def main() -> None:
