@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Мини-викторина</h1>
+    <form method="post" id="quizForm">
+        <!-- Вопрос 1 -->
+        <div class="question" id="question1">
+            <h2>1. Какой язык программирования используется для создания веб-страниц?</h2>
+            <label><input type="radio" name="q1" value="html" required> HTML</label><br>
+            <label><input type="radio" name="q1" value="css"> CSS</label><br>
+            <label><input type="radio" name="q1" value="javascript"> JavaScript</label><br>
+            <label><input type="radio" name="q1" value="python"> Python</label><br>
+        </div>
+
+        <!-- Вопрос 2 -->
+        <div class="question" id="question2">
+            <h2>2. Какие из следующих языков являются языками программирования? (Выберите несколько)</h2>
+            <label><input type="checkbox" name="q2[]" value="java"> Java</label><br>
+            <label><input type="checkbox" name="q2[]" value="html"> HTML</label><br>
+            <label><input type="checkbox" name="q2[]" value="css"> CSS</label><br>
+            <label><input type="checkbox" name="q2[]" value="ruby"> Ruby</label><br>
+        </div>
+
+        <!-- Вопрос 3 -->
+        <div class="question" id="question3">
+            <h2>3. Расскажите о своих любимых языках программирования и почему они вам нравятся.</h2>
+            <textarea name="q3" rows="4" required></textarea>
+        </div>
+
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+<style>
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+    margin-bottom: 20px;
+}
+</style>
