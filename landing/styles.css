@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('images.jpeg');
+    background-size: cover;
+}
+
+.landing-page {
+    display: flex;
+}
+
+.product-image {
+    width: 33.33%;
+    height: 100vh;
+    background-image: url('car.jpg');
+    background-size: cover;
+    animation: fadeIn 2s ease-in-out; /* Добавляем анимацию появления */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.content {
+    width: 66.67%;
+    padding: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.feedback-form {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.form-container {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: -220px; /* Изменяем значение right на left */
+    width: 200px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.message {
+    display: none;
+}
+
+button {
+    margin-top: 10px;
+}
