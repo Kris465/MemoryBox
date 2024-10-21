@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "CnljXv5ZhcyR/9lZ1mQSyF1y2HOYKmMGl+VBGlHPtgNHLVhy4lCOiA5aEhWwh4Xv1qVJXazvWbrEYpYTcuK35w==",
+  "dgSpecHash": "t7VpG2gjLGoqAG9lSGIVZQKq3FaWo3s5nxwuzRXUCLYA8pMi7a/GxTgd/GDmHkkdaDnekI9NFq65eptf7n4JGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nata\\prog\\final-project\\final-project\\SriptForTask\\SriptForTask.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Nata\\Prog\\MemoryBox\\LecturesC#\\finalC#\\SriptForTask\\SriptForTask.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nata\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Nata\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Nata\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Nata\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.16\\microsoft.netcore.app.host.win-x64.6.0.16.nupkg.sha512"
+  ],
   "logs": []
 }
