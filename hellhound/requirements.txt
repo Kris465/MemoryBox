@@ -1,0 +1,4 @@
+colorama==0.4.6
+loguru==0.7.2
+tk==0.1.0
+win32-setctime==1.1.0
