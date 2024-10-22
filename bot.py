@@ -7,10 +7,9 @@ import requests
 
 
 class BotUpdator:
-    def __init__(self) -> None:
-        self.session = requests.Session()
-        self.base_url = 'https://tl.rulate.ru/'
-        self.chapters = []
+    def __init__(self, session) -> None:
+        self.session = session
+        self.novels_dict = {}
 
     def login(self):
         load_dotenv()
