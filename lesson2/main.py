@@ -15,7 +15,7 @@ def toss_coin():
 
     # Загружаем и изменяем размер изображения
     original_image = Image.open(image_path)
-    resized_image = original_image.resize((100, 100))  # Установите нужный размер
+    resized_image = original_image.resize((100, 100))
     coin_image = ImageTk.PhotoImage(resized_image)
 
     # Обновление виджета с изображением
@@ -52,7 +52,7 @@ result_label.pack(pady=20)
 
 # Начальное изображение
 initial_image = Image.open("orel.png")
-resized_initial_image = initial_image.resize((100, 100))  # Установите нужный размер
+resized_initial_image = initial_image.resize((100, 100))
 coin_image = ImageTk.PhotoImage(resized_initial_image)
 coin_label = tk.Label(root, image=coin_image)
 coin_label.pack(pady=20)
