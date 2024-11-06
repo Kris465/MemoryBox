@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 0;
+    text-align: center;
+    border: 1px solid grey;
+    height: 50px;
+}
+
+.inner-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: lightblue;
+    color: yellow;
+}
+
+.inner-cell {
+    padding: 0;
+    text-align: center;
+    border: 1px solid gray;
+    height: 50px;
+}
+
+.middle-cell {
+    background-color: lightblue;
+    color: yellow;
+}
+
+.bottom-cell {
+    background-color: lightblue;
+    color: yellow;
+}
