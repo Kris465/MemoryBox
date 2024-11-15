@@ -1,16 +1,21 @@
-num_superheroes = int(input("Введите количество супергероев: "))
-superheroes = []
+num_animals = int(input("Введите количество животных: "))
+police_officers = []
 heroes_sum = 0
 
-for i in range(num_superheroes):
-    name = input("Введите имя супергероя: ")
-    power = int(input(f"Введите силу {name}: "))
-    superheroes.append((name, power))
+for i in range(num_animals):
+    name = input("Введите имя животного: ")
+    role = input("Введите роль (полицейский/преступник): ").lower()
 
-print("Супергерои от 80 ")
-for hero in superheroes:
-    if 50 < hero[1] < 100:
-        print(hero[0])
+    if role == "полицейский":
+        is_mammal = input(f"{name} является млекопитающим? (да/нет): ").lower()
+        police_officers.append((name, is_mammal))
+
+print("nСписок полицейских:")
+for officer in police_officers:
+    print(officer[0])
+
+for officer in police_officers:
+    if officer[1] == "да":
         heroes_sum += 1
 
-print(f"Всего героев с силой, больше 80: {heroes_sum}")
+print(f"nКоличество полицейских, которые являются млекопитающими: {heroes_sum}")
