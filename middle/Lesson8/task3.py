@@ -18,4 +18,4 @@ for officer in police_officers:
     if officer[1] == "да":
         heroes_sum += 1
 
-print(f"nКоличество полицейских, которые являются млекопитающими: {heroes_sum}")
+print(f"Количество полицейских, которые являются млекопитающими: {heroes_sum}")
