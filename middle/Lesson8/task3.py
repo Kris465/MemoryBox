@@ -9,7 +9,7 @@ for i in range(num_superheroes):
 
 print("Супергерои от 80 ")
 for hero in superheroes:
-    if 50 < hero[1]:
+    if 50 < hero[1] < 100:
         print(hero[0])
         heroes_sum += 1
 
