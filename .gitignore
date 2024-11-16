@@ -1,2 +1,7 @@
-# vert
+# venv python
 .venv
+
+# node.js 
+node_modules
+package-lock.json
+package.json
