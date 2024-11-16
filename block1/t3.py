@@ -1,2 +1,3 @@
-print(50, "\n", 10)
-print("50\n10")
+number = int(input("Введите число: "))
+print("Вы ввели число:", number)
+print(f"Вы ввели число: {number}")
