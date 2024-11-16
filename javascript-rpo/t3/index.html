@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма валидации</title>
+</head>
+<body>
+    <h1>Форма валидации</h1>
+    <form id="myForm">
+        <label for="digits">Только цифры:</label>
+        <input type="text" id="digits" required><br><br>
+
+        <label for="letters">Только буквы:</label>
+        <input type="text" id="letters" required><br><br>
+
+        <label for="uppercase">Только заглавные буквы:</label>
+        <input type="text" id="uppercase" required><br><br>
+
+        <button type="submit">Проверить</button>
+    </form>
+
+    <!-- Подключаем файл script.js -->
+    <script src="script.js"></script>
+</body>
+</html>
