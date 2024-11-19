@@ -2,14 +2,6 @@ from bs4 import BeautifulSoup
 from loguru import logger
 
 
-# class Bot:
-#     def __init__(self, session):
-#         self.novels = []
-#         self.session = session
-
-#     def get_all_novels(self):
-#         logger.info("Вызван метод get_all_novels у объекта бота")
-
 class Bot:
     def __init__(self, session):
         self.novels = []
@@ -43,4 +35,8 @@ class Bot:
             return None
 
     def update_chapters(self, list_of_links):
-        pass
+        response = self.session.get("https://tl.rulate.ru" + list_of_links[0])
+        print(response.text)
+        # for link in list_of_links:
+        #     response = self.session.get("https://tl.rulate.ru" + link)
+        #     print(response.text)

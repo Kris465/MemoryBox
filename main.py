@@ -21,8 +21,7 @@ def main():
     session.get(url)
     session.post(url, data={'login[login]': login, 'login[pass]': password})
     bot = Bot(session)
-    bot.get_all_chapters()
-    bot.update_chapters()
+    bot.logic()
 
 
 if __name__ == '__main__':
