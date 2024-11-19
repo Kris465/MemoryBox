@@ -35,7 +35,7 @@ class Bot:
             return None
 
     def update_chapters(self, list_of_links):
-        response = self.session.get("https://tl.rulate.ru" + list_of_links[0])
+        response = self.session.get("https://tl.rulate.ru" + list_of_links[1])
         print(response.text)
         # for link in list_of_links:
         #     response = self.session.get("https://tl.rulate.ru" + link)
