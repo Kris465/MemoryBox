@@ -1,21 +1,17 @@
-from math import sin, radians
+from math import sin, radians, sqrt, cos
 
-# a
-print("Умножить число х на два.")
-x = int(input('Введите х: '))
-print(2 * x)
+x = int(input("Введите число x: "))
+y = int(input("Введите число y: "))
+a = int(input("Введите число а: "))
+# b = int(input("Введите число b: "))
+n = int(input("Введите число n: "))
 
-# б
-print("Посчитать синус градуса угла: ")
-gradus = int(input("Введите градусы угла: "))
-rads = radians(gradus)
-print(round(sin(rads), 2))
-
-# в
-print("Возвести число а во вторую степень")
-a = int(input("Введите а: "))
-print(a * a)
-
-# г
-print("Извлечь квадратный корень из числа: ")
-number = int(input("Введите число: "))
+print(f"a) 2 * x = {2 * x}")
+print(f"б) sin(x) = {round(sin(radians(x)), 2)}")
+print(f"в) a * a = {a * a}")
+print(f"г) sqrt(x) = {round(sqrt(x), 2)}, {round(x ** 0.5, 2)}")
+print(f"д) abs(n) = {abs(n)}")
+print(f"е) 5 * cos(y) = {5 * round(cos(radians(y)), 2)}")
+print(f"ж) -7.5 * a * a = {-7.5 * a * a}")
+print(f"з) 3 * sqrt(x) = {round(3 * sqrt(x), 2)}, {round(3 * x ** 0.5, 2)}")
+print(f"")
