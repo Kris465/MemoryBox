@@ -1,0 +1,7 @@
+{
+    "name": "Математика",
+    "questions": [
+      {"question": "2 + 2 = ?", "answer": "4"},
+      {"question": "Корень из 9?", "answer": "3"}
+    ]
+}
