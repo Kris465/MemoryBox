@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import os
+import aiofiles
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
@@ -23,10 +24,11 @@ TESTS_FOLDER = 'tests'
 RATINGS_FILE = 'ratings.json'
 
 
-def load_ratings():
+async def load_ratings():
     if os.path.exists(RATINGS_FILE):
-        with open(RATINGS_FILE, 'r') as f:
-            return json.load(f)
+        async with aiofiles.open(RATINGS_FILE, 'r') as f:
+            content = await f.read()
+            return json.loads(content)
     return {}
 
 
