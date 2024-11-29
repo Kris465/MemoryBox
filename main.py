@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import aiofiles
+from random import shuffle
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
@@ -116,14 +117,27 @@ async def start_test(message: types.Message, state: FSMContext):
     await ask_question(message, state)
 
 
+# async def ask_question(message: types.Message, state: FSMContext):
+#     data = await state.get_data()
+#     questions = data['questions']
+#     question_index = data['question_index']
+
+#     if question_index < len(questions):
+#         question = questions[question_index]['question']
+#         await message.answer(f"Вопрос {question_index + 1}: {question}")
+#     else:
+#         await finish_test(message, state)
+        
 async def ask_question(message: types.Message, state: FSMContext):
     data = await state.get_data()
     questions = data['questions']
+    shuffle(questions)
     question_index = data['question_index']
 
     if question_index < len(questions):
         question = questions[question_index]['question']
         await message.answer(f"Вопрос {question_index + 1}: {question}")
+        await state.update_data(question_index=question_index + 1)
     else:
         await finish_test(message, state)
 
