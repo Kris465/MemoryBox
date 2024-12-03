@@ -1,3 +1,6 @@
+# Гюнашян Владислав
+
+
 from math import sin
 
 # a = int(input("Введите число a: "))
