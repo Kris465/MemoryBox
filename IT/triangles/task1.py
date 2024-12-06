@@ -4,5 +4,6 @@ def draw_triangle(fill, base=10):
         i = [fill] * n
         print(''.join(i))
         n += 1
-        
+
+               
 draw_triangle('*')
