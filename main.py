@@ -38,8 +38,8 @@ def save_ratings(ratings):
         json.dump(ratings, f)
 
 
-def update_user_score(user_id, username, test_name, score):
-    ratings = load_ratings()
+async def update_user_score(user_id, username, test_name, score):
+    ratings = await load_ratings()  # Используйте await для получения данных
     if str(user_id) not in ratings:
         ratings[str(user_id)] = {"username": username, "tests": {}}
     if test_name not in ratings[str(user_id)]["tests"] or score > ratings[str(user_id)]["tests"][test_name]:
@@ -47,22 +47,24 @@ def update_user_score(user_id, username, test_name, score):
     save_ratings(ratings)
 
 
-def get_user_rating(user_id):
-    ratings = load_ratings()
+async def get_user_rating(user_id):
+    ratings = await load_ratings()  # Используйте await для получения данных
     if str(user_id) in ratings:
         return ratings[str(user_id)]
     return None
 
 
-def get_top_users(limit=10):
-    ratings = load_ratings()
+async def get_top_users(limit=10):
+    ratings = await load_ratings()  # Используйте await для получения данных
     sorted_users = sorted(ratings.items(), key=lambda x: sum(x[1]["tests"].values()), reverse=True)
     return [(ratings[user_id]["username"], sum(data["tests"].values())) for user_id, data in sorted_users[:limit]]
 
 
 def load_test(filename):
     with open(os.path.join(TESTS_FOLDER, filename), 'r', encoding='utf-8') as file:
-        return json.load(file)
+        test_data = json.load(file)
+        shuffle(test_data['questions'])  # Перемешиваем вопросы
+        return test_data
 
 
 def get_test_files():
@@ -86,7 +88,7 @@ async def cmd_topics(message: types.Message):
 
 @dp.message(Command("rating"))
 async def cmd_rating(message: types.Message):
-    top_users = get_top_users()
+    top_users = await get_top_users()  # Используйте await
     if top_users:
         rating_text = "Топ-10 пользователей:\n" + "\n".join([f"{i+1}. {username}: {score}" for i, (username, score) in enumerate(top_users)])
         await message.answer(rating_text)
@@ -96,7 +98,7 @@ async def cmd_rating(message: types.Message):
 
 @dp.message(Command("myrating"))
 async def cmd_myrating(message: types.Message):
-    user_rating = get_user_rating(message.from_user.id)
+    user_rating = await get_user_rating(message.from_user.id)  # Используйте await
     if user_rating:
         rating_text = f"Ваш рейтинг, {user_rating['username']}:\n"
         for test, score in user_rating['tests'].items():
@@ -117,27 +119,14 @@ async def start_test(message: types.Message, state: FSMContext):
     await ask_question(message, state)
 
 
-# async def ask_question(message: types.Message, state: FSMContext):
-#     data = await state.get_data()
-#     questions = data['questions']
-#     question_index = data['question_index']
-
-#     if question_index < len(questions):
-#         question = questions[question_index]['question']
-#         await message.answer(f"Вопрос {question_index + 1}: {question}")
-#     else:
-#         await finish_test(message, state)
-        
 async def ask_question(message: types.Message, state: FSMContext):
     data = await state.get_data()
     questions = data['questions']
-    shuffle(questions)
     question_index = data['question_index']
 
     if question_index < len(questions):
         question = questions[question_index]['question']
         await message.answer(f"Вопрос {question_index + 1}: {question}")
-        await state.update_data(question_index=question_index + 1)
     else:
         await finish_test(message, state)
 
@@ -148,6 +137,10 @@ async def process_answer(message: types.Message, state: FSMContext):
     questions = data['questions']
     question_index = data['question_index']
     correct_answers = data['correct_answers']
+
+    if question_index >= len(questions):
+        await finish_test(message, state)
+        return
 
     if questions[question_index]['answer'].lower() == message.text.lower():
         correct_answers += 1
@@ -166,7 +159,7 @@ async def finish_test(message: types.Message, state: FSMContext):
     test_name = data['test_name'].replace('.json', '')
 
     score = int((correct_answers / total_questions) * 100)  # Процент правильных ответов
-    update_user_score(message.from_user.id, message.from_user.full_name, test_name, score)
+    await update_user_score(message.from_user.id, message.from_user.full_name, test_name, score)  # Используйте await
 
     await message.answer(f"Тест завершен! Ваш результат: {correct_answers} из {total_questions}")
     await message.answer(f"Вы набрали {score} баллов из 100 возможных!")
