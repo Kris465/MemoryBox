@@ -13,27 +13,27 @@ public class Main {
             System.out.println("3. Exit");
             System.out.print("Choose an action: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Очистка буфера
+            scanner.nextLine();
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.print("The title of a note: ");
                     String title = scanner.nextLine();
                     System.out.print("The body of the note: ");
                     String content = scanner.nextLine();
                     noteManager.addNote(new Note(title, content));
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     for (Note note : noteManager.getNotes()) {
                         System.out.println(note);
                     }
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
-                default:
-                    System.out.println("Something went wrong. Try again.");
+                }
+                default -> System.out.println("Something went wrong. Try again.");
             }
         }
     }

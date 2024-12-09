@@ -3,8 +3,8 @@ package diploma.task2;
 import java.time.LocalDateTime;
 
 public class Note {
-    private String title;
-    private String content;
+    private final String title;
+    private final String content;
     private LocalDateTime timestamp;
 
     public Note(String title, String content) {

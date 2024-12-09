@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoteManager {
-    private List<Note> notes;
-    private String filePath;
+    private final List<Note> notes;
+    private final String filePath;
 
     public NoteManager(String filePath) {
         this.notes = new ArrayList<>();
