@@ -7,7 +7,7 @@ def stone_sort(arr):
                 max_index = j
         arr[max_index], arr[n - i - 1] = arr[n - j - 1], arr[max_index]
         return arr
-    
+
     array = [3, 1, 4, 2, 5]
     sorted_array = stone_sort(array)
     print("Отсортировать массив методом камня:", sorted_array)

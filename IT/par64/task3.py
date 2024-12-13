@@ -1,4 +1,4 @@
-from random import randint 
+from random import randint
 
 
 def bubbleSort(arr):
@@ -12,9 +12,8 @@ def bubbleSort(arr):
         if not swapped:
             break
         return arr
-    
-    
-    
+
+
 a = [randint(1, 100) for i in range(30)]
 print(a)
 print(bubbleSort(a))
