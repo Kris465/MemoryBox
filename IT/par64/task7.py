@@ -1,5 +1,5 @@
 def find_max_duplicate(arr):
-    count = []
+    count = {}
 
     for num in arr:
         count[num] = count.get(num, 0) + 1
