@@ -9,6 +9,7 @@ def find_x(n):
     last_digit = n // 100
     result = n % 100
     x = result * 10 + last_digit
+    return x
 
 
 x = int(input("Введите число: "))
