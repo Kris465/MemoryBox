@@ -20,7 +20,8 @@ def has_adjacent_duplicates(word):
     return False
 
 
-matching_words = [word for word in words if len(word) == n and has_adjacent_duplicates(word)]
+matching_words = [
+    word for word in words if len(word) == n and has_adjacent_duplicates(word)]
 
 
 print("Найденные слова:", matching_words)
