@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+nav {
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.horizontal-menu ul {
+    display: flex;
+    justify-content: center;
+}
+
+.horizontal-menu li {
+    margin-right: 30px;
+}
+
+.horizontal-menu a {
+    text-decoration: none;
+    color: #007BFF;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.horizontal-menu a:hover {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+.vertical-menu {
+    width: 200px; /* Ширина вертикального меню */
+}
+
+.vertical-menu li {
+    position: relative;
+}
+
+.vertical-menu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.vertical-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.vertical-menu .dropdown {
+    display: none;
+    position: absolute;
+    left: 100%; /* Отображение подменю справа от основного меню */
+    top: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-menu li:hover .dropdown {
+    display: block;
+}
+
+.icon-menu ul {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-menu li {
+    margin-right: 30px;
+}
+
+.icon-menu img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.active-menu .active a {
+    font-weight: bold;
+    color: red; /* Цвет активного элемента */
+}
+
+
+/* Общие стили для всех меню */
+nav ul {
+    margin-bottom: 0; /* Убираем отступы снизу */
+}
