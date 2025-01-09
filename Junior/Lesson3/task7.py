@@ -1,9 +1,10 @@
 def todo_list():
     tasks = []
-    
+
     while True:
-        action = input("Введите 'add' для добавления задачи, 'remove' для удаления, 'show' для показа задач или 'exit' для выхода: ")
-        
+        action = input("Введите 'add' для добавления задачи, 'remove' для \
+            удаления, 'show' для показа задач или 'exit' для выхода: ")
+
         if action.lower() == 'add':
             task = input("Введите задачу: ")
             tasks.append(task)
@@ -23,5 +24,6 @@ def todo_list():
             break
         else:
             print("Неизвестная команда.")
+
 
 todo_list()
