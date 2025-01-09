@@ -5,7 +5,8 @@ def sum_of_numbers():
         if user_input.lower() == 'stop':
             break
         numbers.append(int(user_input))
-    
+
     print(f"Сумма введенных чисел: {sum(numbers)}")
+
 
 sum_of_numbers()
