@@ -8,7 +8,8 @@ def guess_the_word():
     guessed_letters = []
 
     while True:
-        display_word = ''.join(letter if letter in guessed_letters else '_' for letter in word_to_guess)
+        display_word = ''.join(letter if letter in guessed_letters else
+                               '_' for letter in word_to_guess)
         print(f"Слово: {display_word}")
 
         guess = input("Угадайте букву: ").lower()
