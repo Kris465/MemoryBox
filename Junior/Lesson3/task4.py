@@ -6,7 +6,7 @@ def flashcards():
         "grape": "виноград",
         "peach": "персик"
     }
-    
+
     for english, russian in cards.items():
         answer = input(f"Как переводится '{english}'? ")
         if answer.lower() == russian:

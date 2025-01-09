@@ -1,7 +1,8 @@
 def calculator():
     while True:
         num1 = float(input("Введите первое число: "))
-        operation = input("Введите операцию (+, -, *, /) или 'exit' для выхода: ")
+        operation = input(
+            "Введите операцию (+, -, *, /) или 'exit' для выхода: ")
         if operation == 'exit':
             break
         num2 = float(input("Введите второе число: "))
