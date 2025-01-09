@@ -5,7 +5,7 @@ def calculator():
         if operation == 'exit':
             break
         num2 = float(input("Введите второе число: "))
-        
+
         if operation == '+':
             result = num1 + num2
         elif operation == '-':
@@ -16,7 +16,8 @@ def calculator():
             result = num1 / num2 if num2 != 0 else "Ошибка: деление на ноль"
         else:
             result = "Неизвестная операция"
-        
+
         print(f"Результат: {result}")
+
 
 calculator()
