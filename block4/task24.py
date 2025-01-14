@@ -1,5 +1,3 @@
-import math
-
 x = int(input('Введите двухзначное число: '))
 
 a = (x // 10) ** 3
@@ -11,4 +9,3 @@ if c == d:
     print('True')
 else:
     print('False')
-
