@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тетрис</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid #fff;
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="tetris" width="240" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('tetris');
+        const context = canvas.getContext('2d');
+        context.scale(20, 20);
+
+        // Определение фигур
+        const pieces = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1], [1, 1]], // O
+            [[0, 1, 0], [1, 1, 1]], // T
+            [[0, 1, 1], [1, 1, 0]], // S
+            [[1, 1, 0], [0, 1, 1]], // Z
+            [[1, 0, 0], [1, 1, 1]], // L
+            [[0, 0, 1], [1, 1, 1]], // J
+        ];
+
+        let board = Array.from({ length: 20 }, () => Array(10).fill(0));
+        let currentPiece;
+        let currentPosition;
+
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawBoard();
+            drawPiece();
+        }
+
+        function drawBoard() {
+            for (let r = 0; r < board.length; r++) {
+                for (let c = 0; c < board[r].length; c++) {
+                    if (board[r][c]) {
+                        context.fillStyle = 'white';
+                        context.fillRect(c, r, 1, 1);
+                    }
+                }
+            }
+        }
+
+        function drawPiece() {
+            currentPiece.forEach((row, r) => {
+                row.forEach((value, c) => {
+                    if (value) {
+                        context.fillStyle = 'red';
+                        context.fillRect(currentPosition.x + c, currentPosition.y + r, 1, 1);
+                    }
+                });
+            });
+        }
+
+        function collide() {
+            for (let r = 0; r < currentPiece.length; r++) {
+                for (let c = 0; c < currentPiece[r].length; c++) {
+                    if (currentPiece[r][c] && (board[r + currentPosition.y] && board[r + currentPosition.y][c + currentPosition.x]) !== 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function merge() {
+            currentPiece.forEach((row, r) => {
+                row.forEach((value, c) => {
+                    if (value) {
+                        board[r + currentPosition.y][c + currentPosition.x] = value;
+                    }
+                });
+            });
+        }
+
+        function rotatePiece() {
+            const rotated = currentPiece[0].map((_, index) => currentPiece.map(row => row[index]).reverse());
+            const originalPiece = currentPiece;
+            currentPiece = rotated;
+
+            if (collide()) {
+                currentPiece = originalPiece;
+            }
+        }
+
+        function drop() {
+            currentPosition.y++;
+            if (collide()) {
+                currentPosition.y--;
+                merge();
+                reset();
+            }
+        }
+
+        function reset() {
+            const randomIndex = Math.floor(Math.random() * pieces.length);
+            currentPiece = pieces[randomIndex];
+            currentPosition = { x: 3, y: 0 };
+
+            if (collide()) {
+                alert('Игра окончена!');
+                board = Array.from({ length: 20 }, () => Array(10).fill(0));
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                currentPosition.x--;
+                if (collide()) currentPosition.x++;
+            } else if (event.key === 'ArrowRight') {
+                currentPosition.x++;
+                if (collide()) currentPosition.x--;
+            } else if (event.key === 'ArrowDown') {
+                drop();
+            } else if (event.key === 'ArrowUp') {
+                rotatePiece();
+            }
+        });
+
+        function update() {
+            drop();
+            draw();
+        }
+
+        reset();
+        setInterval(update, 1000);
+    </script>
+</body>
+</html>
