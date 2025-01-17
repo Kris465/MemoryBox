@@ -1,10 +1,6 @@
 text = input("Введите текст: ")
 text1 = text
 text2 = text
-unikslov = 0
-znak = 0
-unicznak = 0
-slov = 0
 for i in ",.()!?:;-":
     resultlne = text.replace(i, "")
     text = resultlne
@@ -19,7 +15,6 @@ for i in spisok:
 print("Уникальных слов: ", len(clean_spisok))
 kolichestvo = 0
 i = 0
-
 while i < len(text1):
     if text1[i] in ",.()!?:;-":
         kolichestvo += 1
@@ -29,4 +24,4 @@ spisok1 = []
 for i in text1:
     if i not in spisok1 and i in ",.()!?:;-":
         spisok1.append(i)
-print(spisok1)
+print("Уникальные знаки припинания: ", len(spisok1))
