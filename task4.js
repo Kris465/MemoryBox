@@ -20,4 +20,4 @@ console.log(`d) √x = ${dResult}`);
 console.log(`e) |n| = ${eResult}`);
 console.log(`f) 5cos y = ${fResult}`);
 console.log(`g) -7.5a² = ${gResult}`);
-console.log(`h) 3√x = ${hResult}`);
+console.log(`h) 3√x = ${hResult}`); pui
