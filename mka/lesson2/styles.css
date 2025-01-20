@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh; /* Высота страницы с экран пользователя */
+    display: flex;
+    flex-direction: column;
+    background-color: #cae2f5;
+}
+
+header {
+    background-color: #2a49d3; /* Темно-зеленый цвет для заголовка */
+    color: rgb(30, 226, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav.top-nav ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Горизонтальное меню */
+}
+
+nav.top-nav li {
+    margin: 0 15px; /* Отступы между пунктами навигации */
+}
+
+nav.top-nav a {
+    color: rgb(16, 216, 149); /* Цвет текста ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+nav.top-nav a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.container {
+    display: flex;
+    flex: 1; /* Занимает оставшееся пространство */
+}
+
+aside.side-nav {
+    width: 200px; /* Ширина бокового меню */
+    background-color: #a7d2f5; /* Светло-серый фон */
+    padding: 20px;
+}
+
+aside.side-nav ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0;
+}
+
+aside.side-nav li {
+    margin-bottom: 10px; /* Отступы между пунктами бокового меню */
+}
+
+aside.side-nav a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #333; /* Темный цвет текста */
+}
+
+aside.side-nav a:hover {
+    color: #4CAF50; /* Цвет при наведении */
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #000272; /* Темный цвет заголовков */
+}
+
+ol.popular-dishes {
+    margin-left: 20px; /* Отступ для нумерованного списка */
+}
+
+ul.menu-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0;
+}
+
+ul.menu-list li {
+    display: flex; /* Используем Flexbox для расположения изображения и информации о блюде */
+    margin-bottom: 20px; /* Отступ между блюдами */
+}
+
+ul.menu-list img {
+    width: 100px; /* Ширина изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    margin-right: 15px; /* Отступ между изображением и текстом */
+}
+
+.dish-info h3 {
+    margin: 0; /* Убираем отступы у заголовка блюда */
+}
+
+footer {
+    background-color: #333; /* Темный фон для подвала */
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
