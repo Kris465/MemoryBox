@@ -29,5 +29,6 @@ def max_dominoes(a, b, c, d, e):
 
     return max_count
 
+
 result = max_dominoes(a, b, c, d, e)
 print(f'Макс колво костей домино которое можно разместить {result}')
