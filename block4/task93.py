@@ -1,6 +1,6 @@
 def classify_point(x, y, c):
     if (x <= 0 and y >= 0) or (x > 0 and y >= 0):
-       return "1"
+        return "1"
     elif (x <= 0 and y <= 0) or (x > 0 and y > 0):
         return "2"
     else:
