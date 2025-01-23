@@ -1,22 +1,19 @@
-const prompt = require('prompt-sync')(); // Импортируем библиотеку prompt-sync
+const prompt = require('prompt-sync')();
 
 function isPowerOfTwo(x) {
     if (x <= 0) {
-        return false; // Неположительные числа не являются степенью двойки
+        return false;
     }
     if (x === 1) {
-        return true; // 2^0 = 1
+        return true;
     }
-    return isPowerOfTwo(x / 2); // Рекурсивно проверяем
+    return isPowerOfTwo(x / 2);
 }
 
-// Получаем пользовательский ввод
 const userInput = prompt('Введите число для проверки, является ли оно степенью двойки: ');
 
-// Преобразуем введенное значение в число
 const number = parseInt(userInput, 10);
 
-// Проверяем, является ли введенное число степенью двойки и выводим результат
 if (isNaN(number)) {
     console.log('Пожалуйста, введите корректное число.');
 } else {

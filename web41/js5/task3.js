@@ -1,44 +1,40 @@
-const prompt = require('prompt-sync')(); // Подключаем библиотеку prompt-sync
+const prompt = require('prompt-sync')();
 
-// Функция для подсчета количества числовых аргументов
 function numbers(...args) {
-    let count = 0; // Счетчик числовых аргументов
+    let count = 0;
 
-    // Проходим по всем аргументам и проверяем их тип
     for (const arg of args) {
         if (typeof arg === 'number') {
-            count++; // Увеличиваем счетчик, если аргумент - число
+            count++;
         }
     }
 
-    return count; // Возвращаем количество числовых аргументов
+    return count;
 }
 
-// Основная логика программы
 function main() {
-    const inputs = []; // Массив для хранения вводимых значений
+    const inputs = [];
 
     console.log("Введите числа (для завершения ввода введите 'exit'):");
 
     while (true) {
-        const input = prompt('> '); // Запрашиваем ввод пользователя
+        const input = prompt('> ');
 
         if (input.toLowerCase() === 'exit') {
-            break; // Завершаем ввод, если пользователь ввел 'exit'
+            break;
         }
 
-        const number = parseFloat(input); // Пробуем преобразовать ввод в число
+        const number = parseFloat(input);
 
         if (!isNaN(number)) {
-            inputs.push(number); // Если это число, добавляем его в массив
+            inputs.push(number);
         } else {
-            console.log("Пожалуйста, введите число или 'exit' для завершения."); // Сообщение об ошибке
+            console.log("Пожалуйста, введите число или 'exit' для завершения.");
         }
     }
 
-    const count = numbers(...inputs); // Вызываем функцию numbers с введенными значениями
-    console.log(`Количество введенных чисел: ${count}`); // Выводим результат
+    const count = numbers(...inputs);
+    console.log(`Количество введенных чисел: ${count}`);
 }
 
-// Запускаем основную функцию
 main();

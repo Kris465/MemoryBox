@@ -21,15 +21,13 @@ function collectStrings() {
                 console.log(stringFrom(...strings));
                 rl.close();
             } else {
-                // Добавляем введенную строку в массив и спрашиваем снова
                 strings.push(input);
                 askForInput();
             }
         });
     }
 
-    askForInput(); // Начинаем запрашивать ввод
+    askForInput();
 }
 
-// Запускаем сбор строк
 collectStrings();
