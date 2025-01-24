@@ -5,7 +5,7 @@ def find_middle_number(a, b, c):
         return c
     else:
         return a
-    
+
 
 a1, b1, c1 = map(float, input("Введите первую тройку чисел через пробел:")
                  .split())
