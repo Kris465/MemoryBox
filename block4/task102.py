@@ -1,5 +1,5 @@
 x = int(input("Введите число x: "))
-y = int(input("Введите число y"))
+y = int(input("Введите число y: "))
 
 
 def chetvert(x, y):
