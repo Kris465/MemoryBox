@@ -1,5 +1,6 @@
 k = int(input("Введите номер карты (2 - 14)"))
 
+
 def nomer(k):
     match k:
         case 2:
@@ -30,5 +31,6 @@ def nomer(k):
             return "Туз"
         case _:
             return "Недопустимый номер карты"
+
 
 print("Достоинство карты:", nomer(k))
