@@ -8,8 +8,13 @@ response = requests.get(url)
 if response.status_code == 200:
     response.encoding = response.apparent_encoding
     soup = BeautifulSoup(response.text, 'html.parser')
-    
-    result = soup.find_all()
-    print(result)
+    soup = soup.find("ul", class_="list clearfix")
+    elements = soup.find_all("a")
+    links = []
+    for element in elements:
+        href = element.get('href')
+        if href:
+            links.append(href)
+    print(links)
 else:
     print(f"Some troubles: {response.status_code}")
