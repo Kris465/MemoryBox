@@ -10,7 +10,7 @@ body {
 }
 
 #pole {
-    background-image:url(../img/поле.jpg);
+    background-color: #087b2c;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -18,9 +18,9 @@ body {
 }
 
 #myach {
-    background-image:url(../img/myach.jpg);
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-color: #fff;
+    border-radius: 100%;
+    border: 1px solid #000;
     width: 100px;
     height: 100px;
     position: absolute;
