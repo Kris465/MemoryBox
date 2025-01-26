@@ -7,24 +7,23 @@ from loguru import logger
 
 
 chapters = {}
-# https://www.52shuku.vip/yanqing/hyv3.html
-# https://www.52shuku.vip/xiandaidushi/22547.html
+# https://www.xbanxia.com/books/109819.html
 
 
 def get_novel(url):
     chapter = 1
     soup = get_webpage(url)
-    chapters_list = soup.find("ul", class_="list clearfix")
+    chapters_list = soup.find("div", class_="book-list clearfix")
     elements = chapters_list.find_all("a")
     links = []
     for element in elements:
-        href = element.get('href')
+        href = 'https://www.xbanxia.com/' + element.get('href')
         if href:
             links.append(href)
 
     for link in links:
         chapter_page = get_webpage(link)
-        text = chapter_page.find("article", class_="article-content")
+        text = chapter_page.find("div", id="nr1")
         chapters.update({str(chapter): link + text.text})
         chapter += 1
         time.sleep(randint(1, 7))
