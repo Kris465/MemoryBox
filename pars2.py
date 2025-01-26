@@ -6,10 +6,16 @@ from bs4 import BeautifulSoup
 from loguru import logger
 
 
+chapters = {}
+# https://www.52shuku.vip/yanqing/hyv3.html
+# https://www.52shuku.vip/xiandaidushi/22547.html
+
+
 def get_novel(url):
     chapter = 1
     soup = get_webpage(url)
     chapters_list = soup.find("ul", class_="list clearfix")
+    logger.info(f"{chapters_list}")
     elements = chapters_list.find_all("a")
     links = []
     for element in elements:
@@ -17,7 +23,6 @@ def get_novel(url):
         if href:
             links.append(href)
 
-    chapters = {}
     for link in links:
         chapter_page = get_webpage(link)
         text = chapter_page.find("div", class_="book_con fix")
@@ -25,7 +30,6 @@ def get_novel(url):
         chapter += 1
         time.sleep(randint(1, 7))
         logger.info(f"chapter {chapter} for link {link} is got")
-    return chapters
 
 
 def get_webpage(link):
@@ -40,8 +44,10 @@ def get_webpage(link):
 
 title = input("Введите название новеллы: ")
 url = input("Введите ссылку: ")
-chapters = get_novel(url)
-with open(f'{title}.json', 'w', encoding='UTF-8') as json_file:
-    loaded_data = json.dump(chapters, json_file)
+try:
+    get_novel(url)
+except Exception as e:
+    logger.error(f"program failed with {e}")
 
-print(loaded_data)
+with open(f'{title}.json', 'w', encoding='UTF-8') as json_file:
+    loaded_data = json.dump(chapters, json_file, ensure_ascii=False)
