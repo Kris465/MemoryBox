@@ -5,5 +5,7 @@ def get_correct_ending(age):
         return 'года'
     else:
         return 'лет'
+
+
 age = int(input("Введите ваш возраст (от 1 до 99): "))
 print(f"Мне {age} {get_correct_ending(age)}")
