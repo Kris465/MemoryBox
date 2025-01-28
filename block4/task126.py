@@ -11,5 +11,5 @@ def find_mahrooms(k):
             suffix = "грибов"
     return f"мы нашли {k} {suffix} в лесу"
 
-k = int(input("введите количество грибов: "))
-print(find_mahrooms(k))
+    k = int(input("введите количество грибов: "))
+    print(find_mahrooms(k))
