@@ -1,8 +1,13 @@
 from interface import create_interface
+from loguru import logger
 
 
 def main():
-    user_data = create_interface()
+    try:
+        user_data = create_interface()
+    except Exception as e:
+        logger.error(e)
+
     print("Польовательские данные:", user_data)
 
 

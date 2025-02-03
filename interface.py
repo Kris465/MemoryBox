@@ -31,7 +31,7 @@ def on_submit(root, mode_var, chapter_entry, title_entry, link_entry):
 
 def create_interface():
     root = tk.Tk()
-    root.title("Hellhound Interface")
+    root.title("Hellhound")
     root.geometry("500x300")
     icon = PhotoImage(file="yin.png")
     root.iconphoto(False, icon)
