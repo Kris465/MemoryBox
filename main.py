@@ -1,15 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
+from interface import create_interface
 
-url = 'https://www.xbanxia.com/books/109819/23141778.html'
 
-response = requests.get(url)
+def main():
+    user_data = create_interface()
+    print("Польовательские данные:", user_data)
 
-if response.status_code == 200:
-    response.encoding = response.apparent_encoding
-    soup = BeautifulSoup(response.text, 'html.parser')
 
-    result = soup.text
-    print(result)
-else:
-    print(f"Some troubles: {response.status_code}")
+if __name__ == "__main__":
+    main()
