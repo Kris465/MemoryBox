@@ -8,3 +8,6 @@ __pycache__
 # photoes
 *.png
 *.jpg
+
+# logs
+*.log
