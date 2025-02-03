@@ -1,43 +1,45 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import PhotoImage, messagebox
+
+
+def validate_data(data):
+    if not data["chapter"].isdigit():
+        return "Поле 'chapter/from' должно быть числом"
+    if not data["title"]:
+        return "Поле 'Title' не может быть пустым"
+    if not data["link"]:
+        return "Поле 'Link' не может быть пустым"
+    return None
+
+
+def on_submit(root, mode_var, chapter_entry, title_entry, link_entry):
+    data = {
+        "mode": mode_var.get(),
+        "chapter": chapter_entry.get(),
+        "title": title_entry.get(),
+        "link": link_entry.get()
+    }
+
+    error_message = validate_data(data)
+    if error_message:
+        messagebox.showerror("Ошибка", error_message)
+        return None
+
+    root.quit()
+    return data
 
 
 def create_interface():
-    def on_submit():
-
-        data = {
-            "mode": mode_var.get(),
-            "chapter": chapter_entry.get(),
-            "title": title_entry.get(),
-            "link": link_entry.get()
-        }
-
-        if not data["chapter"].isdigit():
-            messagebox.showerror("Ошибка",
-                                 "Поле 'chapter/from' должно быть числом")
-            return
-        if not data["title"]:
-            messagebox.showerror("Ошибка", "Поле 'Title' не может быть пустым")
-            return
-        if not data["link"]:
-            messagebox.showerror("Ошибка", "Поле 'Link' не может быть пустым")
-            return
-
-        root.quit()
-        root.destroy()
-        return data
-
     root = tk.Tk()
     root.title("Hellhound Interface")
-    root.geometry("400x300")
-
-    logo_label = tk.Label(root, text="LOGO", font=("Arial", 16))
-    logo_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-
-    app_name_label = tk.Label(root, text="Hellhound", font=("Arial", 20))
-    app_name_label.grid(row=0, column=1, columnspan=2, padx=10, pady=10)
+    root.geometry("500x300")
+    icon = PhotoImage(file="yin.png")
+    root.iconphoto(False, icon)
 
     mode_var = tk.StringVar(value="stepper")
+    tk.Label(root, text="Выберите режим:").grid(row=0, column=0,
+                                                padx=10, pady=10, sticky="w")
+
     stepper_rb = tk.Radiobutton(root, text="Stepper",
                                 variable=mode_var, value="stepper")
     collector_rb = tk.Radiobutton(root, text="Collector",
@@ -49,26 +51,25 @@ def create_interface():
     collector_rb.grid(row=2, column=0, padx=10, pady=5, sticky="w")
     one_chapter_rb.grid(row=3, column=0, padx=10, pady=5, sticky="w")
 
-    chapter_label = tk.Label(root, text="chapter/from")
-    chapter_label.grid(row=1, column=1, padx=10, pady=5, sticky="e")
+    tk.Label(root, text="chapter/from:").grid(row=1, column=1,
+                                              padx=10, pady=5, sticky="e")
     chapter_entry = tk.Entry(root)
-    chapter_entry.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    chapter_entry.grid(row=1, column=2, padx=10, pady=5)
 
-    title_label = tk.Label(root, text="Title")
-    title_label.grid(row=4, column=0, padx=10, pady=5, sticky="w")
-    title_entry = tk.Entry(root)
-    title_entry.grid(row=4, column=1, columnspan=2,
-                     padx=10, pady=5, sticky="we")
+    tk.Label(root, text="Title:").grid(row=4, column=0, padx=10,
+                                       pady=5, sticky="w")
+    title_entry = tk.Entry(root, width=40)
+    title_entry.grid(row=4, column=1, columnspan=2, padx=10, pady=5)
 
-    link_label = tk.Label(root, text="Link")
-    link_label.grid(row=5, column=0, padx=10, pady=5, sticky="w")
-    link_entry = tk.Entry(root)
-    link_entry.grid(row=5, column=1, columnspan=2,
-                    padx=10, pady=5, sticky="we")
+    tk.Label(root, text="Link:").grid(row=5, column=0, padx=10,
+                                      pady=5, sticky="w")
+    link_entry = tk.Entry(root, width=40)
+    link_entry.grid(row=5, column=1, columnspan=2, padx=10, pady=5)
 
-    submit_button = tk.Button(root, text="Submit", command=on_submit)
-    submit_button.grid(row=6, column=0, columnspan=3, pady=10)
+    submit_button = tk.Button(root, text="Submit", command=lambda: on_submit(
+        root, mode_var, chapter_entry, title_entry, link_entry))
+    submit_button.grid(row=6, column=0, columnspan=3, pady=20)
 
     root.mainloop()
 
-    return on_submit()
+    return on_submit(root, mode_var, chapter_entry, title_entry, link_entry)
