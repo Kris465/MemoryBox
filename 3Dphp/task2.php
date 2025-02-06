@@ -1,28 +1,31 @@
 <?php
+
 function isPalindrome($string) {
-    // Убираем пробелы и приводим строку к нижнему регистру
-    $cleanedString = preg_replace('/s+/', '', mb_strtolower($string, 'UTF-8'));
+    // Убираем пробелы и переводим строку в нижний регистр
+    $cleanedString = preg_replace('/s+/', '', mb_strtolower($string));
     
-    // Убираем все символы, кроме букв (русские и английские)
-    $cleanedString = preg_replace('/[^а-яёa-z]/iu', '', $cleanedString);
-
-    // Проверяем, равна ли строка своей обратной версии
-    return $cleanedString === mb_strrev($cleanedString);
+    // Убираем все символы, кроме букв (русских и английских)
+    $cleanedString = preg_replace('/[^p{L}]/u', '', $cleanedString);
+    
+    // Проверяем, является ли строка палиндромом
+    return $cleanedString === strrev($cleanedString);
 }
 
-// Функция для реверсирования строки с поддержкой многобайтовых символов
-function mb_strrev($string) {
-    return mb_convert_encoding(strrev(mb_convert_encoding($string, 'UTF-16LE', 'UTF-8')), 'UTF-8', 'UTF-16LE');
+// Основной цикл для пользовательского ввода
+while (true) {
+    echo "Введите строку для проверки на палиндром (или 'exit' для выхода): ";
+    $input = trim(fgets(STDIN)); // Читаем ввод пользователя
+
+    if (strtolower($input) === 'exit') {
+        break; // Выход из цикла, если пользователь ввел 'exit'
+    }
+
+    if (isPalindrome($input)) {
+        echo "'$input' является палиндромом.\n";
+    } else {
+        echo "'$input' не является палиндромом.\n";
+    }
 }
 
-// Получаем ввод от пользователя
-echo "Введите строку для проверки: ";
-$inputString = trim(fgets(STDIN)); // Читаем строку
-
-// Проверяем, является ли строка палиндромом
-if (isPalindrome($inputString)) {
-    echo "Строка является палиндромом.\n";
-} else {
-    echo "Строка не является палиндромом.\n";
-}
+echo "Выход из программы.\n";
 ?>
