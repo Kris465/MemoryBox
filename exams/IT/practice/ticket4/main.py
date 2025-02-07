@@ -1,21 +1,32 @@
 from random import randint
 
-a = int(input('Введите начала диапозона: '))
-b = int(input('Введите конец диапозона: '))
-c = int(input('Введите размер списка: '))
+def get_user_input():
+    """Запрашивает у пользователя диапазон чисел и размер списка."""
+    while True:
+        try:
+            a = int(input('Введите начало диапазона: '))
+            b = int(input('Введите конец диапазона: '))
+            c = int(input('Введите размер списка: '))
+            if a >= b:
+                print("Ошибка: Начало диапазона должно быть меньше конца.")
+                continue
+            if c <= 0:
+                print("Ошибка: Размер списка должен быть положительным.")
+                continue
+            return a, b, c
+        except ValueError:
+            print("Ошибка: Пожалуйста, введите корректные целые числа.")
 
-chmo = []
-
-
-for i in range(c):
-    chmo.append(randint(a, b))
-
+def generate_random_list(a, b, c):
+    """Генерирует случайный список чисел в заданном диапазоне."""
+    return [randint(a, b) for _ in range(c)]
 
 def create_node(value):
+    """Создает узел бинарного дерева."""
     return {'value': value, 'left': None, 'right': None}
 
-
 def insert(root, value):
+    """Вставляет значение в бинарное дерево."""
     if root is None:
         return create_node(value)
     if value < root['value']:
@@ -24,21 +35,26 @@ def insert(root, value):
         root['right'] = insert(root['right'], value)
     return root
 
-
 def order(node, sorted_values):
+    """Обходит бинарное дерево в симметричном порядке и добавляет значения в список."""
     if node is not None:
         order(node['left'], sorted_values)
         sorted_values.append(node['value'])
         order(node['right'], sorted_values)
 
+def main():
+    a, b, c = get_user_input()
+    random_list = generate_random_list(a, b, c)
+    root = None
+    for value in random_list:
+        root = insert(root, value)
 
-root = None
-for value in chmo:
-    root = insert(root, value)
+    sorted_values = []
+    order(root, sorted_values)
 
-sorted_values = []
-order(root, sorted_values)
+    print('Изначальный массив:', random_list)
+    print('Отсортированный массив:', sorted_values)
 
 
-print('Изначальный массив:', chmo)
-print('Отсортированый массив:', sorted_values)
+if __name__ == "__main__":
+    main()
