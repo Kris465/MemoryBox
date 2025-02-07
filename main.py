@@ -1,6 +1,7 @@
 def create_node(value):
     return {'value': value, 'left': None, 'right': None}
 
+
 def insert(root, value):
     if root is None:
         return create_node(value)
@@ -9,6 +10,7 @@ def insert(root, value):
     else:
         root['right'] = insert(root['right'], value)
     return root
+
 
 def in_order_traversal(node, sorted_values):
     if node is not None:
