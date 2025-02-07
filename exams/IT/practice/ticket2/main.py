@@ -1,11 +1,9 @@
 from random import randint
 
 def triple_characters(s):
-    """Утроить каждый символ в строке."""
     return ''.join([char * 3 for char in s])
 
 def simulate_transmission(tripled_string):
-    """Имитация передачи сообщения с случайными удалениями символов."""
     transmitted_message = []
     i = 0
     
@@ -28,7 +26,6 @@ def simulate_transmission(tripled_string):
     return ''.join(transmitted_message)
 
 def remove_duplicates(s):
-    """Удалить дублирующиеся символы из строки."""
     return ''.join([s[i] for i in range(len(s) - 1) if s[i] != s[i + 1]]) + s[-1]
 
 def main():
