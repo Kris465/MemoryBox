@@ -13,7 +13,6 @@ def main():
         second_operand = True
     else:
         second_operand = False
-    
 
     and_result = first_operand and second_operand
     or_result = first_operand or second_operand
