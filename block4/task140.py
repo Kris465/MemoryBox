@@ -2,11 +2,9 @@ def find_kth_digit(k):
 
     one_digit_count = 9
     two_digit_count = 90
-    three_digit_count = 11
 
     one_digit_lenght = one_digit_count * 1
     two_digit_lenght = two_digit_count * 2
-    three_digit_lenght = three_digit_count * 3
 
     if k <= one_digit_lenght:
         number = k
