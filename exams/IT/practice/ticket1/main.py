@@ -1,27 +1,30 @@
-text = input("Введите текст: ")
-text1 = text
-text2 = text
-for i in ",.()!?:;-":
-    resultlne = text.replace(i, "")
-    text = resultlne
-print(resultlne)
-spisok = resultlne.split()
-dlina = len(spisok)
-print("Количество слов: ", dlina)
-clean_spisok = []
-for i in spisok:
-    if i not in clean_spisok:
-        clean_spisok.append(i)
-print("Уникальных слов: ", len(clean_spisok))
-kolichestvo = 0
-i = 0
-while i < len(text1):
-    if text1[i] in ",.()!?:;-":
-        kolichestvo += 1
-    i += 1
-print("Колличество знаков припинания: ", kolichestvo)
-spisok1 = []
-for i in text1:
-    if i not in spisok1 and i in ",.()!?:;-":
-        spisok1.append(i)
-print("Уникальные знаки припинания: ", len(spisok1))
+import string
+
+def get_text_statistics(text):
+    words = text.split()
+    word_count = len(words)
+    unique_words = set(words)
+    unique_word_count = len(unique_words)
+    punctuation_count = sum(1 for char in text if char in string.punctuation)
+    unique_punctuation = set(char for char in text if char in string.punctuation)
+    unique_punctuation_count = len(unique_punctuation)
+
+    return {
+        "word_count": word_count,
+        "unique_word_count": unique_word_count,
+        "punctuation_count": punctuation_count,
+        "unique_punctuation_count": unique_punctuation_count
+    }
+
+def main():
+    user_input = input("Введите текст: ")
+    stats = get_text_statistics(user_input)
+    
+    print("\nСтатистика текста:")
+    print(f"Количество слов: {stats['word_count']}")
+    print(f"Количество уникальных слов: {stats['unique_word_count']}")
+    print(f"Количество знаков препинания: {stats['punctuation_count']}")
+    print(f"Количество уникальных знаков препинания: {stats['unique_punctuation_count']}")
+
+if __name__ == "__main__":
+    main()

@@ -1,7 +1,4 @@
 def main():
-    # first_operand = True
-    # second_operand = False
-
     first_operand = input("Введите первое логичское значение (True/False): ")
     second_operand = input("Введите второе логическое значение (True/False): ")
     
