@@ -16,9 +16,10 @@ def find_kth_digit(k):
     else:
         k -= one_digit_lenght + two_digit_lenght
         number = 100 + (k - 1) // 3
-    
+
     position_in_number = (k - 1) % len(str(number))
     return int(str(number)[position_in_number])
+
 
 k = int(input("Введите значение k (1 <= k <= 222): "))
 result = find_kth_digit(k)
