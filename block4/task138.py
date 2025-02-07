@@ -8,5 +8,5 @@ def find_digit(n):
 
 
 n = int(input("введите номер цифры (от 1 до 32): "))
-result = find_digit
-print(f'цифры под номером {n}: {result}')
+result = find_digit(n)
+print(f"цифры под номером {n}: {result}")
