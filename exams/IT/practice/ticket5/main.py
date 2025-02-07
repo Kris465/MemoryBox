@@ -2,7 +2,6 @@ import platform
 import socket
 
 def get_system_info():
-    """Получает основные данные о системе."""
     system_info = {
         'Операционная система': platform.system(),
         'Версия ОС': platform.version(),
@@ -14,7 +13,6 @@ def get_system_info():
     return system_info
 
 def get_network_interfaces():
-    """Получает информацию о сетевых интерфейсах."""
     interfaces = socket.getaddrinfo(socket.gethostname(), None)
     network_info = {}
     
@@ -32,13 +30,11 @@ def get_network_interfaces():
     return network_info
 
 def print_system_info(system_info):
-    """Выводит информацию о системе."""
     print("Основные данные о системе:")
     for key, value in system_info.items():
         print(f"{key}: {value}")
 
 def print_network_interfaces(network_info):
-    """Выводит информацию о сетевых интерфейсах."""
     print("\nСетевые интерфейсы:")
     for ip, details in network_info.items():
         print(f"IP-адрес: {ip}")

@@ -1,7 +1,6 @@
 from random import randint
 
 def get_user_input():
-    """Запрашивает у пользователя диапазон чисел и размер списка."""
     while True:
         try:
             a = int(input('Введите начало диапазона: '))
@@ -18,15 +17,12 @@ def get_user_input():
             print("Ошибка: Пожалуйста, введите корректные целые числа.")
 
 def generate_random_list(a, b, c):
-    """Генерирует случайный список чисел в заданном диапазоне."""
     return [randint(a, b) for _ in range(c)]
 
 def create_node(value):
-    """Создает узел бинарного дерева."""
     return {'value': value, 'left': None, 'right': None}
 
 def insert(root, value):
-    """Вставляет значение в бинарное дерево."""
     if root is None:
         return create_node(value)
     if value < root['value']:
@@ -36,7 +32,6 @@ def insert(root, value):
     return root
 
 def order(node, sorted_values):
-    """Обходит бинарное дерево в симметричном порядке и добавляет значения в список."""
     if node is not None:
         order(node['left'], sorted_values)
         sorted_values.append(node['value'])
