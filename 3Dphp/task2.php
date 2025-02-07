@@ -1,7 +1,7 @@
 <?php
 function isPalindrome($string) {
     $string = mb_strtolower(trim($string));
-    $string = preg_replace('/[^p{L}]/u', '', $string);
+    $string = preg_replace('/[p{L}]/u', '', $string);
     return $string === strrev($string);
 }
 
