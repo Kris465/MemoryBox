@@ -18,10 +18,10 @@ function renderPuzzle() {
         const piece = document.createElement('div');
         piece.classList.add('puzzle-piece');
         if (number !== 0) {
-            piece.style.backgroundImage = 'url(images.jpg)';
+            piece.style.backgroundImage = 'url(image.jpg)';
             const x = (number % size) * 100;
             const y = Math.floor(number / size) * 100;
-            piece.style.backgroundPosition = `-${x}px -${y}px`;
+            piece.style.backgroundPosition = -${x}px -${y}px;
             piece.addEventListener('click', () => movePiece(index));
         } else {
             piece.classList.add('empty');
