@@ -18,7 +18,7 @@ function renderPuzzle() {
         const piece = document.createElement('div');
         piece.classList.add('puzzle-piece');
         if (number !== 0) {
-            piece.style.backgroundImage = 'url(image.jpg)';
+            piece.style.backgroundImage = 'url(images.jpg)';
             const x = (number % size) * 100;
             const y = Math.floor(number / size) * 100;
             piece.style.backgroundPosition = `-${x}px -${y}px`;
