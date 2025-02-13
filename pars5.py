@@ -7,34 +7,16 @@ from loguru import logger
 
 
 chapters = {}
+'''Stepper'''
 # https://citrusaurora.com/series/that-ladys-stalker/chapter-1/
 
 
 def get_novel(url):
     chapter = 1
-    soup = get_webpage(url)
-    chapters_list = soup.find("table", class_="table table-zebra")
-    elements = chapters_list.find_all("a")
-    links = []
-    for element in elements:
-        href = element.get('href')
-        if href:
-            links.append(href)
-
-    for link in links:
-        chapter_page = get_webpage(link)
-        text = chapter_page.find("main", id="main").text
-        result = []
-        for char in text:
-            if char == '.':
-                result.append('.\n')
-            else:
-                result.append(char)
-        text = ''.join(result)
-        chapters.update({str(chapter): link + text})
-        chapter += 1
-        time.sleep(randint(1, 7))
-        logger.info(f"chapter {chapter} for link {link} is got")
+    next_link = url
+    while next_link:
+        page = get_webpage(next_link)
+        print(page.text)
 
 
 def get_webpage(link):
