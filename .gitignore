@@ -1,0 +1,12 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__/
+
+# files
+*.json
+
+# logs
+*.log
