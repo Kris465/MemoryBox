@@ -8,7 +8,6 @@ for i in range(20):
         grades.append(grade)
     else:
         print("Ошибка: оценка должна быть в диапазоне от 0 до 100.")
-        # Повторный ввод в случае ошибки
         grade = float(input(f"Введите оценку ученика {i + 1} снова: "))
         grades.append(grade)
 
