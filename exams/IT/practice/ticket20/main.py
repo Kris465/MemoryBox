@@ -117,43 +117,39 @@ if choice2 == 1 and choice3 == 3 and choice1 == 1:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 + num2
+        otvet_in_module1 = abs(num1) + num2
         print(f"Ваш пример: |{num1}| + {num2}")
     if num_choice3 == 2:
-        module_num2 = abs(num2)
         # конечный ответ
-        otvet_in_module2 = num1 + module_num2
+        otvet_in_module2 = num1 + abs(num2)
         print(f"Ваш пример: {num1} + |{num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 + module_num2
+        module_nums = abs(num1) + abs(num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{num1}| + |{num2}|")
 
 # логарифм
 if choice2 == 1 and choice3 == 4 and choice1 == 1:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 + num2
+        otvet_log_num1 = log(num1, base) + num2
         print(f"Ваш пример: log{base}^{num1} + {num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(num2, base)
         # конечный ответ
-        otvet_log_num2 = num1 + log_num2
+        otvet_log_num2 = num1 + log(num2, base)
         print(f"Ваш пример: {num1} + log{base}^{num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 + log_num2
+        log_nums = log(num1, base) + log(num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{num1} + log{base}^{num2}")
@@ -266,24 +262,22 @@ if choice2 == 2 and choice3 == 3 and choice1 == 1:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 - num2
+        otvet_in_module1 = abs(num1) - num2
         print(f"Ваш пример: |{num1}| - {num2}")
     if num_choice3 == 2:
-        module_num2 = abs(num2)
         # конечный ответ
-        otvet_in_module2 = num1 - module_num2
+        otvet_in_module2 = num1 - abs(num2)
         print(f"Ваш пример: {num1} - |{num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 - module_num2
+        module_nums = abs(num1) - abs(num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{num1}| - |{num2}|")
 
 # логарифм
 if choice2 == 2 and choice3 == 4 and choice1 == 1:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
@@ -292,17 +286,16 @@ if choice2 == 2 and choice3 == 4 and choice1 == 1:
         base = int(input("Введите основание логарифма: "))
         log_num1 = log(num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 - num2
+        otvet_log_num1 = log(num1, base) - num2
         print(f"Ваш пример: log{base}^{num1} - {num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(num2, base)
         # конечный ответ
-        otvet_log_num2 = num1 - log_num2
+        otvet_log_num2 = num1 - log(num2, base)
         print(f"Ваш пример: {num1} - log{base}^{num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 - log_num2
+        log_nums = log(num1, base) - log(num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{num1} - log{base}^{num2}")
@@ -415,43 +408,39 @@ if choice2 == 3 and choice3 == 3 and choice1 == 1:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 * num2
+        otvet_in_module1 = abs(num1) * num2
         print(f"Ваш пример: |{num1}| * {num2}")
     if num_choice3 == 2:
-        module_num2 = abs(num2)
         # конечный ответ
-        otvet_in_module2 = num1 * module_num2
+        otvet_in_module2 = num1 * abs(num2)
         print(f"Ваш пример: {num1} * |{num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 * module_num2
+        module_nums = abs(num1) * abs(num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{num1}| * |{num2}|")
 
 # логарифм
 if choice2 == 3 and choice3 == 4 and choice1 == 1:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 * num2
+        otvet_log_num1 = log(num1, base) * num2
         print(f"Ваш пример: log{base}^{num1} * {num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(num2, base)
         # конечный ответ
-        otvet_log_num2 = num1 * log_num2
+        otvet_log_num2 = num1 * log(num2, base)
         print(f"Ваш пример: {num1} * log{base}^{num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 * log_num2
+        log_nums = log(num1, base) * log(num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{num1} * log{base}^{num2}")
@@ -564,43 +553,39 @@ if choice2 == 3 and choice3 == 3 and choice1 == 1:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 / num2
+        otvet_in_module1 = abs(num1) / num2
         print(f"Ваш пример: |{num1}| : {num2}")
     if num_choice3 == 2:
-        module_num2 = abs(num2)
         # конечный ответ
-        otvet_in_module2 = num1 / module_num2
+        otvet_in_module2 = num1 / abs(num2)
         print(f"Ваш пример: {num1} : |{num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 / module_num2
+        module_nums = abs(num1) / abs(num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{num1}| : |{num2}|")
 
 # логарифм
 if choice2 == 4 and choice3 == 4 and choice1 == 1:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 / num2
+        otvet_log_num1 = log(num1, base) / num2
         print(f"Ваш пример: log{base}^{num1} : {num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(num2, base)
         # конечный ответ
-        otvet_log_num2 = num1 / log_num2
+        otvet_log_num2 = num1 / log(num2, base)
         print(f"Ваш пример: {num1} : log{base}^{num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 / log_num2
+        log_nums = log(num1, base) / log(num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{num1} : log{base}^{num2}")
@@ -712,43 +697,39 @@ if choice2 == 1 and choice3 == 3 and choice1 == 2:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(random_num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 + random_num2
+        otvet_in_module1 = abs(random_num1) + random_num2
         print(f"Ваш пример: |{random_num1}| + {random_num2}")
     if num_choice3 == 2:
-        module_num2 = abs(random_num2)
         # конечный ответ
-        otvet_in_module2 = random_num1 + module_num2
+        otvet_in_module2 = random_num1 + abs(random_num2)
         print(f"Ваш пример: {random_num1} + |{random_num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 + module_num2
+        module_nums = abs(random_num1) + abs(random_num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{random_num1}| + |{random_num2}|")
 
 # логарифм
 if choice2 == 1 and choice3 == 4 and choice1 == 2:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(random_num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 + random_num2
+        otvet_log_num1 = log(random_num1, base) + random_num2
         print(f"Ваш пример: log{base}^{random_num1} + {random_num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(random_num2, base)
         # конечный ответ
-        otvet_log_num2 = random_num1 + log_num2
+        otvet_log_num2 = random_num1 + log(random_num2, base)
         print(f"Ваш пример: {random_num1} + log{base}^{random_num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 + log_num2
+        log_nums = log(random_num1, base) + log(random_num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{random_num1} + log{base}^{random_num2}")
@@ -861,43 +842,40 @@ if choice2 == 2 and choice3 == 3 and choice1 == 2:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(random_num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 - random_num2
+        otvet_in_module1 = abs(random_num1) - random_num2
         print(f"Ваш пример: |{random_num1}| - {random_num2}")
     if num_choice3 == 2:
         module_num2 = abs(random_num2)
         # конечный ответ
-        otvet_in_module2 = random_num1 - module_num2
+        otvet_in_module2 = random_num1 - abs(random_num2)
         print(f"Ваш пример: {random_num1} - |{random_num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 - module_num2
+        module_nums = abs(random_num1) - abs(random_num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{random_num1}| - |{random_num2}|")
 
 # логарифм
 if choice2 == 2 and choice3 == 4 and choice1 == 2:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(random_num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 - random_num2
+        otvet_log_num1 = log(random_num1, base) - random_num2
         print(f"Ваш пример: log{base}^{random_num1} - {random_num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(random_num2, base)
         # конечный ответ
-        otvet_log_num2 = random_num1 - log_num2
+        otvet_log_num2 = random_num1 - log(random_num2, base)
         print(f"Ваш пример: {random_num1} - log{base}^{random_num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 - log_num2
+        log_nums = log(random_num1, base) - log(random_num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{random_num1} - log{base}^{random_num2}")
@@ -1010,43 +988,39 @@ if choice2 == 3 and choice3 == 3 and choice1 == 2:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(random_num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 * random_num2
+        otvet_in_module1 = abs(random_num1) * random_num2
         print(f"Ваш пример: |{random_num1}| * {random_num2}")
     if num_choice3 == 2:
-        module_num2 = abs(random_num2)
         # конечный ответ
-        otvet_in_module2 = random_num1 * module_num2
+        otvet_in_module2 = random_num1 * abs(random_num2)
         print(f"Ваш пример: {random_num1} * |{random_num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 * module_num2
+        module_nums = abs(random_num1) * abs(random_num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{random_num1}| * |{random_num2}|")
 
 # логарифм
 if choice2 == 3 and choice3 == 4 and choice1 == 2:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(random_num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 * random_num2
+        otvet_log_num1 = log(random_num1, base) * random_num2
         print(f"Ваш пример: log{base}^{random_num1} * {random_num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(random_num2, base)
         # конечный ответ
-        otvet_log_num2 = random_num1 * log_num2
+        otvet_log_num2 = random_num1 * log(random_num2, base)
         print(f"Ваш пример: {random_num1} * log{base}^{random_num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 * log_num2
+        log_nums = log(random_num1, base) * log(random_num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{random_num1} * log{base}^{random_num2}")
@@ -1159,43 +1133,39 @@ if choice2 == 3 and choice3 == 3 and choice1 == 2:
     print("3 - оба числа")
     num_choice3 = int(input("Ваш выбор: "))
     if num_choice3 == 1:
-        module_num1 = abs(random_num1)
         # конечный ответ
-        otvet_in_module1 = module_num1 / random_num2
+        otvet_in_module1 = abs(random_num1) / random_num2
         print(f"Ваш пример: |{random_num1}| : {random_num2}")
     if num_choice3 == 2:
-        module_num2 = abs(random_num2)
         # конечный ответ
-        otvet_in_module2 = random_num1 / module_num2
+        otvet_in_module2 = random_num1 / abs(random_num2)
         print(f"Ваш пример: {random_num1} : |{random_num2}|")
     if num_choice3 == 3:
-        module_nums = module_num1 / module_num2
+        module_nums = abs(random_num1) / abs(random_num2)
         # конечный ответ
         otvet_in_module3 = module_nums
         print(f"Ваш пример: |{random_num1}| : |{random_num2}|")
 
 # логарифм
 if choice2 == 4 and choice3 == 4 and choice1 == 2:
-    print("Из какого числа хотите совершить модуль?")
+    print("Из какого числа хотите совершить логарифм?")
     print("1 - первое число")
     print("2 - второе число")
     print("3 - оба числа")
     num_choice4 = int(input("Ваш выбор: "))
     if num_choice4 == 1:
         base = int(input("Введите основание логарифма: "))
-        log_num1 = log(random_num1, base)
         # конечный ответ
-        otvet_log_num1 = log_num1 / random_num2
+        otvet_log_num1 = log(random_num1, base) / random_num2
         print(f"Ваш пример: log{base}^{random_num1} : {random_num2}")
     if num_choice4 == 2:
         base = int(input("Введите основание логарифма: "))
-        log_num2 = log(random_num2, base)
         # конечный ответ
-        otvet_log_num2 = random_num1 / log_num2
+        otvet_log_num2 = random_num1 / log(random_num2, base)
         print(f"Ваш пример: {random_num1} : log{base}^{random_num2}")
     if num_choice4 == 3:
         base = int(input("Введите основание логарифма: "))
-        log_nums = log_num1 / log_num2
+        log_nums = log(random_num1, base) / log(random_num2, base)
         # конечный ответ
         otvet_log_num3 = log_nums
         print(f"Ваш пример: log{base}^{random_num1} : log{base}^{random_num2}")
@@ -1269,19 +1239,19 @@ elif choice1 == 1 and choice2 == 1 and choice3 == 2 and num_choice2 == 3:
 
 # модуль
 if choice1 == 1 and choice2 == 1 and choice3 == 3 and num_choice3 == 1:
-    print(f"Ваш ответ: {module_num1}")
+    print(f"Ваш ответ: {otvet_in_module1}")
 elif choice1 == 1 and choice2 == 1 and choice3 == 3 and num_choice3 == 2:
-    print(f"Ваш ответ: {module_num2}")
+    print(f"Ваш ответ: {otvet_in_module2}")
 elif choice1 == 1 and choice2 == 1 and choice3 == 3 and num_choice3 == 3:
-    print(f"Ваш ответ: {module_nums}")
+    print(f"Ваш ответ: {otvet_in_module3}")
 
 # логарифм
 if choice1 == 1 and choice2 == 1 and choice3 == 4 and num_choice4 == 1:
-    print(f"Ваш ответ: {log_num1}")
+    print(f"Ваш ответ: {otvet_log_num1}")
 elif choice1 == 1 and choice2 == 1 and choice3 == 4 and num_choice4 == 2:
-    print(f"Ваш ответ: {log_num2}")
+    print(f"Ваш ответ: {otvet_log_num2}")
 elif choice1 == 1 and choice2 == 1 and choice3 == 4 and num_choice4 == 3:
-    print(f"Ваш ответ: {log_nums}")
+    print(f"Ваш ответ: {otvet_log_num3}")
 
 # синус
 if choice1 == 1 and choice2 == 1 and choice3 == 5 and num_choice5 == 1:
@@ -1304,3 +1274,389 @@ if choice1 == 1 and choice2 == 1 and choice3 == 7:
     sum_nums = num1 + num2
     print(f"Ваш ответ: {sum_nums}")
 
+# Вычитание
+
+# степень
+if choice1 == 1 and choice2 == 2 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 1 and choice2 == 2 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 1 and choice2 == 2 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 1 and choice2 == 2 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 1 and choice2 == 2 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 1 and choice2 == 2 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 2 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 1 and choice2 == 2 and choice3 == 7:
+    subtraction_nums = num1 - num2
+    print(f"Ваш ответ: {subtraction_nums}")
+
+# Умножение
+
+# степень
+if choice1 == 1 and choice2 == 3 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 1 and choice2 == 3 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 1 and choice2 == 3 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 1 and choice2 == 3 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 1 and choice2 == 3 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 1 and choice2 == 3 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 3 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 1 and choice2 == 3 and choice3 == 7:
+    multiplication_nums = num1 * num2
+    print(f"Ваш ответ: {multiplication_nums}")
+
+# Деление
+
+# степень
+if choice1 == 1 and choice2 == 4 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 1 and choice2 == 4 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 1 and choice2 == 4 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 1 and choice2 == 4 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 1 and choice2 == 4 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 1 and choice2 == 4 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 1 and choice2 == 4 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 1 and choice2 == 4 and choice3 == 7:
+    division_nums = num1 / num2
+    print(f"Ваш ответ: {division_nums}")
+
+# Рандомные числа
+
+# Сложение
+
+# степень
+if choice1 == 2 and choice2 == 1 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 2 and choice2 == 1 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 2 and choice2 == 1 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 2 and choice2 == 1 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_log_num2}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 2 and choice2 == 1 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 2 and choice2 == 1 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 1 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 2 and choice2 == 1 and choice3 == 7:
+    sum_nums = num1 + num2
+    print(f"Ваш ответ: {sum_nums}")
+
+# Вычитание
+
+# степень
+if choice1 == 2 and choice2 == 2 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 2 and choice2 == 2 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 2 and choice2 == 2 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 2 and choice2 == 2 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 2 and choice2 == 2 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 2 and choice2 == 2 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 2 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 2 and choice2 == 2 and choice3 == 7:
+    subtraction_nums = num1 - num2
+    print(f"Ваш ответ: {subtraction_nums}")
+
+# Умножение
+
+# степень
+if choice1 == 2 and choice2 == 3 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 2 and choice2 == 3 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 2 and choice2 == 3 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 2 and choice2 == 3 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 2 and choice2 == 3 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 2 and choice2 == 3 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 3 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 2 and choice2 == 3 and choice3 == 7:
+    multiplication_nums = num1 * num2
+    print(f"Ваш ответ: {multiplication_nums}")
+
+# Деление
+
+# степень
+if choice1 == 2 and choice2 == 4 and choice3 == 1 and num_choice1 == 1:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 1 and num_choice1 == 2:
+    print(f"Ваш ответ: {otvet1_in_degree}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 1 and num_choice1 == 3:
+    print(f"Ваш ответ: {nums_in_degree}")
+
+# корень
+if choice1 == 2 and choice2 == 4 and choice3 == 2 and num_choice2 == 1:
+    print(f"Ваш ответ: {otvet_in_root_extraction1}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 2 and num_choice2 == 2:
+    print(f"Ваш ответ: {otvet_in_root_extraction2}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 2 and num_choice2 == 3:
+    print(f"Ваш ответ: {root_extraction_nums}")
+
+# модуль
+if choice1 == 2 and choice2 == 4 and choice3 == 3 and num_choice3 == 1:
+    print(f"Ваш ответ: {otvet_in_module1}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 3 and num_choice3 == 2:
+    print(f"Ваш ответ: {otvet_in_module2}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 3 and num_choice3 == 3:
+    print(f"Ваш ответ: {otvet_in_module3}")
+
+# логарифм
+if choice1 == 2 and choice2 == 4 and choice3 == 4 and num_choice4 == 1:
+    print(f"Ваш ответ: {otvet_log_num1}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 4 and num_choice4 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 4 and num_choice4 == 3:
+    print(f"Ваш ответ: {otvet_log_num3}")
+
+# синус
+if choice1 == 2 and choice2 == 4 and choice3 == 5 and num_choice5 == 1:
+    print(f"Ваш ответ: {sin_num1}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 5 and num_choice5 == 2:
+    print(f"Ваш ответ: {sin_num2}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 5 and num_choice5 == 3:
+    print(f"Ваш ответ: {sin_nums}")
+
+# косинус
+if choice1 == 2 and choice2 == 4 and choice3 == 6 and num_choice6 == 1:
+    print(f"Ваш ответ: {otvet_cos_num1}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 6 and num_choice6 == 2:
+    print(f"Ваш ответ: {otvet_cos_num2}")
+elif choice1 == 2 and choice2 == 4 and choice3 == 6 and num_choice6 == 3:
+    print(f"Ваш ответ: {cos_nums}")
+
+# оставить все как есть
+if choice1 == 2 and choice2 == 4 and choice3 == 7:
+    division_nums = num1 / num2
+    print(f"Ваш ответ: {division_nums}")
