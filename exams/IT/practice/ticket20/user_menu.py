@@ -40,14 +40,23 @@ class User_menu:
 
     def user_input(self):
         # возвращает num1 num2 sign
-        user_list = input("Введите выражение: ").split()
-        num1 = int(user_list[0])
-        num2 = int(user_list[2])
-        sign = user_list[1]
-        return num1, num2, sign
+        spisok = []
+        user_string = input("Введите выражение: ")
+        for char in user_string:
+            spisok.append(char)
+        print(spisok)
+        return 1, 1, "+"
+        # num1 = int(user_list[0])
+        # num2 = int(user_list[2])
+        # sign = user_list[1]
+        # return num1, num2, sign
+
+    def checking_the_expression_formatting(self):
+        # проверка выражения
+        pass
 
     def user_output(self, result):
-        print(result)
+        print(f"Ваш ответ: {result}")
 
     def random_num(self):
         return randint(self.start_num, self.end_num)
