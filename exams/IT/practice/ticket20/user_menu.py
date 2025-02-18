@@ -1,3 +1,4 @@
+import re
 from random import randint
 from calculate import Calculator
 
@@ -44,7 +45,13 @@ class User_menu:
         user_string = input("Введите выражение: ")
         for char in user_string:
             spisok.append(char)
+
+        if spisok[0].isdigit():
+            print(spisok[0])
+        if spisok[1].isdigit():
+            print(spisok[1])
         print(spisok)
+        
         return 1, 1, "+"
         # num1 = int(user_list[0])
         # num2 = int(user_list[2])
