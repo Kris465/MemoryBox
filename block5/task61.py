@@ -14,7 +14,7 @@ test_sequence = [
     [21, 35, 49, -1],
 ]
 
-for seq in test_sequence
+for seq in test_sequence:
     result = find_multiple_of_seven(seq)
     print(f"\Последовательность: {seq}")
     if result:
