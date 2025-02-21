@@ -1,32 +1,31 @@
-def decompose_sum(a2, a1, b):
-  if not (0 <= a2 <= 9 and 0 <= a1 <= 9 and 0 <= b <= 9):
-    return None, None
+num1 = input("Введите двузначное число: ")
+num2 = input("Введите однозначное число: ")
 
-  sum_num = a2 * 10 + a1 + b
-  tens = sum_num // 10
-  units = sum_num % 10
+a2 = num1[0]
+a1 = num1[1]
 
-  return tens, units
+match num2:
+    case "0":
+        s = a1
+    case "1":
+        s = int(a1) + 1
+    case "2":
+        s = int(a1) + 2
+    case "3":
+        s = int(a1) + 3
+    case "4":
+        s = int(a1) + 4
+    case "5":
+        s = int(a1) + 5
+    case "6":
+        s = int(a1) + 6
+    case "7":
+        s = int(a1) + 7
+    case "8":
+        s = int(a1) + 8
+    case "9":
+        s = int(a1) + 9
+    case _:
+        s = None
 
-tens_digit, units_digit = decompose_sum(2, 5, 7)  
-
-if tens_digit is not None:
-  print(f"Tens digit: {tens_digit}, Units digit: {units_digit}")
-else:
-  print("Invalid input")
-
-
-tens_digit, units_digit = decompose_sum(9,9,9) 
-
-if tens_digit is not None:
-  print(f"Tens digit: {tens_digit}, Units digit: {units_digit}")
-else:
-  print("Invalid input")
-
-
-tens_digit, units_digit = decompose_sum(10,5,2) 
-
-if tens_digit is not None:
-  print(f"Tens digit: {tens_digit}, Units digit: {units_digit}")
-else:
-  print("Invalid input")
+print(f"Ответ: {a2 + str(s)}")

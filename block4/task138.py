@@ -7,6 +7,6 @@ def find_digit(n):
     return digit
 
 
-n = int(input("Введите номер цифры (от 1 до 32): "))
+n = int(input("введите номер цифры (от 1 до 32): "))
 result = find_digit(n)
-print(f"Цифра под номером {n}: {result}")
+print(f"цифры под номером {n}: {result}")

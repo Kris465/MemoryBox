@@ -1,10 +1,13 @@
-num = input("Введите четырехзночное число: ")
+num = int(input("Введите четырёхзначное число: "))
 
-sum1 = num[0]
-sum2 = num[1]
-sum3 = num[2]
-sum4 = num[3]
-print(int(''.join([sum4, sum3, sum2, sum1])))
-print(int(''.join([sum2, sum1, sum4, sum3])))
-print(int(''.join([sum1, sum3, sum2, sum4])))
-print(int(''.join([sum3, sum4, sum1, sum2])))
+# a)
+one_num = num % 10
+two_num = (num // 10) % 10
+three_num = (num // 100) % 10
+four_num = (num // 1000) % 10
+sum_num = one_num + two_num + three_num + four_num
+print(f"Сумма четырёхзначного числа: {sum_num}")
+
+# б)
+proizv_num = one_num * two_num * three_num * four_num
+print(f"Произведение четырёхзначного числа: {proizv_num}")

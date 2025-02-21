@@ -1,20 +1,59 @@
-# Ввод цифр трехзначного числа a3a2a1 и двузначного числа b2b1
-a3 = int(input("Введите цифру сотен (a3): "))
-a2 = int(input("Введите цифру десятков (a2): "))
-a1 = int(input("Введите цифру единиц (a1): "))
-b2 = int(input("Введите цифру десятков (b2): "))
-b1 = int(input("Введите цифру единиц (b1): "))
+num1 = input("Первое трехзначное число: ")
+num2 = input("Второе двузначное число: ")
 
-# Вычисляем результат
-result = (a3 * 100 + a2 * 10 + a1) + (b2 * 10 + b1)
+a3 = num1[0]
+a2 = num1[1]
+a1 = num1[2]
 
-# Получаем цифры из результата
-c3 = result // 100  # Сотни
-c2 = (result // 10) % 10  # Десятки
-c1 = result % 10  # Единицы
+b2 = num2[0]
+b1 = num2[1]
 
-# Выводим цифры результата
-print("Цифры суммы:")
-print("Цифра сотен (c3):", c3)
-print("Цифра десятков (c2):", c2)
-print("Цифра единиц (c1):", c1)
+match b1:
+    case "0":
+        s = a1
+    case "1":
+        s = int(a1) + 1
+    case "2":
+        s = int(a1) + 2
+    case "3":
+        s = int(a1) + 3
+    case "4":
+        s = int(a1) + 4
+    case "5":
+        s = int(a1) + 5
+    case "6":
+        s = int(a1) + 6
+    case "7":
+        s = int(a1) + 7
+    case "8":
+        s = int(a1) + 8
+    case "9":
+        s = int(a1) + 9
+    case _:
+        s = None
+
+match b2:
+    case "0":
+        q = int(a2) + (int(s) // 10)
+    case "1":
+        q = int(a2) + (int(s) // 10) + 1
+    case "2":
+        q = int(a2) + (int(s) // 10) + 2
+    case "3":
+        q = int(a2) + (int(s) // 10) + 3
+    case "4":
+        q = int(a2) + (int(s) // 10) + 4
+    case "5":
+        q = int(a2) + (int(s) // 10) + 5
+    case "6":
+        q = int(a2) + (int(s) // 10) + 6
+    case "7":
+        q = int(a2) + (int(s) // 10) + 7
+    case "8":
+        q = int(a2) + (int(s) // 10) + 8
+    case "9":
+        q = int(a2) + (int(s) // 10) + 9
+    case _:
+        q = None
+
+print(f' Ответ: {str(a3) + str(q) + str(s)}')

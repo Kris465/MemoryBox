@@ -1,18 +1,26 @@
-num = [(True, True), (True, False), (False, True), (False, False)]
+A = False
+B = False
+C = True
+D = True
+E = True
+F = False
+G = False
+H = True
 
+# a
+print(f"a) {not (A and B)}")
+print(f"{not (C and D)}")
+print(f"{not (E and F)}")
+print(f"{not (G and H)}")
 
-def compute_expressions(A, B):
-    a = not (A and B)
-    b = not A or B
-    c = A or not B
+# б
+print(f"б) {not A or B}")
+print(f"{not C or D}")
+print(f"{not E or F}")
+print(f"{not G or H}")
 
-    return a, b, c
-
-
-for A, B in num:
-    a, b, c = compute_expressions(A, B)
-    print(f"А={A}, B={B}:")
-    print(f"\ta) не (А и В) = {a}")
-    print(f"\тб) не А или В = {b}")
-    print(f"\tв) А или не В = {c}")
-    print()
+# в
+print(f"в) {A or not B}")
+print(f"{C or not D}")
+print(f"{E or not F}")
+print(f"{G or not H}")

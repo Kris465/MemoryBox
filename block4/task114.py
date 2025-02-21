@@ -1,9 +1,9 @@
 import datetime
 
 
-g = 2023  
-m = 3    
-n = 7   
+g = 2023
+m = 3
+n = 7
 
 
 d = datetime.date(g, m, n)
@@ -23,11 +23,11 @@ next_day = d + one_day
 
 
 print(f"Дата: {d}")
-print(f"Дата предыдущего дня: {prev_day}")
+print(f"Дата предидущего дня: {prev_day}")
 print(f"Дата следующего дня: {next_day}")
 
 
 if is_leap_year(g):
     print("Заданный год является високосным.")
 else:
-    print("Заданный год не является високосным.")
+    print("заданный год не является високосным.")

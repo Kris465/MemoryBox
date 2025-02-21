@@ -1,18 +1,21 @@
-# Исходные значения
 X = False
 Y = False
 Z = True
 
-# Вычисление значений логических выражений
-a = X or (Y and not Z)
-b = not X and not Y
-c = not (X and Z) or Y
-d = X and (not Y or Z)
-e = X or not (Y or Z)
+# a)
+print(f"{X or Y and not Z}")
 
-# Вывод результатов
-print("а:", a)
-print("б:", b)
-print("в:", c)
-print("г:", d)
-print("е:", e)
+# б)
+print(f"{not X and not Y}")
+
+# в)
+print(f"{not (X and Z) or Y}")
+
+# г)
+print(f"{X and not Y or Z}")
+
+# д)
+print(f"{X and (not Y or Z)}")
+
+# е)
+print(f"{X or (not (Y or Z))}")

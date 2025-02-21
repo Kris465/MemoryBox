@@ -1,10 +1,9 @@
-from math import sin
+from math import sin, radians
 
-x = float(input("x="))  # Теперь принимаем вещественное число
-
+x = int(input("Введите число: "))
 if x > 0:
-    y = 1 + 2 * sin(x)**2  # Используем синус квадрата x
+    primer_one = sin(radians(x * x))
+    print(f"Ответ: {primer_one}")
 else:
-    y = sin(x**2)          # Синус от квадрата x
-
-print(y)
+    primer_two = 1 + 2 * sin(radians(x)) ** 2
+    print(f"Ответ: {primer_two}")

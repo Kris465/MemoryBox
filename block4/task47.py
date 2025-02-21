@@ -1,8 +1,8 @@
 a = int(input("Введите число a: "))
-b = int(input("Введите число b:"))
+b = int(input("Введите число b: "))
 c = int(input("Введите число c: "))
 
 if a == b > c:
-    print("true")
+    print(True)
 else:
-    print("false")
+    print(False)

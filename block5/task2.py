@@ -1,5 +1,4 @@
-number = int(input("Введите число: "))
-repeats = int(input("Сколько раз повторить? "))
-
-
-print((str(number) + ' ') * repeats)
+a = int(input("Введиите колличесвто чисел: "))
+b = int(input("Введите число: "))
+for i in range(a):
+    print(b, end=" ")
