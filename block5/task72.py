@@ -6,7 +6,7 @@ def calculate_speed(initial_speed, increment, seconds):
 
 
 initial_speed = 10
-increment = 10 
+increment = 10
 seconds = 10
 final_speed = calculate_speed(initial_speed, increment, seconds)
 print("Финальная скорость капли: {:.2f} км/ч".format(final_speed))

@@ -5,7 +5,7 @@ def sport_score(results):
         return 'Ничья'
     else:
         return 'Второе место'
-    
-    
+
+
 results = [20, 18]
 print("Результаты соревнований:", sport_score(results))

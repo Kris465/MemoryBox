@@ -8,9 +8,9 @@ def calculate_average_grade(grades):
     return sum(grades) / len(grades)
 
 
-avg_class1 =  calculate_average_grade(physics_grades_class1)
+avg_class1 = calculate_average_grade(physics_grades_class1)
 print(f"Средняя оценка по физике в первом классе: {avg_class1:.2f}")
 
 
-avg_class2 =  calculate_average_grade(physics_grades_class2)
+avg_class2 = calculate_average_grade(physics_grades_class2)
 print(f"Средняя оценка по физике в втором классе: {avg_class1:.2f}")

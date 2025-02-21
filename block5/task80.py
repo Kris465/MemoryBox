@@ -1,7 +1,9 @@
 import numpy as np
 
+
 def f(x):
     return np.sqrt(x)
+
 
 def trapezoidal_rule(a, b, n, func):
     h = (b - a) / n
@@ -11,7 +13,7 @@ def trapezoidal_rule(a, b, n, func):
         s += func(xi)
     return h * s
 
-# Параметры для интегрирования
+
 a = 0
 b = 2
 n = 1000  # Количество интервалов разбиения

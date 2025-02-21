@@ -5,7 +5,8 @@ print("Сумма кубов всех целых чисел от 20 до 40:", s
 a = int(input("Введите значение a (0 <= a <= 50): "))
 if 0 <= a <= 50:
     sum_squares_a_to_50 = sum(i ** 2 for i in range(a, 51))
-    print(f"Сумма квадратов всех целых чисел от {a} до 50:", sum_squares_a_to_50)
+    print(f"Сумма квадратов \
+          всех целых чисел от {a} до 50:", sum_squares_a_to_50)
 else:
     print("Ошибка: значение a должно быть в диапазоне от 0 до 50.")
 
@@ -22,6 +23,7 @@ a = int(input("Введите значение a (a < b): "))
 b = int(input("Введите значение b (a < b): "))
 if a < b:
     sum_squares_a_to_b = sum(i ** 2 for i in range(a, b + 1))
-    print(f"Сумма квадратов всех целых чисел от {a} до {b}:", sum_squares_a_to_b)
+    print(f"Сумма квадратов всех целых \
+          чисел от {a} до {b}:", sum_squares_a_to_b)
 else:
     print("Ошибка: значение b должно быть больше значения a.")

@@ -5,7 +5,7 @@ def reverse_number(n):
     reversed_num = int(reversed_str)
     return reversed_num
 
-# Пример использования
+
 number = input('Введите число: ')
 reversed_number = reverse_number(number)
 print(f"Исходное число: {number}, Перевернутое число: {reversed_number}")

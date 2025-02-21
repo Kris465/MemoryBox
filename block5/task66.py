@@ -6,6 +6,7 @@ def generate_sequence(n, K):
         sequence.append(a)
     return sequence
 
+
 n = int(input("Введите число n: "))
 K = int(input("Введите число K: "))
 print(generate_sequence(n, K))

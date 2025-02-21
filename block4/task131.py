@@ -2,7 +2,7 @@ def calculate_age(birth_year, birth_month, current_year, current_month):
     age_years = current_year - birth_year
     age_months = current_month - birth_month
     if age_months < 0:
-       age_years -= 1
+        age_years -= 1
     return age_years, age_months
 
 

@@ -5,7 +5,7 @@ def check_brick_fit(a, b, c, x, y):
         return True
     if (b <= x and c <= y) or (b <= y and c <= x):
         return True
-    
+
     return False
 
 
@@ -20,7 +20,3 @@ if check_brick_fit(a, b, c, x, y):
     print("кирпич пройдёт в отверстие")
 else:
     print("кирпич не пройдёт в отверстие")
-
-
-    
-    

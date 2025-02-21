@@ -4,8 +4,9 @@ def find_multiple_of_seven(sequence):
             break
         if num % 7 == 0:
             return i + 1
-        
+
     return None
+
 
 test_sequence = [
     [14, 21, 5, -1],
@@ -16,9 +17,8 @@ test_sequence = [
 
 for seq in test_sequence:
     result = find_multiple_of_seven(seq)
-    print(f"\Последовательность: {seq}")
+    print(f"Последовательность: {seq}")
     if result:
         print(f"Первое число, кратное семи, находится на позиции {result}")
     else:
         print("В последовательности нет чисел, кратных семи")
-        

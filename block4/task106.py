@@ -1,8 +1,22 @@
-month=int(input('Введите число месяца:\n'))
+while True:
+    try:
+        month = int(input('Введите число месяца (от 1 до 12):\n'))
+        if 1 <= month <= 12:
+            break
+        else:
+            print("Пожалуйста, введите число от 1 до 12.")
+    except ValueError:
+        print("Пожалуйста, введите целое число.")
 
-season = {'winter':[12 , 1, 2], 'spring':[3, 4, 5],/
-           'summer':[6, 7, 8], 'autum':[9, 10, 11]}
+# Объединяем зимние месяцы в один список
+seasons = {
+    'зима': list(range(12, 13)) + list(range(1, 3)),
+    'весна': range(3, 6),
+    'лето': range(6, 9),
+    'осень': range(9, 12)
+}
 
-for k, i in season.items():
-        if month in i:
-                print(k)
+# Определяем сезон
+for season_name, months in seasons.items():
+    if month in months:
+        print(season_name)

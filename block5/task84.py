@@ -4,6 +4,5 @@ def computer_expression(n):
         result = (result - i**2)**2
     return result
 
-# Пример для n = 5
-print(computer_expression(5))
 
+print(computer_expression(5))

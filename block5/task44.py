@@ -5,7 +5,7 @@ mass4 = float(input("Введите массу четвертого предме
 
 
 if 0 <= mass1 <= 100 and 0 <= mass2 <= 100 and 0 <= mass3 <= 100 and 0 <= \
-    mass4 <= 100:
+        mass4 <= 100:
 
     total_score = mass1 + mass2 + mass3 + mass4
 

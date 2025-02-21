@@ -1,5 +1,6 @@
 import math
 
+
 def task_5_93a(n):
     """
     Вычисляет сумму 1/sin1 + 1/(sin1 + sin2) + ... + 1/(sin1 + ... + sinn)
@@ -11,6 +12,7 @@ def task_5_93a(n):
         result += 1 / sum_sin
     return result
 
+
 def task_5_93b(n):
     """
     Вычисляет √2 + √2 + ... + √2 (n слагаемых)
@@ -20,9 +22,11 @@ def task_5_93b(n):
         result = math.sqrt(2 + result)
     return result
 
+
 def task_5_93c(n):
     """
-    Вычисляет (cos1/sin1) + (cos1+cos2)/(sin1+sin2) + ... + (cos1+...+cosn)/(sin1+...+sin2n)
+    Вычисляет (cos1/sin1) + (cos1+cos2)/(sin1+sin2)
+    + ... + (cos1+...+cosn)/(sin1+...+sin2n)
     """
     sum_cos = 0
     sum_sin = 0
@@ -32,6 +36,7 @@ def task_5_93c(n):
         sum_sin += math.sin(i) + math.sin(2*i)
         result += sum_cos / sum_sin
     return result
+
 
 def task_5_93d(n):
     """

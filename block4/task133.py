@@ -34,12 +34,12 @@ def next_day(month, day):
         return month, day + 1
     else:
         if month < 12:
-            month += 1 
+            month += 1
             return month, 1
         else:
             print("Некорректная дата.")
             return None
-        
+
 
 prev_date = previous_day(month, day)
 next_date = next_day(month, day)
@@ -47,5 +47,5 @@ next_date = next_day(month, day)
 
 if prev_date is not None:
     print(f'Предыдущий день {prev_date[1]}.{prev_date[0]}')
-if next_day is not None: 
+if next_day is not None:
     print(f'Следующий день {next_date[1]}.{next_date[0]}')

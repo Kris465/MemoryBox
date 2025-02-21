@@ -17,9 +17,9 @@ b = int(input("Введите значение b (1 <= b <= 20): "))
 if b < 1 or b > 20:
     print("Ошибка: значение b должно быть в пределах от 1 до 20.")
 else:
-    prod_c = math.prod(range(1,b + 1))
+    prod_c = math.prod(range(1, b + 1))
     print(f"Произведение чисел от 1 до {b}: {prod_c}")
-    
+
 a = int(input("Введите значение a: "))
 b = int(input("Введите значени b (b >= a): "))
 if b > a:

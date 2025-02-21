@@ -5,7 +5,7 @@ exam4 = float(input("Введите оценку за четвертый экз�
 
 
 if 0 <= exam1 <= 100 and 0 <= exam2 <= 100 and 0 <= exam3 <= 100 and 0 <= \
-    exam4 <= 100:
+        exam4 <= 100:
 
     total_score = exam1 + exam2 + exam3 + exam4
 

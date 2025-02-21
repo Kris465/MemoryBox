@@ -6,6 +6,7 @@ def generate_sequencef(initial_value, step_size, number_of_steps):
         sequence.append(current_value)
     return sequence
 
+
 initial_value = 1
 step_size = 1.5
 number_of_steps = 5

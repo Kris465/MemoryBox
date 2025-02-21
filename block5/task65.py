@@ -3,9 +3,8 @@ total_area = 0
 
 for i in range(1, 13):
 
-    population = float(input(f"Введите количество жителей в районе {i} (в тыс. чел.): "))
-    density = float(input(f"Введите плотность населения в районе {i} (в тыс. чел./км²): "))
-    
+    population = float(input(f"Введите количество жителей в районе{i} "))
+    density = float(input(f"Введите населения в районе {i}(чел./км²): "))
 
     if density > 0:
 
