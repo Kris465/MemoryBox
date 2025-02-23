@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Default title{% endblock title %}</title>
+    <link rel="stylesheet" href="{%static "css/style.css" %}" />
+</head>
+<body>
+    <div class="cont">
+        <a href="/">Главная</a> | <a href="/contacts">Контакты</a>
+        <a href="/"></a> | <a href="/login">Логин</a>
+    </div>
+    <h1>{% block header %}{% endblock header %}</h1>
+    <div>{% block content%}{% endblock content %}</div>
+    <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod aliquam vitae facere corporis sint fugiat provident voluptate accusantium nostrum, culpa dolor cupiditate eos. Officiis inventore quisquam id sint amet soluta?</h2>
+    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias tenetur veritatis voluptates earum explicabo. Eius vitae, ipsum alias non reiciendis beatae fuga. Impedit placeat cumque praesentium reprehenderit numquam inventore ducimus! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit voluptas vero explicabo fugit. Numquam tenetur, et unde dolorem aspernatur ut eligendi explicabo perferendis laudantium officiis fuga ex rem sint. Adipisci?</h3>
+    <h2>What is Lorem Ipsum?
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        Why do we use it?
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</h2>
+    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati autem hic ipsa dolores sint nostrum molestias dicta id totam, nisi labore facilis sequi aperiam deleniti amet debitis aut adipisci! Illum!</h2>
+</body>
+</html>
