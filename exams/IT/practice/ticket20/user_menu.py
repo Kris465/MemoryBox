@@ -51,14 +51,26 @@ class User_menu:
         if spisok[1].isdigit():
             print(spisok[1])
         print(spisok)
+
+        num1 = int(user_string[0])
+        num2 = int(user_string[2])
+        sign = user_string[1]
         
-        num1 = int(spisok[0])
-        num2 = int(spisok[2])
-        sign = spisok[1]
+        primer = ''
+        for el in spisok:
+            primer += str(el)
+            primer += ' '
+        
+        if 'log' in primer:
+            re.search(primer, 'log')
+            re.sub(primer, '', 'log')
+            print(primer)
+        
         return num1, num2, sign
 
     def checking_the_expression_formatting(self):
         # проверка выражения
+        
         pass
 
     def user_output(self, result):
