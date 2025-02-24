@@ -42,7 +42,7 @@ class User_menu:
     def user_input(self):
         # возвращает num1 num2 sign
         spisok = []
-        user_string = input("Введите выражение: ")
+        user_string = input("Введите выражение: ").split()
         for char in user_string:
             spisok.append(char)
 
@@ -51,15 +51,26 @@ class User_menu:
         if spisok[1].isdigit():
             print(spisok[1])
         print(spisok)
+
+        num1 = int(user_string[0])
+        num2 = int(user_string[2])
+        sign = user_string[1]
         
-        return 1, 1, "+"
-        # num1 = int(user_list[0])
-        # num2 = int(user_list[2])
-        # sign = user_list[1]
-        # return num1, num2, sign
+        primer = ''
+        for el in spisok:
+            primer += str(el)
+            primer += ' '
+        
+        if 'log' in primer:
+            re.search(primer, 'log')
+            re.sub(primer, '', 'log')
+            print(primer)
+        
+        return num1, num2, sign
 
     def checking_the_expression_formatting(self):
         # проверка выражения
+        
         pass
 
     def user_output(self, result):
