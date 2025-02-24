@@ -1,14 +1,12 @@
-def calculate_distances():
-    inital_distance = 10
-    growth_rate = 1.1
-    
-    distances = [inital_distance * (growth_rate ** i) for i in range(10)]
-    print("пробег лыжника за второй третий ... десятый день тренировок")
-    for day, distances in enumerate(distances[1:], start=20):
-        print(f"День {day}: {distances:.2f} км")
-        
-    total_distance_first7 = sum(distances[:7])
-    print(f"суммарный путь за 7 дней {total_distance_first7:.2f}км")
-    
-if __name__ == "__main__":
-    calculate_distances
+def calculate_speed(initial_speed, increment, seconds):
+    speed = initial_speed
+    for _ in range(seconds):
+        speed += speed * increment / 100
+    return speed
+
+
+initial_speed = 10
+increment = 10 
+seconds = 10
+final_speed = calculate_speed(initial_speed, increment, seconds)
+print("Финальная скорость капли: {:.2f} км/ч".format(final_speed))

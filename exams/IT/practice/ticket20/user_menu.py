@@ -1,3 +1,4 @@
+import re
 from random import randint
 from calculate import Calculator
 
@@ -41,15 +42,20 @@ class User_menu:
     def user_input(self):
         # возвращает num1 num2 sign
         spisok = []
-        user_string = input("Введите выражение: ")
+        user_string = input("Введите выражение: ").split()
         for char in user_string:
             spisok.append(char)
+
+        if spisok[0].isdigit():
+            print(spisok[0])
+        if spisok[1].isdigit():
+            print(spisok[1])
         print(spisok)
-        return 1, 1, "+"
-        # num1 = int(user_list[0])
-        # num2 = int(user_list[2])
-        # sign = user_list[1]
-        # return num1, num2, sign
+        
+        num1 = int(spisok[0])
+        num2 = int(spisok[2])
+        sign = spisok[1]
+        return num1, num2, sign
 
     def checking_the_expression_formatting(self):
         # проверка выражения
