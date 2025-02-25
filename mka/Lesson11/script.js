@@ -22,12 +22,10 @@ function createCard(cardValue) {
     card.classList.add('card');
     card.dataset.value = cardValue;
 
-    // Создаем элемент для текста
     const cardText = document.createElement('span');
     cardText.textContent = cardValue;
     cardText.classList.add('card-text');
-    
-    // Добавляем текст на карточку
+
     card.appendChild(cardText);
 
     card.addEventListener('click', flipCard);
