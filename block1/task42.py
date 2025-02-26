@@ -1,4 +1,6 @@
 from math import sqrt, sin, radians
+
+
 e = int(input("Введите число e: "))
 h = int(input("Введите число h: "))
 g = int(input("Введите число g: "))

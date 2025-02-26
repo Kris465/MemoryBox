@@ -1,28 +1,6 @@
-# Маклюсов
-
-# а)
-
+# TODO доделать по аналогии и оформить вывод с помощью f-строки
 a = 5.8
-print(a)
-
 b = -7.9
-print(b)
-
 b = a
-print(b)
-
-a = print(a)
-
-# б)
-
-a = 0
-print(a)
-
-b = -9.99
-print(b)
-
-b = a
-print(b)
-
 a = b
-print(a)
+print(a, b)
