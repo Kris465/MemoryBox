@@ -11,10 +11,10 @@ examples = [
     123488,
     812345,
     12345,
-    888888      
+    888888
+    ]
 
 for number in examples:
     position = find_eight_position(number)
     print(f"Число: {number}")
     print(f"Позиция цифры 8 (от конца): {position}\n")
-]
