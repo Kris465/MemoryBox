@@ -1,12 +1,9 @@
 def find_eight_position(n):
     num_str = str(n)
-    
     try:
-        # rindex ищет с конца строки
         pos = len(num_str) - num_str.rindex('8')
         return pos
     except ValueError:
-        # Если цифра 8 не найдена
         return 0
 
 examples = [
