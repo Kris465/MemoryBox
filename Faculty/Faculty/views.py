@@ -46,7 +46,7 @@ def logout_view(request):
 
 
 def index(request):
-    return render(request, template_name: 'index.html')
+    return render(request, template_name='index.html')
 
 
 
@@ -55,7 +55,7 @@ def students(request):
     context = {
         'students': students,
     }
-    return render(request, template_name 'student_list.html', context)
+    return render(request, template_name='student_list.html', context=context)
 
 
 def display_students(request):
@@ -65,7 +65,7 @@ def display_students(request):
         'header': 'Список студентов'
     }
 
-    return render(request, template_name 'student_list.html', context)
+    return render(request, template_name='student_list.html', context=context)
 
 def add_student(request):
     if request.method =='POST':
@@ -81,7 +81,7 @@ def add_student(request):
             'header': 'Добавить студента'
         }
             
-        return render(request, template_name 'add=_student.html', context)
+        return render(request, template_name='add=_student.html', context=context)
 
 def student_detail(request, pk):
     student = get_object_or_404(Student, pk=pk)
@@ -90,7 +90,7 @@ def student_detail(request, pk):
         'header': 'Детальная информация о студенте'
     }
 
-    return render(request, template_name 'student_detail.html', context)
+    return render(request, template_name='student_detail.html', context=context)
 
 
 def edit_student(request, pk):
@@ -108,14 +108,14 @@ def edit_student(request, pk):
             'header': 'редактировать студента',
     }
 
-    return render(request, template_name:'edit_student.html', context)
+    return render(request, template_name='edit_student.html', context=context)
 
 
 
 def delete_student (request, pk):
     students = get_object_or_404(Student, pk=pk)
     students.delete()
-    return.redirect("student_list")
+    return redirect("student_list")
 
 
 def print_students(request):
@@ -123,7 +123,7 @@ def print_students(request):
     context = {
         'students': students,
     }
-    return render(request, template_name: 'student_list.html', context)
+    return render(request, template_name='student_list.html', context=context)
 
 
 
@@ -132,7 +132,7 @@ def teachers(request):
     context = {
         'teachers': teachers,
     }
-    return render(request, template_name: 'teacher_list.html', context)
+    return render(request, template_name='teacher_list.html', context=context)
 
 
 def display_teachers(request):
@@ -141,7 +141,7 @@ def display_teachers(request):
         'teachers': teachers,
         'header': 'Список преподавателей'
     }
-    return render(request, template_name: 'teacher_list.html', context)
+    return render(request, template_name='teacher_list.html', context=context)
 
 
 def add_teacher(request):
@@ -157,7 +157,7 @@ def add_teacher(request):
             'form': form,
             'header': 'Добавить преподавателя',
         }
-        return render(request, template_name: 'add_teacher.html', context)
+        return render(request, template_name='add_teacher.html', context=context)
 
 
 
@@ -166,7 +166,7 @@ def subjects(request):
     context = {
         'subjects': subjects,
     }
-    return render(request, template_name: 'subjects_list.html', context)
+    return render(request, template_name='subjects_list.html', context=context)
 
 
 def display_subjects(request):
@@ -175,7 +175,7 @@ def display_subjects(request):
         'subjects': subjects,
         'header': 'spisok predmetov'
     }
-    return render(request, template_name: 'subjects_list.html', context)
+    return render(request, template_name='subjects_list.html', context=context)
 
 
 def add_subjects(request):
@@ -191,7 +191,7 @@ def add_subjects(request):
             'form': form,
             'header': 'Добавить предмет',
         }
-        return render(request, template_name: 'add_subjects.html', context)
+        return render(request, template_name='add_subjects.html', context=context)
     
 
 
@@ -200,7 +200,7 @@ def statements(request):
     context = {
         'statements': statements,
     }
-    return render(request, template_name: 'statements_list.html', context)
+    return render(request, template_name='statements_list.html', context=context)
 
 
 def display_statements(request):
@@ -210,7 +210,7 @@ def display_statements(request):
         'header': 'Ведомость успеваемости и посещаемости' 
 
     }
-    return render(request, template_name: 'statements_list.html', context)
+    return render(request, template_name='statements_list.html', context=context)
 
 
 def add_statement(request):
@@ -226,7 +226,7 @@ def add_statement(request):
             'form': form,
             'header': 'Добавить успеваемость',
         }
-        return render(request, template_name: 'add_statement.html', context)
+        return render(request, template_name='add_statement.html', context=context)
 
 
 def edit_statement(request, pk):
@@ -244,7 +244,7 @@ def edit_statement(request, pk):
             'form': form,
             'header': 'Редактировать успеваемость',
         }
-        return render(request, template_name: 'edit_statement.html', context)
+        return render(request, template_name='edit_statement.html', context=context)
 
 
 def statement_detail(request, pk):
@@ -252,7 +252,7 @@ def statement_detail(request, pk):
     context = {
         'statement': statement,
     }
-    return render(request, template_name: 'statement_detail.html', context)
+    return render(request, template_name='statement_detail.html', context=context)
 
 
 def delete_statements(request, pk):
@@ -274,7 +274,7 @@ def search_statements(request):
         'header': 'header' 
 
     }
-    return render(request, template_name: 'statements_list.html', context)
+    return render(request, template_name='statements_list.html', context=context)
 
 
 def print_statement(request):
@@ -282,4 +282,4 @@ def print_statement(request):
     context = {
         'statements': statements,
     }
-    return render(request, template_name: 'statement_detail.html', context)
+    return render(request, template_name='statement_detail.html', context=context)
