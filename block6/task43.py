@@ -13,8 +13,8 @@ def solve(sequence):
         if sequence[i] == current_number:
             current_count += 1
         else:
-            if current_count > 1: 
-                count_same_groups += 1 
+            if current_count > 1:
+                count_same_groups += 1
             current_number = sequence[i]
             current_count = 1
         distinct_numbers.add(sequence[i])
