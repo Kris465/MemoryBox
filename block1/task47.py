@@ -1,4 +1,6 @@
 from math import sqrt
+
+
 x1 = float(input("Введите число x1: "))
 y1 = float(input("Введите число y1: "))
 x2 = float(input("Введите число x1: "))

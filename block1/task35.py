@@ -1,3 +1,4 @@
+# TODO округлить вывод, передать в аргумент input() инструкции пользователю
 from math import sqrt
 
 a = float(input())
