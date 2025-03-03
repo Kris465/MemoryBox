@@ -6,6 +6,6 @@ def find_numbers():
         if number % 9 == 0 and str(number).endswith('7'):
             print(number)
             count += 1
-        number += 18  
+        number += 18
 
 find_numbers()
