@@ -7,6 +7,7 @@ def gcd(a, b):
 def gcd_of_three_numbers(a, b, c):
     return gcd(gcd(a, b), c)
 
+
 # Пример использования
 a = int(input("Введите первое натуральное число: "))
 b = int(input("Введите второе натуральное число: "))

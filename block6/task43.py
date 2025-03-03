@@ -24,6 +24,7 @@ def solve(sequence):
 
     return count_same_groups, len(distinct_numbers)
 
+
 sequence = [1.5, 2.0, 2.0, 3.5, 5.0, 5.0, 5.0, 1000.0]
 same_groups, distinct_count = solve(sequence)
 print("Количество групп одинаковых чисел:", same_groups)

@@ -11,6 +11,7 @@ def count_unique_numbers(sequence):
 
     return unique_count
 
+
 sequence = [6, 5, 4, 4, 3, 2, 2, 1, 1, 0]
 result = count_unique_numbers(sequence)
 print(result)
