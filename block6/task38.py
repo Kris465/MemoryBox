@@ -3,6 +3,7 @@ def count_first_digit(n):
     first_digit = num_str[0]
     return num_str.count(first_digit)
 
+
 examples = [
     12345,
     11111,
