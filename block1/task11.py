@@ -1,8 +1,18 @@
-# TODO улучшить задачу, сделав либо случайные числа через random, либо через пользовательский ввод
-num1 = 11
-num2 = 22
-num3 = 33
-num4 = 44
+import random
+
+choice = input("Хотите ввести числа вручную? (да/нет): ").lower()
+
+if choice == 'да':
+    num1 = int(input("Введите первое число: "))
+    num2 = int(input("Введите второе число: "))
+    num3 = int(input("Введите третье число: "))
+    num4 = int(input("Введите четвертое число: "))
+else:
+    num1 = random.randint(1, 100)
+    num2 = random.randint(1, 100)
+    num3 = random.randint(1, 100)
+    num4 = random.randint(1, 100)
+
 
 print(num1)
 print(num2)

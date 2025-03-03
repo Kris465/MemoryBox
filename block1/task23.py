@@ -1,7 +1,11 @@
-# TODO красиво оформить вывод f-строки
 from math import sqrt
 
+a = int(input("Введите число a: "))
 
-a = int(input("Введите число a : "))
+numerator = a * a + 10
+denominator = sqrt(a * a + 1)
+result = numerator / denominator
 
-print(f"(a * a + 10) / (sqrt(a * a + 1))={(a * a + 10) / sqrt(a * a + 1)}")
+print(f"Числитель: {numerator}")
+print(f"Знаменатель: {denominator:.4f}")
+print(f"Результат: {result:.4f}")

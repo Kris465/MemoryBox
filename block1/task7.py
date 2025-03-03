@@ -1,6 +1,15 @@
-# TODO улучшить задачу, сделав либо случайные числа через random, либо через пользовательский ввод
-num1 = 5
-num2 = 10
-num3 = 20
+import random
 
+choice = input("Хотите ввести числа вручную? (да/нет): ").lower()
+
+if choice == 'да':
+    num1 = int(input("Введите первое число: "))
+    num2 = int(input("Введите второе число: "))
+    num3 = int(input("Введите третье число: "))
+else:
+    num1 = random.randint(1, 100)
+    num2 = random.randint(1, 100)
+    num3 = random.randint(1, 100)
+
+# Вывод чисел с разделением двумя пробелами
 print(num1, num2, num3, sep='  ')
