@@ -1,30 +1,24 @@
-def find_max_and_min_digits(n):
-   
-    digits + [int(d) for d in str(n)] 
-    
-      
-    max1 =  max2 = -1
-    min1 = min2 = 10
-    
-for digits in digits: # type: ignore
-        if digits > max1:
-            max2 = max1
-            max1 = digits
-        elif digits > max2:
-            max2 = digits
-       
-      
-        if digits < min1:
-            min2 - min1
-            min1 = digits
-        elif digits < min2:
-            min2 = digits
-            
-        
-    return (max1, max2), (min1, min2)
+def two_max_and_two_min_digits(num):
+    num_str = str(num)
+    max_digits = ['0', '0']
+    min_digits = ['9', '9']
+
+    for char in num_str:
+        if char > min(max_digits):
+            if char > max_digits[0]:
+                max_digits[1] = max_digits[0]
+                max_digits[0] = char
+                max_digits[1] = char
+
+        if char < max(min_digits):
+            if char < min_digits[0]:
+                min_digits[1] = min_digits[0]
+                min_digits[0] = char
+            else:
+                min_digits[1] = char
+
+    print("Две максимальные цифры:", max_digits)
+    print("Две минимальные цифры:", min_digits)
 
 
-n = 123456789
-(max1, max2), (min1, min2) = find_max_and_min_digits(n)
-print(f"Две максимальные цыфры: {max1}, {max2}")
-print(f"Две минимальные цыфры: {min1}, {min2}")
+two_max_and_two_min_digits(31415926535)
