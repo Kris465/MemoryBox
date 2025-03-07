@@ -35,8 +35,4 @@ print(s)
 s = -25
 print(s)
 
-try:
-    s = s + k
-    print(s + k)
-except NameError as e:
-    print(e)
+print("s + k")
