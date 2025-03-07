@@ -1,3 +1,6 @@
+from random import randint
+
+
 def find_position(heights, new_height):
     low, high = 0, len(heights) - 1
 
@@ -13,8 +16,7 @@ def find_position(heights, new_height):
     return low + 1
 
 
-heights = [180, 178, 176, 174, 172, 170, 168, 166, 164, 162,
-           160, 158, 156, 154, 152]
+heights = [randint(0, 100) for i in range(15)]
 new_height = 175
 position = find_position(heights, new_height)
 print(position)
