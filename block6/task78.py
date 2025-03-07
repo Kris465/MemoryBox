@@ -1,4 +1,4 @@
-def is_in_arithmetic_progression(n, f , s):
+def is_in_arithmetic_progression(n, f, s):
     if s == 0:
         return n == f
     k = (n - f) / s
