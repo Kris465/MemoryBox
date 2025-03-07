@@ -1,4 +1,4 @@
-import random
+from random import randint
 
 
 def bubble_sort(arr):
@@ -18,7 +18,7 @@ def bubble_sort(arr):
 
 size = int(input("Введите размер массива: "))
 
-array = [random.randint(1, 100) for _ in range(size)]
+array = [randint(1, 100) for _ in range(size)]
 print("Исходный массив:", array)
 
 bubble_sort(array)

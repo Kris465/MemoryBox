@@ -22,7 +22,7 @@ def draw_triangle(turtle, length, diff):
 
 def draw_sierpinski(turtle, length, depth, diff):
     if depth == 0:
-       draw_triangle(turtle, length, diff)
+        draw_triangle(turtle, length, diff)
     else:
         draw_sierpinski(turtle, length / 2, depth - 1, diff)
         turtle.forward(length / 2)
@@ -35,7 +35,8 @@ def draw_sierpinski(turtle, length, depth, diff):
         turtle.left(60)
         turtle.backward(length / 2)
         turtle.right(60)
-        
+
+
 length = 400
 depth = 5
 dif = 0.66
