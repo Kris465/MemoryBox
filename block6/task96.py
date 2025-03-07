@@ -16,7 +16,7 @@ def find_position(heights, new_height):
     return low + 1
 
 
-heights = [randint(0, 100) for i in range(15)]
+heights = [randint(0, 175) for i in range(15)]
 new_height = 175
 position = find_position(heights, new_height)
 print(position)
