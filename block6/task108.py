@@ -9,6 +9,7 @@ def calculate_banknotes(n):
 
     return count
 
+
 n = 73
 result = calculate_banknotes(n)
 print(result)
