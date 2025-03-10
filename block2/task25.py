@@ -1,3 +1,6 @@
+# TODO Задача решена неверно. Решить верно.
+
+
 def find_n(x):
     last_digit = x % 10
     result = (x - last_digit) // 10
