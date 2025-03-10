@@ -8,6 +8,6 @@ if c == 0:
 elif a > b:
     print("Ошибка: a должно быть меньше или равно b.")
 else:
-    for number in range(a, b +1):
+    for number in range(a, b + 1):
         if number % c == 0:
             print(number)
