@@ -27,7 +27,7 @@ while True:
 print(f"Площадь участка станет больше 120 гектаров в {year} году.")
 
 # в) В каком году общий урожай, собранный за все время, превысит 800 центнеров?
-initial_area = 100  
+initial_area = 100
 area_increase = 0.05
 initial_yield = 20
 yield_increase = 0.02
