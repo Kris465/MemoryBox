@@ -1,35 +1,38 @@
-# TODO улучшить задачу.
-# Сделать нормальный переход от одного десятка к другому.
-# Добавить обработку пользовательского ввода.
+def validate_input(prompt, condition=lambda x: True):
 
-num1 = input("Введите двузначное число: ")
-num2 = input("Введите однозначное число: ")
+    while True:
+        try:
+            value = input(prompt)
+            if condition(value):
+                return value
+            else:
+                print("Введённое значение не соответствует условиям. Попробуйте ещё раз.")
+        except ValueError:
+            print("Введены некорректные данные. Попробуйте ещё раз.")
 
-a2 = num1[0]
-a1 = num1[1]
+def add_to_dozen(num1, num2):
 
-match num2:
-    case "0":
-        s = a1
-    case "1":
-        s = int(a1) + 1
-    case "2":
-        s = int(a1) + 2
-    case "3":
-        s = int(a1) + 3
-    case "4":
-        s = int(a1) + 4
-    case "5":
-        s = int(a1) + 5
-    case "6":
-        s = int(a1) + 6
-    case "7":
-        s = int(a1) + 7
-    case "8":
-        s = int(a1) + 8
-    case "9":
-        s = int(a1) + 9
-    case _:
-        s = None
+    a2 = int(num1[0])
+    a1 = int(num1[1])
+    b = int(num2)
 
-print(f"Ответ: {a2 + str(s)}")
+
+    s = a1 + b
+
+
+    if s >= 10:
+        a2 += 1
+        s -= 10
+
+    return f"{a2}{s}"
+
+if __name__ == "__main__":
+
+    num1 = validate_input("Введите двузначное число: ", lambda x: len(x) == 2 and x.isdigit())
+
+
+    num2 = validate_input("Введите однозначное число: ", lambda x: len(x) == 1 and x.isdigit())
+
+
+    result = add_to_dozen(num1, num2)
+    print(f"Ответ: {result}")
