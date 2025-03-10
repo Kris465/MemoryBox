@@ -1,3 +1,5 @@
+# TODO задача решена неверно. Решить верно. Изначальное число 456, a не 452
+
 def find_x(target):
     for first_digit in range(1, 12):
         for last_two_degits in range(0, 100):
