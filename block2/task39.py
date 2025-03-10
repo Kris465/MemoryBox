@@ -1,23 +1,16 @@
-def calculate_hour_angle(h, m, s):
+# TODO Добавить пользовательский ввод.
+# Добавить обработку пользовательского ввода.
+# Привести скрипт к PEP8
 
+
+def calculate_hour_angle(h, m, s):
     if not (0 < h <= 23 and 0 <= m <= 59 and 0 <= s <= 59):
         return "Некорректные входные данные"
-    
-
     angle_hours = h * 30
-    
-
     angle_minutes = m * 0.5
-    
-
     angle_seconds = s * (0.5 / 60)
-    
-
     total_angle = angle_hours + angle_minutes + angle_seconds
-    
-
     total_angle %= 360
-    
     return total_angle
 
 
