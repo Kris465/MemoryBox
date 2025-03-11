@@ -3,7 +3,7 @@ import asyncio
 from loguru import logger
 from dotenv import load_dotenv, find_dotenv
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command
 
 
 load_dotenv(find_dotenv())
@@ -20,7 +20,7 @@ async def main():
     dp = Dispatcher()
     logger.info("Диспетчер создан")
 
-    @dp.message(CommandStart)
+    @dp.message(Command('start'))
     async def send_welcome(message: types.Message):
         await message.answer("Привет, Я эхо-бот!")
         await message.answer("Мои команды: /start и /help")
