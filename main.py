@@ -1,4 +1,5 @@
 import os
+from random import randint
 import asyncio
 from loguru import logger
 from aiogram import Bot, Dispatcher, types
@@ -8,6 +9,7 @@ from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 TOKEN = os.getenv("TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 
 async def main():
@@ -20,24 +22,30 @@ async def main():
     dp = Dispatcher()
     logger.info("Диспетчер создан")
 
-    @dp.message(Command("start"))
-    async def send_welcome(message: types.Message):
-        await message.answer("Привет, Я эхо-бот!")
-        await message.answer("Мои команды: /start и /help")
-        logger.info("Бот ответил на команду /start")
-        
-    @dp.message(Command("help"))
-    async def help(message: types.Message):
-        await message.answer("Ты можешь отправить мне сообщение, я верну его тебе")
-        logger.info("Бот объяснил, что делает")
-        
-    @dp.message()
-    async def echo(message: types.Message):
-        await message.answer(message.text)
-        logger.info(f"Бот вернул пользователю сообщение {message.text}")
-        
+    async def send_random_number():
+        while True:
+            try:
+                random_number = randint(1, 1000)
+                await bot.send_message(CHANNEL_ID,
+                                       f"Случайное число: {random_number}")
+                logger.info(f"Отправлено число: {random_number}")
+            except Exception as e:
+                logger.error(f"Ошибка при отправке сообщения: {e}")
+            await asyncio.sleep(30)
 
-    await dp.start_polling(bot)
+    @dp.message(Command("start"))
+    async def start_command(message: types.Message):
+        await message.answer(
+            "Бот запущен! Случайные числа будут отправляться в канал.")
+
+    task = asyncio.create_task(send_random_number())
+
+    try:
+        await dp.start_polling(bot)
+    finally:
+        task.cancel()
+        await bot.session.close()
+        logger.info("Бот остановлен")
 
 
 if __name__ == '__main__':
