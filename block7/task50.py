@@ -4,6 +4,7 @@ def find_last_index_greater_than_100(arr, n):
             return i + 1
     return None
 
+
 arr = [120, 50, 150, 80, 110]
 n = len(arr)
 result = find_last_index_greater_than_100(arr, n)

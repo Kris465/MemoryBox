@@ -7,8 +7,10 @@ def calculate_avg_height(heights):
         elif height > 0:
             girls_heights.append(height)
 
-    avg_boys_height = sum(boys_heights) / len(boys_heights) if boys_heights else 0
-    avg_girls_height = sum(girls_heights) / len(girls_heights) if girls_heights else 0
+    avg_boys_height = sum(boys_heights) / len(boys_heights)\
+        if boys_heights else 0
+    avg_girls_height = sum(girls_heights) / len(girls_heights)\
+        if girls_heights else 0
 
     return avg_boys_height, avg_girls_height
 
