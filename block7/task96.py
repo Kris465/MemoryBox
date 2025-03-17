@@ -7,6 +7,7 @@ def check_conditions(bs):
 
     return condition_a, condition_b
 
+
 bs = [23, 51, 19, 71, 29, 41, 83, 37, 59, 47]
 condition_a, condition_b = check_conditions(bs)
 
