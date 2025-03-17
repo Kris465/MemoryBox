@@ -2,8 +2,10 @@ games = []
 
 
 for i in range(20):
-    goals_scored = int(input(f"Введите количество забитых мячей в игре {i+1}: "))
-    goals_conceded = int(input(f"Введите количество пропущенных мячей в игре {i+1}: "))
+    goals_scored = int(input(f"Введите количество забитых мячей в игре\
+        {i+1}: "))
+    goals_conceded = int(input(f"Введите количество пропущенных мячей в игре \
+        {i+1}: "))
     games.append((goals_scored, goals_conceded))
 
 
@@ -26,8 +28,10 @@ print(f"Количество выигрышей: {wins}, Количество п
 
 
 draws = sum(1 for game in games if game[0] == game[1])
-print(f"Количество выигрышей: {wins}, Количество ничьих: {draws}, Количество проигрышей: {losses}")
+print(f"Количество выигрышей: {wins}, Количество ничьих: {draws},\
+    Количество проигрышей: {losses}")
 
 
 big_difference_games = sum(1 for game in games if abs(game[0] - game[1]) >= 3)
-print(f"Количество игр с разницей забитых и пропущенных мячей >= 3: {big_difference_games}")
+print(f"Количество игр с разницей забитых и пропущенных мячей >= 3:\
+    {big_difference_games}")
