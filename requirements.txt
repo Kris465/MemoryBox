@@ -1,10 +1,16 @@
 beautifulsoup4==4.12.3
 certifi==2024.12.14
 charset-normalizer==3.4.1
+<<<<<<< HEAD
 colorama==0.4.6
+=======
+>>>>>>> 39e56d6cb7d53a0f3ebcfc055748e5a8a700220b
 idna==3.10
 loguru==0.7.3
 requests==2.32.3
 soupsieve==2.6
 urllib3==2.3.0
+<<<<<<< HEAD
 win32_setctime==1.2.0
+=======
+>>>>>>> 39e56d6cb7d53a0f3ebcfc055748e5a8a700220b

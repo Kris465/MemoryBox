@@ -2,8 +2,12 @@
 .env
 .venv
 
+# packages
+__pycache__
+
+# photoes
+*.png
+*.jpg
+
 # logs
 *.log
-
-# python
-__pycache__
