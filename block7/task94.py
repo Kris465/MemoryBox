@@ -7,4 +7,4 @@ product = reduce(lambda x, y: x * y, numbers)
 if product < 10000:
     print("Произведение меньше 10000")
 else:
-    print("Произведение болше 10000")
+    print("Произведение больше 10000")
