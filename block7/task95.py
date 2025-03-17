@@ -9,7 +9,8 @@ def is_product_greater(ds, s):
 
 
 n = int(input("Введите количество вещественных чисел: "))
-ds = list(map(float, input("Введите вещественные числа через пробел: ").split()))
+ds = list(map(float, input("Введите вещественные числа через пробел: ")
+              .split()))
 s = float(input("Введите число s: "))
 
 result = is_product_greater(ds, s)
