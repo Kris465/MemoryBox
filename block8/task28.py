@@ -7,6 +7,7 @@ def is_prime(n):
             return False
     return True
 
+
 def find_numbers_with_six_divisors(start, end):
     primes = [p for p in range(2, int(end**(1/3)) + 1) if is_prime(p)]
     result = set()
