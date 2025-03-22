@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container" style="margin: 100px;">
+        <h1>уведомления заметки для студента</h1>
+        {% if notices %}
+        <table class="table">
+            <tr>
+                <th> с .но </th>
+                <th>заголовок</th>
+                <th>контент</th>
+            </tr>
+            {% for notice in notices reversed %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{notice.title}}</td>
+                <td>{{notice.content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2 class="text-danger mx-5 my-5">уведомления не доступны</h2>
+        {% endif %}
+    </div>
+{% endblock %}

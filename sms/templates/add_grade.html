@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<body>
+    <style>
+        body{
+            background-color:rgb(140, 212, 221);
+        }
+        form{
+            display: block;
+            margin-left: 500px;
+            
+            width: 400px;
+        }
+        button[type="submit"]{
+            background:forestgreen;
+        }
+    </style>
+    <h1>Add Grade</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Grade</button>
+    </form>
+</body>
+{% endblock %}

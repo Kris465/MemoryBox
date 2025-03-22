@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    body{
+        background-color: mediumaquamarine;
+    }
+    input[type="email"]{
+        width: 30%;
+        margin-left: 360px;
+    }
+    input[type="password"]{
+        width: 30%;
+        margin-left: 360px;
+    }
+    form{
+        border: 2px solid rebeccapurple;
+        border-left-width: 30px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px  30px;
+    }
+</style>
+    <div class="container my-5 w-50">
+        <h1 class="text-center">логин админа</h1>
+        <form action="{% url 'admin_login' %}" method="post">
+            {% csrf_token %}
+            <input type="email" placeholder="Email" class="form-control" name="email">
+            <br>
+            <input type="password" placeholder="Password" class="form-control" name="pwd">
+            <br>
+            <input type="submit" class="btn btn-primary width: 45% form-control" style="width:30%; margin-left: 360px;" value="Login">
+        </form>
+    </div>
+{% endblock %}

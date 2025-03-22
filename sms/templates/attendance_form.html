@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<body>
+    <h1>Attendance Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" required><br><br>
+
+        {% block body %}
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+        
+        <label for="is_present">Present:</label>
+        <input type="checkbox" id="is_present" name="is_present"><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+{% endblock %}

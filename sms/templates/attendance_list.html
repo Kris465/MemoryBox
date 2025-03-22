@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<body>
+    <h1>attendance list</h1>
+    <ul>
+        {% for attendance in attendances %}
+        <li>{{ attendance }} 
+            {% endfor %}
+    </ul>
+</body>

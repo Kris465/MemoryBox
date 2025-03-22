@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    body{
+        background-color: mediumaquamarine;
+    }
+    input[type="text"]{
+        width: 30%;
+        margin-left: 360px;
+    }
+    input[type="password"]{
+        width: 30%;
+        margin-left: 360px;
+    }
+    form{
+        border: 2px solid rebeccapurple;
+        border-left-width: 30px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px 30px;
+}
+</style>
+    <div class="container my-5 w-50">
+        <h1 class="text-center">логин студента</h1>
+        
+        <body>
+        
+        
+        <form action="{% url 'student_login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" placeholder="Username" name="userName">
+            <br>
+            <input type="password" class="form-control" placeholder="Password" name="stuPwd">
+            <br>
+            <input type="submit" value="Login" class="btn btn-primary form-control" style="width: 30%; margin-left: 360px;">
+        </form>
+    </div>
+{% endblock %}
