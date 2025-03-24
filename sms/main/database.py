@@ -1,50 +1,15 @@
-import sqlite3
- 
-# устанавливаем соединение с базой данных university
-conn = sqlite3.connect('university.db')
- 
-# создаем курсор для выполнения операций с базой данных
-cursor = conn.cursor()
- 
-# добавляем информацию о студентах в таблицу students
-students_info = [('Иван', 'Иванов', 5, 4, 4),
-                 ('Анна', 'Андреева', 5, 4, 3),                 
-                 ('Петр', 'Петров', 4, 4, 4),
-                 ('Марина', 'Маринина', 4, 4, 4),
-                 ('Сергей', 'Сергеев', 3, 3, 5),
-                 ('Андрей', 'Андреев', 5, 4, 3),
-                 ('Елена', 'Максимова', 5, 5, 5),
-                 ('Светлана', 'Сергеева', 4, 3, 5),
-                 ('Николай', 'Николаев', 3, 5, 4),
-                 ('Валерия', 'Владимирова', 4, 5, 5),
-                 ('Дмитрий', 'Дмитриев', 4, 4, 5),
-                 ('Алексей', 'Алексеев', 4, 4, 4),
-                 ('Инна', 'Ильина', 3, 3, 5),
-                 ('Максим', 'Максимов', 5, 5, 5),
-                 ('Егор', 'Егоров', 3, 3, 3),
-                 ('Ольга', 'Артемова', 5, 5, 5),
-                 ('Илья', 'Ильин', 3, 3, 5),
-                 ('Олег', 'Олегов', 4, 3, 8),
-                 ('Кирилл', 'Кириллов', 5, 5, 5),
-                 ('Владимир', 'Владимиров', 3, 5, 5),
-                 ('Артем', 'Артемов', 5, 5, 5),
-                 ('Михаил', 'Михайлов', 4, 4, 4)]
-cursor.executemany('INSERT INTO students (name, lastname, physics, math, CS) VALUES (?, ?, ?, ?, ?)', students_info)
- 
-# добавляем записи о стоимости обучения в таблицу fees
-fee = 205000
-average = 4.0
-discount = 0.01
-with_discount = fee * (100 - discount)
-for year in range(1, 6):
-    cursor.execute('INSERT INTO fees (year, fee, average, discount, with_discount) VALUES (?, ?, ?, ?, ?)', (year, fee, average, discount, with_discount))
-    fee = round(fee * 0.97, 2)
-    average += 0.1
-    discount += 0.01
-    with_discount = round(fee * 0.97 + discount, 2)
- 
-# сохраняем изменения в базе данных
-conn.commit()
- 
-# закрываем соединение с базой данных
-conn.close()
+import sqlite3 as sl
+
+# открываем файл с базой данных
+con = sl.connect('Grade.db')
+
+# создаём таблицу для товаров
+with con:
+    con.execute("""
+        CREATE TABLE Student (
+            gender VARCHAR(20) PRIMARY KEY,
+            address INTEGER,
+            age INTEGER
+
+);
+    """)
