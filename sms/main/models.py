@@ -68,6 +68,7 @@ class Grade(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.CharField(max_length=100)
     grade = models.IntegerField()
+    score = models.IntegerField()
 
     def __str__(self):
         return f"{self.student.name} - {self.subject}: {self.grade}"
