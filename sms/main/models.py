@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 
@@ -10,7 +9,7 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Schedule(models.Model):
     title = models.CharField(max_length=200)
@@ -20,8 +19,8 @@ class Schedule(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
+
+
 class AboutPage(models.Model):
     about = models.TextField()
 
@@ -160,4 +159,3 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.full_name
-    
