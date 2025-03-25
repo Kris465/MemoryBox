@@ -1,7 +1,7 @@
 import sqlite3 as sl
 
 # открываем файл с базой данных
-con = sl.connect('Grade.db')
+con = sl.connect('main_grade.db')
 
 # создаём таблицу для товаров
 with con:

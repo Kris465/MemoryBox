@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 
@@ -72,6 +73,55 @@ class Grade(models.Model):
 
     def __str__(self):
         return f"{self.student.name} - {self.subject}: {self.grade}"
+    
+
+class mainGrade(models.Model):
+    GRADE_CHOICES = [
+        ('A', 'Отлично (90-100)'),
+        ('B', 'Хорошо (80-89)'),
+        ('C', 'Удовлетворительно (70-79)'),
+        ('D', 'Неудовлетворительно (60-69)'),
+        ('F', 'Не сдано (0-59)'),
+    ]
+    
+    grade = models.CharField(
+        max_length=1,
+        choices=GRADE_CHOICES,
+        verbose_name="Оценка"
+    )
+
+
+class main_grade(models.Model):
+    name = models.CharField(
+        max_length=100, verbose_name="Название оценки",
+        help_text="Введите название оценки/рейтинга"
+    )
+    
+    value = models.DecimalField(
+        max_digits=5, decimal_places=2,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        verbose_name="Значение оценки",
+        help_text="Оценка от 0 до 100"
+    )
+    
+    description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Описание",
+        help_text="Дополнительное описание оценки"
+    )
+    
+    class Meta:
+        verbose_name = "Основная оценка"
+        verbose_name_plural = "Основные оценки"
+        ordering = ['-value']  # Сортировка по убыванию оценки
+        
+    # Методы
+    def __str__(self):
+        return f"{self.name}: {self.value}"
+    
+    def is_passing(self):
+        """Проверяет, является ли оценка проходной."""
+        return self.value >= 60
 
 
 class Course(models.Model):
