@@ -182,3 +182,15 @@ function updateFontStyle() {
 
 isMinecraftFontActive = false;
 updateFontStyle();
+
+function toggleMenu() {
+    sideMenu.classList.toggle('open'); // Открываем или закрываем меню
+
+    if (sideMenu.classList.contains('open')) {
+        chatList.style.pointerEvents = 'none'; // Отключаем взаимодействие с chat-list
+    } else {
+        chatList.style.pointerEvents = 'auto'; // Восстанавливаем взаимодействие
+    }
+}
+
+document.querySelector('.menu-toggle-button').addEventListener('click', toggleMenu);
