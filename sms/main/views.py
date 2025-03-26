@@ -13,7 +13,7 @@ def main_grade(request):
         'grades': grades,
         'title': 'Основные оценки'
     }
-    return render(request, 'grades/main_grade.html', context)
+    return render(request, 'main_grade.html', context)
 
 
 class MainGradeView(View):
@@ -25,7 +25,7 @@ class MainGradeView(View):
             'grades': grades,
             'title': 'Основные оценки'
         }
-        return render(request, 'grades/main_grade.html', context)
+        return render(request, 'main_grade.html', context)
     
     def post(self, request, *args, **kwargs):
         # Логика для POST-запроса (если нужно обрабатывать формы)
@@ -128,8 +128,6 @@ def add_attendance(request):
 def attendance_list(request):
     attendances = Attendance.objects.all()
     return render(request, 'attendance_list.html', {'attendances': attendances})
-
-
 
 
 def home(request):
@@ -238,8 +236,17 @@ def addStudent(request):
         studentId = request.POST['stu_id']
         studentUserName = request.POST['stu_user_name']
         studentPassword = request.POST['stu_pwd']
-        
-        add_student = Student.objects.create(full_name=fullName, father_name=fatherName, mother_name=motherName, gender=gender, address=address, city=city,email=stuEmail, contact_num=contactNum, date_of_birth=dob, course=course, stu_id=studentId, user_name=studentUserName, password=studentPassword)
+        add_student = Student.objects.create(full_name=fullName,
+                                             father_name=fatherName,
+                                             mother_name=motherName,
+                                             gender=gender, address=address,
+                                             city=city, email=stuEmail,
+                                             contact_num=contactNum,
+                                             date_of_birth=dob,
+                                             course=course,
+                                             stu_id=studentId,
+                                             user_name=studentUserName,
+                                             password=studentPassword)
 
         add_student.save()
     return render(request, 'admin/new_student.html')
@@ -342,8 +349,11 @@ def addTeacher(request):
         email = request.POST['email']
         contact_num = request.POST['contact_number']
         qualification = request.POST['qualification']
-        
-        add_teacher = Teacher.objects.create(full_name=full_name, gender=gender, email=email,contact_num=contact_num, qualification=qualification)
+
+        add_teacher = Teacher.objects.create(full_name=full_name,
+                                             gender=gender, email=email,
+                                             contact_num=contact_num,
+                                             qualification=qualification)
         add_teacher.save()
     return render(request, 'admin/add_teacher.html')
 
@@ -365,8 +375,9 @@ def studentLogin(request):
         if request.method == "POST":
             user_name = request.POST['userName']
             student_pwd = request.POST['stuPwd']
-            
-            stu_exists = Student.objects.filter(user_name=user_name, password=student_pwd).exists()
+
+            stu_exists = Student.objects.filter(user_name=user_name,
+                                                password=student_pwd).exists()
             if stu_exists:
                 request.session['student_user'] = user_name
                 return redirect('student_dashboard')
@@ -378,8 +389,9 @@ def studentLogin(request):
 
 def studentDashboard(request):
     if 'student_user' in request.session:
-        student_in_session = Student.objects.get(user_name=request.session['student_user'])
-        data  = {"student": student_in_session}
+        student_in_session = Student.objects.get(user_name=request.session
+                                                 ['student_user'])
+        data = {"student": student_in_session}
         return render(request, 'student/student_dashboard.html', data)
     else:
         return redirect('student_login')
@@ -419,12 +431,13 @@ def viewNotices(request):
 
 def studentSettings(request):
     if 'student_user' in request.session:
-        student_obj = Student.objects.get(user_name = request.session['student_user'])
+        student_obj = Student.objects.get(user_name=request.session
+                                          ['student_user'])
         data = {'student': student_obj}
         if request.method == 'POST':
             currentPwd = request.POST['current_pwd']
             new_pwd = request.POST['new_pwd']
-            student_obj.password  =new_pwd
+            student_obj.password = new_pwd
             student_obj.save() 
             return redirect('student_dashboard')      
         return render(request, "student/student_settings.html", data)
