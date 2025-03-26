@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ваши оценки</h1>
+
+{% if courses_grades %}
+    {% for course, grades in courses_grades.items %}
+        <h2>{{ course.name }}</h2>
+        <p>Средний балл: {{ grades|avg:'grade' }}</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Оценка</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in grades %}
+                <tr>
+                    <td>{{ grade.grade }}</td>
+                    <td>{{ grade.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% else %}
+    <p>У вас пока нет оценок.</p>
+{% endif %}
+{% endblock %}

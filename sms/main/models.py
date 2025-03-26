@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 
@@ -67,14 +68,15 @@ class Student(models.Model):
 class Grade(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.CharField(max_length=100)
-    grade = models.IntegerField()
+    grade = models.DecimalField(max_digits=5, decimal_places=2)
+    date = models.DateField()
     score = models.IntegerField()
 
     def __str__(self):
-        return f"{self.student.name} - {self.subject}: {self.grade}"
+        return f"{self.student.full_name} - {self.subject}: {self.grade}"
     
 
-class mainGrade(models.Model):
+class main_grade(models.Model):
     GRADE_CHOICES = [
         ('A', 'Отлично (90-100)'),
         ('B', 'Хорошо (80-89)'),
@@ -90,7 +92,7 @@ class mainGrade(models.Model):
     )
 
 
-class main_grade(models.Model):
+class mainGrade(models.Model):
     name = models.CharField(
         max_length=100, verbose_name="Название оценки",
         help_text="Введите название оценки/рейтинга"
@@ -138,7 +140,8 @@ class Attendance(models.Model):
     is_present = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.course.name} - {self.date} - {'Present' if self.is_present else 'Absent'}"
+        return f"{self.course.name} - {self.date} - {'Present' if self.
+                                                     is_present else 'Absent'}"
 
 
 class Notice(models.Model):

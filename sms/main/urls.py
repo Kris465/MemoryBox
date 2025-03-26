@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import MainGradeView, main_grade
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -8,6 +9,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('add-grade/', views.add_grade, name='add_grade'),
     path('grades/', views.grades_list, name='grades_list'),
+    path('grades/', MainGradeView.as_view(), name='main_grade'),
+    path('grades/', main_grade, name='main_grade'),
     path('add/', views.add_schedule, name='add_schedule'),
     path('list/', views.attendance_list, name='attendance_list'),
     path('contact/', views.contact, name="contact"),
