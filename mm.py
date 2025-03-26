@@ -1,69 +1,44 @@
 import pyaudio
 import numpy as np
-import psutil
-import os
-import time
-from pycaw.pycaw import AudioUtilities
-
-# Настройки аудиопотока
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
-CHUNK = 1024
+import audioop
 
 # Инициализация PyAudio
 p = pyaudio.PyAudio()
 
-# Открытие аудиопотока
+# Параметры для захвата аудиопотока
+FORMAT = pyaudio.paInt16  # Формат аудиоданных
+CHANNELS = 1              # Количество каналов (моно)
+RATE = 44100              # Частота дискретизации
+CHUNK = 1024              # Количество фреймов в одном блоке данных
+as_loopback = True        # Использование loopback для захвата звука с устройства
+
+# Открытие потока
 stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
-                frames_per_buffer=CHUNK)
-
-def get_db_level(data):
-    """Вычисление уровня громкости в децибелах."""
-    rms = np.sqrt(np.mean(np.square(data)))
-    return 20 * np.log10(rms + 1e-9)  # Добавляем маленькое значение, чтобы избежать log(0)
-
-def get_active_apps_with_volume():
-    """Получение списка активных приложений с их громкостью."""
-    active_apps = []
-    sessions = AudioUtilities.GetAllSessions()
-
-    for session in sessions:
-        if session.Process:
-            app_name = session.Process.name()
-            volume = session.SimpleAudioVolume.GetMasterVolume()
-            active_apps.append((app_name, volume))
-    return active_apps
+                frames_per_buffer=CHUNK,
+                as_loopback=as_loopback)
 
 try:
     while True:
-        # Чтение данных из аудиопотока
-        data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
+        # Чтение данных из потока
+        data = stream.read(CHUNK)
         
-        # Вычисление уровня громкости в децибелах
-        db_level = get_db_level(data)
+        # Преобразование данных в массив numpy
+        audio_data = np.frombuffer(data, dtype=np.int16)
         
-        # Получение активных приложений с их громкостью
-        active_apps = get_active_apps_with_volume()
+        # Вычисление амплитуды (разница между максимальным и минимальным значением)
+        amplitude = np.max(audio_data) - np.min(audio_data)
         
-        # Очистка консоли
-        os.system('cls')
+        # Преобразование амплитуды в процент громкости
+        volume_percent = (amplitude * 100) / (2**16)
         
-        # Вывод информации
-        print("Активные приложения и уровень звука в децибелах:")
-        
-        # Вывод списка приложений и их уровня звука
-        for app, volume in active_apps:
-            print(f"- {app}: {db_level:.2f} dB")
-        
-        # Пауза перед следующим измерением
-        time.sleep(1)
+        # Вывод результата
+        print(f"Громкость: {volume_percent:.2f}%")
 
 except KeyboardInterrupt:
-    # Остановка и закрытие аудиопотока
+    # Остановка и закрытие потока при прерывании
     stream.stop_stream()
     stream.close()
     p.terminate()
