@@ -13,7 +13,7 @@ def search(request):
             results = Item.objects.filter(name__icontains=query)
     else:
         form = SearchForm()
-    
+
     return render(request, 'search.html', {'form': form, 'results': results})
 
 
@@ -43,7 +43,7 @@ def add_schedule(request):
         form = ScheduleForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('schedule_list')  # Перенаправление на страницу со списком расписаний
+            return redirect('schedule_list')
     else:
         form = ScheduleForm()
     return render(request, 'add_schedule.html', {'form': form})
@@ -54,14 +54,14 @@ def attendance_form(request):
         student_name = request.POST.get('student_name')
         date = request.POST.get('date')
         is_present = request.POST.get('is_present') == 'on'
-        
+
         Attendance.objects.create(
             student_name=student_name,
             date=date,
             is_present=is_present
         )
         return redirect('attendance_form')
-    
+
     return render(request, 'attendance_form.html')
 
 
@@ -70,7 +70,7 @@ def add_attendance(request):
         form = AttendanceForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('attendance_list')  # Перенаправление на страницу со списком посещаемости
+            return redirect('attendance_list')
     else:
         form = AttendanceForm()
     return render(request, 'add_attendance.html', {'form': form})
@@ -78,16 +78,14 @@ def add_attendance(request):
 
 def attendance_list(request):
     attendances = Attendance.objects.all()
-    return render(request, 'attendance_list.html', {'attendances': attendances})
-
-
+    return render(request, 'attendance_list.html',
+                  {'attendances': attendances})
 
 
 def home(request):
-    publicNotices = Notice.objects.filter(isPublic = True)
+    publicNotices = Notice.objects.filter(isPublic=True)
     data = {"public_notices": publicNotices}
     return render(request, 'home.html', data)
-
 
 
 def about(request):
@@ -96,20 +94,15 @@ def about(request):
     return render(request, 'about.html', data)
 
 
-
-
 def contact(request):
     contact_text = ContactPage.objects.all()
     data = {"contactDetails": contact_text}
     return render(request, 'contact.html', data)
 
 
-
-
 def student_list(request):
     students = Student.objects.all()
     return render(request, 'student_list.html', {'students': students})
-
 
 
 def course_list(request):
@@ -125,7 +118,7 @@ def adminPanel(request):
         return render(request, 'admin/admin_panel.html', data)
     else:
         return redirect('admin_login')
-    
+
 
 def adminLogin(request):
     if request.method == 'POST':
@@ -140,6 +133,7 @@ def adminLogin(request):
 
     return render(request, 'admin/admin_login.html')
 
+
 def adminLogout(request):
     del request.session['admin_user']
     return redirect('admin_login')
@@ -150,25 +144,28 @@ def adminAbout(request):
     data = {"aboutDetails": about_details}
     return render(request, 'admin/admin_about.html', data)
 
+
 def updateAbout(request, id):
     if request.method == 'POST':
         aboutText = request.POST['text']
-        about_obj = AboutPage.objects.get(id = id)
+        about_obj = AboutPage.objects.get(id=id)
         about_obj.about = aboutText
         about_obj.save()
     return redirect('admin_about')
 
+
 def adminContact(request):
     contact_details = ContactPage.objects.all()
-    data = {"contactDetails": contact_details} 
+    data = {"contactDetails": contact_details}
     return render(request, 'admin/admin_contact.html', data)
+
 
 def updateContact(request, id):
     if request.method == 'POST':
         contactAddress = request.POST['address']
         contactEmail = request.POST['email']
         contactNumber = request.POST['contact']
-        contact_obj = ContactPage.objects.get(id = id)
+        contact_obj = ContactPage.objects.get(id=id)
         contact_obj.address = contactAddress
         contact_obj.email = contactEmail
         contact_obj.contact_num = contactNumber
@@ -191,11 +188,24 @@ def addStudent(request):
         studentId = request.POST['stu_id']
         studentUserName = request.POST['stu_user_name']
         studentPassword = request.POST['stu_pwd']
-        
-        add_student = Student.objects.create(full_name=fullName, father_name=fatherName, mother_name=motherName, gender=gender, address=address, city=city,email=stuEmail, contact_num=contactNum, date_of_birth=dob, course=course, stu_id=studentId, user_name=studentUserName, password=studentPassword)
+
+        add_student = Student.objects.create(full_name=fullName,
+                                             ather_name=fatherName,
+                                             mother_name=motherName,
+                                             gender=gender,
+                                             ddress=address,
+                                             city=city,
+                                             email=stuEmail,
+                                             contact_num=contactNum,
+                                             date_of_birth=dob,
+                                             course=course,
+                                             stu_id=studentId,
+                                             user_name=studentUserName,
+                                             password=studentPassword)
 
         add_student.save()
     return render(request, 'admin/new_student.html')
+
 
 def manageStudent(request):
     all_students = Student.objects.all()
@@ -221,7 +231,6 @@ def updateStudent(request, id):
         studentUserName = request.POST['stu_user_name']
         studentPassword = request.POST['stu_pwd']
 
-        
         student_obj.full_name = fullName
         student_obj.father_name = fatherName
         student_obj.mother_name = motherName
@@ -239,6 +248,7 @@ def updateStudent(request, id):
         student_obj.save()
     return redirect('manage_students')
 
+
 def deleteStudent(request, id):
     if 'admin_user' in request.session:
         stu_obj = Student.objects.get(id=id)
@@ -252,7 +262,9 @@ def addNotice(request):
         noticeContent = request.POST['notice_content']
         isPublic = request.POST['notice_status']
 
-        add_notice = Notice.objects.create(title=noticeTitle, content=noticeContent, isPublic=isPublic)
+        add_notice = Notice.objects.create(title=noticeTitle,
+                                           content=noticeContent,
+                                           isPublic=isPublic)
         add_notice.save()
     return render(request, "admin/admin_notice.html")
 
@@ -268,6 +280,7 @@ def deleteNotice(request, id):
         notice_obj = Notice.objects.get(id=id)
         notice_obj.delete()
     return redirect('manage_notices')
+
 
 def updateNotice(request, id):
     if request.method == 'POST':
@@ -291,28 +304,36 @@ def addTeacher(request):
         email = request.POST['email']
         contact_num = request.POST['contact_number']
         qualification = request.POST['qualification']
-        
-        add_teacher = Teacher.objects.create(full_name=full_name, gender=gender, email=email,contact_num=contact_num, qualification=qualification)
+
+        add_teacher = Teacher.objects.create(full_name=full_name,
+                                             gender=gender,
+                                             email=email,
+                                             contact_num=contact_num,
+                                             qualification=qualification)
         add_teacher.save()
     return render(request, 'admin/add_teacher.html')
+
 
 def manageTeachers(request):
     all_teachers = Teacher.objects.all()
     data = {"teachers": all_teachers}
     return render(request, 'admin/manage_teachers.html', data)
 
+
 def deleteTeacher(request, id):
     teacher_obj = Teacher.objects.get(id=id)
     teacher_obj.delete()
     return redirect('manage_teachers')
+
 
 def studentLogin(request):
     if 'student_user' not in request.session:
         if request.method == "POST":
             user_name = request.POST['userName']
             student_pwd = request.POST['stuPwd']
-            
-            stu_exists = Student.objects.filter(user_name=user_name, password=student_pwd).exists()
+
+            stu_exists = Student.objects.filter(user_name=user_name,
+                                                password=student_pwd).exists()
             if stu_exists:
                 request.session['student_user'] = user_name
                 return redirect('student_dashboard')
@@ -320,13 +341,13 @@ def studentLogin(request):
         return render(request, 'student/student_login.html')
     else:
         return redirect('student_dashboard')
-    
 
 
 def studentDashboard(request):
     if 'student_user' in request.session:
-        student_in_session = Student.objects.get(user_name=request.session['student_user'])
-        data  = {"student": student_in_session}
+        student_in_session = Student.objects.get(
+            user_name=request.session['student_user'])
+        data = {"student": student_in_session}
         return render(request, 'student/student_dashboard.html', data)
     else:
         return redirect('student_login')
@@ -357,22 +378,24 @@ def updateFaculty(request, id):
 
 def viewNotices(request):
     if 'student_user' in request.session:
-        student_notice = Notice.objects.filter(isPublic = False)
+        student_notice = Notice.objects.filter(isPublic=False)
         data = {"notices": student_notice}
         return render(request, 'student/view_notices.html', data)
     else:
         return redirect('student_login')
 
+
 def studentSettings(request):
     if 'student_user' in request.session:
-        student_obj = Student.objects.get(user_name = request.session['student_user'])
+        student_obj = Student.objects.get(
+            user_name=request.session['student_user'])
         data = {'student': student_obj}
         if request.method == 'POST':
             currentPwd = request.POST['current_pwd']
             new_pwd = request.POST['new_pwd']
-            student_obj.password  =new_pwd
-            student_obj.save() 
-            return redirect('student_dashboard')      
+            student_obj.password = new_pwd
+            student_obj.save()
+            return redirect('student_dashboard')
         return render(request, "student/student_settings.html", data)
     else:
         return redirect('student_login')

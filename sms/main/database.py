@@ -1,9 +1,7 @@
 import sqlite3 as sl
 
-# открываем файл с базой данных
 con = sl.connect('Grade.db')
 
-# создаём таблицу для товаров
 with con:
     con.execute("""
         CREATE TABLE Student (
@@ -12,4 +10,4 @@ with con:
             age INTEGER
 
 );
-    """)
+""")
