@@ -1,7 +1,5 @@
 from django.db import models
-from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
-# Create your models here.
 
 
 class Item(models.Model):
@@ -65,18 +63,15 @@ class Student(models.Model):
         return self.full_name
 
 
-class Grade(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=100)
-    grade = models.DecimalField(max_digits=5, decimal_places=2)
-    date = models.DateField()
-    score = models.IntegerField()
+class Course(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return f"{self.student.full_name} - {self.subject}: {self.grade}"
-    
+        return self.name
 
-class main_grade(models.Model):
+
+class Grade(models.Model):
     GRADE_CHOICES = [
         ('A', 'Отлично (90-100)'),
         ('B', 'Хорошо (80-89)'),
@@ -84,53 +79,35 @@ class main_grade(models.Model):
         ('D', 'Неудовлетворительно (60-69)'),
         ('F', 'Не сдано (0-59)'),
     ]
-    
-    grade = models.CharField(
+
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    date = models.DateField()
+    numeric_score = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+    letter_grade = models.CharField(
         max_length=1,
         choices=GRADE_CHOICES,
-        verbose_name="Оценка"
+        blank=True
     )
 
-
-class mainGrade(models.Model):
-    name = models.CharField(
-        max_length=100, verbose_name="Название оценки",
-        help_text="Введите название оценки/рейтинга"
-    )
-    
-    value = models.DecimalField(
-        max_digits=5, decimal_places=2,
-        validators=[MinValueValidator(0), MaxValueValidator(100)],
-        verbose_name="Значение оценки",
-        help_text="Оценка от 0 до 100"
-    )
-    
-    description = models.TextField(
-        blank=True, null=True,
-        verbose_name="Описание",
-        help_text="Дополнительное описание оценки"
-    )
-    
     class Meta:
-        verbose_name = "Основная оценка"
-        verbose_name_plural = "Основные оценки"
-        ordering = ['-value']  # Сортировка по убыванию оценки
-        
-    # Методы
-    def __str__(self):
-        return f"{self.name}: {self.value}"
-    
-    def is_passing(self):
-        """Проверяет, является ли оценка проходной."""
-        return self.value >= 60
-
-
-class Course(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=20, unique=True)
+        ordering = ['-date']
 
     def __str__(self):
-        return self.name
+        return f"{self.student} - {self.course}: {self.letter_grade}"
+
+    def save(self, *args, **kwargs):
+        if not self.letter_grade:
+            if self.numeric_score >= 90: self.letter_grade = 'A'
+            elif self.numeric_score >= 80: self.letter_grade = 'B'
+            elif self.numeric_score >= 70: self.letter_grade = 'C'
+            elif self.numeric_score >= 60: self.letter_grade = 'D'
+            else: self.letter_grade = 'F'
+        super().save(*args, **kwargs)
 
 
 class Attendance(models.Model):
