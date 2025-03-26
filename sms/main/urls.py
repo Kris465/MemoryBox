@@ -38,7 +38,7 @@ urlpatterns = [
     path('admin_panel/add_teacher/', views.addTeacher, name="add_teacher"),
     path('admin_panel/manage_teacher/', views.manageTeachers, name="manage_teachers"),
     path('admin_panel/delete_teacher/<str:id>/', views.deleteTeacher, name="delete_teacher"),
-    
+
     path('student/dashboard/', views.studentDashboard, name="student_dashboard"),
     path('student/logout/', views.studentLogout, name="student_logout"),
     path('students/', views.student_list, name='student_list'),

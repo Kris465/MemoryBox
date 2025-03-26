@@ -41,7 +41,7 @@ def search(request):
             results = Item.objects.filter(name__icontains=query)
     else:
         form = SearchForm()
-    
+
     return render(request, 'search.html', {'form': form, 'results': results})
 
 
@@ -92,8 +92,7 @@ def add_schedule(request):
         form = ScheduleForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('schedule_list')  
-        # Перенаправление на страницу со списком расписаний
+            return redirect('schedule_list')  # Перенаправление на страницу со списком расписаний
     else:
         form = ScheduleForm()
     return render(request, 'add_schedule.html', {'form': form})
@@ -104,14 +103,14 @@ def attendance_form(request):
         student_name = request.POST.get('student_name')
         date = request.POST.get('date')
         is_present = request.POST.get('is_present') == 'on'
-        
+
         Attendance.objects.create(
             student_name=student_name,
             date=date,
             is_present=is_present
         )
         return redirect('attendance_form')
-    
+
     return render(request, 'attendance_form.html')
 
 
@@ -120,7 +119,7 @@ def add_attendance(request):
         form = AttendanceForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('attendance_list')  # Перенаправление на страницу со списком посещаемости
+            return redirect('attendance_list')
     else:
         form = AttendanceForm()
     return render(request, 'add_attendance.html', {'form': form})
@@ -128,8 +127,9 @@ def add_attendance(request):
 
 def attendance_list(request):
     attendances = Attendance.objects.all()
-    return render(request, 'attendance_list.html', {'attendances': 
-                                                    attendances})
+    return render(request, 'attendance_list.html', {'attendances': attendances})
+
+
 
 
 def home(request):
@@ -168,7 +168,7 @@ def adminPanel(request):
         return render(request, 'admin/admin_panel.html', data)
     else:
         return redirect('admin_login')
-    
+
 
 def adminLogin(request):
     if request.method == 'POST':
@@ -206,7 +206,7 @@ def updateAbout(request, id):
 
 def adminContact(request):
     contact_details = ContactPage.objects.all()
-    data = {"contactDetails": contact_details} 
+    data = {"contactDetails": contact_details}
     return render(request, 'admin/admin_contact.html', data)
 
 
@@ -239,16 +239,7 @@ def addStudent(request):
         studentUserName = request.POST['stu_user_name']
         studentPassword = request.POST['stu_pwd']
         
-        add_student = Student.objects.create(full_name=fullName,
-                                             father_name=fatherName,
-                                             mother_name=motherName,
-                                             gender=gender, address=address,
-                                             city=city, email=stuEmail,
-                                             contact_num=contactNum,
-                                             date_of_birth=dob,
-                                             course=course, stu_id=studentId,
-                                             user_name=studentUserName,
-                                             password=studentPassword)
+        add_student = Student.objects.create(full_name=fullName, father_name=fatherName, mother_name=motherName, gender=gender, address=address, city=city,email=stuEmail, contact_num=contactNum, date_of_birth=dob, course=course, stu_id=studentId, user_name=studentUserName, password=studentPassword)
 
         add_student.save()
     return render(request, 'admin/new_student.html')
@@ -352,10 +343,7 @@ def addTeacher(request):
         contact_num = request.POST['contact_number']
         qualification = request.POST['qualification']
         
-        add_teacher = Teacher.objects.create(full_name=full_name, 
-                                             gender=gender, email=email,
-                                             contact_num=contact_num, 
-                                             qualification=qualification)
+        add_teacher = Teacher.objects.create(full_name=full_name, gender=gender, email=email,contact_num=contact_num, qualification=qualification)
         add_teacher.save()
     return render(request, 'admin/add_teacher.html')
 
@@ -377,9 +365,8 @@ def studentLogin(request):
         if request.method == "POST":
             user_name = request.POST['userName']
             student_pwd = request.POST['stuPwd']
-
-            stu_exists = Student.objects.filter(user_name=user_name, 
-                                                password=student_pwd).exists()
+            
+            stu_exists = Student.objects.filter(user_name=user_name, password=student_pwd).exists()
             if stu_exists:
                 request.session['student_user'] = user_name
                 return redirect('student_dashboard')
@@ -391,9 +378,8 @@ def studentLogin(request):
 
 def studentDashboard(request):
     if 'student_user' in request.session:
-        student_in_session = Student.objects.get(user_name=request.
-                                                 session['student_user'])
-        data = {"student": student_in_session}
+        student_in_session = Student.objects.get(user_name=request.session['student_user'])
+        data  = {"student": student_in_session}
         return render(request, 'student/student_dashboard.html', data)
     else:
         return redirect('student_login')
@@ -433,13 +419,12 @@ def viewNotices(request):
 
 def studentSettings(request):
     if 'student_user' in request.session:
-        student_obj = Student.objects.get(user_name=request.
-                                          session['student_user'])
+        student_obj = Student.objects.get(user_name = request.session['student_user'])
         data = {'student': student_obj}
         if request.method == 'POST':
             currentPwd = request.POST['current_pwd']
             new_pwd = request.POST['new_pwd']
-            student_obj.password = new_pwd
+            student_obj.password  =new_pwd
             student_obj.save() 
             return redirect('student_dashboard')      
         return render(request, "student/student_settings.html", data)
