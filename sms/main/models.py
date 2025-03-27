@@ -115,11 +115,16 @@ class Grade(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.letter_grade:
-            if self.numeric_score >= 90: self.letter_grade = 'A'
-            elif self.numeric_score >= 80: self.letter_grade = 'B'
-            elif self.numeric_score >= 70: self.letter_grade = 'C'
-            elif self.numeric_score >= 60: self.letter_grade = 'D'
-            else: self.letter_grade = 'F'
+            if self.numeric_score >= 90:
+                self.letter_grade = 'A'
+            elif self.numeric_score >= 80:
+                self.letter_grade = 'B'
+            elif self.numeric_score >= 70:
+                self.letter_grade = 'C'
+            elif self.numeric_score >= 60:
+                self.letter_grade = 'D'
+            else:
+                self.letter_grade = 'F'
         super().save(*args, **kwargs)
 
 
