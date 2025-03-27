@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Дурак - простая рабочая версия</title>
+    <title>Дурак - исправленная версия</title>
     <style>
-       body {
-  			background: grey;
+        body {
+            background: grey;
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
@@ -72,7 +72,7 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>Дурак (финальная версия)</h1>
+        <h1>Дурак (исправленная версия)</h1>
         
         <div class="info-panel">
             <div>Козырь: <span id="trump-card"></span></div>
@@ -115,10 +115,10 @@
                 this.computerCards = [];
                 this.attackCards = [];
                 this.defendCards = [];
-                this.currentTurn = 'computer'; // Начинает компьютер
+                this.currentTurn = 'computer';
                 this.gameOver = false;
-                this.lastAttacker = 'computer'; // Кто последний атаковал
-                this.computerDefendCard = null; // Карта, которой компьютер отбивается
+                this.lastAttacker = 'computer';
+                this.computerDefendCard = null;
                 
                 this.initGame();
             }
@@ -214,15 +214,13 @@
                 }
                 
                 return (defendCard.suit === attackCard.suit) && 
-                       (this.getCardValue(defendCard) > this.getCardValue(attackCard));
+                       (this.getCardValue(defendCard) > this.getCardValue(attackCard);
             }
             
             completeDefense() {
                 this.attackCards = [];
                 this.defendCards = [];
                 this.computerDefendCard = null;
-                
-                // После отбития ход переходит к противнику (независимо от того, кто атаковал)
                 this.currentTurn = this.lastAttacker === 'player' ? 'computer' : 'player';
                 this.refillCards();
             }
@@ -291,13 +289,14 @@
                     this.computerDefendCard = null;
                     this.currentTurn = 'player';
                     this.lastAttacker = 'player';
+                    this.refillCards();
                     return false;
                 }
                 
                 possibleDefends.sort((a, b) => this.getCardValue(a.card) - this.getCardValue(b.card));
                 const {card, index} = possibleDefends[0];
                 
-                this.computerDefendCard = card; // Сохраняем карту для отображения
+                this.computerDefendCard = card;
                 this.defendCards.push({
                     attack: attackCard,
                     defend: card
@@ -312,33 +311,31 @@
             }
             
             computerAttack() {
-                    if (this.computerCards.length === 0) return false;
-                    
-                    // Сортируем карты по значению (от меньшего к большему)
-                    this.computerCards.sort((a, b) => this.getCardValue(a) - this.getCardValue(b));
-                    
-                    // Если на столе уже есть карты, ищем карту такого же достоинства
-                    if (this.attackCards.length > 0) {
-                        const existingRanks = this.getAllTableCards().map(c => c.rank);
-                        const matchingCard = this.computerCards.find(c => existingRanks.includes(c.rank));
-                        
-                        if (matchingCard) {
-                            const cardIndex = this.computerCards.indexOf(matchingCard);
-                            this.attackCards.push(matchingCard);
+                if (this.computerCards.length === 0) return false;
+                
+                // Сортируем карты по значению (от меньшего к большему)
+                this.computerCards.sort((a, b) => this.getCardValue(a) - this.getCardValue(b));
+                
+                // Если на столе уже есть карты, ищем карту такого же достоинства
+                if (this.attackCards.length > 0) {
+                    const existingRanks = this.getAllTableCards().map(c => c.rank);
+                    for (let card of this.computerCards) {
+                        if (existingRanks.includes(card.rank)) {
+                            const cardIndex = this.computerCards.indexOf(card);
+                            this.attackCards.push(card);
                             this.computerCards.splice(cardIndex, 1);
                             this.lastAttacker = 'computer';
                             this.currentTurn = 'player';
                             return true;
                         }
-                        return false;
                     }
-                    
-                // Если стол пустой - атакуем любой картой (берем самую слабую)
-                const attackCard = this.computerCards[0];
-                const cardIndex = 0;
+                    return false;
+                }
                 
+                // Если стол пустой - атакуем самой слабой картой
+                const attackCard = this.computerCards[0];
                 this.attackCards.push(attackCard);
-                this.computerCards.splice(cardIndex, 1);
+                this.computerCards.splice(0, 1);
                 this.lastAttacker = 'computer';
                 this.currentTurn = 'player';
                 return true;
@@ -369,7 +366,6 @@
             }
             
             updateUI() {
-                // Карты игрока
                 this.playerCardsContainer.innerHTML = '';
                 this.game.playerCards.forEach((card, index) => {
                     const cardElement = this.createCardElement(card, index, true);
@@ -387,7 +383,6 @@
                     this.playerCardsContainer.appendChild(cardElement);
                 });
                 
-                // Карты компьютера
                 this.computerCardsContainer.innerHTML = '';
                 this.game.computerCards.forEach((card, index) => {
                     const cardElement = document.createElement('div');
@@ -396,7 +391,6 @@
                     this.computerCardsContainer.appendChild(cardElement);
                 });
                 
-                // Карты на столе (атака)
                 this.attackCardsContainer.innerHTML = '';
                 this.game.attackCards.forEach((card, index) => {
                     if (index >= this.game.defendCards.length) {
@@ -405,7 +399,6 @@
                     }
                 });
                 
-                // Отбитые карты
                 this.defendCardsContainer.innerHTML = '';
                 this.game.defendCards.forEach(pair => {
                     const attackCard = this.createCardElement(pair.attack, -1, false);
@@ -420,29 +413,24 @@
                     this.defendCardsContainer.appendChild(pairContainer);
                 });
                 
-                // Если компьютер только что положил карту для защиты - показываем ее
                 if (this.game.computerDefendCard) {
                     const defendCardElement = this.createCardElement(this.game.computerDefendCard, -1, false);
                     defendCardElement.classList.add('computer-card');
                     this.defendCardsContainer.appendChild(defendCardElement);
                 }
                 
-                // Козырь
                 this.trumpCardElement.textContent = this.getCardSymbol(this.game.trumpCard);
                 this.trumpCardElement.className = 'card';
                 if (this.game.trumpCard.suit === this.game.trump) {
                     this.trumpCardElement.classList.add('trump');
                 }
                 
-                // Счетчики
                 this.deckCountElement.textContent = this.game.deck.length;
                 this.playerCardsCount.textContent = this.game.playerCards.length;
                 this.computerCardsCount.textContent = this.game.computerCards.length;
                 
-                // Чей ход
                 this.currentTurnElement.textContent = this.game.currentTurn === 'player' ? 'Ваш' : 'Компьютера';
                 
-                // Кнопки
                 this.takeCardsButton.disabled = 
                     this.game.currentTurn !== 'player' || 
                     this.game.attackCards.length === 0;
@@ -452,7 +440,6 @@
                     this.game.attackCards.length === 0 ||
                     this.game.defendCards.length < this.game.attackCards.length;
                 
-                // Сообщения
                 if (this.game.currentTurn === 'player') {
                     if (this.game.attackCards.length > 0 && 
                         this.game.defendCards.length < this.game.attackCards.length) {
@@ -538,7 +525,6 @@
                 if (this.game.currentTurn === 'player') {
                     if (this.game.attackCards.length > 0 && 
                         this.game.defendCards.length < this.game.attackCards.length) {
-                        // Режим защиты
                         const success = this.game.playerDefend(index);
                         if (success) {
                             this.updateUI();
@@ -558,7 +544,6 @@
                             }
                         }
                     } else if (this.game.lastAttacker !== 'player') {
-                        // Режим атаки (только если последний атакующий не игрок)
                         const success = this.game.playerAttack(index);
                         if (success) {
                             this.updateUI();
@@ -578,54 +563,34 @@
             }
             
             computerTurn() {
-    if (this.game.gameOver) return;
-    if (this.game.currentTurn !== 'computer') {
-        this.updateUI();
-        return;
-    }
-
-    setTimeout(() => {
-        // 1. Проверяем, нужно ли отбиваться
-        if (this.game.attackCards.length > 0 && 
-            this.game.defendCards.length < this.game.attackCards.length) {
-            
-            const success = this.game.computerDefend();
-            this.updateUI();
-            
-            if (!success) {
-                // Не смог отбиться - ход игрока
-                return;
-            }
-            
-            // Если еще нужно отбиваться - продолжаем
-            if (this.game.defendCards.length < this.game.attackCards.length) {
-                this.computerTurn();
-            } else {
-                // Успешно отбились - проверяем, может ли компьютер атаковать
-                if (this.game.currentTurn === 'computer') {
-                    this.computerTurn();
+                if (this.game.gameOver) return;
+                if (this.game.currentTurn !== 'computer') {
+                    this.updateUI();
+                    return;
                 }
+
+                setTimeout(() => {
+                    // 1. Сначала пытаемся отбиться
+                    if (this.game.attackCards.length > 0 && 
+                        this.game.defendCards.length < this.game.attackCards.length) {
+                        
+                        const defended = this.game.computerDefend();
+                        this.updateUI();
+                        
+                        if (defended && this.game.defendCards.length < this.game.attackCards.length) {
+                            // Если еще нужно отбиваться - продолжаем
+                            this.computerTurn();
+                        }
+                        return;
+                    }
+                    
+                    // 2. Если не нужно отбиваться - пытаемся атаковать
+                    if (this.game.lastAttacker !== 'computer') {
+                        const attacked = this.game.computerAttack();
+                        this.updateUI();
+                    }
+                }, 1000);
             }
-            return;
-        }
-        
-        // 2. Если не нужно отбиваться - атакуем
-        if (this.game.lastAttacker !== 'computer' || this.game.attackCards.length === 0) {
-            const success = this.game.computerAttack();
-            this.updateUI();
-            
-            if (!success && this.game.attackCards.length === 0) {
-                // Не смог атаковать - передаем ход
-                this.game.currentTurn = 'player';
-                this.updateUI();
-            }
-        } else {
-            // Уже атаковал - передаем ход
-            this.game.currentTurn = 'player';
-            this.updateUI();
-        }
-    }, 1000);
-}
             
             showGameOver(winner) {
                 alert(winner === 'player' ? 
@@ -640,7 +605,6 @@
             const game = new DurakGame();
             const ui = new DurakUI(game);
             
-            // Первый ход - компьютер атакует
             setTimeout(() => {
                 ui.computerTurn();
             }, 1000);
