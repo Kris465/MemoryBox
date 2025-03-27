@@ -120,7 +120,8 @@ def add_attendance(request):
 
 def attendance_list(request):
     attendances = Attendance.objects.all()
-    return render(request, 'attendance_list.html', {'attendances': attendances})
+    return render(request, 'attendance_list.html',
+                  {'attendances': attendances})
 
 
 def home(request):
@@ -428,7 +429,7 @@ def studentSettings(request):
                                           ['student_user'])
         data = {'student': student_obj}
         if request.method == 'POST':
-            currentPwd = request.POST['current_pwd']
+            # currentPwd = request.POST['current_pwd']
             new_pwd = request.POST['new_pwd']
             student_obj.password = new_pwd
             student_obj.save()
