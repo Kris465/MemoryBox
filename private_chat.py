@@ -1,18 +1,15 @@
-from aiogram import Router, types
+from aiogram import Dispatcher, types, F
 from aiogram.filters import Command
 from loguru import logger
 
 
-private_router = Router()
+def setup_private_handlers(dp: Dispatcher):
+    @dp.message(Command('start'), F.chat.type == "private")
+    async def private_start(message: types.Message):
+        await message.answer("Привет! Это бот для личных сообщений")
+        logger.info(f"ЛС: {message.from_user.id} начал чат")
 
-
-@private_router.message(Command('start'))
-async def private_start(message: types.Message):
-    await message.answer("Привет! Я эхо-бот. Просто напиши мне что-нибудь!")
-    logger.info(f"Пользователь {message.from_user.id} начал чат")
-
-
-@private_router.message()
-async def echo(message: types.Message):
-    await message.answer(f"Вы написали: {message.text}")
-    logger.info(f"Эхо для пользователя {message.from_user.id}: {message.text}")
+    @dp.message(F.chat.type == "private")
+    async def private_echo(message: types.Message):
+        await message.answer(f"Вы написали в ЛС: {message.text}")
+        logger.info(f"ЛС: эхо для {message.from_user.id}")
