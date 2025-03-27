@@ -1,43 +1,52 @@
-import subprocess
+import psutil
 import time
-import os
+import win32gui
+import win32process
+from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 
-def clear_screen():
-    # Очистка экрана в зависимости от операционной системы
-    os.system('cls' if os.name == 'nt' else 'clear')
+set_vol = 10
+# set_vol = int(input("укажите значение того какой должна быть громкость музыки когда открыто приложение с аудио: "))
 
-def get_sound_info():
-    # Запускаем SoundVolumeView и получаем информацию о звуке в формате CSV
-    process = subprocess.Popen(['svcl.exe', '/scomma', 'output.csv'], stdout=subprocess.PIPE)
-    process.wait()  # Ждем завершения процесса
+def get_chrome_url():
+    # Получаем список всех процессов
+    for proc in psutil.process_iter(['pid', 'name']):
+        # Проверяем, является ли процесс Google Chrome
+        if proc.info['name'] == 'chrome.exe':
+            # Получаем дескриптор окна
+            def callback(hwnd, _):
+                if win32gui.IsWindowVisible(hwnd):
+                    _, pid = win32process.GetWindowThreadProcessId(hwnd)
+                    if pid == proc.info['pid']:
+                        title = win32gui.GetWindowText(hwnd)
+                        if title and ' - Google Chrome' in title:
+                            # Убираем часть с " - Google Chrome" для чистого заголовка
+                            clean_title = title.replace(' - Google Chrome', '')
+                            # print(f"Открытый сайт: {clean_title}")
+                            # Проверяем, содержит ли заголовок слово "YouTube"
+                            if "YouTube" in clean_title or active_game == 1:
+                                set_yandex_music_volume(set_vol)
+                            else:
+                                set_yandex_music_volume(100)
 
-    with open('output.csv', 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-        for line in lines[1:]:  # Пропускаем заголовок
-            data = line.strip().split(',')
+            win32gui.EnumWindows(callback, None)
 
-            if len(data) > 1:
-                app_name = data[0]
+def set_yandex_music_volume(volume):
+    """Устанавливает громкость Яндекс Музыка."""
+    sessions = AudioUtilities.GetAllSessions()
+    for session in sessions:
+        if session.Process and session.Process.name() == "Яндекс Музыка.exe":
+            volume_control = session._ctl.QueryInterface(ISimpleAudioVolume)
+            volume_control.SetMasterVolume(volume / 100, None)
+            # print(f"Громкость Яндекс Музыка установлена на {volume}%")
+            return
+    # print("Процесс Яндекс Музыка не найден.")
 
-                # Игнорируем "Яндекс Музыка" и "System Sounds"
-                if "Яндекс Музыка" in app_name or "System Sounds" in app_name:
-                    continue
-
-                # Ищем значение перед dB
-                volume_value = "N/A"  # Значение по умолчанию
-                for i, value in enumerate(data):
-                    if 'dB' in value:
-                        if i > 0:  # Проверяем, что есть предыдущее значение
-                            volume_value = data[i - 1].strip()  # Получаем значение громкости
-                        break  # Выходим из цикла после нахождения dB
-
-                print(f"Приложение: {app_name}, Громкость: {volume_value}")
 
 def main():
+    """Основная логика программы."""
     while True:
-        clear_screen()  # Очистка экрана перед выводом
-        get_sound_info()
-        time.sleep(1)  # Обновление раз в секунду
+        get_chrome_url()
+        time.sleep(0.5)
 
 if __name__ == "__main__":
     main()
