@@ -3,7 +3,7 @@ import os
 from random import choice
 from dotenv import find_dotenv, load_dotenv
 from aiogram import Router, types, Bot
-from aiogram import Command
+from aiogram.filters import Command
 import requests
 from loguru import logger
 from bs4 import BeautifulSoup

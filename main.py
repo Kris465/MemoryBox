@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from loguru import logger
 from aiogram import Bot, Dispatcher
-from aiogram.enums import ParseMode
 
 from channel import channel_router
 from private_chat import private_router
@@ -21,7 +20,7 @@ async def main():
                backtrace=True,
                diagnose=True)
 
-    bot = Bot(token=TOKEN, parse_mode=ParseMode.HTML)
+    bot = Bot(token=TOKEN)
     dp = Dispatcher()
 
     dp.include_router(private_router)
