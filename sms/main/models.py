@@ -64,11 +64,24 @@ class Student(models.Model):
 
 
 class Course(models.Model):
+    COURSE_TYPES = [
+        ('lecture', 'Лекция'),
+        ('seminar', 'Семинар'),
+        ('lab', 'Лабораторная работа'),
+    ]
+
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=20, unique=True)
+    description = models.TextField(blank=True)
+    credits = models.PositiveSmallIntegerField(default=3)
+    course_type = models.CharField(
+        max_length=10,
+        choices=COURSE_TYPES,
+        default='lecture'
+    )
 
     def __str__(self):
-        return self.name
+        return f"{self.code}: {self.name}"
 
 
 class Grade(models.Model):
