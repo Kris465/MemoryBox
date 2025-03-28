@@ -33,7 +33,7 @@ def set_yandex_music_volume(volume):
     """Устанавливает громкость Яндекс Музыка."""
     sessions = AudioUtilities.GetAllSessions()
     for session in sessions:
-        if session.Process and session.Process.name() == "Яндекс Музыка.exe":
+        if session.Process and session.Process.name() == "Системные Звуки":
             volume_control = session._ctl.QueryInterface(ISimpleAudioVolume)
             volume_control.SetMasterVolume(volume / 100, None)
             return
@@ -45,7 +45,7 @@ def load_games(filename):
         games = [line.strip() for line in file if line.strip()]
     return games
 
-# def check_game_running(games):
+def check_game_running(games):
     """Проверяет, запущена ли какая-либо игра из списка."""
     blacklist = {
         "locationnotificationwindows.exe",
@@ -62,21 +62,21 @@ def load_games(filename):
                     return True, process.info['name']
     return False, None
 
-# def gmain(active_brow):
+def gmain(active_brow):
     """Основная логика проверки запущенных игр."""
     games_file = 'games.txt'
     games = load_games(games_file)
-
-    while True:
-        game_running, current_game = check_game_running(games)
-        if not game_running or active_brow == 0:
-            active_game = 0
-            # time.sleep(1)
-            set_yandex_music_volume(100)
-        else:
-            set_yandex_music_volume(set_vol)
-            active_game = 1
-        return active_game
+    if active_brow == 1:
+        while True:
+            game_running, current_game = check_game_running(games)
+            if not game_running or active_brow == 0:
+                active_game = 0
+                # time.sleep(1)
+                set_yandex_music_volume(100)
+            else:
+                set_yandex_music_volume(set_vol)
+                active_game = 1
+            return active_game
 
 
 def main():
@@ -85,7 +85,7 @@ def main():
     active_brow = 0
     while True:
         active_brow = get_chrome_url(active_game)
-        # active_game = gmain(active_brow)
+        active_game = gmain(active_brow)
         time.sleep(0.5)
 
 
