@@ -8,7 +8,7 @@ set_vol = 10  # Уровень громкости для Яндекс Музык
 
 def get_chrome_url(active_game):
     """Проверяет, открыт ли YouTube в Google Chrome, и регулирует громкость."""
-    active_brow = 0  # Инициализация переменной
+    active_brow = 0
     for proc in psutil.process_iter(['pid', 'name']):
         if proc.info['name'] == 'chrome.exe':
             def callback(hwnd, _):
@@ -45,7 +45,7 @@ def load_games(filename):
         games = [line.strip() for line in file if line.strip()]
     return games
 
-def check_game_running(games):
+# def check_game_running(games):
     """Проверяет, запущена ли какая-либо игра из списка."""
     blacklist = {
         "locationnotificationwindows.exe",
@@ -62,7 +62,7 @@ def check_game_running(games):
                     return True, process.info['name']
     return False, None
 
-def gmain(active_brow):
+# def gmain(active_brow):
     """Основная логика проверки запущенных игр."""
     games_file = 'games.txt'
     games = load_games(games_file)
@@ -81,11 +81,11 @@ def gmain(active_brow):
 
 def main():
     """Основная логика программы."""
-    active_game = 0  # Инициализация переменной
-    active_brow = 0  # Инициализация переменной
+    active_game = 0
+    active_brow = 0
     while True:
-        active_brow = get_chrome_url(active_game)  # Получаем значение active_brow
-        active_game = gmain(active_brow)  # Передаем active_brow в gmain
+        active_brow = get_chrome_url(active_game)
+        # active_game = gmain(active_brow)
         time.sleep(0.5)
 
 
