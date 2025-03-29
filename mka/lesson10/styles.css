@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #282c34;
+}
+
+#gameArea {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    border: 2px solid #fff;
+    overflow: hidden;
+    background-color: #444;
+}
+
+#player {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #00ff00;
+    transform: translateX(-50%);
+}
+
+.obstacle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #ff0000;
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+}
