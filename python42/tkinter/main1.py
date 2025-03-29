@@ -70,7 +70,7 @@ class ClickerGame:
     def play_sound(self):
         try:
             winsound.Beep(1000, 100)  # Частота 1000 Гц, длительность 100 мс
-        except:
+        except Exception as e:
             pass  # Если winsound не работает (не Windows)
 
     def check_achievements(self):
@@ -147,7 +147,8 @@ class ClickerGame:
                 self.save_settings()
                 settings_window.destroy()
             except ValueError:
-                messagebox.showerror("Ошибка", "Сила клика должна быть числом!")
+                messagebox.showerror("Ошибка",
+                                     "Сила клика должна быть числом!")
 
         tk.Button(
             settings_window,
