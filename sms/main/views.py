@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import AboutPage, Item, Grade, Schedule, Attendance, ContactPage, Student, Course, Notice, Teacher
+from .models import (AboutPage, Item, Grade, Schedule, Attendance,
+                     ContactPage, Student, Course, Notice, Teacher)
 from .forms import AttendanceForm, SearchForm, ScheduleForm, GradeForm
 from django.views import View
 
