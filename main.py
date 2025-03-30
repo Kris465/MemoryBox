@@ -33,7 +33,7 @@ def set_yandex_music_volume(volume):
     """Устанавливает громкость Яндекс Музыка."""
     sessions = AudioUtilities.GetAllSessions()
     for session in sessions:
-        if session.Process and session.Process.name() == "Системные Звуки":
+        if session.Process and session.Process.name() == "Яндекс Музыка.exe":
             volume_control = session._ctl.QueryInterface(ISimpleAudioVolume)
             volume_control.SetMasterVolume(volume / 100, None)
             return
@@ -70,9 +70,9 @@ def gmain(active_brow):
         while True:
             game_running, current_game = check_game_running(games)
             if not game_running or active_brow == 0:
-                active_game = 0
-                # time.sleep(1)
-                set_yandex_music_volume(100)
+                # active_game = 0
+                time.sleep(1)
+                # set_yandex_music_volume(100)
             else:
                 set_yandex_music_volume(set_vol)
                 active_game = 1
