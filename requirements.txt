@@ -1,0 +1,7 @@
+colorama==0.4.6
+comtypes==1.4.10
+loguru==0.7.3
+psutil==7.0.0
+pycaw==20240210
+pywin32==310
+win32_setctime==1.2.0
