@@ -3,6 +3,7 @@ import time
 import win32gui
 import win32process
 from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
+from loguru import logger
 
 set_vol = 10
 
@@ -35,7 +36,8 @@ def set_yandex_music_volume(volume):
     """Устанавливает громкость Яндекс Музыка."""
     sessions = AudioUtilities.GetAllSessions()
     for session in sessions:
-        if session.Process and session.Process.name() == "Яндекс Музыка.exe":
+        # if session.Process and session.Process.name() == "Яндекс Музыка.exe":
+        if session.Process and session.Process.name() == "YandexMusic.exe":
             volume_control = session._ctl.QueryInterface(ISimpleAudioVolume)
             volume_control.SetMasterVolume(volume / 100, None)
             return
@@ -58,6 +60,7 @@ def check_game_running(games):
         "searchindexer.exe",
         "searchprotocolhost.exe"
     }
+
     for game in games:
         for process in psutil.process_iter(['name']):
             process_name = process.info['name'].lower()
@@ -86,12 +89,21 @@ def gmain(active_brow):
 
 def main():
     """Основная логика программы."""
+    logger.add("file.log",
+               format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
+               rotation="3 days",
+               backtrace=True,
+               diagnose=True)
+
     active_game = 0
     active_brow = 0
     while True:
-        active_brow = get_chrome_url(active_game)
-        active_game = gmain(active_brow)
-        time.sleep(0.5)
+        try:
+            active_brow = get_chrome_url(active_game)
+            active_game = gmain(active_brow)
+            time.sleep(0.5)
+        except Exception as e:
+            logger.warning(f"Вкладка Ютуба закрыта. Ошибка библиотеки: {e}")
 
 
 if __name__ == "__main__":
