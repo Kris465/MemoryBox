@@ -4,7 +4,8 @@ import win32gui
 import win32process
 from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 
-set_vol = 10  # Уровень громкости для Яндекс Музыка
+set_vol = 10
+
 
 def get_chrome_url(active_game):
     """Проверяет, открыт ли YouTube в Google Chrome, и регулирует громкость."""
@@ -29,6 +30,7 @@ def get_chrome_url(active_game):
             win32gui.EnumWindows(callback, None)
     return active_brow
 
+
 def set_yandex_music_volume(volume):
     """Устанавливает громкость Яндекс Музыка."""
     sessions = AudioUtilities.GetAllSessions()
@@ -39,11 +41,13 @@ def set_yandex_music_volume(volume):
             return
     print("Процесс Яндекс Музыка не найден.")
 
+
 def load_games(filename):
     """Загружает список игр из файла."""
     with open(filename, 'r') as file:
         games = [line.strip() for line in file if line.strip()]
     return games
+
 
 def check_game_running(games):
     """Проверяет, запущена ли какая-либо игра из списка."""
@@ -61,6 +65,7 @@ def check_game_running(games):
                 if process_name.startswith(game.lower()) or game.lower() in process_name:
                     return True, process.info['name']
     return False, None
+
 
 def gmain(active_brow):
     """Основная логика проверки запущенных игр."""

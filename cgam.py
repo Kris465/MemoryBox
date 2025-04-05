@@ -11,6 +11,7 @@ def load_games(filename):
         games = [line.strip() for line in file if line.strip()]
     return games
 
+
 def check_game_running(games):
     for game in games:
         for process in psutil.process_iter(['name']):
@@ -20,18 +21,22 @@ def check_game_running(games):
                 return True, process.info['name']  # Возвращаем полное имя процесса
     return False, None
 
+
 def notify_user(message):
     root = tk.Tk()
     root.withdraw()  # Скрыть главное окно
     messagebox.showwarning("Уведомление", message)
     root.destroy()
 
+
 def close_game(game_name):
     for process in psutil.process_iter(['name']):
-        if game_name.lower() == process.info['name'].lower():  # Точное совпадение
+        if game_name.lower() == process.info['name'].lower():
             process.kill()
             print(f"Приложение '{game_name}' закрыто.")
             break
+
+
 def set_yandex_music_volume(volume):
     """Устанавливает громкость Яндекс Музыка."""
     sessions = AudioUtilities.GetAllSessions()
@@ -42,6 +47,8 @@ def set_yandex_music_volume(volume):
             # print(f"Громкость Яндекс Музыка установлена на {volume}%")
             return
     # print("Процесс Яндекс Музыка не найден.")
+
+
 def main():
     games_file = 'games.txt'
     games = load_games(games_file)
@@ -64,6 +71,7 @@ def main():
     active_game = 1
     print(f"Игра найдена: '{current_game}'")
     print(f"active_game: {active_game}")
+
 
 if __name__ == "__main__":
     main()
