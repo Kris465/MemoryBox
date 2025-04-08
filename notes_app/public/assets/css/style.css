@@ -1,0 +1,206 @@
+/* Основные стили */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Заметки */
+.note {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.note:hover {
+    transform: translateY(-3px);
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background: #4361ee;
+    color: white;
+}
+
+.btn-danger {
+    background: #f72585;
+    color: white;
+}
+
+/* Формы */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+form {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #121212;
+        color: #eee;
+    }
+    .note {
+        background: #1e1e1e;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+}
+
+/* Общие стили для страницы */
+.page-title {
+    color: #2b2d42;
+    margin-bottom: 1.5rem;
+}
+
+.btn-add-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Сетка заметок */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Карточка заметки */
+.note-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Шапка карточки */
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.note-title {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.note-link {
+    color: #4361ee;
+    text-decoration: none;
+}
+
+.note-link:hover {
+    text-decoration: underline;
+}
+
+/* Контент */
+.note-content-preview {
+    color: #4a4a4a;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.ellipsis {
+    color: #999;
+}
+
+/* Футер карточки */
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.note-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.btn-read-more {
+    color: #4361ee;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.btn-read-more:hover {
+    text-decoration: underline;
+}
+
+/* Иконки действий */
+.note-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0.25rem;
+}
+
+.btn-icon:hover {
+    color: #4361ee;
+}
+
+.btn-delete:hover {
+    color: #f72585 !important;
+}
+
+@media (max-width: 768px) {
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .note-card {
+        padding: 1rem;
+    }
+}
