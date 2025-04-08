@@ -22,22 +22,17 @@
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Регулярные выражения
-        $pattern_digits = '/^d+$/'; // Только цифры
-        $pattern_letters = '/^[a-zA-Z]+$/'; // Только буквы
-        $pattern_uppercase = '/^[A-Z]+$/'; // Только заглавные буквы
-
-        // Получение данных из формы
+        $pattern_digits = '/^d+$/';
+        $pattern_letters = '/^[a-zA-Z]+$/';
+        $pattern_uppercase = '/^[A-Z]+$/';
         $input_digits = $_POST['digits'];
         $input_letters = $_POST['letters'];
         $input_uppercase = $_POST['uppercase'];
 
-        // Функция проверки ввода
         function validateInput($input, $pattern) {
             return preg_match($pattern, $input) === 1;
         }
 
-        // Проверка каждого поля
         if (validateInput($input_digits, $pattern_digits)) {
             echo "<p>Ввод '$input_digits' содержит только цифры.</p>";
         } else {
