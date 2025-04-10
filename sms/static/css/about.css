@@ -1,0 +1,48 @@
+/* Стили для страницы "О нас" */
+.about-section {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+}
+
+.divider {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, #0d6efd, #20c997);
+    border-radius: 2px;
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.team-member img {
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover img {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 2rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}

@@ -1,0 +1,128 @@
+/* Стили для страницы контактов */
+.contacts-section {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+}
+
+.divider {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, #0d6efd, #20c997);
+    border-radius: 2px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.contact-badge {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+.bg-vk { background-color: #4a76a8; }
+.bg-telegram { background-color: #0088cc; }
+.bg-youtube { background-color: #ff0000; }
+.bg-whatsapp { background-color: #25d366; }
+.bg-instagram { 
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+.contact-form .form-control,
+.newsletter-form .form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.newsletter-form .input-group {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-form .btn {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-item {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.contact-item:nth-child(1) { animation-delay: 0.1s; }
+.contact-item:nth-child(2) { animation-delay: 0.3s; }
+.contact-item:nth-child(3) { animation-delay: 0.5s; }
+
+@media (max-width: 768px) {
+    .contacts-section {
+        padding: 2rem 0;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .social-links {
+        gap: 0.5rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}

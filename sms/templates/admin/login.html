@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Вход для администратора | SMS{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_login.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<section class="admin-login-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <!-- Шапка с описанием -->
+                <div class="admin-login-header">
+                    <div class="admin-login-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h1>Административная панель</h1>
+                    <p>Доступ только для авторизованного персонала</p>
+                </div>
+
+                <!-- Форма входа -->
+                <div class="admin-login-card">
+                    <div class="card-body">
+                        <form action="{% url 'admin_login' %}" method="post" class="admin-login-form">
+                            {% csrf_token %}
+                            
+                            {% if messages %}
+                            <div class="alert alert-danger">
+                                {% for message in messages %}
+                                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="form-group">
+                                <label for="email">Электронная почта</label>
+                                <div class="input-group">
+                                    <span class="input-group-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" id="email" name="email" 
+                                           placeholder="admin@example.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Пароль</label>
+                                <div class="input-group">
+                                    <span class="input-group-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" id="password" name="pwd" 
+                                           placeholder="Введите ваш пароль" required>
+                                    <button class="toggle-password" type="button">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Запомнить устройство</label>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-sign-in-alt"></i> Войти
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Предупреждение о безопасности -->
+                <div class="security-warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> Не используйте общедоступные компьютеры для входа</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/admin_login.js' %}"></script>
+{% endblock %}
