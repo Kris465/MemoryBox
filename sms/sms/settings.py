@@ -94,7 +94,9 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Media files
 MEDIA_URL = '/media/'
@@ -102,6 +104,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Security
 SESSION_COOKIE_SECURE = False
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies' 
 CSRF_COOKIE_SECURE = False
 SECURE_BROWSER_XSS_FILTER = True
 

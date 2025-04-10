@@ -12,7 +12,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
-                <!-- Шапка с описанием -->
                 <div class="admin-login-header">
                     <div class="admin-login-icon">
                         <i class="fas fa-shield-alt"></i>
@@ -20,8 +19,6 @@
                     <h1>Административная панель</h1>
                     <p>Доступ только для авторизованного персонала</p>
                 </div>
-
-                <!-- Форма входа -->
                 <div class="admin-login-card">
                     <div class="card-body">
                         <form action="{% url 'admin_login' %}" method="post" class="admin-login-form">
@@ -71,8 +68,6 @@
                         </form>
                     </div>
                 </div>
-                
-                <!-- Предупреждение о безопасности -->
                 <div class="security-warning">
                     <p><i class="fas fa-exclamation-triangle"></i> Не используйте общедоступные компьютеры для входа</p>
                 </div>

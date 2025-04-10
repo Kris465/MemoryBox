@@ -19,6 +19,7 @@ class TeacherAuthMixin:
 
 class AdminAuthMixin:
     def dispatch(self, request, *args, **kwargs):
-        if not request.session.get('admin_user'):
+        if not request.session.get('admin_authenticated'):
+            messages.error(request, 'Пожалуйста, войдите как администратор')
             return redirect('admin_login')
         return super().dispatch(request, *args, **kwargs)

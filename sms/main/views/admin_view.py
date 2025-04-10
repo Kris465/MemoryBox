@@ -11,24 +11,30 @@ from main.models import (
 
 
 class AdminLoginView(View):
-    """Обработка входа администратора"""
     template_name = 'admin/admin_login.html'
 
     def get(self, request):
-        if request.user.is_authenticated and request.user.role == 'admin':
+        if request.session.get('admin_authenticated'):
+            print("Already authenticated, redirecting...")
             return redirect('admin_dashboard')
         return render(request, self.template_name)
 
     def post(self, request):
         email = request.POST.get('email')
-        password = request.POST.get('password')
+        password = request.POST.get('pwd')
 
-        # Временная проверка (замените на реальную аутентификацию)
+        print(f"Auth attempt - Email: {email}, Password: {password}")
+
         if email == "admin@gmail.com" and password == "admin@123":
             request.session['admin_authenticated'] = True
+            request.session['admin_email'] = email
+            request.session.save()
+
+            print("Session after auth:", request.session.items())
+            print("Redirecting to dashboard...")
             return redirect('admin_dashboard')
 
-        messages.error(request, 'Неверные учетные данные')
+        messages.error(request, 'Неверный email или пароль')
         return render(request, self.template_name)
 
 
