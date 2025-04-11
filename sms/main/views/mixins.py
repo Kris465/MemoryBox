@@ -1,28 +1,30 @@
-from django.shortcuts import redirect
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 
-class StudentAuthMixin:
-    def dispatch(self, request, *args, **kwargs):
-        if not request.session.get('student_user'):
-            messages.error(request, 'Войдите в систему как студент')
-            return redirect('student_login')
-        return super().dispatch(request, *args, **kwargs)
+class StudentRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.role == 'student'
+
+    def handle_no_permission(self):
+        messages.error(self.request, 'Требуется авторизация студента')
+        return redirect('student_login')
 
 
-class TeacherAuthMixin:
-    def dispatch(self, request, *args, **kwargs):
-        if not request.session.get('teacher_user'):
-            return redirect('teacher_login')
-        return super().dispatch(request, *args, **kwargs)
+class TeacherRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.role == 'teacher'
+
+    def handle_no_permission(self):
+        messages.error(self.request, 'Требуется авторизация преподавателя')
+        return redirect('teacher_login')
 
 
-class AdminAuthMixin:
-    def dispatch(self, request, *args, **kwargs):
-        if not request.session.get('admin_authenticated'):
-            messages.error(request, 'Пожалуйста, войдите как администратор')
-            login_url = reverse('admin_login') + f"?next={request.path}"
-            return HttpResponseRedirect(login_url)
-        return super().dispatch(request, *args, **kwargs)
+class AdminRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.error(self.request, 'Требуются права администратора')
+        return redirect('admin:login')

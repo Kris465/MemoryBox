@@ -3,7 +3,15 @@ from django.contrib.auth.admin import UserAdmin
 from .models import (User, Grade, Course, Student, Teacher, Schedule,
                      Attendance, AboutPage, ContactPage)
 
-admin.site.register(User, UserAdmin)
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'role', 'is_staff')
+    fieldsets = UserAdmin.fieldsets + (
+        ('Custom Fields', {'fields': ('role', 'phone')}),
+    )
+
+
 admin.site.register(AboutPage)
 admin.site.register(ContactPage)
 admin.site.register(Student)

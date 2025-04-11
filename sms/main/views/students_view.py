@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import update_session_auth_hash
 from django.utils import timezone
-from .mixins import StudentAuthMixin
-from main.models import (
-    Student, Schedule, Grade,
-    Attendance, Course
-)
+from django.db import models
+from .mixins import StudentRequiredMixin
+from ..models import Student, Schedule, Grade, Attendance, Course
 
 
 class StudentLoginView(View):
@@ -40,7 +40,7 @@ class StudentLogoutView(View):
         return redirect('student_login')
 
 
-class StudentDashboardView(StudentAuthMixin, View):
+class StudentDashboardView(StudentRequiredMixin, View):
     """Главная страница студента"""
     template_name = 'student/dashboard.html'
 
@@ -48,33 +48,30 @@ class StudentDashboardView(StudentAuthMixin, View):
         student = request.user.student_profile
         today = timezone.now().date()
         
-        # Ближайшие занятия
         upcoming_schedules = Schedule.objects.filter(
-            course__name=student.course,
+            course=student.course,
             start_time__date__gte=today
         ).order_by('start_time')[:3]
         
-        # Последние оценки
         recent_grades = Grade.objects.filter(
             student=student
         ).select_related('course').order_by('-date')[:5]
         
-        context = {
+        return render(request, self.template_name, {
             'student': student,
             'upcoming_schedules': upcoming_schedules,
-            'recent_grades': recent_grades,
-        }
-        return render(request, self.template_name, context)
+            'recent_grades': recent_grades
+        })
 
 
-class StudentScheduleView(StudentAuthMixin, View):
+class StudentScheduleView(StudentRequiredMixin, View):
     """Просмотр расписания"""
     template_name = 'student/schedule.html'
 
     def get(self, request):
         student = request.user.student_profile
         schedules = Schedule.objects.filter(
-            course__name=student.course
+            course=student.course
         ).order_by('start_time')
         
         return render(request, self.template_name, {
@@ -83,7 +80,7 @@ class StudentScheduleView(StudentAuthMixin, View):
         })
 
 
-class StudentGradesView(StudentAuthMixin, View):
+class StudentGradesView(StudentRequiredMixin, View):
     """Просмотр оценок"""
     template_name = 'student/grades.html'
 
@@ -93,7 +90,6 @@ class StudentGradesView(StudentAuthMixin, View):
             student=student
         ).select_related('course').order_by('-date')
         
-        # Расчет среднего балла
         avg_grade = grades.aggregate(models.Avg('numeric_score'))['numeric_score__avg']
         
         return render(request, self.template_name, {
@@ -103,7 +99,7 @@ class StudentGradesView(StudentAuthMixin, View):
         })
 
 
-class StudentAttendanceView(StudentAuthMixin, View):
+class StudentAttendanceView(StudentRequiredMixin, View):
     """Просмотр посещаемости"""
     template_name = 'student/attendance.html'
 
@@ -113,7 +109,6 @@ class StudentAttendanceView(StudentAuthMixin, View):
             student=student
         ).select_related('schedule', 'schedule__course')
         
-        # Статистика посещаемости
         total_classes = attendance.count()
         present_count = attendance.filter(status='present').count()
         attendance_rate = (present_count / total_classes * 100) if total_classes > 0 else 0
@@ -127,7 +122,7 @@ class StudentAttendanceView(StudentAuthMixin, View):
         })
 
 
-class StudentSettingsView(StudentAuthMixin, View):
+class StudentSettingsView(StudentRequiredMixin, View):
     """Настройки профиля"""
     template_name = 'student/settings.html'
 
@@ -140,15 +135,14 @@ class StudentSettingsView(StudentAuthMixin, View):
         user = request.user
         
         try:
-            # Обновление пароля
             new_password = request.POST.get('new_password')
             if new_password:
                 user.set_password(new_password)
                 user.save()
+                update_session_auth_hash(request, user)
                 messages.success(request, 'Пароль успешно изменен')
             
-            # Обновление контактных данных
-            student.contact_num = request.POST.get('contact_num')
+            student.contact_num = request.POST.get('contact_num', student.contact_num)
             student.save()
             
             messages.success(request, 'Настройки сохранены')
@@ -156,4 +150,4 @@ class StudentSettingsView(StudentAuthMixin, View):
             
         except Exception as e:
             messages.error(request, f'Ошибка: {str(e)}')
-            return self.get(request)
+            return render(request, self.template_name, {'student': student})

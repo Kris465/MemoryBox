@@ -2,16 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-# from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
-from .mixins import TeacherAuthMixin
-from main.models import (
-    Schedule, Grade, Attendance,
-    Student, Course
-)
+from .mixins import TeacherRequiredMixin
+from ..models import Schedule, Grade, Attendance, Student, Course
 
 
 class TeacherLoginView(View):
+    """Аутентификация преподавателя"""
     template_name = 'teacher/login.html'
 
     def get(self, request):
@@ -32,7 +30,7 @@ class TeacherLoginView(View):
         return render(request, self.template_name)
 
 
-class TeacherDashboardView(TeacherAuthMixin, View):
+class TeacherDashboardView(LoginRequiredMixin, TeacherRequiredMixin, View):
     """Дашборд преподавателя"""
     template_name = 'teacher/dashboard.html'
 
@@ -57,7 +55,7 @@ class TeacherDashboardView(TeacherAuthMixin, View):
         return render(request, self.template_name, context)
 
 
-class TeacherScheduleView(TeacherAuthMixin, View):
+class TeacherScheduleView(LoginRequiredMixin, TeacherRequiredMixin, View):
     """Просмотр расписания преподавателя"""
     template_name = 'teacher/schedule.html'
 
@@ -72,13 +70,13 @@ class TeacherScheduleView(TeacherAuthMixin, View):
         })
 
 
-class GradeBookView(TeacherAuthMixin, View):
+class GradeBookView(LoginRequiredMixin, TeacherRequiredMixin, View):
     """Журнал оценок по курсу"""
     template_name = 'teacher/gradebook.html'
 
     def get(self, request, course_id):
         course = get_object_or_404(Course, id=course_id, teacher=request.user.teacher_profile)
-        students = Student.objects.filter(course=course.name)
+        students = Student.objects.filter(course=course)
         grades = Grade.objects.filter(course=course).select_related('student')
 
         return render(request, self.template_name, {
@@ -88,7 +86,7 @@ class GradeBookView(TeacherAuthMixin, View):
         })
 
 
-class AddGradeView(TeacherAuthMixin, View):
+class AddGradeView(LoginRequiredMixin, TeacherRequiredMixin, View):
     """Добавление оценки"""
     template_name = 'teacher/add_grade.html'
 
@@ -96,7 +94,7 @@ class AddGradeView(TeacherAuthMixin, View):
         teacher = request.user.teacher_profile
         courses = Course.objects.filter(teacher=teacher)
         students = Student.objects.filter(
-            course__in=courses.values_list('name', flat=True)
+            course__in=courses.values_list('id', flat=True)
         )
 
         return render(request, self.template_name, {
@@ -114,8 +112,7 @@ class AddGradeView(TeacherAuthMixin, View):
                 course=course,
                 teacher=request.user.teacher_profile,
                 date=request.POST.get('date'),
-                numeric_score=request.POST.get('score'),
-                letter_grade=''
+                numeric_score=request.POST.get('score')
             )
 
             messages.success(request, 'Оценка успешно добавлена')
@@ -126,13 +123,13 @@ class AddGradeView(TeacherAuthMixin, View):
             return self.get(request)
 
 
-class AttendanceView(TeacherAuthMixin, View):
+class AttendanceView(LoginRequiredMixin, TeacherRequiredMixin, View):
     """Управление посещаемостью"""
     template_name = 'teacher/attendance.html'
 
     def get(self, request, schedule_id):
         schedule = get_object_or_404(Schedule, id=schedule_id)
-        students = Student.objects.filter(course=schedule.course.name)
+        students = Student.objects.filter(course=schedule.course)
         attendance_records = Attendance.objects.filter(
             schedule=schedule
         ).select_related('student')
@@ -150,7 +147,7 @@ class AttendanceView(TeacherAuthMixin, View):
 
     def post(self, request, schedule_id):
         schedule = get_object_or_404(Schedule, id=schedule_id)
-        students = Student.objects.filter(course=schedule.course.name)
+        students = Student.objects.filter(course=schedule.course)
 
         try:
             for student in students:
@@ -159,8 +156,10 @@ class AttendanceView(TeacherAuthMixin, View):
                 Attendance.objects.update_or_create(
                     student=student,
                     schedule=schedule,
-                    date=schedule.start_time.date(),
-                    defaults={'status': status}
+                    defaults={
+                        'date': schedule.start_time.date(),
+                        'status': status
+                    }
                 )
 
             messages.success(request, 'Посещаемость сохранена')

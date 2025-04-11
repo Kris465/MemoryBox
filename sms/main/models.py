@@ -25,13 +25,26 @@ class User(AbstractUser):
         validators=[RegexValidator(r'^\+?1?\d{9,15}$')]
     )
 
+    def save(self, *args, **kwargs):
+        if self.role == 'admin':
+            self.is_staff = True
+            self.is_superuser = True
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.get_full_name()} ({self.role})"
+
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
-                              related_name='student_profile')
-    father_name = models.CharField(max_length=100, blank=True, verbose_name='Отчество')
-    mother_name = models.CharField(max_length=100, blank=True, verbose_name='Мать')
-    date_of_birth = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
+                                related_name='student_profile',
+                                verbose_name='Пользователь')
+    father_name = models.CharField(max_length=100, blank=True,
+                                   verbose_name='Отчество')
+    mother_name = models.CharField(max_length=100, blank=True,
+                                   verbose_name='Мать')
+    date_of_birth = models.DateField(null=True, blank=True,
+                                     verbose_name='Дата рождения')
     course = models.ForeignKey('Course', on_delete=models.SET_NULL,
                                null=True, blank=True, verbose_name='Курс')
     stu_id = models.CharField(
@@ -42,11 +55,25 @@ class Student(models.Model):
         validators=[MinLengthValidator(5)]
     )
 
+    class Meta:
+        verbose_name = 'Студент'
+        verbose_name_plural = 'Студенты'
+        ordering = ['user__last_name', 'user__first_name']
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} ({self.stu_id or 'нет ID'})"
+
 
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                related_name='teacher_profile')
-    qualification = models.TextField(blank=True)
+                                related_name='teacher_profile',
+                                verbose_name='Пользователь')
+    qualification = models.TextField(blank=True, verbose_name='Квалификация')
+
+    class Meta:
+        verbose_name = 'Преподаватель'
+        verbose_name_plural = 'Преподаватели'
+        ordering = ['user__last_name', 'user__first_name']
 
     def __str__(self):
         return self.user.get_full_name()
@@ -59,17 +86,26 @@ class Course(models.Model):
         ('lab', 'Лабораторная работа'),
     ]
 
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=20, unique=True)
-    description = models.TextField(blank=True)
-    credits = models.PositiveSmallIntegerField(default=3)
+    name = models.CharField(max_length=100, verbose_name='Название')
+    code = models.CharField(max_length=20, unique=True,
+                            verbose_name='Код курса')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    credits = models.PositiveSmallIntegerField(default=3,
+                                               verbose_name='Кредиты')
     course_type = models.CharField(
         max_length=10,
         choices=COURSE_TYPES,
-        default='lecture'
+        default='lecture',
+        verbose_name='Тип курса'
     )
     teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL,
-                                null=True, blank=True)
+                                null=True, blank=True,
+                                verbose_name='Преподаватель')
+
+    class Meta:
+        verbose_name = 'Курс'
+        verbose_name_plural = 'Курсы'
+        ordering = ['code']
 
     def __str__(self):
         return f"{self.code}: {self.name}"
@@ -84,23 +120,30 @@ class Grade(models.Model):
         ('F', 'Не сдано (0-59)'),
     ]
 
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    date = models.DateField()
+    student = models.ForeignKey(Student, on_delete=models.CASCADE,
+                                verbose_name='Студент')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,
+                               verbose_name='Курс')
+    date = models.DateField(verbose_name='Дата оценки')
     numeric_score = models.DecimalField(
         max_digits=5,
         decimal_places=2,
-        validators=[MinValueValidator(0), MaxValueValidator(100)]
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        verbose_name='Числовая оценка'
     )
     letter_grade = models.CharField(
         max_length=1,
         choices=GRADE_CHOICES,
-        blank=True
+        blank=True,
+        verbose_name='Буквенная оценка'
     )
     teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL,
-                                null=True, blank=True)
+                                null=True, blank=True,
+                                verbose_name='Преподаватель')
 
     class Meta:
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
         ordering = ['-date']
         unique_together = ['student', 'course', 'date']
 
@@ -123,19 +166,27 @@ class Grade(models.Model):
 
 
 class AboutPage(models.Model):
-    about = models.TextField()
+    about = models.TextField(verbose_name='Текст страницы')
+
+    class Meta:
+        verbose_name = 'Страница "О нас"'
+        verbose_name_plural = 'Страницы "О нас"'
 
     def __str__(self):
-        return "About Page Content"
+        return "Содержание страницы 'О нас'"
 
 
 class ContactPage(models.Model):
-    address = models.TextField()
-    contact_num = models.CharField(max_length=20)
-    email = models.EmailField()
+    address = models.TextField(verbose_name='Адрес')
+    contact_num = models.CharField(max_length=20, verbose_name='Телефон')
+    email = models.EmailField(verbose_name='Email')
+
+    class Meta:
+        verbose_name = 'Контактная информация'
+        verbose_name_plural = 'Контактная информация'
 
     def __str__(self):
-        return "Contact Information"
+        return "Контактная информация"
 
 
 class Schedule(models.Model):
@@ -143,7 +194,13 @@ class Schedule(models.Model):
     start_time = models.DateTimeField(verbose_name='Начало')
     end_time = models.DateTimeField(verbose_name='Окончание')
     teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL,
-                                null=True, blank=True, verbose_name='Преподаватель')
+                                null=True, blank=True,
+                                verbose_name='Преподаватель')
+
+    class Meta:
+        verbose_name = 'Расписание'
+        verbose_name_plural = 'Расписания'
+        ordering = ['start_time']
 
     def clean(self):
         if self.end_time <= self.start_time:
@@ -181,10 +238,14 @@ class Attendance(models.Model):
     notes = models.TextField(blank=True, verbose_name='Примечания')
 
     class Meta:
-        unique_together = ['student', 'schedule']
         verbose_name = 'Посещаемость'
         verbose_name_plural = 'Посещаемость'
+        unique_together = ['student', 'schedule']
+        ordering = ['schedule__start_time']
 
     @property
     def date(self):
         return self.schedule.start_time.date()
+
+    def __str__(self):
+        return f"{self.student} - {self.schedule}: {self.get_status_display()}"

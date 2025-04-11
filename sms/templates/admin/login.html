@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Вход для администратора | SMS{% endblock %}
+{% block title %}Вход в админку | SMS{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/admin_login.css' %}?v=1.0">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="admin-login-card">
                     <div class="card-body">
-                        <form action="{% url 'admin_login' %}" method="post" class="admin-login-form">
+                        <form action="{% url 'admin:login' %}" method="post" class="admin-login-form">
                             {% csrf_token %}
                             
                             {% if messages %}
@@ -33,13 +33,13 @@
                             {% endif %}
                             
                             <div class="form-group">
-                                <label for="email">Электронная почта</label>
+                                <label for="username">Имя пользователя</label>
                                 <div class="input-group">
                                     <span class="input-group-icon">
-                                        <i class="fas fa-envelope"></i>
+                                        <i class="fas fa-user"></i>
                                     </span>
-                                    <input type="email" id="email" name="email" 
-                                           placeholder="admin@example.com" required>
+                                    <input type="text" id="username" name="username" 
+                                           placeholder="Введите имя пользователя" required>
                                 </div>
                             </div>
                             
@@ -57,10 +57,7 @@
                                 </div>
                             </div>
                             
-                            <div class="form-check">
-                                <input type="checkbox" id="rememberMe">
-                                <label for="rememberMe">Запомнить устройство</label>
-                            </div>
+                            <input type="hidden" name="next" value="{{ next }}">
                             
                             <button type="submit" class="btn-submit">
                                 <i class="fas fa-sign-in-alt"></i> Войти
