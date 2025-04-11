@@ -1,0 +1,238 @@
+/* admin_dashboard.css */
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--space-lg) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.welcome {
+    font-weight: 500;
+}
+
+.logout-btn {
+    color: white;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-container {
+    display: flex;
+    flex: 1;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg) 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    color: var(--dark-color);
+}
+
+.sidebar-nav li a:hover {
+    background-color: var(--light-color);
+}
+
+.sidebar-nav li.active a {
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(111, 66, 193, 0.05);
+}
+
+.dashboard-content {
+    flex: 1;
+    padding: var(--space-lg);
+    background-color: var(--light-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    transition: transform var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-icon.students {
+    background: linear-gradient(45deg, #4e73df, #224abe);
+}
+
+.stat-icon.teachers {
+    background: linear-gradient(45deg, #1cc88a, #13855c);
+}
+
+.stat-icon.courses {
+    background: linear-gradient(45deg, #36b9cc, #258391);
+}
+
+.stat-icon.attendance {
+    background: linear-gradient(45deg, #f6c23e, #dda20a);
+}
+
+.stat-info h3 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1rem;
+    color: var(--dark-color);
+}
+
+.stat-info .count {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.stat-link {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--primary-color);
+}
+
+.activity-section {
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.activity-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
+    font-size: 1.25rem;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.activity-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.activity-details p {
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.activity-time {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.no-activity {
+    color: #6c757d;
+    text-align: center;
+    padding: var(--space-lg) 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    
+    .admin-sidebar {
+        width: 100%;
+        padding: var(--space-md) 0;
+    }
+    
+    .sidebar-nav ul {
+        display: flex;
+        overflow-x: auto;
+        padding: 0 var(--space-md);
+    }
+    
+    .sidebar-nav li a {
+        white-space: nowrap;
+    }
+    
+    .sidebar-nav li.active a {
+        border-left: none;
+        border-bottom: 3px solid var(--primary-color);
+    }
+}

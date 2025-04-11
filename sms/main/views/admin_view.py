@@ -7,7 +7,8 @@ from main.models import (
     Student, Teacher, Course,
     AboutPage, ContactPage, User
 )
-# from django.core.exceptions import ValidationError
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 class AdminLoginView(View):
@@ -15,28 +16,39 @@ class AdminLoginView(View):
 
     def get(self, request):
         if request.session.get('admin_authenticated'):
-            print("Already authenticated, redirecting...")
-            return redirect('admin_dashboard')
+            print("GET: Already authenticated, session:", dict(request.session))
+            return HttpResponseRedirect(reverse('admin_dashboard'))
         return render(request, self.template_name)
 
     def post(self, request):
         email = request.POST.get('email')
         password = request.POST.get('pwd')
 
-        print(f"Auth attempt - Email: {email}, Password: {password}")
+        print(f"POST: Auth attempt - Email: {email}, Password: {password}")
+        print("Session before auth:", dict(request.session))
 
         if email == "admin@gmail.com" and password == "admin@123":
+            request.session.flush()
+            request.session.create()
+
             request.session['admin_authenticated'] = True
             request.session['admin_email'] = email
             request.session.save()
 
-            print("Session after auth:", request.session.items())
-            print("Redirecting to dashboard...")
-            return redirect('admin_dashboard')
+            print("Session after auth:", dict(request.session))
+            print("Session key:", request.session.session_key)
+
+            from django.contrib.sessions.models import Session
+            session_exists = Session.objects.filter(
+                session_key=request.session.session_key).exists()
+            print("Session exists in DB:", session_exists)
+
+            response = HttpResponseRedirect(reverse('admin_dashboard'))
+            print("Response headers:", response.headers)
+            return response
 
         messages.error(request, 'Неверный email или пароль')
         return render(request, self.template_name)
-
 
 class AdminLogoutView(View):
     """Выход из системы администратора"""
@@ -46,17 +58,19 @@ class AdminLogoutView(View):
         return redirect('admin_login')
 
 
-class AdminDashboardView(AdminAuthMixin, View):
-    """Панель управления администратора"""
-    template_name = 'admin/admin_panel.html'
-
+class AdminDashboardView(View):
     def get(self, request):
+        print("DASHBOARD: Session data:", dict(request.session))
+        if not request.session.get('admin_authenticated'):
+            print("DASHBOARD: Not authenticated!")
+            return HttpResponseRedirect(reverse('admin_login'))
+
         context = {
             'students': Student.objects.all().order_by('-id')[:10],
             'teachers': Teacher.objects.all().order_by('-id')[:5],
             'courses': Course.objects.all().count()
         }
-        return render(request, self.template_name, context)
+        return render(request, 'admin/admin_panel.html', context)
 
 
 class StudentManagementView(AdminAuthMixin, View):

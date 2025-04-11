@@ -1,5 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 class StudentAuthMixin:
@@ -21,5 +23,6 @@ class AdminAuthMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.session.get('admin_authenticated'):
             messages.error(request, 'Пожалуйста, войдите как администратор')
-            return redirect('admin_login')
+            login_url = reverse('admin_login') + f"?next={request.path}"
+            return HttpResponseRedirect(login_url)
         return super().dispatch(request, *args, **kwargs)
