@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import (Grade, Course, Student, Teacher,
-                     Schedule, Attendance, AboutPage, ContactPage)
+from django.contrib.auth.admin import UserAdmin
+from .models import (User, Grade, Course, Student, Teacher, Schedule,
+                     Attendance, AboutPage, ContactPage)
 
+admin.site.register(User, UserAdmin)
 admin.site.register(AboutPage)
 admin.site.register(ContactPage)
 admin.site.register(Student)

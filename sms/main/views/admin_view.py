@@ -2,53 +2,36 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate, login
 from .mixins import AdminAuthMixin
 from main.models import (
     Student, Teacher, Course,
     AboutPage, ContactPage, User
 )
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class AdminLoginView(View):
     template_name = 'admin/admin_login.html'
 
     def get(self, request):
-        if request.session.get('admin_authenticated'):
-            print("GET: Already authenticated, session:", dict(request.session))
-            return HttpResponseRedirect(reverse('admin_dashboard'))
+        if request.user.is_authenticated and request.user.is_staff:
+            return redirect('admin_dashboard')
         return render(request, self.template_name)
 
     def post(self, request):
         email = request.POST.get('email')
-        password = request.POST.get('pwd')
+        password = request.POST.get('password')
 
-        print(f"POST: Auth attempt - Email: {email}, Password: {password}")
-        print("Session before auth:", dict(request.session))
+        user = authenticate(request, username=email, password=password)
 
-        if email == "admin@gmail.com" and password == "admin@123":
-            request.session.flush()
-            request.session.create()
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin_dashboard')
 
-            request.session['admin_authenticated'] = True
-            request.session['admin_email'] = email
-            request.session.save()
-
-            print("Session after auth:", dict(request.session))
-            print("Session key:", request.session.session_key)
-
-            from django.contrib.sessions.models import Session
-            session_exists = Session.objects.filter(
-                session_key=request.session.session_key).exists()
-            print("Session exists in DB:", session_exists)
-
-            response = HttpResponseRedirect(reverse('admin_dashboard'))
-            print("Response headers:", response.headers)
-            return response
-
-        messages.error(request, 'Неверный email или пароль')
+        messages.error(request, 'Неверные учетные данные')
         return render(request, self.template_name)
+
 
 class AdminLogoutView(View):
     """Выход из системы администратора"""
@@ -58,19 +41,20 @@ class AdminLogoutView(View):
         return redirect('admin_login')
 
 
-class AdminDashboardView(View):
-    def get(self, request):
-        print("DASHBOARD: Session data:", dict(request.session))
-        if not request.session.get('admin_authenticated'):
-            print("DASHBOARD: Not authenticated!")
-            return HttpResponseRedirect(reverse('admin_login'))
+class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
+    template_name = 'admin/admin_panel.html'
+    login_url = '/admin/login/'
 
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get(self, request):
         context = {
-            'students': Student.objects.all().order_by('-id')[:10],
-            'teachers': Teacher.objects.all().order_by('-id')[:5],
-            'courses': Course.objects.all().count()
+            'students_count': Student.objects.count(),
+            'teachers_count': Teacher.objects.count(),
+            'courses_count': Course.objects.count()
         }
-        return render(request, 'admin/admin_panel.html', context)
+        return render(request, self.template_name, context)
 
 
 class StudentManagementView(AdminAuthMixin, View):
@@ -91,7 +75,6 @@ class StudentCreateView(AdminAuthMixin, View):
 
     def post(self, request):
         try:
-            # Создание пользователя
             user = User.objects.create(
                 username=request.POST.get('stu_user_name'),
                 email=request.POST.get('stu_email'),
@@ -99,8 +82,6 @@ class StudentCreateView(AdminAuthMixin, View):
                 role='student',
                 phone=request.POST.get('contact_number')
             )
-
-            # Создание профиля студента
             Student.objects.create(
                 user=user,
                 father_name=request.POST.get('f_name'),
@@ -123,7 +104,6 @@ class StudentUpdateView(AdminAuthMixin, View):
     def post(self, request, id):
         student = get_object_or_404(Student, id=id)
         try:
-            # Обновление данных
             student.user.email = request.POST.get('stu_email')
             student.user.phone = request.POST.get('contact_number')
             student.user.save()
@@ -146,7 +126,7 @@ class StudentDeleteView(AdminAuthMixin, View):
     """Удаление студента"""
     def get(self, request, id):
         student = get_object_or_404(Student, id=id)
-        student.user.delete()  # Удаляем связанного пользователя
+        student.user.delete()
         messages.success(request, 'Студент удален')
         return redirect('manage_students')
 

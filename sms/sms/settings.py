@@ -75,12 +75,12 @@ DATABASES = {
 }
 
 # Authentication
-AUTH_USER_MODEL = 'main.User'  # Только если у вас есть кастомная модель!
+AUTH_USER_MODEL = 'main.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/admin/dashboard/'
-LOGOUT_REDIRECT_URL = '/admin/login/'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
