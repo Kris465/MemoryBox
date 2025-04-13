@@ -25,6 +25,11 @@ class User(AbstractUser):
         validators=[RegexValidator(r'^\+?1?\d{9,15}$')]
     )
 
+    is_staff = models.BooleanField(default=False,
+                                   verbose_name='Доступ в админку')
+    is_active = models.BooleanField(default=True, 
+                                    verbose_name='Активный')
+
     def save(self, *args, **kwargs):
         if self.role == 'admin':
             self.is_staff = True
@@ -32,7 +37,12 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.get_full_name()} ({self.role})"
+        return f"{self.username} ({self.get_role_display()})"
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+        ordering = ['last_name', 'first_name']
 
 
 class Student(models.Model):

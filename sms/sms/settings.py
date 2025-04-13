@@ -12,14 +12,12 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
-    # Core Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Local apps
     'main',
 ]
 
@@ -118,3 +116,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = "SMS Administration"
 ADMIN_SITE_TITLE = "SMS Admin Portal"
 ADMIN_INDEX_TITLE = "Site Administration"
+
+LOGIN_URL = 'admin:login'
+LOGIN_REDIRECT_URL = 'admin:index'
