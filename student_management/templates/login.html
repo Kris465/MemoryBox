@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход в систему{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">
+                        {% if request.GET.role == 'teacher' %}
+                            Преподаватель
+                        {% elif request.GET.role == 'student' %}
+                            Студент
+                        {% else %}
+                            Вход в систему
+                        {% endif %}
+                    </h2>
+                    
+                    <!-- Добавлено отображение ошибок -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Неверные логин или пароль
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- Скрытое поле для сохранения роли -->
+                        <input type="hidden" name="role" value="{{ request.GET.role }}">
+                        
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Логин</label>
+                            <input type="text" class="form-control" id="username" name="username" 
+                                   required autofocus>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input type="password" class="form-control" id="password" 
+                                   name="password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">
+                            Войти
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

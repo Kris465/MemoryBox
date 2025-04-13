@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Расписание преподавателя{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <i class="fas fa-calendar-alt me-2"></i>Моё расписание
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Время</th>
+                        <th>Понедельник</th>
+                        <th>Вторник</th>
+                        <th>Среда</th>
+                        <th>Четверг</th>
+                        <th>Пятница</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for time_slot in schedule_data %}
+                    <tr>
+                        <td>{{ time_slot.time }}</td>
+                        {% for day in time_slot.days %}
+                        <td>
+                            {% if day %}
+                                <strong>{{ day.course.name }}</strong><br>
+                                Ауд. {{ day.classroom|default:"-" }}<br>
+                                Группа: {{ day.group }}
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
