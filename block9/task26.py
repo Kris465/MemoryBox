@@ -1,6 +1,3 @@
-from itertools import permutations
-
-
 def find_words(source_word, target_words):
     source_letters = list(set(source_word))
 
@@ -12,7 +9,6 @@ def find_words(source_word, target_words):
             found_words.append(word)
 
     return found_words
-
 
 
 source_word = 'вертикаль'
