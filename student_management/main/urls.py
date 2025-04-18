@@ -1,6 +1,8 @@
 # main/urls.py
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 from . import views
 
 
@@ -29,4 +31,6 @@ urlpatterns = [
     path('student/', views.student_dashboard, name='student_dashboard'),
     path('student/schedule/', views.student_schedule, name='student_schedule'),
     path('student/grades/', views.student_grades, name='student_grades'),
+    path('favicon.ico', RedirectView.as_view
+         (url=staticfiles_storage.url('img/favicon.ico')))
 ]
