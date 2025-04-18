@@ -7,9 +7,11 @@
         body{
             background-color: mediumaquamarine;
         }
+
     </style>
 <div class="home-page">
     <!-- Карусель -->
+     {% if request.path == '/' %}
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -33,7 +35,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
+      {% endif %}
     <!-- Уведомления -->
     <div class="container mt-5">
         <div class="card announcements-card">
