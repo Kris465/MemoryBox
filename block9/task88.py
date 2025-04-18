@@ -3,7 +3,7 @@ def print_between_commas(s):
     if first_comma != -1:
         second_comma = s.find(',', first_comma + 1)
         if second_comma != -1:
-            result = s[first_comma+1 : second_comma].strip()
+            result = s[first_comma +1 : second_comma].strip()
         else:
             result = s[first_comma+1:].strip()
     else:
