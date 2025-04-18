@@ -5,6 +5,7 @@ def remove_odd_o(sentence):
             result.append(char)
     return ''.join(result)
 
+
 sentence = input("Введите предложение: ")
 modified_sentence = remove_odd_o(sentence)
 print("Измененное предложение:", modified_sentence)
