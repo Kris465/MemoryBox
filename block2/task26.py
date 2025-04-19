@@ -1,12 +1,10 @@
-# TODO задача решена неверно. Решить верно. Изначальное число 456, a не 452
-
 def find_x(target):
-    for first_digit in range(1, 12):
-        for last_two_degits in range(0, 100):
-            if first_digit * 10 + last_two_degits * 10 + first_digit == target:
-                return first_digit * 100 + last_two_degits
+    for A in range(1, 10):
+        for B in range(0, 10):
+            for C in range(0, 10):
+                if 11 * A + 100 * B + 10 * C == target:
+                    return A * 1000 + B * 100 + C * 10 + A
     return None
-
 
 result = find_x(564)
 print(result)

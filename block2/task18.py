@@ -1,18 +1,48 @@
-# TODO Добавить обработку пользовательского ввода.
-# Красиво, зрительно оформить код, чтобы он был читаемым
+def get_three_digit_number():
 
-abc = int(input("Введите число: "))
-n1 = abc // 100
-n2 = abc // 10 % 10
-n3 = abc % 10
-acb = n1 * 100 + n3 * 10 + n2
-bac = n2 * 100 + n1 * 10 + n3
-bca = n2 * 100 + n3 * 10 + n1
-cab = n3 * 100 + n1 * 10 + n2
-cba = n3 * 100 + n2 * 10 + n1
-print(abc)
-print(acb)
-print(bac)
-print(bca)
-print(cab)
-print(cba)
+    while True:
+        try:
+            number = int(input("Введите трёхзначное число: "))
+            if 99 < number < 1000:
+                return number
+            else:
+                print("Введённое число должно быть трёхзначным!")
+        except ValueError:
+            print("Вы ввели некорректное значение. Попробуйте ещё раз.")
+
+def rearrange_digits(number):
+
+    hundreds = number // 100
+    tens = (number // 10) % 10
+    units = number % 10
+    return hundreds, tens, units
+
+def generate_permutations(hundreds, tens, units):
+
+    permutations = [
+        (hundreds * 100 + tens * 10 + units),
+        (hundreds * 100 + units * 10 + tens),
+        (tens * 100 + hundreds * 10 + units),
+        (tens * 100 + units * 10 + hundreds),
+        (units * 100 + hundreds * 10 + tens),
+        (units * 100 + tens * 10 + hundreds)
+    ]
+    return permutations
+
+def display_results(permutations):
+
+    for i, permutation in enumerate(permutations, start=1):
+        print(f"Перестановка {i}: {permutation}")
+
+if __name__ == "__main__":
+
+    three_digit_number = get_three_digit_number()
+    
+
+    hundreds, tens, units = rearrange_digits(three_digit_number)
+    
+
+    permutations = generate_permutations(hundreds, tens, units)
+    
+
+    display_results(permutations)

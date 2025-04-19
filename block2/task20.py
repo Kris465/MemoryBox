@@ -1,14 +1,51 @@
-# TODO б решено неверно. Исправить решение.
-# г решено неверно. Исправить решение.
-# Второй вариант, без выделения отдельных цифр числа не решен. Решить.
+def get_four_digit_number():
 
-num = input("Введите четырехзночное число: ")
+    while True:
+        try:
+            number = int(input("Введите четырёхзначное число: "))
+            if 999 < number < 10000:
+                return number
+            else:
+                print("Введённое число должно быть четырёхзначным!")
+        except ValueError:
+            print("Вы ввели некорректное значение. Попробуйте ещё раз.")
 
-sum1 = num[0]
-sum2 = num[1]
-sum3 = num[2]
-sum4 = num[3]
-print(int(''.join([sum4, sum3, sum2, sum1])))
-print(int(''.join([sum2, sum1, sum4, sum3])))
-print(int(''.join([sum1, sum3, sum2, sum4])))
-print(int(''.join([sum3, sum4, sum1, sum2])))
+def rearrange_digits(number):
+
+    thousands = number // 1000
+    hundreds = (number // 100) % 10
+    tens = (number // 10) % 10
+    ones = number % 10
+    return thousands, hundreds, tens, ones
+
+def generate_permutations(digits):
+
+    permutations = [
+        (digits[0] * 1000 + digits[1] * 100 + digits[2] * 10 + digits[3]),
+        (digits[0] * 1000 + digits[3] * 100 + digits[2] * 10 + digits[1]),
+        (digits[1] * 1000 + digits[0] * 100 + digits[3] * 10 + digits[2]),
+        (digits[1] * 1000 + digits[2] * 100 + digits[0] * 10 + digits[3]),
+        (digits[2] * 1000 + digits[1] * 100 + digits[0] * 10 + digits[3]),
+        (digits[2] * 1000 + digits[3] * 100 + digits[1] * 10 + digits[0]),
+        (digits[3] * 1000 + digits[0] * 100 + digits[1] * 10 + digits[2]),
+        (digits[3] * 1000 + digits[2] * 100 + digits[0] * 10 + digits[1])
+    ]
+    return permutations
+
+def display_results(permutations):
+
+    for i, permutation in enumerate(permutations, start=1):
+        print(f"Перестановка {i}: {permutation}")
+
+if __name__ == "__main__":
+
+    four_digit_number = get_four_digit_number()
+    
+
+    digits = rearrange_digits(four_digit_number)
+    
+
+    permutations = generate_permutations(digits)
+    
+
+    display_results(permutations)

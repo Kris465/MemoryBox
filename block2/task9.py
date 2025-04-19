@@ -1,13 +1,23 @@
-# TODO Нормально обработать ошибку. Таким образом, чтобы программа не падала.
-
 def get_month_number(n):
+    if not isinstance(n, int):
+        raise TypeError("Аргумент должен быть целым числом.")
     if 0 <= n <= 11:
-        x = n + 1
+        return n + 1
     else:
-        raise ValueError("Количество месяцев должно быть от 0 до 11.")
-    return x
+        raise ValueError("Номер месяца должен быть от 0 до 11.")
 
 
-n = int(input("Введите номер месяца: "))
-x = get_month_number(n)
-print(f"Месяц: {x}")
+def main():
+    while True:
+        try:
+            n = int(input("Введите номер месяца (от 0 до 11): "))
+            month_number = get_month_number(n)
+            print(f"Месяц: {month_number}")
+            break
+        except ValueError as e:
+            print(e)
+        except TypeError as e:
+            print(e)
+
+if __name__ == "__main__":
+    main()
