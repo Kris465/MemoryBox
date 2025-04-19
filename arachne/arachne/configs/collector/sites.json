@@ -1,0 +1,12 @@
+{
+    "default": {
+      "toc_selector": "div.toc-list",
+      "chapter_links": "a.chapter-link",
+      "content_selector": "div.content"
+    },
+    "52shuku.vip": {
+      "toc_selector": "ul.chapter-list",
+      "chapter_links": "li > a",
+      "content_selector": "article.text"
+    }
+}
