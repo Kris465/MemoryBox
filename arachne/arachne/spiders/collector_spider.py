@@ -1,9 +1,10 @@
 # spiders/collector_spider.py
 from .base_spider import BaseSpider
 
+
 class CollectorSpider(BaseSpider):
     name = "collector_spider"
-    
+
     def __init__(self, toc_url=None, title=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.start_urls = [toc_url]
