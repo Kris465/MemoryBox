@@ -12,10 +12,9 @@ class CollectorSpider(BaseSpider):
         self.config = self.load_config("collector", toc_url)
 
     def parse(self, response):
-        # Парсинг оглавления
         toc = response.css(self.config["toc_selector"])
         chapter_links = toc.css(self.config["chapter_links"] + "::attr(href)").getall()
-        
+
         for link in chapter_links:
             yield response.follow(link, callback=self.parse_chapter)
 
