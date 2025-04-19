@@ -108,3 +108,20 @@ class Grade(models.Model):
 
     def __str__(self):
         return f"{self.student.username} - {self.course.name}: {self.get_value_display()}"
+
+
+class CourseMembership(models.Model):
+    STUDENT = 'S'
+    TEACHER = 'T'
+    ROLE_CHOICES = [
+        (STUDENT, 'Student'),
+        (TEACHER, 'Teacher'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    role = models.CharField(max_length=1, choices=ROLE_CHOICES)
+    date_joined = models.DateField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'course', 'role')
