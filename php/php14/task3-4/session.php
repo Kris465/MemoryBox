@@ -65,8 +65,7 @@ $userPurchases = $allPurchases[$email] ?? [];
     <?php else: ?>
         <p class="no-purchases">У пользователя нет истории покупок.</p>
     <?php endif; ?>
-
-    <p><a href="index.html">Вернуться к списку пользователей</a></p>
+        <p><a href="index.html">Вернуться к списку пользователей</a></p>
     
     <?php
     $_SESSION['current_user'] = [
