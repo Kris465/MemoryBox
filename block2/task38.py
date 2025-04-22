@@ -1,23 +1,38 @@
-# TODO оформить скрипт в соответствии с требованиями PEP8
+def validate_input(prompt, condition=lambda x: True):
 
-def find_kth_digit(k):
-    if k < 1 or k > 150:
-        return "k должно быть в диапазоне от 1 до 150"
-    number_index = (k - 1) // 3
-    three_digit_number = 101 + number_index
+    while True:
+        try:
+            value = input(prompt)
+            if condition(value):
+                return value
+            else:
+                print("Введённое значение не соответствует условиям. Попробуйте ещё раз.")
+        except ValueError:
+            print("Введены некорректные данные. Попробуйте ещё раз.")
 
-    position_in_number = (k - 1) % 3
+def add_to_dozen(num1, num2):
 
-    if position_in_number == 0:
-        kth_digit = three_digit_number // 100
-    elif position_in_number == 1:
-        kth_digit = (three_digit_number // 10) % 10
-    else:
-        kth_digit = three_digit_number % 10
-
-    return three_digit_number, position_in_number + 1, kth_digit
+    a2 = int(num1[0])
+    a1 = int(num1[1])
+    b = int(num2)
 
 
-k = int(input("Введите число: "))
-number, position, digit = find_kth_digit(k)
-print(f"k = {k}: Трехзначное число = {number}, Позиция в числе = {position}, Цифра = {digit}")
+    s = a1 + b
+
+
+    if s >= 10:
+        a2 += 1
+        s -= 10
+
+    return f"{a2}{s}"
+
+if __name__ == "__main__":
+
+    num1 = validate_input("Введите двузначное число: ", lambda x: len(x) == 2 and x.isdigit())
+
+
+    num2 = validate_input("Введите однозначное число: ", lambda x: len(x) == 1 and x.isdigit())
+
+
+    result = add_to_dozen(num1, num2)
+    print(f"Ответ: {result}")
