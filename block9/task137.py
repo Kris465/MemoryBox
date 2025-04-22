@@ -8,6 +8,6 @@ def rearrange_word(word):
     return rearranged
 
 
-word = "ABCDEFGHIJKL"
+word = input("Введите слово: ")
 result = rearrange_word(word)
 print(result)
