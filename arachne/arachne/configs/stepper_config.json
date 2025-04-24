@@ -1,20 +1,10 @@
 {
-    "crimsontranslations.com": {
-        "content_selector": ".entry-content",
-        "next_selector": ".nav-next a::attr(href)",
-        "next_keyword": "Next",
-        "base_url": "https://www.crimsontranslations.com"
-    },
-    "mesmerizingmemoirs.com": {
-        "content_selector": "div.entry-content",
-        "next_selector": "a:contains('Next')::attr(href)",
-        "next_keyword": "Next",
-        "base_url": "https://www.mesmerizingmemoirs.com"
-    },
-    "52shuku.vip": {
-        "content_selector": "article.article-content",
-        "next_selector": "a:contains('下一页')::attr(href)",
-        "next_keyword": "下一页",
-        "base_url": "https://www.52shuku.vip"
+    "sites": {
+        "crimsontranslations": {
+            "content_selector": ".entry-content",
+            "next_selector": ".nav-next a::attr(href)",
+            "base_url": "https://www.crimsontranslations.com",
+            "allowed_domains": ["crimsontranslations.com"]
+        }
     }
 }

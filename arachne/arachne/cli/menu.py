@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-from typing import Optional
 from urllib.parse import urlparse
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
@@ -40,38 +39,34 @@ class SpiderCLI:
                 print("Invalid option, try again.")
 
     def parse_novel(self):
-        """Основной метод для запуска парсинга"""
         print("\nNovel Parsing Mode")
-        url = input("Enter first chapter URL: ").strip()
+        url = input("Enter starting chapter URL: ").strip()
 
-        site_key = self._detect_site_template(url)
-
-        if not site_key:
-            print("No matching site template found for this URL.")
-            if input("Create new template? (y/n): ").lower() == 'y':
-                self.add_site_template(url)
+        if not url:
+            print("Error: URL is required!")
             return
 
-        print(f"Using template: {site_key}")
+        chapter_num = input("Enter chapter number (default: 1): ").strip()
+        chapter_num = int(chapter_num) if chapter_num.isdigit() else 1
 
         output_file = input(
             "Output filename (default: novel.json): ").strip() or "novel.json"
 
-        self._run_spider(site_key, url, output_file)
-        print(f"\nSuccess! Results saved to {output_file}")
+        site_key = self._detect_site_template(url)
+        if not site_key:
+            print(f"No template found for {url}")
+            return
 
-    def _detect_site_template(self, url: str) -> Optional[str]:
-        """Определяет подходящий шаблон сайта по URL"""
-        with open(self.main_config) as f:
-            config = json.load(f)
+        self._run_spider(
+            site_key=site_key,
+            start_url=url,
+            output_file=output_file,
+            chapter_num=chapter_num
+        )
 
-        for site_key, site_data in config["sites"].items():
-            if any(domain in url for domain in site_data["allowed_domains"]):
-                return site_key
-        return None
-
-    def _run_spider(self, site_key: str, start_url: str, output_file: str):
-        """Запускает паука Scrapy"""
+    def _run_spider(self, site_key: str, start_url: str,
+                    output_file: str, chapter_num: int = 1):
+        """Обновлённый метод с поддержкой chapter_num"""
         settings = get_project_settings()
         settings.update({
             "FEEDS": {
@@ -82,8 +77,28 @@ class SpiderCLI:
         })
 
         process = CrawlerProcess(settings)
-        process.crawl(Stepper, site_key=site_key, start_urls=[start_url])
+        process.crawl(
+            Stepper,
+            site_key=site_key,
+            start_url=start_url,
+            chapter_num=chapter_num
+        )
         process.start()
+
+    def _detect_site_template(self, url):
+        """Определяет подходящий шаблон сайта по URL"""
+        if not self.main_config.exists():
+            return None
+
+        with open(self.main_config) as f:
+            config = json.load(f)
+
+        domain = self.extract_domain(url)
+
+        for site_key, site_data in config.get("sites", {}).items():
+            if site_key in domain or domain in site_key:
+                return site_key
+        return None
 
     def add_site_template(self, known_url: str = None):
         """Добавляет новый шаблон сайта"""
