@@ -33,7 +33,7 @@ def unique_letters(word1, word2, word3):
         unique_set2 = set(word2)
         unique_set3 = set(word3)
 
-        for letter in (unique_set1 | unique_set2 | unique_set3): 
+        for letter in (unique_set1 | unique_set2 | unique_set3):
             if (letter in unique_set1 and letter not in unique_set2 and
                 letter not in unique_set3) or \
                (letter in unique_set2 and letter not in unique_set1 and
