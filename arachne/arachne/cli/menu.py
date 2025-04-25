@@ -171,34 +171,6 @@ class SpiderCLI:
             logger.error(f"Config load error: {e}")
             return None
 
-    def add_site_template(self, known_url: str = None):
-        """Добавляет новый шаблон сайта"""
-        print("\nAdding New Site Template")
-
-        site_name = input("Site name (key): ").strip()
-        base_url = input("Base URL (e.g. https://example.com): ").strip()
-        start_url = known_url or input("Example start URL: ").strip()
-
-        print("\nOpen the site in browser and inspect elements to find:")
-        content_sel = input("Chapter content CSS selector: ").strip()
-        next_sel = input("Next chapter link CSS selector: ").strip()
-
-        template = {
-            "base_url": base_url,
-            "chapter_content_selector": content_sel,
-            "next_chapter_selector": next_sel,
-            "start_urls": [start_url],
-            "allowed_domains": [urlparse(base_url).netloc.replace("www.", "")]
-        }
-
-        template_path = self.site_templates_dir / f"{site_name}.json"
-        with open(template_path, "w") as f:
-            json.dump(template, f, indent=2)
-
-        self._update_main_config(site_name, template_path)
-
-        print(f"Template '{site_name}' added successfully!")
-
     def _update_main_config(self, site_key: str, template: dict) -> None:
         """Обновляет основной конфигурационный файл"""
         try:
