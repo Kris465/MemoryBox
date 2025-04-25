@@ -1,104 +1,175 @@
 import json
 from pathlib import Path
+from typing import Any, Dict, Optional
 from urllib.parse import urlparse
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from ..spiders.stepper import Stepper
+from loguru import logger
+
+
+logger.add("file.log",
+           format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
+           rotation="3 days",
+           backtrace=True, diagnose=True)
+
+
+class ConfigManager:
+    """Класс для управления конфигурацией с логированием"""
+    def __init__(self, config_dir: Path):
+        self.config_dir = config_dir
+        self.main_config = config_dir / "stepper_config.json"
+        self.site_templates_dir = config_dir / "site_templates"
+        self._ensure_dirs()
+
+    def _ensure_dirs(self) -> None:
+        try:
+            self.site_templates_dir.mkdir(exist_ok=True, parents=True)
+            logger.debug(f"Directories verified at {self.site_templates_dir}")
+        except Exception as e:
+            logger.error(f"Directory creation failed: {e}")
+            raise
+
+    def load_config(self) -> Dict[str, Any]:
+        try:
+            with open(self.main_config, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                logger.debug("Config loaded successfully")
+                return config
+        except FileNotFoundError:
+            logger.warning("Config file not found, creating new")
+            return {"sites": {}}
+        except Exception as e:
+            logger.error(f"Config load error: {e}")
+            return {"sites": {}}
+
+    def save_config(self, config: Dict[str, Any]) -> bool:
+        try:
+            with open(self.main_config, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=2, ensure_ascii=False)
+            logger.success("Config saved successfully")
+            return True
+        except Exception as e:
+            logger.error(f"Config save failed: {e}")
+            return False
 
 
 class SpiderCLI:
     def __init__(self):
-        self.config_dir = Path(__file__).parent.parent / "configs"
-        self.site_templates_dir = self.config_dir / "site_templates"
-        self.main_config = self.config_dir / "stepper_config.json"
-        self._ensure_dirs()
+        self.config_manager = ConfigManager(Path(__file__).parent.parent / "configs")
+        logger.info("CLI initialized")
 
-    def _ensure_dirs(self):
-        self.site_templates_dir.mkdir(exist_ok=True, parents=True)
-
-    def run(self):
-        print("Arachne")
+    def run(self) -> None:
+        """Основной цикл приложения с логированием"""
+        logger.info("Starting Arachne CLI")
         while True:
-            print("\nOptions:")
-            print("1. Parse a novel")
-            print("2. Add new site template")
-            print("3. List available sites")
-            print("4. Exit")
+            try:
+                user_choice = self._show_menu()
 
-            choice = input("Select option: ").strip()
+                if user_choice == "1":
+                    self._handle_parse_novel()
+                elif user_choice == "2":
+                    self.add_site_template()
+                elif user_choice == "3":
+                    self.list_sites()
+                elif user_choice == "4":
+                    logger.info("Exiting application")
+                    break
 
-            if choice == "1":
-                self.parse_novel()
-            elif choice == "2":
-                self.add_site_template()
-            elif choice == "3":
-                self.list_sites()
-            elif choice == "4":
-                break
-            else:
-                print("Invalid option, try again.")
+            except Exception as e:
+                logger.error(f"Unexpected error: {e}")
+                continue
 
-    def parse_novel(self):
-        print("\nNovel Parsing Mode")
-        url = input("Enter starting chapter URL: ").strip()
+    def _show_menu(self) -> str:
+        """Отображение меню с логированием выбора"""
+        print("\nOptions:")
+        print("1. Parse")
+        print("2. Add new site template")
+        print("3. List available sites")
+        print("4. Exit")
 
+        choice = input("Select option: ").strip()
+        logger.debug(f"User selected option: {choice}")
+        return choice
+
+    def _handle_parse_novel(self) -> None:
+        """Обработка парсинга новеллы с полным логированием"""
+        logger.info("Starting novel parsing flow")
+
+        url = input("Enter starting chapter URL: ")
         if not url:
-            print("Error: URL is required!")
+            logger.warning("Empty URL provided")
             return
 
-        chapter_num = input("Enter chapter number (default: 1): ").strip()
-        chapter_num = int(chapter_num) if chapter_num.isdigit() else 1
+        chapter_num = input("Enter chapter number (default: 1): ")
+        if not chapter_num:
+            chapter_num = 1
+        logger.debug(f"Starting from chapter: {chapter_num}")
 
-        output_file = input(
-            "Output filename (default: novel.json): ").strip() or "novel.json"
+        output_file = input("Output filename (default: novel.json): ").strip() or "novel.json"
+        logger.debug(f"Output file: {output_file}")
 
         site_key = self._detect_site_template(url)
         if not site_key:
-            print(f"No template found for {url}")
+            logger.warning(f"No template found for URL: {url}")
+            if input("Create template? (y/n): ").lower() == 'y':
+                self.add_site_template(url)
             return
 
-        self._run_spider(
-            site_key=site_key,
-            start_url=url,
-            output_file=output_file,
-            chapter_num=chapter_num
-        )
+        self._run_spider(site_key, url, output_file, chapter_num)
 
     def _run_spider(self, site_key: str, start_url: str,
-                    output_file: str, chapter_num: int = 1):
-        """Обновлённый метод с поддержкой chapter_num"""
+                    output_file: str, chapter_num: int = 1) -> None:
+        """Запуск паука с детальным логированием"""
+        logger.info(f"Starting spider for {site_key}")
+
         settings = get_project_settings()
         settings.update({
             "FEEDS": {
                 output_file: {"format": "json"},
             },
-            "LOG_ENABLED": True,
-            "LOG_LEVEL": "INFO"
+            "LOG_LEVEL": "INFO",
+            "DEPTH_LIMIT": 1000
         })
 
-        process = CrawlerProcess(settings)
-        process.crawl(
-            Stepper,
-            site_key=site_key,
-            start_url=start_url,
-            chapter_num=chapter_num
-        )
-        process.start()
+        try:
+            process = CrawlerProcess(settings)
+            process.crawl(
+                Stepper,
+                site_key=site_key,
+                start_url=start_url,
+                chapter_num=chapter_num
+            )
+            logger.debug("Spider configured, starting process...")
+            process.start()
+            logger.success("Spider completed successfully")
+        except Exception as e:
+            logger.error(f"Spider failed: {e}")
+            raise
 
-    def _detect_site_template(self, url):
+    def _detect_site_template(self, url: str) -> Optional[str]:
         """Определяет подходящий шаблон сайта по URL"""
-        if not self.main_config.exists():
+        if not self.stepper_config.exists():
+            logger.warning("Config file not found")
             return None
 
-        with open(self.main_config) as f:
-            config = json.load(f)
+        try:
+            with open(self.main_config, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                domain = urlparse(url).netloc.replace("www.", "")
 
-        domain = self.extract_domain(url)
+                for site_key in config.keys():
+                    if site_key.lower() in domain.lower():
+                        logger.debug(
+                            f"Matched template: {site_key} for URL: {url}")
+                        return site_key
 
-        for site_key, site_data in config.get("sites", {}).items():
-            if site_key in domain or domain in site_key:
-                return site_key
-        return None
+                logger.warning(f"No template found for URL: {url}")
+                return None
+
+        except Exception as e:
+            logger.error(f"Config load error: {e}")
+            return None
 
     def add_site_template(self, known_url: str = None):
         """Добавляет новый шаблон сайта"""
@@ -128,34 +199,47 @@ class SpiderCLI:
 
         print(f"Template '{site_name}' added successfully!")
 
-    def _update_main_config(self, site_key: str, template_path: Path):
+    def _update_main_config(self, site_key: str, template: dict) -> None:
         """Обновляет основной конфигурационный файл"""
-        if not self.main_config.exists():
-            config = {"sites": {}}
-        else:
-            with open(self.main_config) as f:
+        try:
+            config = {}
+            if self.main_config.exists():
+                with open(self.main_config, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+
+            config[site_key] = template
+            with open(self.main_config, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=2, ensure_ascii=False)
+
+            logger.debug(f"Config updated with template: {site_key}")
+        except Exception as e:
+            logger.error(f"Config update failed: {e}")
+            raise
+
+    def list_sites(self) -> None:
+        """Выводит список доступных сайтов"""
+        try:
+            if not self.main_config.exists():
+                logger.warning("No config file found")
+                print("No templates available yet.")
+                return
+
+            with open(self.main_config, 'r', encoding='utf-8') as f:
                 config = json.load(f)
 
-        with open(template_path) as f:
-            template = json.load(f)
+            if not config:
+                print("No templates available yet.")
+                return
 
-        config["sites"][site_key] = template
+            print("\nAvailable site templates:")
+            for i, site_key in enumerate(config.keys(), 1):
+                print(f"{i}. {site_key}")
 
-        with open(self.main_config, "w") as f:
-            json.dump(config, f, indent=2)
+            logger.debug(f"Listed {len(config)} templates")
 
-    def list_sites(self):
-        """Выводит список доступных сайтов"""
-        if not self.main_config.exists():
-            print("No site templates available yet.")
-            return
-
-        with open(self.main_config) as f:
-            config = json.load(f)
-
-        print("\nAvailable site templates:")
-        for i, site_key in enumerate(config["sites"].keys(), 1):
-            print(f"{i}. {site_key}")
+        except Exception as e:
+            logger.error(f"Failed to list sites: {e}")
+            print("Error loading templates list")
 
 
 if __name__ == "__main__":

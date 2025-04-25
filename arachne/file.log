@@ -1,0 +1,30 @@
+2025-04-25 at 08:44:26 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
+2025-04-25 at 08:44:26 | INFO | CLI initialized
+2025-04-25 at 08:44:26 | INFO | Starting Arachne CLI
+2025-04-25 at 08:44:29 | DEBUG | User selected option: 1
+2025-04-25 at 08:44:29 | INFO | Starting novel parsing flow
+2025-04-25 at 08:44:29 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute '_get_valid_input'
+2025-04-25 at 08:48:57 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
+2025-04-25 at 08:48:57 | INFO | CLI initialized
+2025-04-25 at 08:48:57 | INFO | Starting Arachne CLI
+2025-04-25 at 08:48:59 | DEBUG | User selected option: 1
+2025-04-25 at 08:48:59 | INFO | Starting novel parsing flow
+2025-04-25 at 08:50:32 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
+2025-04-25 at 08:50:32 | INFO | CLI initialized
+2025-04-25 at 08:50:32 | INFO | Starting Arachne CLI
+2025-04-25 at 08:50:34 | DEBUG | User selected option: 1
+2025-04-25 at 08:50:34 | INFO | Starting novel parsing flow
+2025-04-25 at 08:50:40 | DEBUG | Starting from chapter: 1
+2025-04-25 at 08:50:49 | DEBUG | Output file: testing_novel.json
+2025-04-25 at 08:50:49 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute 'main_config'
+2025-04-25 at 08:52:08 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
+2025-04-25 at 08:52:08 | INFO | CLI initialized
+2025-04-25 at 08:52:08 | INFO | Starting Arachne CLI
+2025-04-25 at 08:52:42 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
+2025-04-25 at 08:52:42 | INFO | CLI initialized
+2025-04-25 at 08:52:42 | INFO | Starting Arachne CLI
+2025-04-25 at 08:52:44 | DEBUG | User selected option: 1
+2025-04-25 at 08:52:44 | INFO | Starting novel parsing flow
+2025-04-25 at 08:53:11 | DEBUG | Starting from chapter: 1
+2025-04-25 at 08:53:19 | DEBUG | Output file: testing_novel.json
+2025-04-25 at 08:53:19 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute 'main_config'
