@@ -1,7 +1,7 @@
 # Способ №1
 def recursive_max(x, y):
     """Рекурсивная реализация функции max"""
-    if not isinstance(y, list):  
+    if not isinstance(y, list):
         return x if x >= y else y
     elif len(y) == 1:
         return recursive_max(x, y[0])
