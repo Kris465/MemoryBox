@@ -1,30 +1,9 @@
-2025-04-25 at 08:44:26 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
-2025-04-25 at 08:44:26 | INFO | CLI initialized
-2025-04-25 at 08:44:26 | INFO | Starting Arachne CLI
-2025-04-25 at 08:44:29 | DEBUG | User selected option: 1
-2025-04-25 at 08:44:29 | INFO | Starting novel parsing flow
-2025-04-25 at 08:44:29 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute '_get_valid_input'
-2025-04-25 at 08:48:57 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
-2025-04-25 at 08:48:57 | INFO | CLI initialized
-2025-04-25 at 08:48:57 | INFO | Starting Arachne CLI
-2025-04-25 at 08:48:59 | DEBUG | User selected option: 1
-2025-04-25 at 08:48:59 | INFO | Starting novel parsing flow
-2025-04-25 at 08:50:32 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
-2025-04-25 at 08:50:32 | INFO | CLI initialized
-2025-04-25 at 08:50:32 | INFO | Starting Arachne CLI
-2025-04-25 at 08:50:34 | DEBUG | User selected option: 1
-2025-04-25 at 08:50:34 | INFO | Starting novel parsing flow
-2025-04-25 at 08:50:40 | DEBUG | Starting from chapter: 1
-2025-04-25 at 08:50:49 | DEBUG | Output file: testing_novel.json
-2025-04-25 at 08:50:49 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute 'main_config'
-2025-04-25 at 08:52:08 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
-2025-04-25 at 08:52:08 | INFO | CLI initialized
-2025-04-25 at 08:52:08 | INFO | Starting Arachne CLI
-2025-04-25 at 08:52:42 | DEBUG | Directories verified at C:\Users\nata\prog\Arahne\arachne\arachne\configs\site_templates
-2025-04-25 at 08:52:42 | INFO | CLI initialized
-2025-04-25 at 08:52:42 | INFO | Starting Arachne CLI
-2025-04-25 at 08:52:44 | DEBUG | User selected option: 1
-2025-04-25 at 08:52:44 | INFO | Starting novel parsing flow
-2025-04-25 at 08:53:11 | DEBUG | Starting from chapter: 1
-2025-04-25 at 08:53:19 | DEBUG | Output file: testing_novel.json
-2025-04-25 at 08:53:19 | ERROR | Unexpected error: 'SpiderCLI' object has no attribute 'main_config'
+2025-04-29 at 14:31:57 | DEBUG | Loaded config for stepper
+2025-04-29 at 14:31:57 | INFO | CLI initialized for stepper
+2025-04-29 at 14:31:57 | INFO | Starting Arachne CLI
+2025-04-29 at 14:32:00 | DEBUG | User selected: 1
+2025-04-29 at 14:32:50 | DEBUG | Matched config: crimsontranslations for https://www.crimsontranslations.com/51-a-silly-little-snakes-mishap/419
+2025-04-29 at 14:33:02 | INFO | Starting spider with config: {'content_selector': '.entry-content', 'next_selector': '.nav-next a::attr(href)', 'base_url': 'https://www.crimsontranslations.com'}
+2025-04-29 at 14:33:02 | SUCCESS | Spider completed successfully
+2025-04-29 at 14:33:57 | DEBUG | User selected: 3
+2025-04-29 at 14:33:57 | INFO | Exiting application
