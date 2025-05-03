@@ -6,6 +6,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from ..spiders.stepper import Stepper
 from loguru import logger
+from twisted.internet import reactor
 
 
 logger.add(
@@ -25,43 +26,55 @@ class SpiderCLI:
         self.raw_config = self._load_config()
         logger.info(f"CLI initialized for {self.spider_name}")
 
-    def _load_config(self) -> Dict[str, Any]:
-        """Загружает конфиг для текущего паука"""
+    def load_config(self, site_key: Optional[str]) -> Optional[Dict[str, Any]]:
+        """Загружает конфиг для указанного сайта"""
+        if not site_key:
+            return None
+
+        config_path = Path(__file__).parent.parent / "configs" / "stepper_config.json"
+
+        logger.debug(f"Looking for config at: {config_path.absolute()}")
+
+        if not config_path.exists():
+            logger.error(f"Config file not found at {config_path.absolute()}")
+            return None
+
         try:
-            if not self.config_file.exists():
-                logger.warning(f"Config file not found: {self.config_file}")
-                return {}
-
-            with open(self.config_file, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-                logger.debug(f"Loaded config for {self.spider_name}")
-                return config
-
+            with open(config_path, "r", encoding="utf-8") as f:
+                configs = json.load(f)
+                logger.debug(f"Config content: {json.dumps(configs, indent=2)}")
+                return configs.get(site_key)
         except Exception as e:
-            logger.error(f"Config load error: {e}")
-            return {}
+            logger.error(f"Error loading config: {e}")
+            return None
 
     def run(self) -> None:
         """Основной цикл приложения"""
         logger.info("Starting Arachne CLI")
-        while True:
-            print("\nOptions:")
-            print("1. Parse novel")
-            print("2. List available sites")
-            print("3. Exit")
+        try:
+            while True:
+                print("\nOptions:")
+                print("1. Parse novel")
+                print("2. List available sites")
+                print("3. Exit")
 
-            choice = input("Select option: ").strip()
-            logger.debug(f"User selected: {choice}")
+                choice = input("Select option: ").strip()
+                logger.debug(f"User selected: {choice}")
 
-            if choice == "1":
-                self._handle_parse()
-            elif choice == "2":
-                self._list_sites()
-            elif choice == "3":
-                logger.info("Exiting application")
-                break
-            else:
-                print("Invalid option, try again")
+                if choice == "1":
+                    self._handle_parse()
+                elif choice == "2":
+                    self._list_sites()
+                elif choice == "3":
+                    logger.info("Exiting application")
+                    break
+                else:
+                    print("Invalid option, try again")
+        except KeyboardInterrupt:
+            logger.info("Received exit signal, shutting down")
+        finally:
+            if reactor.running:
+                reactor.stop()
 
     def _handle_parse(self) -> None:
         """Обработка парсинга новеллы"""
@@ -112,7 +125,8 @@ class SpiderCLI:
         if not parsed.netloc:
             return None
 
-        return parsed.netloc.replace("www.", "").lower()
+        domain = parsed.netloc.replace("www.", "").split(':')[0]
+        return domain.split('.')[0]
 
     def _list_sites(self) -> None:
         """Выводит список доступных сайтов"""
@@ -130,24 +144,40 @@ class SpiderCLI:
         """Запускает паука с указанными параметрами"""
         logger.info(f"Starting spider with config: {config}")
 
+        novels_dir = Path("novels")
+        novels_dir.mkdir(exist_ok=True)
+
+        output_path = novels_dir / output_file
+
         settings = get_project_settings()
         settings.update({
             "FEEDS": {
-                output_file: {"format": "json"},
+                str(output_path): {
+                    "format": "json",
+                    "encoding": "utf8",
+                    "indent": 2,
+                    "overwrite": True,
+                },
             },
-            "LOG_LEVEL": "INFO"
+            "LOG_LEVEL": "INFO",
+            "DOWNLOAD_HANDLERS": {
+                "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+                "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+            },
+            "TWISTED_REACTOR": "twisted.internet.asyncioreactor.AsyncioSelectorReactor",
+            "PLAYWRIGHT_BROWSER_TYPE": "chromium",
         })
 
         try:
             process = CrawlerProcess(settings)
             process.crawl(
                 Stepper,
-                config=config,
+                site_key=self._extract_domain(start_url),
                 start_url=start_url,
                 chapter_num=chapter_num
             )
             process.start()
-            logger.success("Spider completed successfully")
+            logger.success(f"Spider completed successfully. Results saved to {output_path}")
         except Exception as e:
             logger.error(f"Spider failed: {e}")
             raise
