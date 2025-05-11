@@ -1,7 +1,0 @@
-{
-    "crimsontranslations": {
-        "content_selector": ".entry-content",
-        "next_selector": ".nav-next a::attr(href)",
-        "base_url": "https://www.crimsontranslations.com"
-    }
-}
