@@ -1,14 +1,96 @@
 <?php
-require_once 'Input.php';
-require_once 'Radio.php';
-require_once 'Checkbox.php';
-require_once 'Select.php';
-require_once 'Control.php';
-
 /**
  * @param mixed $object 
  * @return string 
  */
+
+
+class Input {
+    protected $background;
+    protected $width;
+    protected $height;
+    protected $name;
+    protected $value;
+
+    public function __construct($background, $width, $height, $name, $value) {
+        $this->background = $background;
+        $this->width = $width;
+        $this->height = $height;
+        $this->name = $name;
+        $this->value = $value;
+    }
+}
+
+class Radio extends Input {
+    private $isChecked;
+
+    public function __construct($background, $width, $height, $name, $value, $isChecked) {
+        parent::__construct($background, $width, $height, $name, $value); 
+        $this->setCheckedState($isChecked);
+    }
+
+    public function getCheckedState() {
+        return $this->isChecked;
+    }
+
+    public function setCheckedState($isChecked) {
+        $this->isChecked = $isChecked === true; 
+    }
+}
+
+class Checkbox extends Input {
+    private $isChecked;
+
+    public function __construct($background, $width, $height, $name, $value, $isChecked) {
+        parent::__construct($background, $width, $height, $name, $value);
+        $this->setCheckedState($isChecked); 
+    }
+
+    public function getCheckedState() {
+        return $this->isChecked;
+    }
+
+    public function setCheckedState($isChecked) {
+        $this->isChecked = $isChecked === true; 
+    }
+}
+
+class Control {
+    protected $background;
+    protected $width;
+    protected $height;
+    protected $name;
+    protected $value;
+
+    public function __construct($background, $width, $height, $name, $value) {
+        $this->background = $background;
+        $this->width = $width;
+        $this->height = $height;
+        $this->name = $name;
+        $this->value = $value;
+    }
+}
+class Select extends Control {
+    private $items;
+
+    public function __construct($background, $width, $height, $name, $value, $items) {
+        parent::__construct($background, $width, $height, $name, $value); 
+        $this->setItems($items); 
+    }
+
+    public function getItems() {
+        return $this->items;
+    }
+
+    public function setItems($items) {
+        if (is_array($items)) {
+            $this->items = $items;
+        } else {
+            $this->items = [];
+        }
+    }
+}
+
 function convertToHTML($object) {
     if ($object instanceof Radio) {
         return sprintf(
