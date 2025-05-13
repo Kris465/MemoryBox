@@ -4,8 +4,17 @@ ini_set('display_errors', 1);
 
 if (isset($_POST['selected_folder'])) {
     $folder = $_POST['selected_folder'];
-    setcookie('last_folder', $folder, time() + 3600 * 24 * 30); 
-    $_COOKIE['last_folder'] = $folder;
+    setcookie('last_folder', $folder, time() + 3600 * 24 * 30);
+    $_COOKIE['last_folder'] = $folder; 
+}
+
+if (isset($_POST['go_back'])) {
+    setcookie('last_folder', '', time() - 3600); 
+    unset($_COOKIE['last_folder']);
+    $current_folder = null;
+    $folder_content = null;
+    header("Location: index.php"); 
+    exit();
 }
 
 $current_folder = isset($_COOKIE['last_folder']) ? $_COOKIE['last_folder'] : null;
@@ -13,7 +22,7 @@ $folder_content = null;
 
 if (isset($_POST['goto_folder']) && $current_folder && is_dir($current_folder)) {
     $folder_content = scandir($current_folder);
-    $folder_content = array_diff($folder_content, ['.', '..']); 
+    $folder_content = array_diff($folder_content, ['.', '..']);
 }
 ?>
 <!DOCTYPE html>
@@ -21,12 +30,17 @@ if (isset($_POST['goto_folder']) && $current_folder && is_dir($current_folder)) 
 <head>
     <meta charset="UTF-8">
     <title>Файловый менеджер</title>
+    <style>
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
     <script>
         function updateFolderSelection() {
             const select = document.getElementById('folder_select');
             const gotoBtn = document.getElementById('goto_folder_btn');
             gotoBtn.disabled = select.value === '';
-            
         }
     </script>
 </head>
@@ -50,6 +64,9 @@ if (isset($_POST['goto_folder']) && $current_folder && is_dir($current_folder)) 
         </select>
         
         <button type="submit" id="goto_folder_btn" name="goto_folder" disabled>GoToFolder</button>
+        <?php if ($current_folder): ?>
+            <button type="submit" name="go_back">GoBack</button>
+        <?php endif; ?>
     </form>
     
     <?php if ($current_folder): ?>
