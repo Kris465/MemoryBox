@@ -2,9 +2,6 @@ import math
 
 
 def triangle_area_by_sides(a, b, c):
-    """
-    Вычисляет площадь треугольника по длинам сторон a, b, c с помощью формулы Герона.
-    """
     s = (a + b + c) / 2
     area = math.sqrt(s * (s - a) * (s - b) * (s - c))
     return area
