@@ -3,6 +3,7 @@ def has_real_roots(a, b, c):
     discriminant = b**2 - 4*a*c
     return discriminant >= 0
 
+
 a = float(input("Введите значение a: "))
 b = float(input("Введите значение b: "))
 c = float(input("Введите значение c: "))
