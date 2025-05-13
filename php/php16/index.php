@@ -2,31 +2,75 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (!isset($_COOKIE['page1_visits'])) {
-    setcookie('page1_visits', 0, time() + 3600 * 24 * 30); 
+if (isset($_POST['selected_folder'])) {
+    $folder = $_POST['selected_folder'];
+    setcookie('last_folder', $folder, time() + 3600 * 24 * 30); 
+    $_COOKIE['last_folder'] = $folder;
 }
-if (!isset($_COOKIE['page2_visits'])) {
-    setcookie('page2_visits', 0, time() + 3600 * 24 * 30);
+
+$current_folder = isset($_COOKIE['last_folder']) ? $_COOKIE['last_folder'] : null;
+$folder_content = null;
+
+if (isset($_POST['goto_folder']) && $current_folder && is_dir($current_folder)) {
+    $folder_content = scandir($current_folder);
+    $folder_content = array_diff($folder_content, ['.', '..']); 
 }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <title>Файловый менеджер</title>
+    <script>
+        function updateFolderSelection() {
+            const select = document.getElementById('folder_select');
+            const gotoBtn = document.getElementById('goto_folder_btn');
+            gotoBtn.disabled = select.value === '';
+            
+        }
+    </script>
 </head>
 <body>
-    <h1>Добро пожаловать на главную страницу!</h1>
+    <h1>Файловый менеджер</h1>
     
-    <nav>
+    <form id="folder_form" method="post">
+        <label for="folder_select">Выберите папку:</label>
+        <select id="folder_select" name="selected_folder" onchange="updateFolderSelection()">
+            <option value="">-- Выберите папку --</option>
+            <?php
+            $folders = array_filter(scandir('.'), function($item) {
+                return is_dir($item) && !in_array($item, ['.', '..']);
+            });
+            
+            foreach ($folders as $folder) {
+                $selected = ($current_folder === $folder) ? 'selected' : '';
+                echo "<option value=\"$folder\" $selected>$folder</option>";
+            }
+            ?>
+        </select>
+        
+        <button type="submit" id="goto_folder_btn" name="goto_folder" disabled>GoToFolder</button>
+    </form>
+    
+    <?php if ($current_folder): ?>
+        <h2>Текущая папка: <?php echo htmlspecialchars($current_folder); ?></h2>
+    <?php endif; ?>
+    
+    <?php if ($folder_content !== null): ?>
+        <h3>Содержимое папки:</h3>
         <ul>
-            <li><a href="1.php">Страница 1</a></li>
-            <li><a href="2.php">Страница 2</a></li>
+            <?php foreach ($folder_content as $item): ?>
+                <li><?php echo htmlspecialchars($item); ?></li>
+            <?php endforeach; ?>
         </ul>
-    </nav>
+    <?php elseif ($current_folder && !is_dir($current_folder)): ?>
+        <p style="color: red;">Папка больше не существует!</p>
+    <?php endif; ?>
     
-    <h2>Статистика переходов:</h2>
-    <p>Переходов на Страницу 1: <?php echo $_COOKIE['page1_visits'] ?? 0; ?></p>
-    <p>Переходов на Страницу 2: <?php echo $_COOKIE['page2_visits'] ?? 0; ?></p>
+    <script>
+        window.onload = function() {
+            updateFolderSelection();
+        };
+    </script>
 </body>
 </html>
