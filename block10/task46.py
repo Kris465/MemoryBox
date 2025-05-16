@@ -9,7 +9,8 @@ first_term = 2
 common_ratio = 3
 term_number = 5
 
-nth_term = geometric_progression_nth_term(first_term, common_ratio, term_number)
+nth_term = geometric_progression_nth_term(first_term,
+                                          common_ratio, term_number)
 print(f"{term_number}-й член геометрической прогрессии: {nth_term}")
 
 
@@ -26,5 +27,7 @@ first_term = 2
 common_ratio = 3
 number_of_terms = 5
 
-progression_sum = geometric_progression_sum(first_term, common_ratio, number_of_terms)
-print(f"Сумма первых {number_of_terms} членов геометрической прогрессии: {progression_sum}")
+progression_sum = geometric_progression_sum(first_term, common_ratio,
+                                            number_of_terms)
+print(f"Сумма первых {number_of_terms} членов геометрической \
+    прогрессии: {progression_sum}")
