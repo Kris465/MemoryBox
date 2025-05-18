@@ -5,6 +5,8 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 class StepperSpider(scrapy.Spider):
     name = 'stepper'
     start_urls = ['https://inoveltranslation.com/chapters/8250907e-0f47-421d-aad7-5b72d5fe7164']
+    chapter_counter = 1
+    max_chapters = 100
 
     def start_requests(self):
         for url in self.start_urls:
@@ -13,16 +15,23 @@ class StepperSpider(scrapy.Spider):
                 meta={
                     "playwright": True,
                     "playwright_include_page": True,
-                    "playwright_context": "debug-context",
+                    "playwright_context": "stepper-context",
                     "playwright_page_goto_kwargs": {
                         "wait_until": "domcontentloaded",
                         "timeout": 60000
                     }
                 },
-                callback=self.parse_debug
+                callback=self.parse_chapter
             )
 
-    async def parse_debug(self, response):
+    async def parse_chapter(self, response):
+        page = response.meta["playwright_page"]
+        await page.wait_for_selector('section[data-sentry-component="RichText"]', timeout=15000)
+        content = await page.query_selector('section[data-sentry-component="RichText"]')
+        chapter_text = await content.text_content()
+        chapter_text = " ".join(chapter_text.split()).strip()
+
+    async def get_next_page(self, response):
         page = response.meta["playwright_page"]
 
         try:
