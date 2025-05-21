@@ -1,0 +1,9 @@
+document.getElementById('submitReview').addEventListener('click', function() {
+    var reviewText = document.getElementById('reviewInput').value;
+    if (reviewText.trim() !== "") {
+        document.getElementById('reviewMessage').textContent = "Спасибо за отзыв!";
+        document.getElementById('reviewInput').value = "";
+    } else {
+        document.getElementById('reviewMessage').textContent = "Напишите отзыв(";
+    }
+});
