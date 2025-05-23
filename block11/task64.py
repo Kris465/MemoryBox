@@ -17,5 +17,5 @@ def main():
     print(f"Количество элементов, кратных {last_element}: {count_multiples_a}")
 
 
-if __name__ == "__main__":
+if __name__== "__main__":
     main()
