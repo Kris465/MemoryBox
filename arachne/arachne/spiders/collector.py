@@ -2,17 +2,17 @@ import scrapy
 import json
 import re
 from scrapy import Request
-from urllib.parse import urljoin
 
 
-class NovelSpider(scrapy.Spider):
-    name = 'novel_spider'
-    start_urls = ['https://inoveltranslation.com/novels/4fe34c97-15e2-4bca-8cef-eeee498a1d15']
+class Collector(scrapy.Spider):
+    name = 'collector'
+    start_urls = ['https://volarereads.com/story/after-the-marriage-agreement-with-the-powerful-man/']
 
     custom_settings = {
-        'DOWNLOAD_DELAY': 3,
+        'DOWNLOAD_DELAY': 5,
         'CONCURRENT_REQUESTS': 1,
         'PLAYWRIGHT_MAX_PAGES_PER_CONTEXT': 1,
+        'PLAYWRIGHT_DEFAULT_NAVIGATION_TIMEOUT': 120000,
     }
 
     def __init__(self, *args, **kwargs):
@@ -20,12 +20,12 @@ class NovelSpider(scrapy.Spider):
         self.chapters_dict = {}
         self.processed_urls = set()
 
-    def start_requests(self):
+    async def start(self):
         try:
             with open('chapter_links.json', 'r', encoding='utf-8') as f:
                 chapters = json.load(f)
                 if isinstance(chapters, list):
-                    self.logger.info("Найдены сохраненные ссылки на главы (старый формат)")
+                    self.logger.info("Found saved chapter links (old format)")
                     for chapter in chapters:
                         if chapter['url'] not in self.processed_urls:
                             self.processed_urls.add(chapter['url'])
@@ -36,8 +36,8 @@ class NovelSpider(scrapy.Spider):
                                     "playwright_include_page": True,
                                     "playwright_context": "chapter_content_context",
                                     "playwright_page_goto_kwargs": {
-                                        "wait_until": "networkidle",
-                                        "timeout": 90000
+                                        "wait_until": "domcontentloaded",
+                                        "timeout": 120000
                                     },
                                     "chapter_title": chapter.get('title', '')
                                 },
@@ -48,7 +48,7 @@ class NovelSpider(scrapy.Spider):
         except (FileNotFoundError, json.JSONDecodeError):
             pass
 
-        self.logger.info("Собираем ссылки на главы")
+        self.logger.info("Collecting chapter links")
         for url in self.start_urls:
             yield Request(
                 url,
@@ -57,8 +57,8 @@ class NovelSpider(scrapy.Spider):
                     "playwright_include_page": True,
                     "playwright_context": "chapter_links_context",
                     "playwright_page_goto_kwargs": {
-                        "wait_until": "networkidle",
-                        "timeout": 90000
+                        "wait_until": "domcontentloaded",
+                        "timeout": 120000
                     }
                 },
                 callback=self.parse_chapter_links
@@ -69,26 +69,31 @@ class NovelSpider(scrapy.Spider):
         chapters = []
 
         try:
-            await page.wait_for_timeout(5000)
-            await page.wait_for_selector('section a[href*="/chapters/"]', timeout=60000)
+            await page.wait_for_selector('.chapter-group__list', state='visible', timeout=60000)
+            await page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
+            await page.wait_for_timeout(3000)
 
-            chapter_elements = await page.query_selector_all('section a[href*="/chapters/"]')
+            show_more_button = await page.query_selector('.chapter-group__folding-toggle')
+            if show_more_button:
+                await show_more_button.click()
+                await page.wait_for_timeout(5000)
+
+            chapter_elements = await page.query_selector_all('.chapter-group__list-item._publish a.chapter-group__list-item-link')
 
             for element in chapter_elements:
                 href = await element.get_attribute('href')
                 title = await element.text_content()
                 if href and title and href not in self.processed_urls:
-                    full_url = urljoin(response.url, href)
                     chapters.append({
                         'title': title.strip(),
-                        'url': full_url
+                        'url': href
                     })
                     self.processed_urls.add(href)
 
             if chapters:
                 with open('chapter_links.json', 'w', encoding='utf-8') as f:
                     json.dump(chapters, f, ensure_ascii=False, indent=2)
-                self.logger.info(f"Сохранено {len(chapters)} ссылок на главы")
+                self.logger.info(f"Saved {len(chapters)} chapter links")
 
                 for chapter in chapters:
                     yield Request(
@@ -98,8 +103,8 @@ class NovelSpider(scrapy.Spider):
                             "playwright_include_page": True,
                             "playwright_context": "chapter_content_context",
                             "playwright_page_goto_kwargs": {
-                                "wait_until": "networkidle",
-                                "timeout": 90000
+                                "wait_until": "domcontentloaded",
+                                "timeout": 120000
                             },
                             "chapter_title": chapter['title']
                         },
@@ -107,11 +112,12 @@ class NovelSpider(scrapy.Spider):
                         dont_filter=True
                     )
             else:
-                self.logger.warning("Не найдено ни одной главы")
+                self.logger.warning("No chapters found")
 
         except Exception as e:
-            self.logger.error(f"Ошибка при сборе ссылок: {str(e)}")
+            self.logger.error(f"Error collecting links: {str(e)}")
             await page.screenshot(path='chapter_links_error.png', full_page=True)
+            raise
         finally:
             await page.close()
 
@@ -120,39 +126,30 @@ class NovelSpider(scrapy.Spider):
         chapter_title = response.meta.get("chapter_title", "")
 
         try:
-            await page.wait_for_timeout(3000)
-            await page.wait_for_selector('section[data-sentry-component="RichText"]', timeout=60000)
+            await page.wait_for_selector('#chapter-content', state='visible', timeout=60000)
 
-            await page.wait_for_function(
-                '''() => {
-                    const el = document.querySelector('section[data-sentry-component="RichText"]');
-                    return el && el.textContent.trim().length > 50;
-                }''',
-                timeout=60000
-            )
+            await page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
+            await page.wait_for_timeout(2000)
 
-            content = await page.query_selector('section[data-sentry-component="RichText"]')
+            content = await page.query_selector('#chapter-content')
             chapter_text = await content.text_content()
             chapter_text = " ".join(chapter_text.split()).strip()
 
             chapter_number = self.extract_chapter_number(chapter_title) or str(len(self.chapters_dict) + 1)
-
+            
             if chapter_text:
                 self.chapters_dict[chapter_number] = f"{response.url}\n\n{chapter_text}"
-                self.logger.info(f"Обработана глава {chapter_number}: {chapter_title[:50]}...")
-
+                self.logger.info(f"Processed chapter {chapter_number}: {chapter_title[:50]}...")
+                
                 with open('novel_content.json', 'w', encoding='utf-8') as f:
-                    json.dump(self.chapters_dict, f, ensure_ascii=False,
-                              indent=2)
+                    json.dump(self.chapters_dict, f, ensure_ascii=False, indent=2)
             else:
-                self.logger.warning(f"Пустой текст в главе {chapter_number}")
+                self.logger.warning(f"Empty content in chapter {chapter_number}")
 
         except Exception as e:
-            self.logger.error(
-                f"Ошибка при обработке главы {response.url}: {str(e)}")
-            await page.screenshot(
-                path=f'chapter_error_{response.url.split("/")[-1]}.png',
-                full_page=True)
+            self.logger.error(f"Error processing chapter {response.url}: {str(e)}")
+            await page.screenshot(path=f'chapter_error_{response.url.split("/")[-1]}.png', full_page=True)
+            raise
         finally:
             await page.close()
 
@@ -160,11 +157,11 @@ class NovelSpider(scrapy.Spider):
         if self.chapters_dict:
             with open('novel_content.json', 'w', encoding='utf-8') as f:
                 json.dump(self.chapters_dict, f, ensure_ascii=False, indent=2)
-            self.logger.info(f"Итоговый результат: сохранено {len(self.chapters_dict)} глав")
+            self.logger.info(f"Final result: saved {len(self.chapters_dict)} chapters")
         else:
-            self.logger.warning("Не удалось сохранить результат - словарь глав пуст")
+            self.logger.warning("Failed to save result - chapters dictionary is empty")
 
     @staticmethod
     def extract_chapter_number(title):
-        matches = re.findall(r'\d+', title)
-        return matches[0] if matches else None
+        matches = re.findall(r'\b(\d+)\b', title)
+        return matches[-1] if matches else None

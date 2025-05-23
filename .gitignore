@@ -7,3 +7,7 @@ __pycache__
 
 # logs
 *.log
+
+# files
+*.html
+*.json
