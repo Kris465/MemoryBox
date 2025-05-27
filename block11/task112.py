@@ -7,4 +7,5 @@ min_height = min(heights)
 
 difference = max_height - min_height
 
+
 print("Рост самого высокого человека превышает рост самого низкого на:", difference)
