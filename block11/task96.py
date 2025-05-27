@@ -12,7 +12,7 @@ average_precipitation = sum(precipitations) / len(precipitations)
 
 
 for year_index in range(len(precipitations)):
-    year_number = year_index +1
+    year_number = year_index + 1
     deviation = precipitations[year_index] - average_precipitation
     print(f"Год {year_number}: Осадки = {precipitations[year_index]} мм,"
           f" отклонение от среднего = {deviation:.2f} мм")
