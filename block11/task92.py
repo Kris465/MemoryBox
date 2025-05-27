@@ -1,0 +1,5 @@
+array = list(map(int, input("Введите рост учеников через пробел: ").split()))
+total_height = sum(array)
+average_height = total_height / len(array)
+count_above_average = sum(1 for h in array if h > average_height)
+print(f"Количество учеников с ростом больше среднего: {count_above_average}")
