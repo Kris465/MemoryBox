@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h2 class="mb-4">Конвертер валют</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="amount" class="form-label">Сумма</label>
+                <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="from_currency" class="form-label">Из</label>
+                    <select class="form-select" id="from_currency" name="from_currency">
+                        {% for currency in currencies %}
+                            <option value="{{ currency.char_code }}">{{ currency.name }} ({{ currency.char_code }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="to_currency" class="form-label">В</label>
+                    <select class="form-select" id="to_currency" name="to_currency">
+                        {% for currency in currencies %}
+                            <option value="{{ currency.char_code }}">{{ currency.name }} ({{ currency.char_code }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Конвертировать</button>
+        </form>
+
+        {% if result %}
+        <div class="mt-4 p-3 bg-light rounded">
+            <h4>Результат:</h4>
+            <p>{{ amount }} {{ from_currency }} = {{ result }} {{ to_currency }}</p>
+            <p class="text-muted small">Курс ЦБ РФ на {{ date }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
