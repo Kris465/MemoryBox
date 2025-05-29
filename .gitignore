@@ -1,0 +1,18 @@
+# venv
+.venv
+.env
+
+# logs
+*.log
+
+# python
+__pycache__
+
+# static files
+*.jpg
+*.png
+*.jpeg
+
+# db
+*.db
+*.sqlite3
