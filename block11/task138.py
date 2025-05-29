@@ -1,4 +1,4 @@
-temperatures = [/* сюда вставьте 31 значения температуры */]
+temperatures = [12, 30, 61, 20, 34, 12, 11, 1, 2, 5, 6, 7, 9, 20, 27]
 
 max_temp = float('-inf')
 second_max_temp = float('-inf')
