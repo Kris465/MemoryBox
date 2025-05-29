@@ -1,14 +1,19 @@
-# Массив с годами рождения 30 человек
-birth_years = [/* вставьте сюда ваши данные: 30 чисел */]
+years = [
+    1980, 1975, 1990, 1985, 1970,
+    1980, 1975, 1992, 1988, 1973,
+    1980, 1975, 1990, 1985, 1970,
+    1980, 1975, 1992, 1988, 1973,
+    1980, 1975, 1990, 1985, 1970,
+    1980, 1975, 1992
+]
 
-# Находим минимальный год рождения (самый старший)
-min_year = min(birth_years)
+min_year = min(years)
 
-# а) номер первого человека с этим годом
-first_oldest_index = birth_years.index(min_year) + 1
+indices = [i for i, year in enumerate(years) if year == min_year]
 
-# б) номер последнего человека с этим годом
-last_oldest_index = len(birth_years) - 1 - birth_years[::-1].index(min_year) + 1
+first_index = indices[0] + 1
 
-print("Порядковый номер самого старшего (первый случай):", first_oldest_index)
-print("Порядковый номер самого старшего (последний случай):", last_oldest_index)
+last_index = indices[-1] + 1
+
+print(f"номер самого старшего (первый случай): {first_index}")
+print(f"номер самого старшего(последний случай): {last_index}")
