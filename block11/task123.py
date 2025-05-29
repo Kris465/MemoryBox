@@ -9,7 +9,7 @@ for temp in temperatures:
         min_temp = temp
         count_cool_days = 1
     elif temp == min_temp:
-        # День с такой же минимальной температурой
+
         count_cool_days += 1
 
 print(f"Самая прохладная температура: {min_temp}")
