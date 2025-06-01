@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('memes', function (Blueprint $table) {
             $table->id();
-            $table->string('image_path');
-            $table->string('top_text')->nullable();
-            $table->string('bottom_text')->nullable();
-            $table->timestamps();
+            $table->text('top_text')->nullable();
+            $table->text('bottom_text')->nullable();
+            $table->longText('image_data'); // Для хранения base64 или бинарных данных
+            $table->string('mime_type', 50); // Для хранения типа изображения (image/jpeg и т.д.)
+            $table->timestamps(); // created_at и updated_at
         });
     }
 
