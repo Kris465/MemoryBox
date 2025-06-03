@@ -1,18 +1,17 @@
-def move_s_to_k(arr, s, k):
-    if s < 0 or k < 0 or s >= len(arr) or k >= len(arr) or s <= k:
-        raise IndexError("Неправильные значения s и k. Убедитесь, что s > k и находятся в пределах массива.")
+def fix_sorted_array(arr):
 
-    element = arr[s]
-    arr.pop(s)
+    if len(arr) == 0:
+        print("Массив пустой")
+        return arr
 
-    arr.insert(k, element)
+    last = arr[-1]
+
+    arr.pop()
+
+    i = 0
+    while i < len(arr) and arr[i] <= last:
+        i += 1
+
+    arr.insert(i, last)
 
     return arr
-
-
-arr = [1, 2, 3, 4, 5]
-s = 4
-k = 2
-new_arr = move_s_to_k(arr, s, k)
-print(new_arr)
-
