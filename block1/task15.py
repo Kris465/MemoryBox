@@ -27,7 +27,7 @@ expression_10 = "(-b + (b**2 - 4*a*c)**0.5) / (2*a)"
 
 expression_11 = "1 / (1 + 1/2 + 1 / (2 + 3/5))"
 
-# Вывод всех выражений
+
 expressions = [expression_a, expression_b, expression_c, expression_d,
                expression_6, expression_7, expression_8, expression_9,
                expression_10, expression_11

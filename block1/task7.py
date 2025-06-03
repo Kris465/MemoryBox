@@ -11,5 +11,5 @@ else:
     num2 = random.randint(1, 100)
     num3 = random.randint(1, 100)
 
-# Вывод чисел с разделением двумя пробелами
+
 print(num1, num2, num3, sep='  ')
