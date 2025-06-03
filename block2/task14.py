@@ -7,7 +7,9 @@ def get_three_digit_number():
             else:
                 print("Число должно быть трехзначным!")
         except ValueError:
-            print("Вы ввели некорректное значение. Пожалуйста, попробуйте снова.")
+            print("Вы ввели некорректное значение. \
+                Пожалуйста, попробуйте снова.")
+
 
 def rearrange_number(number):
     first_digit = number // 100

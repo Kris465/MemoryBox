@@ -19,7 +19,8 @@ print(f"\nКоличество студентов, сдавших сессию �
 
 subjects_with_only_4_and_5 = 0
 for subject in range(num_subjects):
-    if all(grade in [4, 5] for grade in (grades[student][subject] for student in range(num_students))):
+    if all(grade in [4, 5] for grade in (grades[student][subject] for
+                                         student in range(num_students))):
         subjects_with_only_4_and_5 += 1
 
 print(f"Количество предметов, по которым были получены только оценки '5' и '4\

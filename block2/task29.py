@@ -3,9 +3,7 @@ def find_x(n):
 
         first_digit = n // 100 if n >= 100 else n // 10
 
-
         tens = (n // 10) % 10
-
 
         x = first_digit * 100 + (tens * 2) * 10 + (n % 10)
 

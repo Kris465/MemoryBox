@@ -5,6 +5,8 @@ def traffic_light_color(t):
         return 'зеленый'
     else:
         return 'красный'
+
+
 t = 7.5
 color = traffic_light_color(t)
 print(color)

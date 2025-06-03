@@ -10,12 +10,14 @@ def get_three_digit_number():
         except ValueError:
             print("Вы ввели некорректное значение. Попробуйте ещё раз.")
 
+
 def rearrange_digits(number):
 
     hundreds = number // 100
     tens = (number // 10) % 10
     units = number % 10
     return hundreds, tens, units
+
 
 def generate_permutations(hundreds, tens, units):
 
@@ -29,20 +31,19 @@ def generate_permutations(hundreds, tens, units):
     ]
     return permutations
 
+
 def display_results(permutations):
 
     for i, permutation in enumerate(permutations, start=1):
         print(f"Перестановка {i}: {permutation}")
 
+
 if __name__ == "__main__":
 
     three_digit_number = get_three_digit_number()
-    
 
     hundreds, tens, units = rearrange_digits(three_digit_number)
-    
 
     permutations = generate_permutations(hundreds, tens, units)
-    
 
     display_results(permutations)

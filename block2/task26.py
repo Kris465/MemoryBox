@@ -6,5 +6,6 @@ def find_x(target):
                     return A * 1000 + B * 100 + C * 10 + A
     return None
 
+
 result = find_x(564)
 print(result)

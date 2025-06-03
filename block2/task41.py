@@ -1,15 +1,14 @@
 import math
 
+
 def calculate_minute_angle_and_time(angle_y):
 
     if not (0 < angle_y <= 2 * math.pi):
         return
 
-
     total_minutes = (angle_y / (2 * math.pi)) * 12 * 60
     hours = int(total_minutes // 60)
     minutes = int(total_minutes % 60)
-
 
     theta_m = 12 * angle_y
     theta_m %= 2 * math.pi
@@ -25,7 +24,8 @@ def get_user_input():
             if 0 < angle_y <= 2 * math.pi:
                 return angle_y
             else:
-                print("Угол y должен быть в диапазоне (0, 2π]. Попробуйте снова.")
+                print("Угол y должен быть в диапазоне \
+                    (0, 2π]. Попробуйте снова.")
         except ValueError:
             print("Введены некорректные данные. Попробуйте снова.")
 
@@ -34,9 +34,7 @@ if __name__ == "__main__":
 
     angle_y = get_user_input()
 
-
     theta_m, hours, minutes = calculate_minute_angle_and_time(angle_y)
-
 
     if isinstance(theta_m, str):
         print(theta_m)

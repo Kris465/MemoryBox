@@ -10,6 +10,7 @@ def get_four_digit_number():
         except ValueError:
             print("Вы ввели некорректное значение. Попробуйте ещё раз.")
 
+
 def rearrange_digits(number):
 
     thousands = number // 1000
@@ -17,6 +18,7 @@ def rearrange_digits(number):
     tens = (number // 10) % 10
     ones = number % 10
     return thousands, hundreds, tens, ones
+
 
 def generate_permutations(digits):
 
@@ -32,20 +34,19 @@ def generate_permutations(digits):
     ]
     return permutations
 
+
 def display_results(permutations):
 
     for i, permutation in enumerate(permutations, start=1):
         print(f"Перестановка {i}: {permutation}")
 
+
 if __name__ == "__main__":
 
     four_digit_number = get_four_digit_number()
-    
 
     digits = rearrange_digits(four_digit_number)
-    
 
     permutations = generate_permutations(digits)
-    
 
     display_results(permutations)

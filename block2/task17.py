@@ -10,6 +10,7 @@ def get_three_digit_number():
         except ValueError:
             print("Вы ввели некорректное значение. Попробуйте ещё раз.")
 
+
 def rearrange_digits(number):
 
     hundreds = number // 100
@@ -17,10 +18,10 @@ def rearrange_digits(number):
     units = number % 10
     return f"{hundreds}{units}{tens}"
 
+
 if __name__ == "__main__":
 
     three_digit_number = get_three_digit_number()
-    
-    # Переставляем цифры и выводим результат
+
     rearranged_number = rearrange_digits(three_digit_number)
     print(rearranged_number)

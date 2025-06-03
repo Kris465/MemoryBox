@@ -5,7 +5,8 @@ def check_digits(number):
     str_number = str(number)
 
     contains_4_7 = "4" in str_number or "7" in str_number
-    contains_3_6_9 = "3" in str_number or "6" in str_number or '9' in str_number
+    contains_3_6_9 = "3" in str_number or "6" \
+        in str_number or '9' in str_number
 
     return contains_4_7, contains_3_6_9
 

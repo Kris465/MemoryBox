@@ -4,6 +4,7 @@ def find_n(x):
     n = last_digit * 10**(len(str(rest_part)) + 1) + rest_part  # Формула для n
     return n
 
+
 def find_x(n):
     last_digit = n // 10**(len(str(n))-1)
     rest_part = n % 10**(len(str(n))-1)

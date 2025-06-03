@@ -7,19 +7,19 @@ def rectangles_relationship(rect1, rect2):
         x2, y2, w2, h2 = r2
         return (x2 <= x1 and y2 <= y1 and
                 x1 + w1 <= x2 + w2 and y1 + h1 <= y2 + h2)
-    
+
     def is_contained(r1, r2):
         x1, y1, w1, h1 = r1
         x2, y2, w2, h2 = r2
         return (x1 >= x2 and y1 >= y2 and
                 x1 + w1 <= x2 + w2 and y1 + h1 <= y2 + h2)
-    
+
     def is_intersecting(r1, r2):
         x1, y1, w1, h1 = r1
         x2, y2, w2, h2 = r2
         return not (x1 + w1 < x2 or x2 + w2 < x1 or
                     y1 + h1 < y2 or y2 + h2 < y1)
-    
+
     inside_first_in_second = is_inside(rect1, rect2)
     inside_secoind_in_first = is_inside(rect2, rect1)
     intersecting = is_intersecting(rect1, rect2)
