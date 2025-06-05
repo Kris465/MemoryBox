@@ -1,15 +1,15 @@
 def fix_swimming_results(results):
     if len(results) <= 1:
         return results
-    
+
     misplaced = results.pop(0)
-    
+
     insert_pos = 0
     while insert_pos < len(results) and results[insert_pos] > misplaced:
         insert_pos += 1
-    
+
     results.insert(insert_pos, misplaced)
-    
+
     return results
 
 
