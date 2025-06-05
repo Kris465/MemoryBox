@@ -1,5 +1,5 @@
 
-pages = [/* ваши данные: 100 чисел */]
+pages = [list(map(int, input("Введите массив: ").split()))]
 
 
 max_pages = max(pages)

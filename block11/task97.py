@@ -11,4 +11,5 @@ for element in array:
         min_diff = diff
         closest_element = element
 
-print(f"Элемент, наиболее близкий к среднему ({average_value:.2f}): {closest_element}")
+print(f"Элемент, наиболее близкий к среднему ({average_value:.2f}) : \
+    {closest_element}")

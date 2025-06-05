@@ -1,4 +1,4 @@
-speeds = [/* вставьте сюда ваши данные: 40 чисел */]
+speeds = [list(map(int, input("Введите массив: ").split()))]
 
 max_speed = max(speeds)
 

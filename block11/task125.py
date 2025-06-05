@@ -1,7 +1,7 @@
-# Массив вещественных чисел
-array = [/* ваши данные здесь */]
 
-# Инициализация переменных
+array = [list(map(int, input("Введите массив: ").split()))]
+
+
 min_value = None
 max_value = None
 
@@ -11,7 +11,7 @@ for num in array:
     if max_value is None or num > max_value:
         max_value = num
 
-# Проверка условий
+
 condition_a = (max_value - min_value) <= 25
 condition_b = min_value < max_value / 2
 

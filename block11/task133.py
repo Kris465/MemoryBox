@@ -1,5 +1,5 @@
 
-speeds = [/* сюда вставьте 40 значений */]
+speeds = [list(map(int, input("Введите массив: ").split()))]
 
 
 max_speed = float('-inf')

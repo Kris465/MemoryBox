@@ -1,7 +1,7 @@
-# Предположим, у вас есть массив цен товаров
-prices = [/* сюда вставьте 30 значений */]
 
-# Инициализация
+prices = [list(map(int, input("Введите массив: ").split()))]
+
+
 max_price = float('-inf')
 second_max_price = float('-inf')
 

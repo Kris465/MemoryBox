@@ -1,5 +1,5 @@
 
-scores = [/* вставьте сюда оценки судей, например: 9.5, 8.7, 9.0, ... */]
+scores = [list(map(int, input("Введите массив: ").split()))]
 
 
 max_score = max(scores)
@@ -11,4 +11,5 @@ scores.remove(min_score)
 
 average_score = sum(scores) / len(scores)
 
-print("Среднее арифметическое после удаления наибольшей и наименьшей оценки:", average_score)
+print("Среднее арифметическое после удаления наибольшей и \
+    наименьшей оценки:", average_score)

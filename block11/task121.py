@@ -1,5 +1,5 @@
 
-precipitations = [10, 20, 15, 20, 25, 25, 18, ...] 
+precipitations = [10, 20, 15, 20, 25, 25, 18, ...]
 
 
 max_precipitation = None

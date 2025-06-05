@@ -1,7 +1,7 @@
-# Массив с весами людей
-weights = [/* ваши данные здесь */]
 
-# Инициализация переменных
+weights = [list(map(int, input("Введите массив: ").split()))]
+
+
 min_weight = None
 max_weight = None
 
@@ -11,7 +11,7 @@ for weight in weights:
     if max_weight is None or weight > max_weight:
         max_weight = weight
 
-# Проверка условия
+
 result = max_weight > 2 * min_weight
 
 print(f"Вес самого тяжелого превышает массу \
