@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Meme;
 use Illuminate\Http\Request;
 
-class MemeController extends Controller
+class MemeController extends Controller 
 {
-    public function index()
+        public function index()
     {
-        $memes = Meme::latest()->get(); // Сортировка по дате создания
+        $memes = Meme::latest()->get();
         return view('memes.index', compact('memes'));
     }
+
+
     public function create()
     {
         return view('memes.create');
