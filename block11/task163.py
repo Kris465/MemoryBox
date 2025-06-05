@@ -2,9 +2,6 @@ def insert_numbers(heights, num1, num2):
     if not heights:
         return [num2, num1]
 
-
-    max_height = heights[0]
-
     heights.insert(0, num2)
 
     index = 1
