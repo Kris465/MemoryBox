@@ -4,7 +4,6 @@ def to_digit_array(number_str):
 
 
 def add_big_numbers(num1_str, num2_str):
-
     a = list(map(int, reversed(num1_str)))
     b = list(map(int, reversed(num2_str)))
 
@@ -26,17 +25,17 @@ def add_big_numbers(num1_str, num2_str):
 
 
 def subtract_big_numbers(num1_str, num2_str):
-
-
-
     def compare(num1, num2):
         if len(num1) != len(num2):
             return len(num1) > len(num2)
-        return num1 > num2
+        for i in range(len(num1)):
+            if num1[i] != num2[i]:
+                return num1[i] > num2[i]
+        return True  # числа равны
 
     if not compare(num1_str, num2_str):
-        raise ValueError("Первое число должно быть больше второго для \
-            корректного вычитания.")
+        raise ValueError("Первое число должно быть больше или равно \
+            второму для корректного вычитания.")
 
     a = list(map(int, reversed(num1_str)))
     b = list(map(int, reversed(num2_str)))
@@ -57,9 +56,8 @@ def subtract_big_numbers(num1_str, num2_str):
 
         result.append(digit_a - digit_b)
 
-
-
-while len(result) > 1 and result[-1] == 0:
+    # Удаляем лишние нули справа (в конце списка, так как он обратный)
+    while len(result) > 1 and result[-1] == 0:
         result.pop()
 
     return ''.join(map(str, reversed(result)))

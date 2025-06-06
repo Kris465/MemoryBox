@@ -19,11 +19,13 @@ def calculate_total_quarterly(salary_data):
 
 
 def calculate_quarterly_per_employee(salary_data):
-    return [sum(employee_monthly_salary) for employee_monthly_salary in salary_data]
+    return [sum(employee_monthly_salary) for employee_monthly_salary
+            in salary_data]
 
 
 def calculate_monthly_total(salary_data):
-    return [sum([employee_monthly_salary[i] for employee_monthly_salary in salary_data])
+    return [sum([employee_monthly_salary[i] for employee_monthly_salary
+                 in salary_data])
             for i in range(len(salary_data[0]))]
 
 
