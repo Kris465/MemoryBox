@@ -33,7 +33,8 @@ else:
     total_revenue = sum(revenue_per_product)
     print(f"Общий доход магазина за 6 дней: {total_revenue:.2f} руб.")
 
-    max_revenue_product = revenue_per_product.index(max(revenue_per_product)) + 1
+    max_revenue_product = revenue_per_product.index(
+        max(revenue_per_product)) + 1
     print(f"Максимальный доход получен от товара {max_revenue_product}.")
 
     max_daily_revenue_day = daily_revenues.index(max(daily_revenues)) + 1

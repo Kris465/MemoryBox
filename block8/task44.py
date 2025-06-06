@@ -1,7 +1,7 @@
 def find_numbers_with_digit_sum(n):
     results = []
-    for num in range(100, 1000):  # Все трехзначные числа
-        digits = list(map(int, str(num)))  # Разбиваем число на цифры
+    for num in range(100, 1000):
+        digits = list(map(int, str(num)))
         if sum(digits) == n:
             results.append(num)
     return results
