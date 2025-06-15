@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переходник с аналитикой</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Выберите сайт для перехода</h1>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value" id="visitCount">0</div>
+                <div class="stat-label">Всего переходов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="lastVisitTime">-</div>
+                <div class="stat-label">Последний переход</div>
+            </div>
+            <div class="time-scale" id="timeScale">
+                <div class="time-bar"></div>
+                <div class="time-marker" id="timeMarker"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-primary" id="siteA">Перейти на Site-A</button>
+            <button class="btn btn-secondary" id="siteB">Перейти на Site-B</button>
+        </div>
+    </div>
+    
+    <div class="transition-overlay" id="transitionOverlay"></div>
+    <div class="loading-text" id="loadingText">Переходим...</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
