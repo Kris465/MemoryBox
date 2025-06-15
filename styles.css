@@ -1,0 +1,165 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Bellota", cursive, sans-serif;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  animation: fadeIn 1s ease-out;
+}
+
+.menu {
+  margin: 0;
+  padding: 0.9% 10% 0.9% 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: right;
+}
+
+.menu li {
+  display: inline-block;
+  font-size: 1.3rem;
+  color: #8cb687;
+  text-transform: uppercase;
+  margin-inline: 0.5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  animation: slideUp 0.8s ease-out both;
+  text-decoration: none;
+}
+
+/* Подсветка при наведении */
+.menu li:hover {
+  color: #9ddb8a;
+  text-shadow: 0 0 10px rgba(169, 209, 164, 0.8);
+}
+
+.menu li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c4f0c6, transparent);
+  transform: translateX(-50%);
+  transition: width 0.4s ease;
+}
+
+.menu li:hover::after {
+  width: 100%;
+}
+
+/* Задержки для пунктов меню */
+.menu li:nth-child(1) { animation-delay: 0.3s; }
+.menu li:nth-child(2) { animation-delay: 0.5s; }
+
+a,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+nav a {
+  color: rgb(170, 212, 172);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: rgba(183, 230, 151, 0.712);
+}
+
+/* Главная секция */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  opacity: 0;
+  animation: fadeInZoom 2s ease-out forwards;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: rgb(221, 221, 221);
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  animation: contentFade 2s ease-in 1s forwards;
+}
+
+/* Анимации */
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contentFade {
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.02);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

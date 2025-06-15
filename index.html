@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтвердите, что вы не робот</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .captcha-wrapper {
+            position: relative;
+            margin: 25px 0;
+        }
+        
+        .blurred-captcha {
+            filter: blur(5px);
+            font-size: 32px;
+            letter-spacing: 8px;
+            background: linear-gradient(45deg, #f1f1f1, #e0e0e0);
+            padding: 20px;
+            border-radius: 8px;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(0,0,0,0.5);
+            user-select: none;
+            transition: filter 0.3s;
+        }
+        
+        .blurred-captcha:hover {
+            filter: blur(3px);
+        }
+        
+        .blurred-captcha:active {
+            filter: blur(0);
+        }
+        
+        input {
+            padding: 12px 15px;
+            width: 100%;
+            max-width: 250px;
+            margin: 15px 0;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            transition: border 0.3s;
+        }
+        
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin: 10px 0;
+            min-height: 20px;
+            font-size: 14px;
+        }
+        
+        .hint {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+        
+        .loader {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Подтвердите, что вы не робот</h2>
+        <p>Нажмите и удерживайте код, чтобы увидеть его четко</p>
+        
+        <div class="captcha-wrapper">
+            <div class="blurred-captcha" id="blurredCaptcha"></div>
+        </div>
+        
+        <input type="text" id="userInput" placeholder="Введите код, который увидели">
+        <div class="error" id="errorMsg"></div>
+        <button id="submitBtn">Подтвердить</button>
+        <div class="loader" id="loader"></div>
+        
+        <p class="hint">Удерживайте код пальцем/курсором, чтобы размытие исчезло</p>
+    </div>
+
+    <script>
+        const targetUrl = './home/firstpage.html';
+        const blurredCaptchaEl = document.getElementById('blurredCaptcha');
+        const userInputEl = document.getElementById('userInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsgEl = document.getElementById('errorMsg');
+        const loaderEl = document.getElementById('loader');
+      
+        function generateComplexCaptcha() {
+            const chars = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
+            let result = '';
+            const length = 6 + Math.floor(Math.random() * 3); // 6-8 символов
+            
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            if (Math.random() > 0.7) {
+                const pos = Math.floor(Math.random() * (result.length - 1)) + 1;
+                result = result.slice(0, pos) + ' ' + result.slice(pos);
+            }
+            
+            return result;
+        }
+        
+        let currentCaptcha = generateComplexCaptcha();
+        blurredCaptchaEl.textContent = currentCaptcha;
+  
+        function checkCaptchaAndRedirect() {
+            const userInput = userInputEl.value.trim();
+            const cleanCaptcha = currentCaptcha.replace(/\s/g, '');
+            const cleanInput = userInput.replace(/\s/g, '');
+            
+            if (userInput === '') {
+                errorMsgEl.textContent = 'Пожалуйста, введите код';
+                return;
+            }
+            
+            if (cleanInput !== cleanCaptcha) {
+                errorMsgEl.textContent = 'Неверный код. Попробуйте снова.';
+                currentCaptcha = generateComplexCaptcha();
+                blurredCaptchaEl.textContent = currentCaptcha;
+                userInputEl.value = '';
+                return;
+            }
+        
+            errorMsgEl.textContent = '';
+            submitBtn.style.display = 'none';
+            userInputEl.style.display = 'none';
+            blurredCaptchaEl.style.display = 'none';
+            loaderEl.style.display = 'block';
+        
+            try {
+                window.location.replace(targetUrl);
+            } catch (e) {
+                showRedirectError();
+                return;
+            }
+            
+            setTimeout(() => {
+                if (window.location.href.indexOf(targetUrl) === -1) {
+                    showRedirectError();
+                }
+            }, 3000);
+        }
+        
+        function showRedirectError() {
+            loaderEl.style.display = 'none';
+            errorMsgEl.textContent = 'Ошибка перенаправления. Обновите страницу и попробуйте снова.';
+            
+            setTimeout(() => {
+                currentCaptcha = generateComplexCaptcha();
+                blurredCaptchaEl.textContent = currentCaptcha;
+                blurredCaptchaEl.style.display = 'block';
+                userInputEl.style.display = 'block';
+                userInputEl.value = '';
+                submitBtn.style.display = 'block';
+                errorMsgEl.textContent = '';
+            }, 5000);
+        }
+   
+        submitBtn.addEventListener('click', checkCaptchaAndRedirect);
+        
+        userInputEl.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCaptchaAndRedirect();
+            }
+        });
+        
+        blurredCaptchaEl.addEventListener('copy', function(e) {
+            e.preventDefault();
+            errorMsgEl.textContent = 'Копирование запрещено';
+        });
+
+        blurredCaptchaEl.style.userSelect = 'none';
+        blurredCaptchaEl.style.webkitUserSelect = 'none';
+    </script>
+</body>
+</html>
