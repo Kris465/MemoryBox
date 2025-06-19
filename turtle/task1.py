@@ -1,7 +1,8 @@
 import turtle
 
+
 t = turtle.Turtle()
-t.speed(0)
+t.shape('turtle')
 
 
 def nested_squares(size, steps):
