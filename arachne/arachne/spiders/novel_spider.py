@@ -34,7 +34,8 @@ class NovelSpider(scrapy.Spider):
                                 meta={
                                     "playwright": True,
                                     "playwright_include_page": True,
-                                    "playwright_context": "chapter_content_context",
+                                    "playwright_context":
+                                        "chapter_content_context",
                                     "playwright_page_goto_kwargs": {
                                         "wait_until": "networkidle",
                                         "timeout": 90000
@@ -70,9 +71,11 @@ class NovelSpider(scrapy.Spider):
 
         try:
             await page.wait_for_timeout(5000)
-            await page.wait_for_selector('section a[href*="/chapters/"]', timeout=60000)
+            await page.wait_for_selector('section a[href*="/chapters/"]',
+                                         timeout=60000)
 
-            chapter_elements = await page.query_selector_all('section a[href*="/chapters/"]')
+            chapter_elements = await page.query_selector_all(
+                'section a[href*="/chapters/"]')
 
             for element in chapter_elements:
                 href = await element.get_attribute('href')
