@@ -11,3 +11,7 @@ __pycache__
 # files
 *.html
 *.json
+
+# screenshots
+*.jpg
+*.png
