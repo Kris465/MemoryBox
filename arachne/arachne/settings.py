@@ -14,6 +14,13 @@ NEWSPIDER_MODULE = "arachne.spiders"
 
 ADDONS = {}
 
+# logs
+LOG_ENABLED = True
+LOG_LEVEL = "DEBUG"
+LOG_FILE = "logs/scrapy.log"
+
+LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
+LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -22,11 +29,14 @@ DOWNLOAD_HANDLERS = {
     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler"
 }
 
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+
 PLAYWRIGHT_BROWSER_TYPE = "chromium"
 PLAYWRIGHT_LAUNCH_OPTIONS = {
     "headless": False,
-    "timeout": 60000
+    "timeout": 30 * 1000,
 }
+DOWNLOAD_TIMEOUT = 60
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -100,4 +110,13 @@ DOWNLOAD_DELAY = 3
 #HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
-FEED_EXPORT_ENCODING = "utf-8"
+FEEDS = {
+    'output/%(name)s_%(time)s.json': {
+        'format': 'json',
+        'encoding': 'utf8',
+        'indent': 4,
+        'store_empty': False,
+        'fields': None,
+        'overwrite': True,
+    },
+}
