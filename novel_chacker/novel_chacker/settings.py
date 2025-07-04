@@ -7,6 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import os
+import uuid
+
+
 BOT_NAME = "novel_chacker"
 
 SPIDER_MODULES = ["novel_chacker.spiders"]
@@ -15,11 +19,14 @@ NEWSPIDER_MODULE = "novel_chacker.spiders"
 ADDONS = {}
 
 # logs
+RUN_ID = str(uuid.uuid4())[:8]
 LOG_ENABLED = True
 LOG_LEVEL = "DEBUG"
-LOG_FILE = "logs/scrapy.log"
+LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(LOG_DIR, "scrapy.log")
 
-LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
+LOG_FORMAT = f"%(asctime)s [%(name)s] [run:{RUN_ID}] %(levelname)s: %(message)s"
 LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
