@@ -7,4 +7,6 @@ __pycache__
 
 # files
 *.log
-*.txt
+novels_list.txt
+novels.json
+selectors.json
