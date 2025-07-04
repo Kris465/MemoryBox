@@ -7,6 +7,9 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import uuid
+
+
 BOT_NAME = "arachne"
 
 SPIDER_MODULES = ["arachne.spiders"]
@@ -15,18 +18,24 @@ NEWSPIDER_MODULE = "arachne.spiders"
 ADDONS = {}
 
 # logs
+RUN_ID = str(uuid.uuid4())[:8]
 LOG_ENABLED = True
 LOG_LEVEL = "DEBUG"
 LOG_FILE = "logs/scrapy.log"
 
-LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
+LOG_FORMAT = f"%(asctime)s [%(name)s] [run:{RUN_ID}] %(levelname)s: %(message)s"
 LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+# DOWNLOAD_HANDLERS = {
+#     "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+#     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler"
+# }
+
 DOWNLOAD_HANDLERS = {
-    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
-    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler"
+    "http": "scrapy.core.downloader.handlers.http.HTTPDownloadHandler",
+    "https": "scrapy.core.downloader.handlers.http.HTTPDownloadHandler",
 }
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
@@ -36,6 +45,7 @@ PLAYWRIGHT_LAUNCH_OPTIONS = {
     "headless": False,
     "timeout": 30 * 1000,
 }
+PLAYWRIGHT_MAX_CONTEXTS = 8
 DOWNLOAD_TIMEOUT = 60
 
 # Obey robots.txt rules
