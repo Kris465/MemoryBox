@@ -9,7 +9,6 @@ function replaceWord($string, $searchWord, $replaceWord) {
         },
         $string
     );
-
     $string = $resultString;
     return [$string, $count];
 }
