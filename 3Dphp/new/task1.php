@@ -9,14 +9,14 @@ $search = trim(fgets(STDIN));
 echo "Введите слово для замены: ";
 $replace = trim(fgets(STDIN));
 
-function replaceWord(string $string, string $search, string $replace): int {
+function replaceWord(string $string, string $search, string $replace): array {
     $count = 0;
-    $string = str_replace($search, $replace, $string, $count);
-    return $count;
+    $newString = str_replace($search, $replace, $string, $count);
+    return ['count' => $count, 'newString' => $newString];
 }
 
-$replacements = replaceWord($text, $search, $replace);
+$result = replaceWord($text, $search, $replace);
 
 echo "\nРезультат:\n";
-echo "Новая строка: " . $text . "\n";
-echo "Количество замен: " . $replacements . "\n";
+echo "Новая строка: " . $result['newString'] . "\n";
+echo "Количество замен: " . $result['count'] . "\n";
