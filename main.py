@@ -5,16 +5,17 @@ from aiogram import Bot, Dispatcher
 from loguru import logger
 from dotenv import load_dotenv, find_dotenv
 
-from checker import Checker
+from links_manager import Links_manager
 
 load_dotenv(find_dotenv())
 TOKEN = os.getenv('TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
-checker = Checker(link="https://sleepytranslations.com/series/please-be-quiet-and-take-off-your-something/chapter-1/")
+manager = Links_manager()
 
 
+# ЭТУ функцию ПЕРЕПИСАТЬ!!!
 async def send_check_results():
     try:
         results = checker.parse()
@@ -48,7 +49,6 @@ async def main():
 
 
 async def periodic_check(interval: int):
-    """Функция для периодической проверки"""
     while True:
         await send_check_results()
         await asyncio.sleep(interval)
