@@ -5,33 +5,29 @@ from aiogram import Bot, Dispatcher
 from loguru import logger
 from dotenv import load_dotenv, find_dotenv
 
-from links_manager import Links_manager
+from checker import Checker
+from tools.file_manager import read_from_json
 
 load_dotenv(find_dotenv())
 TOKEN = os.getenv('TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
-manager = Links_manager()
 
 
-# ЭТУ функцию ПЕРЕПИСАТЬ!!!
-async def send_check_results():
-    try:
-        results = checker.parse()
+async def main_logic():
+    links = read_from_json('novels.json')
 
-        if results:
-            message_text = "🔔 Результаты проверки:\n\n" + "\n".join(str(item) for item in results)
-            await bot.send_message(chat_id=CHANNEL_ID, text=message_text)
-            logger.success("Результаты отправлены в канал")
-        else:
-            await bot.send_message(chat_id=CHANNEL_ID, text="ℹ На данный момент изменений нет")
-            logger.info("Новых изменений не обнаружено")
+    for title, link in links.items():
+        logger.info(f"{title}: {link}")
 
-    except Exception as e:
-        error_msg = f"Ошибка при проверке: {str(e)}"
-        await bot.send_message(chat_id=CHANNEL_ID, text=error_msg)
-        logger.error(f"Ошибка: {e}")
+        checker = Checker(link)
+        checker.logic()
+        if checker.result:
+            await bot.send_message(chat_id=CHANNEL_ID,
+                                   text=f'{title}: {link}.',
+                                   parse_mode='HTML')
+            await asyncio.sleep(5)
 
 
 async def main():
@@ -43,15 +39,9 @@ async def main():
 
     logger.info("Запуск бота")
 
-    asyncio.create_task(periodic_check(interval=3600))
+    await main_logic()
 
     await dp.start_polling(bot)
-
-
-async def periodic_check(interval: int):
-    while True:
-        await send_check_results()
-        await asyncio.sleep(interval)
 
 
 if __name__ == '__main__':
