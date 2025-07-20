@@ -9,3 +9,7 @@ def read_from_json(title: str):
 
 def write_to_json():
     pass
+
+
+def update_novels_file(domen_name: str, link: str):
+    pass
