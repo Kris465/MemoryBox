@@ -4,7 +4,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from loguru import logger
 
-from tools.file_manager import read_from_json, update_json_file
+from tools.file_manager import (read_from_json,
+                                update_novels_file)
 from tools.other_tools import get_domain_name
 
 
