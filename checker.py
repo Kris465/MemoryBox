@@ -57,8 +57,10 @@ class Checker:
             page = BeautifulSoup(response.text, 'html.parser')
             link = page.select_one(self.selector)
             extructed_link = link.select_one("a")['href']
+            logger.info(extructed_link)
             try:
                 response = requests.get(extructed_link, 'html.parser')
+                logger.info(response.status_code)
                 if response.status_code == 200:
                     self.result = True
                     update_novels_file(self.name, extructed_link)
