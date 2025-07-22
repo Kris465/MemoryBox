@@ -6,7 +6,7 @@ from loguru import logger
 from dotenv import load_dotenv, find_dotenv
 
 from checker import Checker
-from tools.file_manager import read_from_json
+from tools.file_manager import read_from_json, update_novels_file
 
 load_dotenv(find_dotenv())
 TOKEN = os.getenv('TOKEN')
@@ -16,18 +16,20 @@ dp = Dispatcher()
 
 
 async def main_logic():
-    links = read_from_json('novels.json')
+    while True:
+        links = read_from_json('novels.json')
 
-    for title, link in links.items():
-        logger.info(f"{title}: {link}")
+        for title, link in links.items():
+            logger.info(f"{title}: {link}")
 
-        checker = Checker(link)
-        checker.logic()
-        if checker.result:
-            await bot.send_message(chat_id=CHANNEL_ID,
-                                   text=f'{title}: {link}.',
-                                   parse_mode='HTML')
-            await asyncio.sleep(5)
+            checker = Checker(link)
+            checker.logic()
+            if checker.result:
+                await bot.send_message(chat_id=CHANNEL_ID,
+                                       text=f'{title}: {checker.link}.',
+                                       parse_mode='HTML')
+                update_novels_file(title, checker.link)
+        await asyncio.sleep(5)
 
 
 async def main():
