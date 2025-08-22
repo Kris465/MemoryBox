@@ -1,7 +1,7 @@
 import requests
 from time import sleep
 from random import randint
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 from bs4 import BeautifulSoup
 from loguru import logger
 
@@ -16,27 +16,19 @@ class Checker:
         self.result = False
         self.tool = ""
         self.session = requests.Session()
-        self.playwright_context = None
 
     def tool_box(self):
         '''
         Чтение конфига из selectors.json
-
-        Структура json:
-        {"доменное имя":{
-            selector: значение селектора,
-            button: текст кнопки,
-            tool: playwright / requests
-        }}
         '''
         data = read_from_json("selectors.json")
         self.tool = data[self.name]["tool"]
         self.selector = data[self.name]['selector']
         logger.info(f"Инструмент для новелы: {self.link} выбран: {self.tool}")
 
-    def logic(self):
+    async def logic(self):
         self.tool_box()
-        self.parse()
+        await self.parse()
 
     def get_page_with_requests(self):
         headers = {
@@ -54,43 +46,92 @@ class Checker:
 
         return response.text
 
-    def get_page_with_playwright(self):
-        try:
-            with sync_playwright() as playwright:
-                browser = playwright.chromium.launch()
-                context = browser.new_context()
-                page = context.new_page()
-                page.goto(self.link)
-                page.wait_for_selector(self.selector)
 
-                html = page.content()
-                context.close()
-                browser.close()
-                return html
-        except Exception as e:
-            logger.error(f"Ошибка при работе Playwright: {e}")
-            return None
+async def get_page_with_playwright(self):
+    try:
+        async with async_playwright() as playwright:
+            browser = await playwright.chromium.launch(headless=True)
+            context = await browser.new_context()
+            page = await context.new_page()
+
+            await page.goto(self.link, wait_until='domcontentloaded')
+
+            await page.wait_for_timeout(5000)
+
+            html = await page.content()
+
+            await context.close()
+            await browser.close()
+            return html
+
+    except PlaywrightTimeoutError:
+        logger.error(f"Таймаут при загрузке страницы: {self.link}")
+        return None
+    except Exception as e:
+        logger.error(f"Ошибка при работе Playwright: {e}")
+        return None
 
     def parse_html(self, html):
         if not html:
-            return None
+            return False
 
         page = BeautifulSoup(html, 'html.parser')
         link = page.select_one(self.selector)
 
         if not link:
             logger.error(f"Не удалось найти элемент по селектору: {self.selector}")
-            return None
+            link = self.find_next_link_smart(page)
+            return link
 
-        extracted_link = link.select_one("a")['href']
+        if link.name != 'a' or not link.get('href'):
+            logger.error(f"Элемент по селектору {self.selector} не является ссылкой или не имеет href")
+            return False
+
+        extracted_link = link['href']
         logger.info(f"Извлеченная ссылка: {extracted_link}")
         return extracted_link
+
+    def find_next_link_smart(self, soup):
+        """
+        Умный поиск ссылки на следующую главу
+        """
+        next_keywords = [
+            'next', 'next chapter', '→', '>', 'continue'
+        ]
+        all_links = soup.find_all('a', href=True)
+        scored_links = []
+
+        for link in all_links:
+            text = link.get_text(strip=True).lower()
+            href = link['href']
+            score = 0
+            for keyword in next_keywords:
+                if keyword in text:
+                    score += 3
+
+            if 'chapter' in text or 'глава' in text:
+                score += 2
+
+            if href and not href.startswith(('javascript:', '#')):
+                score += 1
+
+            if score > 0 and 'http' in href:
+                scored_links.append((score, href, text))
+        scored_links.sort(key=lambda x: x[0], reverse=True)
+
+        if scored_links:
+            best_score, best_link, best_text = scored_links[0]
+            logger.info(f"Найдена ссылка: '{best_text}' -> {best_link} (score: {best_score})")
+            return best_link
+
+        logger.error("Не удалось найти подходящую ссылку на следующую главу")
+        return False
 
     def check_link_validity(self, extracted_link):
         if not extracted_link:
             return False
 
-        sleep(randint(7, 20))  # Анти-бот задержка
+        sleep(randint(7, 20))
 
         try:
             headers = {
@@ -113,14 +154,14 @@ class Checker:
             logger.error(e)
             return False
 
-    def parse(self):
+    async def parse(self):
         html = None
 
         match self.tool:
             case "requests":
                 html = self.get_page_with_requests()
             case "playwright":
-                html = self.get_page_with_playwright()
+                html = await self.get_page_with_playwright()
             case _:
                 logger.error(f"Неизвестный инструмент: {self.tool}")
                 self.result = False
