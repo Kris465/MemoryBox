@@ -16,68 +16,77 @@ def get_page_data(url):
         page.wait_for_load_state('load')
         time.sleep(3)
 
-        try:
-            page.wait_for_selector(
-                '//*[@id="main"]/div/div/div[4]/div[2]/div/div/div',
-                timeout=10000)
-            print("Целевой элемент найден")
-        except:
-            print("Элемент не найден, но продолжаем")
-
         print("Начинаем плавный скролл...")
         scroll_to_bottom(page)
         time.sleep(3)
 
-        # Извлекаем данные через JavaScript
-        print("Извлекаем данные...")
-        extracted_data = page.evaluate("""
+        # Извлекаем данные из таблицы
+        print("Извлекаем данные из таблицы...")
+        table_data = page.evaluate("""
             () => {
                 const results = [];
-
-                // Ищем все элементы внутри целевого контейнера
-                const container = document.querySelector('#main div div div:nth-child(4) div:nth-child(2) div div div');
-                if (!container) {
-                    console.log('Контейнер не найден');
+                
+                // Находим таблицу по вашему селектору
+                const table = document.querySelector('#main > div > div > div:nth-child(4) > div:nth-child(2) > div > div > div > div:nth-child(3)');
+                if (!table) {
+                    console.log('Таблица не найдена');
                     return results;
                 }
-
-                // Ищем все дочерние элементы с данными
-                const items = container.querySelectorAll('div > div');
-
-                items.forEach((item, index) => {
-                    // Извлекаем нужные данные из каждого элемента
-                    results.push({
-                        id: index,
-                        text: item.innerText.trim(),
-                        html: item.innerHTML,
-                        class: item.className,
-                        tag: item.tagName
-                        // Добавьте другие нужные поля
+                
+                // Ищем все строки таблицы
+                const rows = table.querySelectorAll('div.notion-table-view-row');
+                console.log('Найдено строк:', rows.length);
+                
+                rows.forEach((row, rowIndex) => {
+                    const rowData = {
+                        row_number: rowIndex + 1,
+                        cells: []
+                    };
+                    
+                    // Ищем все ячейки в строке
+                    const cells = row.querySelectorAll('div > div');
+                    
+                    cells.forEach((cell, cellIndex) => {
+                        const cellData = {
+                            cell_number: cellIndex + 1,
+                            text: cell.innerText.trim(),
+                            html: cell.innerHTML,
+                            class: cell.className,
+                            links: []
+                        };
+                        
+                        // Извлекаем ссылки из ячейки
+                        const links = cell.querySelectorAll('a');
+                        links.forEach(link => {
+                            cellData.links.push({
+                                text: link.innerText.trim(),
+                                href: link.href,
+                                title: link.title
+                            });
+                        });
+                        
+                        rowData.cells.push(cellData);
                     });
+                    
+                    results.push(rowData);
                 });
-
+                
                 return results;
             }
         """)
 
-        print(extracted_data)
+        print(f"Извлечено {len(table_data)} строк таблицы")
 
         # Сохраняем данные в JSON
-        with open('extracted_data.json', 'w', encoding='utf-8') as file:
-            json.dump(extracted_data, file, ensure_ascii=False, indent=2)
+        with open('table_data.json', 'w', encoding='utf-8') as file:
+            json.dump(table_data, file, ensure_ascii=False, indent=2)
 
-        html_content = page.content()
-        # with open('page.html', 'w', encoding='utf-8') as file:
-        #     file.write(html_content)
-
-        print('Данные успешно сохранены в extracted_data.json')
-        print(f'Собрано {len(extracted_data)} элементов')
-        print(f'Размер HTML: {len(html_content)} символов')
+        print('Данные таблицы успешно сохранены в table_data.json')
 
         input("Нажмите Enter чтобы закрыть браузер...")
         browser.close()
 
-        return extracted_data
+        return table_data
 
 
 def scroll_to_bottom(page):
