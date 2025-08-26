@@ -91,10 +91,10 @@ def get_page_data(url):
             notion_data = page.evaluate("""
                 () => {
                     const results = [];
-                    
+
                     // Ищем все элементы с данными
                     const dataElements = document.querySelectorAll('.notion-page-content > div > div');
-                    
+
                     dataElements.forEach((element, index) => {
                         results.push({
                             element_number: index + 1,
@@ -103,7 +103,7 @@ def get_page_data(url):
                             class: element.className
                         });
                     });
-                    
+
                     return results;
                 }
             """)
@@ -129,16 +129,11 @@ def get_page_data(url):
 
 def scroll_to_bottom(page):
     print("Начинаем скролл...")
-    
-    # Notion требует особого подхода к скроллу
     scroll_attempts = 0
     max_attempts = 15
-    
+
     while scroll_attempts < max_attempts:
-        # Сохраняем текущую высоту
         prev_height = page.evaluate("() => document.documentElement.scrollHeight")
-        
-        # Плавный скролл
         page.evaluate("""
             () => {
                 window.scrollTo({
@@ -147,21 +142,21 @@ def scroll_to_bottom(page):
                 });
             }
         """)
-        
+
         # Ждем подгрузки контента
         time.sleep(3)
-        
+
         # Проверяем новую высоту
         new_height = page.evaluate("() => document.documentElement.scrollHeight")
-        
+
         print(f"Скролл {scroll_attempts + 1}: было {prev_height}, стало {new_height}")
-        
+
         if new_height == prev_height:
             print("Высота не изменилась - завершаем скролл")
             break
-            
+
         scroll_attempts += 1
-    
+
     # Дополнительный скролл для уверенности
     page.evaluate("window.scrollTo(0, 0)")
     time.sleep(1)
@@ -172,8 +167,4 @@ def scroll_to_bottom(page):
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
     url = os.getenv("URL")
-    if not url:
-        url = "https://peaceful-mistake-74d.notion.site/dc60267701934e358e321ae08a222ff7?v=45a00aa67a8141289a8983fc89880aa6"
-    
-    print(f"Загружаем URL: {url}")
     data = get_page_data(url)
