@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-#venv
-.venv
-.env
-
-# data
-*.json
-=======
 # venv
 .env
 .venv
@@ -16,4 +8,3 @@
 
 # configs
 config.py
->>>>>>> d54a70a8c7f3a88547a9272444bfb766d53c2432
