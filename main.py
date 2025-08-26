@@ -59,17 +59,16 @@ def get_page_data(url):
                 return results;
             }
         """)
-        
+
         print(extracted_data)
 
         # Сохраняем данные в JSON
         with open('extracted_data.json', 'w', encoding='utf-8') as file:
             json.dump(extracted_data, file, ensure_ascii=False, indent=2)
 
-        # Также сохраняем HTML для сравнения
         html_content = page.content()
-        with open('page.html', 'w', encoding='utf-8') as file:
-            file.write(html_content)
+        # with open('page.html', 'w', encoding='utf-8') as file:
+        #     file.write(html_content)
 
         print('Данные успешно сохранены в extracted_data.json')
         print(f'Собрано {len(extracted_data)} элементов')
