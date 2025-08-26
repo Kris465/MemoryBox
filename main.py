@@ -82,7 +82,6 @@ def get_page_data(url):
 
 
 def scroll_to_bottom(page):
-    # Плавный скролл до низа
     page.evaluate("""
         () => {
             window.scrollTo({
