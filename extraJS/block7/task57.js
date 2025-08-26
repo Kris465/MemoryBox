@@ -1,6 +1,5 @@
 const prompt = require('prompt-sync')();
 
-// Ввод данных
 const speeds = [];
 const totalCars = 20;
 
@@ -9,7 +8,6 @@ for (let i = 0; i < totalCars; i++) {
     speeds.push(speed);
 }
 
-// Находим максимальную скорость
 let maxSpeed = speeds[0];
 
 for (let i = 1; i < totalCars; i++) {
@@ -18,5 +16,4 @@ for (let i = 1; i < totalCars; i++) {
     }
 }
 
-// Вывод результата
 console.log(`Максимальная скорость самого быстрого автомобиля: ${maxSpeed}`);
