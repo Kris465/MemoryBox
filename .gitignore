@@ -5,6 +5,7 @@
 # files
 *.html
 *.json
+*.xlsx
 
 # configs
 config.py
