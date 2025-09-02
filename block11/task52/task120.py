@@ -11,4 +11,5 @@ max_height = max(heights)
 
 count_max_height = heights.count(max_height)
 
-print(f'Количество людей с наибольшим ростом ({max_height} см): {count_max_height}')
+print(f'Количество людей с \
+    наибольшим ростом ({max_height} см): {count_max_height}')
