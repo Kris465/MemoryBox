@@ -1,24 +1,15 @@
+def find_min_max_indices(arr):
+    min_value = min(arr)
 
-array = [/* ваши данные здесь */]
+    max_value = max(arr)
+
+    min_indices = [i for i, x in enumerate(arr) if x == min_value]
+    max_indices = [i for i, x in enumerate(arr) if x == max_value]
+
+    return min_indices, max_indices
 
 
-min_value = None
-max_value = None
-min_indices = []
-max_indices = []
-
-for i, value in enumerate(array):
-    if min_value is None or value < min_value:
-        min_value = value
-        min_indices = [i]
-    elif value == min_value:
-        min_indices.append(i)
-        
-    if max_value is None or value > max_value:
-        max_value = value
-        max_indices = [i]
-    elif value == max_value:
-        max_indices.append(i)
-
-print(f"Индексы элементов с минимальным значением ({min_value}): {min_indices}")
-print(f"Индексы элементов с максимальным значением ({max_value}): {max_indices}")
+arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 1]
+min_indices, max_indices = find_min_max_indices(arr)
+print("Индексы минимальных элементов:", min_indices)
+print("Индексы максимальных элементов:", max_indices)

@@ -1,11 +1,15 @@
-
-heights = [170, 180, 165, 180, 172, 180, ...]
+heights = [
+    180, 175, 190, 185, 178, 180, 190, 175, 180, 185,
+    180, 178, 185, 190, 180, 185, 180, 175, 190, 180,
+    185, 180, 178, 185, 190, 180, 185, 180, 175, 190,
+    180, 185, 180, 178, 185
+]
 
 
 max_height = max(heights)
 
 
-count_max = heights.count(max_height)
+count_max_height = heights.count(max_height)
 
-print(f"Самый большой рост: {max_height}")
-print(f"Количество человек с этим ростом: {count_max}")
+print(f'Количество людей с \
+    наибольшим ростом ({max_height} см): {count_max_height}')

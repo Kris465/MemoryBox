@@ -1,14 +1,12 @@
-prices = [12.99, 8.50, 15.00, 8.50, 20.00, ...]
+import random
+costs = [random.randint(100, 1000) for _ in range(60)]
 
-min_price = None
-count_min = 0
 
-for price in prices:
-    if min_price is None or price < min_price:
-        min_price = price
-        count_min = 1
-    elif price == min_price:
-        count_min += 1
+min_cost = min(costs)
 
-print(f"Самая низкая цена: {min_price}")
-print(f"Количество самых дешевых книг: {count_min}")
+
+count_cheapest = costs.count(min_cost)
+
+
+print(f"Минимальная стоимость книги: {min_cost}")
+print(f"Количество самых дешевых книг: {count_cheapest}")

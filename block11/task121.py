@@ -1,18 +1,5 @@
-
-precipitations = [10, 20, 15, 20, 25, 25, 18, ...]
-
-
-max_precipitation = None
-count_max_days = 0
-
-for precipitation in precipitations:
-    if max_precipitation is None or precipitation > max_precipitation:
-
-        max_precipitation = precipitation
-        count_max_days = 1
-    elif precipitation == max_precipitation:
-
-        count_max_days += 1
-
-print(f"Максимальное количество осадков за месяц: {max_precipitation}")
-print(f"Количество дней с этим количеством осадков: {count_max_days}")
+precipitations = [10, 20, 15, 20, 5, 20, 12, 20, 8, 20, 7, 20, 9, 20, 11, 20,
+                  13, 20, 14, 20, 16, 20, 17, 20, 18, 20, 19, 20, 21, 20, 22]
+max_precipitation = max(precipitations)
+count_max_days = precipitations.count(max_precipitation)
+print("Количество дней с максимальным количеством осадков:", count_max_days)
