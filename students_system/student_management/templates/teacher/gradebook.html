@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Журнал успеваемости{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header bg-warning text-dark">
+        <div class="d-flex justify-content-between align-items-center">
+            <span>
+                <i class="fas fa-book me-2"></i>
+                Журнал: {{ current_course.name|default:"Все курсы" }}
+            </span>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" 
+                        data-bs-toggle="dropdown">
+                    Выбрать курс
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    {% for course in courses %}
+                    <li>
+                        <a class="dropdown-item" href="{% url 'teacher_gradebook' %}?course_id={{ course.id }}">
+                            {{ course.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if students_grades %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Студент</th>
+                        <th>Последняя оценка</th>
+                        <th>Средний балл</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student, grade, avg in students_grades %}
+                    <tr>
+                        <td>{{ student.get_full_name }}</td>
+                        <td>
+                            {% if grade %}
+                                <span class="badge bg-{% if grade.value >= 4 %}success{% else %}danger{% endif %}">
+                                    {{ grade.get_value_display }}
+                                </span>
+                                <small class="text-muted ms-2">{{ grade.date|date:"d.m" }}</small>
+                            {% else %}
+                                <span class="text-muted">Нет оценок</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if avg %}
+                                <strong>{{ avg|floatformat:1 }}</strong>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-primary"
+                               data-bs-toggle="modal" data-bs-target="#gradeModal"
+                               data-student-id="{{ student.id }}"
+                               data-student-name="{{ student.get_full_name }}">
+                                <i class="fas fa-edit"></i> Оценить
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            Нет данных для отображения. Выберите курс из списка.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Модальное окно для оценки -->
+<div class="modal fade" id="gradeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Выставление оценки</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'teacher_add_grade' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input type="hidden" name="student_id" id="studentIdInput">
+                    <input type="hidden" name="course_id" value="{{ current_course.id|default:'' }}">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Студент</label>
+                        <p class="fw-bold" id="studentNameDisplay"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Оценка</label>
+                        <select class="form-select" name="grade_value" required>
+                            <option value="">Выберите оценку</option>
+                            <option value="5">5 (Отлично)</option>
+                            <option value="4">4 (Хорошо)</option>
+                            <option value="3">3 (Удовлетворительно)</option>
+                            <option value="2">2 (Неудовлетворительно)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Комментарий</label>
+                        <textarea class="form-control" name="comment" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var gradeModal = document.getElementById('gradeModal');
+    gradeModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        document.getElementById('studentIdInput').value = button.getAttribute('data-student-id');
+        document.getElementById('studentNameDisplay').textContent = button.getAttribute('data-student-name');
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

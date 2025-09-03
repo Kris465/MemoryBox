@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load student_filters %}
+
+{% block title %}Моё расписание{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <i class="fas fa-calendar-day me-2"></i>Моё расписание
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Время</th>
+                        <th>Понедельник</th>
+                        <th>Вторник</th>
+                        <th>Среда</th>
+                        <th>Четверг</th>
+                        <th>Пятница</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for time_slot in time_slots %}
+                    <tr>
+                        <td>{{ time_slot }}</td>
+                        {% for day_code in day_codes %}
+                        <td>
+                            {% with schedules|filter_schedule:day_code|filter_time:time_slot as lessons %}
+                                {% for lesson in lessons %}
+                                    <strong>{{ lesson.course.name }}</strong><br>
+                                    <small>{{ lesson.course.teacher.get_full_name }}</small><br>
+                                    {% if lesson.classroom %}
+                                        Ауд. {{ lesson.classroom }}
+                                    {% else %}
+                                        (ауд. не указана)
+                                    {% endif %}
+                                {% empty %}
+                                    -
+                                {% endfor %}
+                            {% endwith %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
