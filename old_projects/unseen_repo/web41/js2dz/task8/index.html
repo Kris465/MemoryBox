@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Окружность и квадрат</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin: 10px 0;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Проверка размещения окружности в квадрате</h1>
+
+    <label for="circleInput">Введите длину окружности:</label>
+    <input type="number" id="circleInput" placeholder="Длина окружности" required>
+    
+    <br>
+
+    <label for="squareInput">Введите периметр квадрата:</label>
+    <input type="number" id="squareInput" placeholder="Периметр квадрата" required>
+    
+    <br>
+
+    <button id="circleSquareButton">Проверить</button>
+
+    <h2 id="circleSquareResult"></h2>
+
+    <script src="script.js"></script>
+</body>
+</html>
