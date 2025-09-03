@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разные виды меню</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Разные виды меню</h1>
+
+    <h2>Горизонтальное меню</h2>
+    <nav class="horizontal-menu">
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <h2>Вертикальное меню</h2>
+    <nav class="vertical-menu">
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li>
+                <a href="#services">Услуги</a>
+                <ul class="dropdown">
+                    <li><a href="#design">Дизайн</a></li>
+                    <li><a href="#development">Разработка</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <h2>Меню с иконками</h2>
+    <nav class="icon-menu">
+        <ul>
+            <li><a href="#home"><img src="home-icon.png" alt="Home"> Главная</a></li>
+            <li><a href="#about"><img src="about-icon.png" alt="About"> О нас</a></li>
+            <li><a href="#services"><img src="services-icon.png" alt="Services"> Услуги</a></li>
+            <li><a href="#contact"><img src="contact-icon.png" alt="Contact"> Контакты</a></li>
+        </ul>
+    </nav>
+
+    <h2>Активное меню</h2>
+    <nav class="active-menu">
+        <ul>
+            <li class="active"><a href="#home">Главная</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>   
+
+    <script src="script.js"></script>
+</body>
+</html>
