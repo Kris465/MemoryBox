@@ -1,0 +1,35 @@
+body{ 
+    font-family: monospace; 
+    background-repeat:calc(100%-50vh);
+}
+h1{
+    color:rgb(255, 251, 0);
+}
+.cont{
+    color: #f5eaea;
+    text-align: center;
+    display: inline;
+    justify-content: space-around;
+    margin-left: 120px;
+}
+h2{
+    color: red;
+}
+h3{
+    color:hotpink;
+}
+form{
+    font-size: xx-large;
+}
+input[type="text"] {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    outline: none;
+    height: 24px; 
+    font-size: larger;
+    width: 120px; 
+    color: #cccccc;
+    font-size: 11px;
+    font-family: Tahoma;
+    background: #ffffff !important;
+}
