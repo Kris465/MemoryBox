@@ -1,0 +1,4 @@
+<h1>{{ article.title }}</h1>
+<p>{{ article.content }}</p>
+<p><small>Опубликовано: {{ article.published_at }}</small></p>
+<a href="{% url 'article_list' %}">Назад к списку статей</a>
