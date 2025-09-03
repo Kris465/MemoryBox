@@ -1,0 +1,11 @@
+# venv
+.env
+.venv
+
+# files
+*.html
+*.json
+*.xlsx
+
+# configs
+config.py
