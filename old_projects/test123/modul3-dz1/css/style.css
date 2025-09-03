@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+div {
+    padding: 20px;
+    background-color: #f776a8;
+    width: 200px;
+    margin: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+

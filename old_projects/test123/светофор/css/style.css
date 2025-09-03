@@ -1,0 +1,32 @@
+body {
+    background-color: burlywood;
+}
+
+main {
+    display: flex;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    border: 2px solid #202020;
+    border-radius: 20px;
+    margin-right: 20px;
+    background-color: gray;
+}
+
+.round {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+}
+
+.grey-round {
+    transition: 0.5s;
+    background-color: #202020 !important;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .countdown {
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .new {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 10px;
+            border: 1px solid #000;
+            background-color: rgb(189, 189, 189);
+        }
+
+        .new span {
+            background-color: bisque;
+            padding: 5px;
+        }
+     
+    </style>
+</head>
+<body>
+
+    <div class="countdown" id="countdown"></div>
+
+        <script>
+            function updateCountdown() {
+                const now = new Date();
+                const nextYear = now.getFullYear() + 1;
+                const newYear = new Date(nextYear, 0, 1); 
+
+                const timeDiff = newYear - now; 
+
+                const seconds = Math.floor((timeDiff / 1000) % 60);
+                const minutes = Math.floor((timeDiff / 1000 / 60) % 60);
+                const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                document.getElementById('countdown').innerHTML = 
+                    `
+                        <div class="new">
+                            <p>${days} </p>
+                            <span> Days </span>
+                        </div>
+                        <div class="new">
+                            <p>${hours} </p>
+                            <span> Hours </span>
+                        </div>
+                        <div class="new">
+                            <p>${minutes} </p>
+                            <span> Minutes </span>
+                        </div>
+                        <div class="new">
+                            <p>${seconds} </p>
+                            <span> Seconds </span>
+                        </div>
+                    `;
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown(); 
+        </script>
+
+</body>
+</html>
