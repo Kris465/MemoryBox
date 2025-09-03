@@ -1,0 +1,12 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__
+
+# files
+*.log
+novels_list.txt
+novels.json
+selectors.json
