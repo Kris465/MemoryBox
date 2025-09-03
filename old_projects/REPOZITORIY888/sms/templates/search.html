@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<body>
+    <style>
+        .search-container {
+            margin: 20px;
+        }
+        .search-results {
+            margin-top: 20px;
+        }
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #f105be;
+            border-radius: 5px;
+        }
+    </style>
+<div class="search-container">
+    <form method="get" action="{% url 'search' %}">
+        {{ form.query }}
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="search-results">
+    {% if results %}
+        <h2>Results:</h2>
+        {% for item in results %}
+            <div class="result-item">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+    {% endif %}
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<body>
+    <h1>Grades List</h1>
+    <ul>
+        {% for grade in grades %}
+            <li>{{ grade.student.name }} - {{ grade.subject }}: {{ grade.grade }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_grade' %}">Add Grade</a>
+</body>
+{% endblock %}

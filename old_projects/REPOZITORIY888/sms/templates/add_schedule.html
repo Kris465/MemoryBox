@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<body>
+    <style>
+        body{
+            background-color: mediumaquamarine;
+        }
+        input[type="text"]{
+            background-color:snow;
+            margin-left: 120px;
+        }
+        label{
+            margin-left: 120px;
+        }
+        li{
+            margin-left: 120px;
+            list-style-type: none;
+        }
+        .form[method="post"]{
+            font-size: xx-large;
+            margin-left: 400px;
+        }
+        .button[type="text"]{
+            background-color:chartreuse;
+        }
+
+    </style>
+    <h1>Add Schedule</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+{% endblock %}
