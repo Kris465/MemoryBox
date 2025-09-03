@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: aquamarine;
+    border-radius: 5px;
+}
+
+h2 {
+    color: black;
+}
+
+@media (max-width: 760px) {
+    .container {
+        flex-direction: column;
+    }
+}
