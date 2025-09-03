@@ -1,0 +1,32 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif; /* Шрифт для всего тела */
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем отступы */
+}
+
+.container {
+    display: flex; /* Используем Flexbox для колонок */
+    flex-direction: row; /* Горизонтальное направление */
+    justify-content: space-between; /* Равномерное распределение пространства */
+    padding: 20px; /* Отступ внутри контейнера */
+}
+
+.column {
+    flex: 1; /* Каждая колонка занимает равное пространство */
+    margin: 10px; /* Отступ между колонками */
+    padding: 20px; /* Отступ внутри колонок */
+    background-color: #f4f4f4; /* Цвет фона колонок */
+    border-radius: 5px; /* Скругление углов */
+}
+
+h2 {
+    color: #333; /* Цвет заголовков */
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Вертикальное направление на малых экранах */
+    }
+}

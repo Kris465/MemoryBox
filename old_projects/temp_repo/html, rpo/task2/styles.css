@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif; /* Шрифт для всего тела */
+}
+
+.color-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
+}
+
+.color-list li {
+    font-size: 24px; /* Размер шрифта */
+    margin: 10px 0; /* Отступы между элементами списка */
+}
+
+/* Цвета для каждого элемента списка */
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.orange {
+    color: orange;
+}
