@@ -1,0 +1,156 @@
+{% load static %}<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переходник с аналитикой</title>
+    <link rel="stylesheet" href="{% static 'firts.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bellota&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Выберите сайт для перехода</h1>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value" id="visitCount">0</div>
+                <div class="stat-label">Всего переходов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="lastVisitTime">-</div>
+                <div class="stat-label">Последний переход</div>
+            </div>
+            <div class="time-scale" id="timeScale">
+                <div class="time-bar"></div>
+                <div class="time-marker" id="timeMarker"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-primary" id="siteA">Перейти в магазин травы </button>
+            <button class="btn btn-secondary" id="siteB">Перейти на блог</button>
+        </div>
+    </div>
+    
+    <div class="transition-overlay" id="transitionOverlay"></div>
+    <div class="loading-text" id="loadingText">Переходим...</div>
+
+    <script src="{% static 'firts.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const siteABtn = document.getElementById('siteA');
+            const siteBBtn = document.getElementById('siteB');
+            const overlay = document.getElementById('transitionOverlay');
+            const loadingText = document.getElementById('loadingText');
+            const visitCountEl = document.getElementById('visitCount');
+            const lastVisitTimeEl = document.getElementById('lastVisitTime');
+            const timeBar = document.querySelector('.time-bar');
+            const timeMarker = document.getElementById('timeMarker');
+            
+            let visits = localStorage.getItem('transitionVisits') || 0;
+            let lastVisitTime = localStorage.getItem('lastTransitionTime');
+            let visitHistoryMap = new Map(JSON.parse(localStorage.getItem('visitHistoryMap') || '[]'));
+            
+            function initStats() {
+                visitCountEl.textContent = visits;
+                
+                if (lastVisitTime) {
+                    const lastVisitDate = new Date(parseInt(lastVisitTime));
+                    lastVisitTimeEl.textContent = lastVisitDate.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + ' ' + 
+                                                 lastVisitDate.toLocaleDateString('ru-RU');
+                } else {
+                    lastVisitTimeEl.textContent = '-';
+                }
+                
+                updateTimeScale();
+            }
+            
+            function updateTimeScale() {
+                const timePoints = Array.from({length: 24}, (_, i) => ({hour: i, count: 0}));
+
+                visitHistoryMap.forEach((count, hour) => {
+                    if (hour >= 0 && hour < 24) {
+                        timePoints[hour].count = count;
+                    }
+                });
+                
+                const maxCount = Math.max(...timePoints.map(p => p.count), 1);
+                
+                const now = new Date();
+                const currentHour = now.getHours();
+                timeMarker.style.left = `${(currentHour / 24) * 100}%`;
+                
+                let gradientParts = [];
+                timePoints.forEach((point, i) => {
+                    const intensity = point.count / maxCount;
+                    const color = `rgba(66, 133, 244, ${intensity * 0.8 + 0.2})`; 
+                    const pos1 = (i / 24) * 100;
+                    const pos2 = ((i + 1) / 24) * 100;
+                    gradientParts.push(`${color} ${pos1}%`);
+                    gradientParts.push(`${color} ${pos2}%`);
+                });
+                
+                timeBar.style.background = `linear-gradient(90deg, ${gradientParts.join(', ')})`;
+                timeBar.style.width = '100%';
+            }
+            
+            function handleTransition(btn, url) {
+                const btnColor = window.getComputedStyle(btn).backgroundColor;
+
+                overlay.style.backgroundColor = btnColor;
+                overlay.style.width = '0'; 
+                overlay.style.display = 'block';
+                
+                loadingText.textContent = 'Переходим...';
+                loadingText.style.opacity = '1';
+                loadingText.classList.add('animate'); 
+                
+                setTimeout(() => {
+                    overlay.style.width = '100%';
+                }, 10); 
+
+                visits++;
+                const now = new Date();
+                const timestamp = now.getTime();
+                const currentHour = now.getHours();
+                
+                visitHistoryMap.set(currentHour, (visitHistoryMap.get(currentHour) || 0) + 1);
+                
+                localStorage.setItem('transitionVisits', visits);
+                localStorage.setItem('lastTransitionTime', timestamp);
+                localStorage.setItem('visitHistoryMap', JSON.stringify(Array.from(visitHistoryMap.entries())));
+                
+                setTimeout(() => {
+                    loadingText.textContent = 'Открываем сайт...';
+                    
+                    const finalUrl = new URL(url, window.location.origin);
+                    finalUrl.searchParams.set('from', 'transition_page');
+                    finalUrl.searchParams.set('t', timestamp);
+                    
+                    setTimeout(() => {
+                        window.location.href = finalUrl.toString();
+                    }, 100);
+                }, 300);
+            }
+            
+            initStats();
+            
+            siteABtn.addEventListener('click', function() {
+                handleTransition(this, '{% url "shop:green_corner" %}'); 
+            });
+            
+            siteBBtn.addEventListener('click', function() {
+                handleTransition(this, '{% url "blog:main" %}'); 
+            });
+
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    overlay.style.width = '0';
+                    overlay.style.display = 'none';
+                    loadingText.style.opacity = '0';
+                    loadingText.classList.remove('animate');
+                    initStats();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

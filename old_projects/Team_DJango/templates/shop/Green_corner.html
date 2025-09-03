@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Природные Дары: Эко-Магазин Трав{% endblock %}
+
+{% block extra_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header">
+        <nav>
+            <ul class="menu">
+                <li><a href="#hero-section">Главная</a></li>
+                <li><a href="#products">Товары</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header> 
+
+    <section id="hero-section" class="hero-section">
+        <div class="hero-content">
+            <h1>Природные Дары: Ваш Эко-Магазин Трав</h1>
+            <p>От освежающей мяты до экзотических соцветий – откройте для себя силу природы.</p>
+            <button class="cta-button" onclick="document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });">Начать Поиск</button>
+        </div>
+    </section>
+
+    <section id="products" class="info-section products">
+        <div class="container">
+            <h2>Наши Травы и Растения</h2>
+            <p style="margin-bottom: 30px; font-size: 1.1rem;">Мы предлагаем тщательно отобранные травы и растения, выращенные с заботой о природе и качестве. Наша цель — предоставить вам лучшие природные продукты для здоровья и благополучия, соблюдая все местные законы и нормативы.</p>
+            <div class="product-grid">
+                {% for product in products %}
+                <div class="product-card {% if "legal" in product.name|lower or "конопля" in product.name|lower or "расслаб" in product.name|lower %}legal-product{% endif %}">
+                    <img src="{% if product.image %}{{ product.image }}{% else %}{% static 'shop/images/placeholder.jpg' %}{% endif %}" alt="{{ product.name }}">
+                    <h3>{{ product.name }} {% if "legal" in product.name|lower or "конопля" in product.name|lower or "расслаб" in product.name|lower %}<span class="legal-note">(Только где разрешено!)</span>{% endif %}</h3>
+                    <p>{{ product.description }}</p>
+                    <span class="price">{{ product.price }} €</span>
+                    <button class="buy-button" data-product-id="{{ product.pk }}" data-product-name="{{ product.name }}">Добавить в Корзину</button>
+                </div>
+                {% empty %}
+                <p class="text-center col-span-full text-lg text-gray-600">Товаров пока нет. Добавьте их через <a href="{% url 'admin:index' %}" class="text-blue-600 hover:underline">админ-панель</a>!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="info-section contact">
+        <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            <p>Есть вопросы или предложения? Мы всегда готовы помочь.</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Ваше Имя" required>
+                <input type="email" placeholder="Ваш Email" required>
+                <textarea placeholder="Ваше сообщение..." rows="5"></textarea>
+                <button type="submit" class="cta-button">Отправить Сообщение</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Природные Дары. Все права защищены.</p>
+        <p>Наш магазин работает только в регионах, где это разрешено законом. Пожалуйста, соблюдайте местные нормативы.</p>
+        <p class="mt-4"><a href="{% url 'admin:index' %}" class="text-white hover:text-green-200">Панель администратора</a></p>
+    </footer>
+
+    <div id="shopCustomAlertModal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-[1000] hidden">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center transform scale-0 transition-transform duration-300">
+            <h3 class="text-3xl font-bold text-green-700 mb-4">Сообщение магазина</h3>
+            <p class="text-gray-700 mb-6" id="shopAlertMessage"></p>
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-md" onclick="shopAppInstance.hideCustomAlert()">
+                ОК
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'shop/shop.js' %}"></script>
+{% endblock %}

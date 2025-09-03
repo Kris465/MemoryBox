@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Мой Микроблог{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <style>
+        .post-content-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--color-card-light);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            line-height: 1.8;
+            margin-top: 100px;
+        }
+        .post-content-container h1 {
+            font-family: 'CuberFont', sans-serif !important;
+            font-size: 2.8em;
+            color: var(--color-text-light);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .post-meta {
+            text-align: center;
+            color: var(--color-text-light-dim);
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+        .post-meta span {
+            margin: 0 10px;
+        }
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 30px;
+            border: 2px solid #a7f3d0;
+        }
+        .post-full-text p {
+            margin-bottom: 1em;
+            font-size: 1.1em;
+            color: var(--color-text-light);
+        }
+        html[data-theme='dark'] .post-content-container {
+            background-color: var(--color-card-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #2F3E4C;
+        }
+        html[data-theme='dark'] .post-content-container h1 {
+            color: var(--color-text-dark);
+        }
+        html[data-theme='dark'] .post-meta {
+            color: var(--color-text-dark-dim);
+        }
+        html[data-theme='dark'] .post-full-text p {
+            color: var(--color-text-dark);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="post-content-container">
+    <h1>{{ post.title }}</h1>
+    <p class="post-meta">
+        <span>Категория: {{ post.category }}</span> |
+        <span>Опубликовано: {{ post.pub_date|date:"d.m.Y H:i" }}</span>
+    </p>
+    {% if post.image %}
+        <img src="{{ post.image }}" alt="{{ post.title }}" class="post-image">
+    {% endif %}
+    <div class="post-full-text text-gray-700">
+        <p>{{ post.content|linebreaksbr }}</p>
+    </div>
+    <div class="mt-8 text-center">
+        <a href="{% url 'blog:main' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-md transition-all duration-300">
+            <i class="fas fa-arrow-left mr-2"></i> Вернуться к ленте
+        </a>
+    </div>
+</div>
+{% endblock %}

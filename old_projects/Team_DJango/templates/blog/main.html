@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Микроблог | Мой Блог{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="preloader" class="fixed inset-0 bg-blue-50 flex justify-center items-center z-[9999] transition-opacity duration-500">
+        <div class="w-16 h-16 border-8 border-blue-300 rounded-full border-t-blue-600 animate-spin"></div>
+    </div>
+
+    <div id="theme-transition-overlay" class="hidden"></div>
+
+    <main class="container mx-auto px-4 py-8 flex-grow mt-20 md:mt-24">
+        <section id="what-happening" class="bg-white p-6 rounded-2xl shadow-lg mb-8 border border-blue-100 flex items-start space-x-4">
+            <img src="https://placehold.co/48x48/CCCCCC/FFFFFF?text=Аватар" alt="Аватар пользователя" class="w-12 h-12 rounded-full object-cover border-2 border-blue-300">
+            <div class="flex-grow">
+                <textarea class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none" rows="3" placeholder="Что у вас нового?"></textarea>
+                <div class="flex justify-between items-center mt-3">
+                    <div class="flex space-x-3 text-gray-500">
+                        <i class="fas fa-image cursor-pointer hover:text-blue-500 transition-colors icon-hover-effect"></i>
+                        <i class="fas fa-poll cursor-pointer hover:text-blue-500 transition-colors icon-hover-effect"></i>
+                        <i class="fas fa-smile cursor-pointer hover:text-blue-500 transition-colors icon-hover-effect"></i>
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        Опубликовать
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="news-feed" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-8 text-blue-700">
+                <i class="fas fa-hashtag mr-2"></i>Лента
+            </h2>
+
+            <div id="postsGrid" class="space-y-6">
+                {% for post in posts %}
+                <article class="tweet-card bg-white p-5 rounded-2xl shadow-md border border-gray-200">
+                    <div class="flex items-start space-x-3 mb-3">
+                        <img src="https://placehold.co/48x48/90CAF9/FFFFFF?text=Аватар" alt="Аватар автора" class="w-12 h-12 rounded-full object-cover border-2 border-blue-200">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="font-bold text-gray-900">{{ post.category }}</span>
+                                <span class="text-gray-500 text-sm">@{{ post.category|lower|truncatechars:10 }}</span>
+                                <span class="text-gray-500 text-sm">&middot;</span>
+                                <span class="text-gray-500 text-sm">{{ post.pub_date|date:"d M" }}</span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800 mt-1">{{ post.title }}</h3>
+                        </div>
+                    </div>
+                    {% if post.image %}
+                        <img src="{{ post.image }}" alt="{{ post.title }}" class="tweet-image w-full max-h-96 object-cover rounded-xl mb-4 border border-gray-200">
+                    {% endif %}
+                    <p class="text-gray-800 mb-4">{{ post.content|truncatechars:200 }}</p>
+                    <a href="{% url 'blog:post_detail' pk=post.pk %}" class="text-blue-500 hover:underline text-sm font-semibold flex items-center justify-end">
+                        Развернуть <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                    <div class="tweet-actions flex justify-around text-gray-500 mt-4 border-t border-gray-100 pt-3">
+                        <button class="flex items-center space-x-2 hover:text-blue-500 transition-colors">
+                            <i class="far fa-comment"></i> <span class="text-sm">0</span>
+                        </button>
+                        <button class="flex items-center space-x-2 hover:text-green-500 transition-colors">
+                            <i class="fas fa-retweet"></i> <span class="text-sm">0</span>
+                        </button>
+                        <button class="flex items-center space-x-2 hover:text-red-500 transition-colors">
+                            <i class="far fa-heart"></i> <span class="text-sm">0</span>
+                        </button>
+                        <button class="flex items-center space-x-2 hover:text-blue-500 transition-colors">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </article>
+                {% empty %}
+                <p class="text-center text-lg text-gray-600">Пока нет публикаций. Попробуйте добавить что-то через <a href="{% url 'admin:index' %}" class="text-blue-600 hover:underline">админ-панель</a>!</p>
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_next %}
+            <div id="load-more-container" class="text-center mt-12">
+                <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-md transition-all duration-300 transform hover:scale-105 pulse-effect">
+                    Загрузить ещё <i class="fas fa-arrow-down ml-2"></i>
+                </button>
+            </div>
+            {% endif %}
+
+            <div id="loadingIndicator" class="text-center py-10 hidden">
+                <div class="w-16 h-16 border-4 border-blue-300 rounded-full border-t-blue-600 animate-spin mx-auto"></div>
+                <p class="mt-4 text-gray-600">Загружаем больше публикаций...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-100 text-gray-600 py-6 text-center shadow-inner mt-auto">
+        <p>&copy; 2025 Мой Микроблог. Все права защищены.</p>
+    </footer>
+
+    <button id="back-to-top" class="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 flex justify-center items-center text-xl shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-blue-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="notification-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-[1000] hidden">
+        <div class="modal-content bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center transform scale-0 transition-transform duration-300">
+            <h3 class="text-2xl font-bold text-blue-700 mb-4">Уведомление</h3>
+            <p class="text-gray-700 mb-6">Ваше действие выполнено успешно!</p>
+            <button id="close-modal-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full text-lg shadow-md">
+                ОК
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'blog/blog.js' %}"></script>
+{% endblock %}
