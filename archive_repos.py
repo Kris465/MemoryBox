@@ -82,7 +82,7 @@ def main():
              "Добавляем временный remote"),
             (f"git merge -s ours --allow-unrelated-histories --no-commit temp_repo_{i}/main",
              "Подготавливаем merge"),
-            (f"git read-tree --prefix={target_dir}/ -u temp_repo_{i}/main",
+            (f"git read-tree --prefix=old_projects/{target_dir}/ -u temp_repo_{i}/main",
              "Копируем содержимое"),
             (f"git commit -m \"ARCHIVE: Added {repo_name} as subdirectory\"",
              "Фиксируем архив"),
