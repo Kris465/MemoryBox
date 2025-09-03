@@ -1,0 +1,17 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__
+
+# logs
+*.log
+
+# files
+*.html
+*.json
+
+# screenshots
+*.jpg
+*.png
