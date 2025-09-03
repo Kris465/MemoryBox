@@ -1,0 +1,9 @@
+# standart files
+# python
+.env
+.venv
+
+# javascript
+package.json
+package-lock.json
+nod_modules
