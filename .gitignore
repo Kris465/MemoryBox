@@ -1,0 +1,14 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__
+
+# files
+*.json
+*.csv
+*.txt
+
+# database
+*.db
