@@ -11,3 +11,6 @@ __pycache__
 
 # database
 *.db
+
+# logs
+*.log
