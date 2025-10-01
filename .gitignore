@@ -8,7 +8,6 @@ __pycache__
 # files
 *.json
 *.csv
-*.txt
 
 # database
 *.db
