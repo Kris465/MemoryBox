@@ -9,7 +9,6 @@ from dotenv import load_dotenv, find_dotenv
 from loguru import logger
 from src.utils.url_parser import extract_course_id
 
-
 load_dotenv(find_dotenv())
 
 
@@ -30,8 +29,8 @@ class StepikDownloader:
         try:
             auth = HTTPBasicAuth(self.client_id, self.client_secret)
             resp = requests.post(
-                'https://stepik.org/oauth2/token/', 
-                data={'grant_type': 'client_credentials'}, 
+                'https://stepik.org/oauth2/token/',
+                data={'grant_type': 'client_credentials'},
                 auth=auth
             )
             resp.raise_for_status()
@@ -52,13 +51,31 @@ class StepikDownloader:
             logger.error(f"Ошибка API запроса {url}: {e}")
             raise
 
+    def _fetch_objects_batch(self, obj_class: str, obj_ids: List[int]) -> List[Dict]:
+        """Пакетная загрузка объектов"""
+        if not obj_ids:
+            return []
+
+        objects = []
+        step_size = 30
+
+        for i in range(0, len(obj_ids), step_size):
+            batch_ids = obj_ids[i:i + step_size]
+            ids_param = '&'.join(f'ids[]={obj_id}' for obj_id in batch_ids)
+            api_url = f'https://stepik.org/api/{obj_class}s?{ids_param}'
+
+            response = self._make_api_request(api_url)
+            objects.extend(response[f'{obj_class}s'])
+
+        return objects
+
     def get_course_structure(self, course_id: str) -> Dict:
         """Получение структуры курса"""
         logger.info(f"Получение структуры курса {course_id}")
         return self._make_api_request(f'https://stepik.org/api/courses/{course_id}')
 
     def get_all_sections(self, course_data: Dict) -> List[int]:
-        """Получение списка разделов (недель) курса"""
+        """Получение списка разделов курса"""
         sections = course_data['courses'][0]['sections']
         logger.info(f"Найдено разделов: {len(sections)}")
         return sections
@@ -66,95 +83,72 @@ class StepikDownloader:
     def get_units_for_sections(self, section_ids: List[int]) -> List[List[int]]:
         """Получение юнитов для каждого раздела"""
         logger.info(f"Получение юнитов для {len(section_ids)} разделов")
-        units = []
-        for section_id in section_ids:
-            section_data = self._make_api_request(f'https://stepik.org/api/sections/{section_id}')
-            units.append(section_data['sections'][0]['units'])
+
+        sections_data = self._fetch_objects_batch('section', section_ids)
+        units = [section['units'] for section in sections_data]
+
         return units
 
     def get_steps_for_week(self, units_list: List[List[int]], week: int) -> List[int]:
         """Получение всех шагов для указанной недели"""
         logger.info(f"Получение шагов для недели {week}")
 
-        # week - 1 потому что недели в коде с 1, а в списке с 0
         unit_ids = units_list[week - 1]
+        units_data = self._fetch_objects_batch('unit', unit_ids)
+        lesson_ids = [unit['lesson'] for unit in units_data]
+        lessons_data = self._fetch_objects_batch('lesson', lesson_ids)
 
-        # Получаем данные по каждому юниту
-        units_data = []
-        for unit_id in unit_ids:
-            unit_data = self._make_api_request(f'https://stepik.org/api/units/{unit_id}')
-            units_data.append(unit_data)
-
-        # Извлекаем ID уроков
-        lesson_ids = [unit['units'][0]['lesson'] for unit in units_data]
-
-        # Получаем шаги для каждого урока
         all_steps = []
-        for lesson_id in lesson_ids:
-            lesson_data = self._make_api_request(f'https://stepik.org/api/lessons/{lesson_id}')
-            steps = lesson_data['lessons'][0]['steps']
-            all_steps.extend(steps)
+        for lesson in lessons_data:
+            all_steps.extend(lesson['steps'])
 
         logger.info(f"Найдено шагов для недели {week}: {len(all_steps)}")
         return all_steps
 
-    def filter_video_steps(self, step_ids: List[int]) -> List[Dict]:
-        """Фильтрация видео и аудио шагов"""
+    def filter_media_steps(self, step_ids: List[int]) -> List[Dict]:
+        """Фильтрация медиа-шагов"""
         logger.info(f"Фильтрация медиа из {len(step_ids)} шагов")
+
+        steps_data = self._fetch_objects_batch('step', step_ids)
         media_blocks = []
 
-        for step_id in step_ids:
-            step_data = self._make_api_request(f'https://stepik.org/api/steps/{step_id}')
-            step_block = step_data['steps'][0]['block']
+        for step in steps_data:
+            block = step['block']
+            if block.get('video') is not None:
+                media_blocks.append(block)
 
-            # Проверяем, есть ли видео ИЛИ аудио в шаге
-            if step_block.get('video') or step_block.get('audio'):
-                media_blocks.append(step_block)
-
-        logger.success(f"Найдено медиа: {len(media_blocks)}")
+        logger.success(f"Найдено медиа-блоков: {len(media_blocks)}")
         return media_blocks
 
-    def get_media_urls(self, media_blocks: List[Dict], quality: str = '720') -> List[Dict]:
-        """Получение URL видео и аудио"""
-        media_urls = []
+    def get_video_urls(self, media_blocks: List[Dict], quality: str = '720') -> List[Dict]:
+        """Получение URL видео"""
+        video_urls = []
 
         for media_block in media_blocks:
             selected_url = None
             message = None
-            media_type = None
 
-            # Обрабатываем видео
-            if media_block.get('video'):
-                media_type = 'video'
-                video_data = media_block['video']
+            video_data = media_block['video']
 
-                # Ищем URL с нужным качеством
-                for url_info in video_data['urls']:
-                    if url_info['quality'] == quality:
-                        selected_url = url_info['url']
-                        break
+            for url_info in video_data['urls']:
+                if url_info['quality'] == quality:
+                    selected_url = url_info['url']
+                    break
 
-                # Если нужное качество не найдено, берем первое доступное
-                if not selected_url:
-                    selected_url = video_data['urls'][0]['url']
-                    message = f"Качество {quality}p недоступно, используется {video_data['urls'][0]['quality']}p"
-                    logger.warning(message)
-
-            # Обрабатываем аудио
-            elif media_block.get('audio'):
-                media_type = 'audio'
-                audio_data = media_block['audio']
-                selected_url = audio_data['url']  # У аудио обычно один URL
+            # Если нужное качество не найдено, берем первое доступное
+            if not selected_url and video_data['urls']:
+                selected_url = video_data['urls'][0]['url']
+                actual_quality = video_data['urls'][0]['quality']
+                message = f"Качество {quality}p недоступно, используется {actual_quality}p"
+                logger.warning(message)
 
             if selected_url:
-                media_urls.append({
+                video_urls.append({
                     'url': selected_url,
-                    'message': message,
-                    'media_type': media_type,  # 'video' или 'audio'
-                    'original_block': media_block
+                    'message': message
                 })
 
-        return media_urls
+        return video_urls
 
     def _reporthook(self, blocknum, blocksize, totalsize):
         """Прогресс-бар для скачивания"""
@@ -168,18 +162,15 @@ class StepikDownloader:
         else:
             sys.stderr.write(f"read {readsofar}\n")
 
-    def download_media(self, media_urls: List[Dict],
-                       output_dir: str, week: int):
-        """Скачивание видео и аудио файлов"""
+    def download_videos(self, video_urls: List[Dict], output_dir: str, week: int):
+        """Скачивание видеофайлов"""
         week_dir = os.path.join(output_dir, f'week_{week}')
         os.makedirs(week_dir, exist_ok=True)
 
         logger.info(f'Скачивание в папку: {week_dir}')
 
-        for i, media_info in enumerate(media_urls):
-            # Определяем расширение файла по типу медиа
-            extension = '.mp4' if media_info['media_type'] == 'video' else '.mp3'
-            filename = os.path.join(week_dir, f'media_{i+1}{extension}')
+        for i, video_info in enumerate(video_urls):
+            filename = os.path.join(week_dir, f'video_{i+1}.mp4')
 
             # Пропускаем если файл уже существует
             if os.path.isfile(filename):
@@ -187,24 +178,25 @@ class StepikDownloader:
                 continue
 
             # Выводим предупреждение о качестве
-            if media_info['message']:
-                logger.warning(media_info['message'])
+            if video_info['message']:
+                logger.warning(video_info['message'])
 
             try:
-                logger.info(f'Скачивание {media_info["media_type"]}: {filename}')
-                urllib.request.urlretrieve(media_info['url'],
+                logger.info(f'Скачивание: {filename}')
+                urllib.request.urlretrieve(video_info['url'],
                                            filename, self._reporthook)
                 logger.success(f'Завершено: {filename}')
+
             except Exception as e:
                 logger.error(f'Ошибка при скачивании {filename}: {e}')
                 if os.path.isfile(filename):
                     os.remove(filename)
 
-    def download_course_media(self, course_url: str,
-                              weeks_to_process: Optional[int] = None,
-                              quality: str = '720',
-                              output_dir: str = './data/videos'):
-        """Основной метод для скачивания медиа курса"""
+    def download_course_videos(self, course_url: str,
+                               weeks_to_process: Optional[int] = None,
+                               quality: str = '720',
+                               output_dir: str = './data/videos'):
+        """Основной метод для скачивания видео курса"""
 
         logger.info(f"Начало скачивания курса: {course_url}")
 
@@ -229,17 +221,15 @@ class StepikDownloader:
         for week in range(1, weeks_to_process + 1):
             logger.info(f"Обработка недели {week}")
 
-            # Получаем медиа для недели
+            # Получаем шаги для недели
             steps = self.get_steps_for_week(all_units, week)
-            media_blocks = self.filter_video_steps(steps)
+            media_blocks = self.filter_media_steps(steps)
 
             if not media_blocks:
-                logger.info(f"На неделе {week} нет медиа")
+                logger.info(f"На неделе {week} нет видео")
                 continue
 
-            media_urls = self.get_media_urls(media_blocks, quality)
-
-            # Скачиваем медиа
-            self.download_media(media_urls, output_dir, week)
+            video_urls = self.get_video_urls(media_blocks, quality)
+            self.download_videos(video_urls, output_dir, week)
 
         logger.success("Скачивание завершено!")
