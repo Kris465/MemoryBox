@@ -1,6 +1,5 @@
 import json
 import os
-import re
 import urllib.request
 import requests
 import sys
@@ -8,6 +7,7 @@ from typing import List, Dict, Optional
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv, find_dotenv
 from loguru import logger
+from src.utils.url_parser import extract_course_id
 
 
 load_dotenv(find_dotenv())
@@ -51,18 +51,6 @@ class StepikDownloader:
         except Exception as e:
             logger.error(f"Ошибка API запроса {url}: {e}")
             raise
-
-    def extract_course_id(self, url: str) -> Optional[str]:
-        """Извлечение ID курса из URL"""
-        match = re.search(r'course/(\d+)', url) or re.search(r'\d+', url)
-        course_id = match.group(1) if match else None
-
-        if course_id:
-            logger.info(f"Извлечен ID курса: {course_id}")
-        else:
-            logger.error(f"Не удалось извлечь ID курса из URL: {url}")
-
-        return course_id
 
     def get_course_structure(self, course_id: str) -> Dict:
         """Получение структуры курса"""
@@ -111,49 +99,62 @@ class StepikDownloader:
         return all_steps
 
     def filter_video_steps(self, step_ids: List[int]) -> List[Dict]:
-        """Фильтрация только видео-шагов"""
-        logger.info(f"Фильтрация видео из {len(step_ids)} шагов")
-        video_blocks = []
+        """Фильтрация видео и аудио шагов"""
+        logger.info(f"Фильтрация медиа из {len(step_ids)} шагов")
+        media_blocks = []
 
         for step_id in step_ids:
             step_data = self._make_api_request(f'https://stepik.org/api/steps/{step_id}')
             step_block = step_data['steps'][0]['block']
 
-            # Проверяем, есть ли видео в шаге
-            if step_block.get('video'):
-                video_blocks.append(step_block)
+            # Проверяем, есть ли видео ИЛИ аудио в шаге
+            if step_block.get('video') or step_block.get('audio'):
+                media_blocks.append(step_block)
 
-        logger.success(f"Найдено видео: {len(video_blocks)}")
-        return video_blocks
+        logger.success(f"Найдено медиа: {len(media_blocks)}")
+        return media_blocks
 
-    def get_video_urls(self, video_blocks: List[Dict], quality: str = '720') -> List[Dict]:
-        """Получение URL видео с выбранным качеством"""
-        video_urls = []
+    def get_media_urls(self, media_blocks: List[Dict], quality: str = '720') -> List[Dict]:
+        """Получение URL видео и аудио"""
+        media_urls = []
 
-        for video_block in video_blocks:
-            video_data = video_block['video']
+        for media_block in media_blocks:
             selected_url = None
             message = None
+            media_type = None
 
-            # Ищем URL с нужным качеством
-            for url_info in video_data['urls']:
-                if url_info['quality'] == quality:
-                    selected_url = url_info['url']
-                    break
+            # Обрабатываем видео
+            if media_block.get('video'):
+                media_type = 'video'
+                video_data = media_block['video']
 
-            # Если нужное качество не найдено, берем первое доступное
-            if not selected_url:
-                selected_url = video_data['urls'][0]['url']
-                message = f"Качество {quality}p недоступно, используется {video_data['urls'][0]['quality']}p"
-                logger.warning(message)
+                # Ищем URL с нужным качеством
+                for url_info in video_data['urls']:
+                    if url_info['quality'] == quality:
+                        selected_url = url_info['url']
+                        break
 
-            video_urls.append({
-                'url': selected_url,
-                'message': message,
-                'original_block': video_block
-            })
+                # Если нужное качество не найдено, берем первое доступное
+                if not selected_url:
+                    selected_url = video_data['urls'][0]['url']
+                    message = f"Качество {quality}p недоступно, используется {video_data['urls'][0]['quality']}p"
+                    logger.warning(message)
 
-        return video_urls
+            # Обрабатываем аудио
+            elif media_block.get('audio'):
+                media_type = 'audio'
+                audio_data = media_block['audio']
+                selected_url = audio_data['url']  # У аудио обычно один URL
+
+            if selected_url:
+                media_urls.append({
+                    'url': selected_url,
+                    'message': message,
+                    'media_type': media_type,  # 'video' или 'audio'
+                    'original_block': media_block
+                })
+
+        return media_urls
 
     def _reporthook(self, blocknum, blocksize, totalsize):
         """Прогресс-бар для скачивания"""
@@ -167,17 +168,18 @@ class StepikDownloader:
         else:
             sys.stderr.write(f"read {readsofar}\n")
 
-    def download_videos(self, video_urls: List[Dict],
-                        output_dir: str,
-                        week: int):
-        """Скачивание видеофайлов"""
+    def download_media(self, media_urls: List[Dict],
+                       output_dir: str, week: int):
+        """Скачивание видео и аудио файлов"""
         week_dir = os.path.join(output_dir, f'week_{week}')
         os.makedirs(week_dir, exist_ok=True)
 
         logger.info(f'Скачивание в папку: {week_dir}')
 
-        for i, video_info in enumerate(video_urls):
-            filename = os.path.join(week_dir, f'video_{i+1}.mp4')
+        for i, media_info in enumerate(media_urls):
+            # Определяем расширение файла по типу медиа
+            extension = '.mp4' if media_info['media_type'] == 'video' else '.mp3'
+            filename = os.path.join(week_dir, f'media_{i+1}{extension}')
 
             # Пропускаем если файл уже существует
             if os.path.isfile(filename):
@@ -185,29 +187,29 @@ class StepikDownloader:
                 continue
 
             # Выводим предупреждение о качестве
-            if video_info['message']:
-                logger.warning(video_info['message'])
+            if media_info['message']:
+                logger.warning(media_info['message'])
 
             try:
-                logger.info(f'Скачивание: {filename}')
-                urllib.request.urlretrieve(video_info['url'], filename,
-                                           self._reporthook)
+                logger.info(f'Скачивание {media_info["media_type"]}: {filename}')
+                urllib.request.urlretrieve(media_info['url'],
+                                           filename, self._reporthook)
                 logger.success(f'Завершено: {filename}')
             except Exception as e:
                 logger.error(f'Ошибка при скачивании {filename}: {e}')
                 if os.path.isfile(filename):
                     os.remove(filename)
 
-    def download_course_videos(self, course_url: str,
-                               weeks_to_process: Optional[int] = None,
-                               quality: str = '720',
-                               output_dir: str = './data/videos'):
-        """Основной метод для скачивания видео курса"""
+    def download_course_media(self, course_url: str,
+                              weeks_to_process: Optional[int] = None,
+                              quality: str = '720',
+                              output_dir: str = './data/videos'):
+        """Основной метод для скачивания медиа курса"""
 
         logger.info(f"Начало скачивания курса: {course_url}")
 
         # Извлекаем ID курса
-        course_id = self.extract_course_id(course_url)
+        course_id = extract_course_id(course_url)
         if not course_id:
             raise ValueError("Не удалось извлечь ID курса из URL")
 
@@ -227,17 +229,17 @@ class StepikDownloader:
         for week in range(1, weeks_to_process + 1):
             logger.info(f"Обработка недели {week}")
 
-            # Получаем видео для недели
+            # Получаем медиа для недели
             steps = self.get_steps_for_week(all_units, week)
-            video_blocks = self.filter_video_steps(steps)
+            media_blocks = self.filter_video_steps(steps)
 
-            if not video_blocks:
-                logger.info(f"На неделе {week} нет видео")
+            if not media_blocks:
+                logger.info(f"На неделе {week} нет медиа")
                 continue
 
-            video_urls = self.get_video_urls(video_blocks, quality)
+            media_urls = self.get_media_urls(media_blocks, quality)
 
-            # Скачиваем видео
-            self.download_videos(video_urls, output_dir, week)
+            # Скачиваем медиа
+            self.download_media(media_urls, output_dir, week)
 
         logger.success("Скачивание завершено!")

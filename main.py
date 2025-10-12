@@ -1,7 +1,6 @@
 from dotenv import load_dotenv, find_dotenv
 from loguru import logger
 from src.downloader.stepik_downloader import StepikDownloader
-from src.utils import url_parser
 
 
 # Настройка логов
@@ -23,7 +22,7 @@ def main():
         weeks_to_process = int(weeks_input) if weeks_input else None
 
         # Запускаем скачивание
-        downloader.download_course_videos(
+        downloader.download_course_media(
             course_url=course_url,
             weeks_to_process=weeks_to_process,
             quality="720"
