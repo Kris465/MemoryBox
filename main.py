@@ -1,8 +1,10 @@
+# main.py
 import sys
 from dotenv import load_dotenv, find_dotenv
 from loguru import logger
 from src.downloader.stepik_downloader import StepikDownloader
 from src.transcriber.whisper_transcriber import WhisperTranscriber
+from src.summarizer.mistral_summarizer import MistralSummarizer
 
 # Настройка логов
 logger.add("logs/stepik_assistant.log", rotation="10 MB", level="INFO")
@@ -13,184 +15,138 @@ class StepikAIAssistant:
         load_dotenv(find_dotenv())
         self.downloader = None
         self.transcriber = None
+        self.summarizer = None
 
     def show_menu(self):
         """Главное меню"""
-        print("\n" + "="*50)
+        print("\n" + "="*40)
         print("STEPIK AI ASSISTANT")
-        print("="*50)
-        print("1.Скачать видео с курса")
-        print("2.Транскрибировать видео")
-        print("3.Полный цикл (скачать + транскрибировать)")
-        print("4.Выход")
-        print("="*50)
+        print("="*40)
+        print("1. Скачать видео")
+        print("2. Транскрибировать видео")
+        print("3. Создать конспекты")
+        print("4. Полный цикл")
+        print("5. Выход")
+        print("="*40)
 
     def get_course_info(self):
         """Получение информации о курсе"""
-        print("\nВведите данные курса:")
         course_url = input("Ссылка на курс Stepik: ").strip()
-
-        weeks_input = input("Сколько недель обработать? (оставьте пустым для всех): ").strip()
+        weeks_input = input("Недель обработать (пусто = все): ").strip()
         weeks_to_process = int(weeks_input) if weeks_input else None
+        return course_url, weeks_to_process
 
-        quality = self.get_quality_choice()
-
-        return course_url, weeks_to_process, quality
-
-    def get_quality_choice(self):
-        """Выбор качества видео"""
-        print("\nВыберите качество видео:")
-        print("1. 1080p (лучшее)")
-        print("2. 720p (рекомендуется)")
-        print("3. 360p (экономное)")
-
-        choice = input("Ваш выбор (1-3, по умолчанию 2): ").strip()
-        quality_map = {"1": "1080", "2": "720", "3": "360"}
-        return quality_map.get(choice, "720")
-
-    def get_transcribe_info(self):
-        """Получение параметров транскрибации"""
-        print("\nНастройки транскрибации:")
-
-        # Выбор модели
-        print("Выберите модель Whisper:")
-        print("1. tiny (быстрая, низкое качество)")
-        print("2. base (баланс скорости/качества)")
-        print("3. small (хорошее качество)")
-        print("4. medium (рекомендуется, высокое качество)")
-        print("5. large (лучшее качество, медленная)")
-
-        model_choice = input("Ваш выбор (1-5, по умолчанию 4): ").strip()
-        model_map = {"1": "tiny", "2": "base", "3": "small", "4": "medium", "5": "large"}
-        model_size = model_map.get(model_choice, "medium")
-
-        # Выбор недель для транскрибации
-        weeks_input = input("Какие недели транскрибировать? (через запятую, пусто = все): ").strip()
+    def get_weeks_info(self):
+        """Получение информации о неделях для обработки"""
+        weeks_input = input("Недели через запятую (пусто = все): ").strip()
         if weeks_input:
-            transcribe_weeks = [int(w.strip()) for w in weeks_input.split(",")]
+            weeks_to_process = [int(w.strip()) for w in weeks_input.split(",")]
         else:
-            transcribe_weeks = None
+            weeks_to_process = None
+        return weeks_to_process
 
-        return model_size, transcribe_weeks
-
-    def download_videos(self):
-        """Опция 1: Скачивание видео"""
-        print("\nЗАГРУЗКА ВИДЕО")
-        print("-" * 30)
-
-        course_url, weeks_to_process, quality = self.get_course_info()
-
+    def download_videos(self, course_url: str, weeks_to_process: int = None):
+        """Скачивание видео"""
         if not self.downloader:
             self.downloader = StepikDownloader()
+        self.downloader.download_course_videos(
+            course_url=course_url,
+            weeks_to_process=weeks_to_process,
+            quality="720"
+        )
 
-        try:
-            self.downloader.download_course_videos(
-                course_url=course_url,
-                weeks_to_process=weeks_to_process,
-                quality=quality
-            )
-            input("\nНажмите Enter чтобы продолжить...")
-        except Exception as e:
-            logger.error(f"Ошибка скачивания: {e}")
-            input("\nОшибка! Нажмите Enter чтобы вернуться в меню...")
-
-    def transcribe_videos(self):
-        """Опция 2: Транскрибация"""
-        print("\nТРАНСКРИБАЦИЯ ВИДЕО")
-        print("-" * 30)
-
-        model_size, transcribe_weeks = self.get_transcribe_info()
-
+    def transcribe_videos(self, weeks_to_process: int = None):
+        """Транскрибация видео"""
         if not self.transcriber:
-            self.transcriber = WhisperTranscriber(model_size=model_size)
+            self.transcriber = WhisperTranscriber(model_size="medium")
+        results = self.transcriber.transcribe_course(
+            course_videos_dir="./data/videos",
+            transcription_dir="./data/transcription",
+            weeks_to_process=[weeks_to_process] if weeks_to_process else None
+        )
+        return sum(len(week_results) for week_results in results.values())
 
+    def create_summaries(self, weeks_to_process: int = None):
+        """Создание конспектов"""
+        if not self.summarizer:
+            self.summarizer = MistralSummarizer()
+        results = self.summarizer.summarize_course(
+            transcription_dir="./data/transcription",
+            summaries_dir="./data/summaries",
+            weeks_to_process=[weeks_to_process] if weeks_to_process else None
+        )
+        return sum(len(week_results) for week_results in results.values())
+
+    def run_download_only(self):
+        """Опция 1: Только скачать"""
+        print("\n-- Скачивание видео --")
+        course_url, weeks_to_process = self.get_course_info()
         try:
-            results = self.transcriber.transcribe_course(
-                course_videos_dir="./data/videos",
-                weeks_to_process=transcribe_weeks
-            )
-
-            # Статистика
-            total_files = sum(len(week_results) for week_results in results.values())
-            print(f"\nСтатистика транскрибации:")
-            print(f"Обработано недель: {len(results)}")
-            print(f"Транскрибировано файлов: {total_files}")
-
-            input("\nНажмите Enter чтобы продолжить...")
+            self.download_videos(course_url, weeks_to_process)
+            print("Загрузка завершена")
         except Exception as e:
-            logger.error(f"Ошибка транскрибации: {e}")
-            input("\nОшибка! Нажмите Enter чтобы вернуться в меню...")
+            print(f"Ошибка: {e}")
 
-    def full_cycle(self):
-        """Опция 3: Полный цикл"""
-        print("\nПОЛНЫЙ ЦИКЛ")
-        print("-" * 30)
-
-        # Шаг 1: Скачивание
-        print("ШАГ 1: Загрузка видео")
-        course_url, weeks_to_process, quality = self.get_course_info()
-
-        if not self.downloader:
-            self.downloader = StepikDownloader()
-
+    def run_transcribe_only(self):
+        """Опция 2: Только транскрибировать"""
+        print("\n-- Транскрибация --")
+        weeks_to_process = self.get_weeks_info()
         try:
-            self.downloader.download_course_videos(
-                course_url=course_url,
-                weeks_to_process=weeks_to_process,
-                quality=quality
-            )
+            total_files = self.transcribe_videos(weeks_to_process)
+            print(f"Транскрибировано: {total_files} файлов")
         except Exception as e:
-            logger.error(f"Ошибка скачивания: {e}")
-            input("\nОшибка скачивания! Нажмите Enter чтобы вернуться в меню...")
-            return
+            print(f"Ошибка: {e}")
 
-        # Шаг 2: Транскрибация
-        print("\nШАГ 2: Транскрибация")
-        transcribe_now = input("Начать транскрибацию сейчас? (y/n): ").strip().lower()
+    def run_summarize_only(self):
+        """Опция 3: Только конспекты"""
+        print("\n-- Создание конспектов --")
+        weeks_to_process = self.get_weeks_info()
+        try:
+            total_summaries = self.create_summaries(weeks_to_process)
+            print(f"Создано конспектов: {total_summaries}")
+        except Exception as e:
+            print(f"Ошибка: {e}")
 
-        if transcribe_now == 'y':
-            model_size, transcribe_weeks = self.get_transcribe_info()
+    def run_full_cycle(self):
+        """Опция 4: Полный цикл"""
+        print("\n-- Полный цикл --")
+        course_url, weeks_to_process = self.get_course_info()
+        try:
+            print("Скачивание...")
+            self.download_videos(course_url, weeks_to_process)
 
-            if not self.transcriber:
-                self.transcriber = WhisperTranscriber(model_size=model_size)
+            print("Транскрибация...")
+            total_files = self.transcribe_videos(weeks_to_process)
 
-            try:
-                results = self.transcriber.transcribe_course(
-                    course_videos_dir="./data/videos",
-                    weeks_to_process=transcribe_weeks
-                )
+            print("Создание конспектов...")
+            total_summaries = self.create_summaries(weeks_to_process)
 
-                # Статистика
-                total_files = sum(len(week_results) for week_results in results.values())
-                print(f"\nПОЛНЫЙ ЦИКЛ ЗАВЕРШЕН!")
-                print(f"Скачано и транскрибировано: {total_files} файлов")
-
-            except Exception as e:
-                logger.error(f"Ошибка транскрибации: {e}")
-                print("Транскрибация завершена с ошибками")
-
-        input("\nНажмите Enter чтобы вернуться в меню...")
+            print(f"Готово! Обработано: {total_files} файлов, создано: {total_summaries} конспектов")
+        except Exception as e:
+            print(f"Ошибка: {e}")
 
     def run(self):
         """Запуск приложения"""
         logger.info("Запуск Stepik AI Assistant")
-
         while True:
             self.show_menu()
-            choice = input("\nВыберите действие (1-4): ").strip()
+            choice = input("\nВыбор: ").strip()
 
             if choice == "1":
-                self.download_videos()
+                self.run_download_only()
             elif choice == "2":
-                self.transcribe_videos()
+                self.run_transcribe_only()
             elif choice == "3":
-                self.full_cycle()
+                self.run_summarize_only()
             elif choice == "4":
-                print("\nДо свидания!")
+                self.run_full_cycle()
+            elif choice == "5":
+                print("Выход")
                 break
             else:
-                print("\nНеверный выбор! Попробуйте снова.")
-                input("Нажмите Enter чтобы продолжить...")
+                print("Неверный выбор")
+
+            input("\nEnter чтобы продолжить...")
 
 
 def main():
@@ -198,11 +154,10 @@ def main():
         assistant = StepikAIAssistant()
         assistant.run()
     except KeyboardInterrupt:
-        print("\n\nПрограмма прервана пользователем")
+        print("\nПрервано пользователем")
         sys.exit(0)
     except Exception as e:
-        logger.error(f"Критическая ошибка: {e}")
-        print(f"\nКритическая ошибка: {e}")
+        print(f"Ошибка: {e}")
         sys.exit(1)
 
 

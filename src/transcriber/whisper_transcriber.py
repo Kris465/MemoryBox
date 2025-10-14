@@ -27,13 +27,13 @@ class WhisperTranscriber:
             self.model = whisper.load_model(self.model_size)
             logger.success("Модель Whisper загружена")
 
-    def transcribe_video(self, video_path: str, output_dir: str = None) -> Dict:
+    def transcribe_video(self, video_path: str, output_dir: str) -> Dict:
         """
         Транскрибация видео/аудио файла
 
         Args:
             video_path: путь к видео файлу
-            output_dir: папка для сохранения результата (если None - рядом с исходным файлом)
+            output_dir: папка для сохранения результата
 
         Returns:
             Словарь с результатами транскрибации
@@ -50,14 +50,11 @@ class WhisperTranscriber:
             result = self.model.transcribe(
                 video_path,
                 language="ru",
-                verbose=False  # Отключаем вывод прогресса whisper (у нас есть свои логи)
+                verbose=False
             )
 
             # Сохранение результата
             transcript_text = result["text"].strip()
-
-            if output_dir is None:
-                output_dir = os.path.dirname(video_path)
 
             os.makedirs(output_dir, exist_ok=True)
 
@@ -77,7 +74,6 @@ class WhisperTranscriber:
 
             logger.success(f"Транскрибация завершена: {os.path.basename(video_path)}")
             logger.info(f"Текст сохранен: {transcript_path}")
-            logger.info(f"Полные данные: {transcript_json_path}")
 
             return {
                 "text": transcript_text,
@@ -92,35 +88,32 @@ class WhisperTranscriber:
             logger.error(f"Ошибка транскрибации {video_path}: {e}")
             raise
 
-    def transcribe_week_videos(self, week_dir: str, output_dir: str = None) -> List[Dict]:
+    def transcribe_week_videos(self, week_videos_dir: str, week_output_dir: str) -> List[Dict]:
         """
         Транскрибация всех видео в папке недели
 
         Args:
-            week_dir: папка с видео недели (например, './data/videos/week_1')
-            output_dir: папка для сохранения транскриптов (если None - создается подпапка в week_dir)
+            week_videos_dir: папка с видео недели (например, './data/videos/week_1')
+            week_output_dir: папка для сохранения транскриптов недели
 
         Returns:
             Список результатов транскрибации для каждого видео
         """
-        if output_dir is None:
-            output_dir = os.path.join(week_dir, "transcripts")
+        if not os.path.exists(week_videos_dir):
+            raise FileNotFoundError(f"Папка недели не найдена: {week_videos_dir}")
 
-        if not os.path.exists(week_dir):
-            raise FileNotFoundError(f"Папка недели не найдена: {week_dir}")
-
-        logger.info(f"Транскрибация видео в папке: {week_dir}")
+        logger.info(f"Транскрибация видео в папке: {week_videos_dir}")
 
         # Ищем все видео файлы
         video_extensions = ('.mp4', '.avi', '.mov', '.mkv', '.webm')
         video_files = []
 
-        for file in os.listdir(week_dir):
+        for file in os.listdir(week_videos_dir):
             if file.lower().endswith(video_extensions) and not file.startswith('.'):
-                video_files.append(os.path.join(week_dir, file))
+                video_files.append(os.path.join(week_videos_dir, file))
 
         if not video_files:
-            logger.warning(f"В папке {week_dir} не найдено видео файлов")
+            logger.warning(f"В папке {week_videos_dir} не найдено видео файлов")
             return []
 
         logger.info(f"Найдено видео для транскрибации: {len(video_files)}")
@@ -128,7 +121,7 @@ class WhisperTranscriber:
         results = []
         for video_path in video_files:
             try:
-                result = self.transcribe_video(video_path, output_dir)
+                result = self.transcribe_video(video_path, week_output_dir)
                 results.append(result)
             except Exception as e:
                 logger.error(f"Не удалось транскрибировать {video_path}: {e}")
@@ -138,12 +131,14 @@ class WhisperTranscriber:
         return results
 
     def transcribe_course(self, course_videos_dir: str = "./data/videos",
+                          transcription_dir: str = "./data/transcription",
                           weeks_to_process: Optional[List[int]] = None) -> Dict:
         """
         Транскрибация всего курса
 
         Args:
             course_videos_dir: корневая папка с видео курса
+            transcription_dir: папка для сохранения транскриптов
             weeks_to_process: список номеров недель для обработки (если None - все недели)
 
         Returns:
@@ -177,8 +172,11 @@ class WhisperTranscriber:
             week_num = int(week_dir.split("_")[-1])
             logger.info(f"Транскрибация недели {week_num}")
 
+            # Создаем соответствующую папку для транскриптов недели
+            week_output_dir = os.path.join(transcription_dir, f"week_{week_num}")
+
             try:
-                week_results = self.transcribe_week_videos(week_dir)
+                week_results = self.transcribe_week_videos(week_dir, week_output_dir)
                 course_results[week_num] = week_results
             except Exception as e:
                 logger.error(f"Ошибка транскрибации недели {week_num}: {e}")
