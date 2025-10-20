@@ -5,6 +5,7 @@ from loguru import logger
 from src.downloader.stepik_downloader import StepikDownloader
 from src.transcriber.whisper_transcriber import WhisperTranscriber
 from src.summarizer.mistral_summarizer import MistralSummarizer
+from src.slide_extractor.slide_detector import SlideDetector
 
 # Настройка логов
 logger.add("logs/stepik_assistant.log", rotation="10 MB", level="INFO")
@@ -16,18 +17,16 @@ class StepikAIAssistant:
         self.downloader = None
         self.transcriber = None
         self.summarizer = None
+        self.slide_extractor = None
 
     def show_menu(self):
         """Главное меню"""
-        print("\n" + "="*40)
-        print("STEPIK AI ASSISTANT")
-        print("="*40)
         print("1. Скачать видео")
-        print("2. Транскрибировать видео")
+        print("2. Транскрибировать видео") 
         print("3. Создать конспекты")
-        print("4. Полный цикл")
-        print("5. Выход")
-        print("="*40)
+        print("4. Извлечь слайды из видео")
+        print("5. Полный цикл (со слайдами)")
+        print("6. Выход")
 
     def get_course_info(self):
         """Получение информации о курсе"""
@@ -125,6 +124,48 @@ class StepikAIAssistant:
         except Exception as e:
             print(f"Ошибка: {e}")
 
+    def extract_slides(self, weeks_to_process: int = None):
+        """Извлечение слайдов"""
+        if not self.slide_extractor:
+            self.slide_extractor = SlideDetector()
+        results = self.slide_extractor.extract_course_slides(
+            course_videos_dir="./data/videos",
+            slides_dir="./data/slides", 
+            weeks_to_process=[weeks_to_process] if weeks_to_process else None
+        )
+        return sum(len(week_slides) for week_slides in results.values())
+
+    def run_extract_slides_only(self):
+        """Опция 5: Только извлечение слайдов"""
+        print("\n-- Извлечение слайдов --")
+        weeks_to_process = self.get_weeks_info()
+        try:
+            total_slides = self.extract_slides(weeks_to_process)
+            print(f"Извлечено слайдов: {total_slides}")
+        except Exception as e:
+            print(f"Ошибка: {e}")
+
+    def run_full_cycle_with_slides(self):
+        """Опция 5: Полный цикл со слайдами"""
+        print("\n-- Полный цикл (со слайдами) --")
+        course_url, weeks_to_process = self.get_course_info()
+        try:
+            print("Скачивание...")
+            self.download_videos(course_url, weeks_to_process)
+
+            print("Транскрибация...")
+            total_files = self.transcribe_videos(weeks_to_process)
+
+            print("Извлечение слайдов...")
+            total_slides = self.extract_slides(weeks_to_process)
+
+            print("Создание конспектов...")
+            total_summaries = self.create_summaries(weeks_to_process)
+
+            print(f"Готово! Обработано: {total_files} файлов, извлечено: {total_slides} слайдов, создано: {total_summaries} конспектов")
+        except Exception as e:
+            print(f"Ошибка: {e}")
+
     def run(self):
         """Запуск приложения"""
         logger.info("Запуск Stepik AI Assistant")
@@ -139,12 +180,12 @@ class StepikAIAssistant:
             elif choice == "3":
                 self.run_summarize_only()
             elif choice == "4":
-                self.run_full_cycle()
+                self.run_extract_slides_only()
             elif choice == "5":
+                self.run_full_cycle_with_slides()
+            elif choice == "6":
                 print("Выход")
                 break
-            else:
-                print("Неверный выбор")
 
             input("\nEnter чтобы продолжить...")
 

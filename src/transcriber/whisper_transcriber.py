@@ -9,7 +9,7 @@ load_dotenv(find_dotenv())
 
 
 class WhisperTranscriber:
-    def __init__(self, model_size: str = "medium"):
+    def __init__(self, model_size: str = "large"):
         """
         Инициализация транскрибатора
 
