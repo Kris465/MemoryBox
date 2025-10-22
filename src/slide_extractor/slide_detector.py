@@ -20,14 +20,15 @@ class SlideDetector:
         self.min_interval = min_interval
         logger.info(f"SlideDetector инициализирован (threshold: {change_threshold})")
 
-    def extract_slides_from_video(self, video_path: str, output_dir: str) -> List[Dict]:
+    def extract_slides_from_video(self, video_path: str,
+                                  output_dir: str) -> List[Dict]:
         """
         Извлечение слайдов из одного видео
-        
+
         Args:
             video_path: путь к видео файлу
             output_dir: папка для сохранения слайдов
-            
+
         Returns:
             Список информации о сохраненных слайдах
         """
@@ -35,16 +36,16 @@ class SlideDetector:
             raise FileNotFoundError(f"Видео не найдено: {video_path}")
 
         os.makedirs(output_dir, exist_ok=True)
-        
+
         cap = cv2.VideoCapture(video_path)
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_interval = int(fps * self.min_interval)
-        
+
         prev_frame = None
         slides = []
         frame_count = 0
         slide_count = 0
-        
+
         video_name = Path(video_path).stem
         logger.info(f"Извлечение слайдов из: {video_name}")
 
@@ -52,22 +53,22 @@ class SlideDetector:
             ret, frame = cap.read()
             if not ret:
                 break
-                
+
             # Проверяем кадры с интервалом
             if frame_count % frame_interval == 0:
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                
+
                 if prev_frame is not None:
                     if self._is_slide_change(prev_frame, gray):
                         slide_info = self._save_slide(frame, output_dir, video_name, slide_count, frame_count, fps)
                         slides.append(slide_info)
                         slide_count += 1
                         logger.info(f"Обнаружен слайд #{slide_count} на {slide_info['timestamp']}")
-                
+
                 prev_frame = gray
-                
+
             frame_count += 1
-        
+
         cap.release()
         logger.success(f"Извлечено слайдов: {len(slides)} из {video_name}")
         return slides
@@ -77,12 +78,12 @@ class SlideDetector:
         # Разность кадров
         diff = cv2.absdiff(frame1, frame2)
         change_score = np.mean(diff) / 255
-        
+
         # Дополнительная проверка на гистограммы
         hist1 = cv2.calcHist([frame1], [0], None, [64], [0, 256])
         hist2 = cv2.calcHist([frame2], [0], None, [64], [0, 256])
         hist_diff = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
-        
+
         return change_score > self.change_threshold and hist_diff < 0.8
 
     def _save_slide(self, frame: np.ndarray, output_dir: str, video_name: str,
@@ -91,13 +92,13 @@ class SlideDetector:
         timestamp = frame_count / fps
         minutes = int(timestamp // 60)
         seconds = int(timestamp % 60)
-        
+
         filename = f"{video_name}_slide_{slide_num+1:03d}_{minutes:02d}m{seconds:02d}s.jpg"
         filepath = os.path.join(output_dir, filename)
-        
+
         # Сохраняем в хорошем качестве
         cv2.imwrite(filepath, frame, [cv2.IMWRITE_JPEG_QUALITY, 90])
-        
+
         return {
             "path": filepath,
             "slide_number": slide_num + 1,
