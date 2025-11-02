@@ -1,7 +1,6 @@
 from datetime import datetime
 from loguru import logger
 from parser import UniversityParser
-from bot import send_schedule_to_telegram
 
 
 class ScheduleChecker:
@@ -9,14 +8,15 @@ class ScheduleChecker:
         self.last_check = None
 
     async def check_schedule_daily(self):
-        """Ежедневная проверка расписания (для совместимости)"""
+        """Ежедневная проверка расписания"""
         logger.info("🔔 Выполняем ежедневную проверку расписания")
 
         try:
-            async with UniversityParser(headless=True,
-                                        use_saved_session=True) as parser:
+            async with UniversityParser(headless=True, use_saved_session=True) as parser:
                 result = await parser.get_schedule_for_date()
                 message = self.format_telegram_message(result)
+
+                from bot import send_schedule_to_telegram
                 await send_schedule_to_telegram(message)
 
                 self.last_check = datetime.now()
@@ -24,6 +24,7 @@ class ScheduleChecker:
 
         except Exception as e:
             logger.error(f"Ошибка при проверке расписания: {e}")
+            from bot import send_schedule_to_telegram
             error_msg = f"Ошибка при получении расписания: {str(e)}"
             await send_schedule_to_telegram(error_msg)
 

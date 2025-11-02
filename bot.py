@@ -47,22 +47,18 @@ class UniversityTelegramBot:
         await message.answer("Запрашиваю расписание на сегодня...")
         await self._send_schedule_message(message, datetime.now())
 
-    async def _send_schedule_message(self, message: Message,
-                                     target_date: datetime):
+    async def _send_schedule_message(self, message: Message, target_date: datetime):
         """Отправка сообщения с расписанием"""
         try:
             from parser import UniversityParser
             from scheduler import ScheduleChecker
-
             checker = ScheduleChecker()
 
-            async with UniversityParser(headless=True,
-                                        use_saved_session=True) as parser:
+            async with UniversityParser(headless=True, use_saved_session=True) as parser:
                 result = await parser.get_schedule_for_date(target_date)
                 message_text = checker.format_telegram_message(result)
 
-                await message.answer(message_text,
-                                     parse_mode=ParseMode.MARKDOWN)
+                await message.answer(message_text, parse_mode=ParseMode.MARKDOWN)
 
         except Exception as e:
             logger.error(f"Ошибка при запросе расписания: {e}")
