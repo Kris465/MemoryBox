@@ -103,11 +103,6 @@ class UniversityTelegramBot:
                                 Command(commands=['start', 'help']))
         router.message.register(self.get_schedule_today,
                                 Command(commands=['schedule', 'rasp']))
-        router.message.register(self.get_schedule_tomorrow,
-                                Command(commands=['schedule_tomorrow',
-                                                  'tomorrow']))
-        router.message.register(self.get_next_class,
-                                Command(commands=['next_class', 'next']))
 
         router.message.register(self.handle_private_message,
                                 F.chat.type == 'private')
