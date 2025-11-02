@@ -7,7 +7,7 @@ class ScheduleChecker:
     def __init__(self):
         self.last_check = None
 
-    async def check_schedule_daily(self):
+    async def check_schedule_daily(self, bot_instance=None):
         """Ежедневная проверка расписания"""
         logger.info("🔔 Выполняем ежедневную проверку расписания")
 
@@ -17,10 +17,16 @@ class ScheduleChecker:
                 message = self.format_telegram_message(result)
 
                 from bot import send_schedule_to_telegram
-                await send_schedule_to_telegram(message)
+                await send_schedule_to_telegram(message, bot_instance)
 
                 self.last_check = datetime.now()
                 logger.info("Проверка расписания завершена")
+
+        except Exception as e:
+            logger.error(f"Ошибка при проверке расписания: {e}")
+            from bot import send_schedule_to_telegram
+            error_msg = f"Ошибка при получении расписания: {str(e)}"
+            await send_schedule_to_telegram(error_msg, bot_instance)
 
         except Exception as e:
             logger.error(f"Ошибка при проверке расписания: {e}")

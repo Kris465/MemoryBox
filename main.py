@@ -31,9 +31,19 @@ class UniversityBot:
             logger.info("Бот завершает работу...")
 
 
-async def main():
-    bot = UniversityBot()
-    await bot.run()
+async def run(self):
+    """Основной цикл работы бота"""
+    logger.info("Запуск University Bot (aiogram 3.x)...")
+    self.setup_signal_handlers()
+
+    try:
+        await self.telegram_bot.run()
+    except Exception as e:
+        logger.error(f"Критическая ошибка: {e}")
+    finally:
+        logger.info("Бот завершает работу...")
+        if hasattr(self.telegram_bot, 'scheduler'):
+            self.telegram_bot.scheduler.shutdown()
 
 
 if __name__ == "__main__":
