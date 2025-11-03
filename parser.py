@@ -74,7 +74,8 @@ class UniversityParser:
         if self.playwright:
             await self.playwright.stop()
 
-    async def get_schedule_for_date(self, target_date: datetime = None) -> Dict[str, Any]:
+    async def get_schedule_for_date(self, target_date: datetime = None
+                                    ) -> Dict[str, Any]:
         """
         Получаем расписание на конкретную дату
 
@@ -114,7 +115,8 @@ class UniversityParser:
             return True
 
         logger.info("Проходим авторизацию...")
-        await self.page.goto(f'{self.base_url}/#/login', wait_until='networkidle')
+        await self.page.goto(f'{self.base_url}/#/login',
+                             wait_until='networkidle')
         await self.page.wait_for_timeout(3000)
 
         # Проверяем, что мы на странице логина

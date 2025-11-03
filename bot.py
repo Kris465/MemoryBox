@@ -22,7 +22,7 @@ class UniversityTelegramBot:
     def __init__(self):
         self.bot = None
         self.dp = None
-        self.scheduler = AsyncIOScheduler()
+        self.scheduler = AsyncIOScheduler(max_workers=10)
 
     async def start(self, message: Message):
         """Обработчик команды /start"""
@@ -85,7 +85,8 @@ class UniversityTelegramBot:
                 "И как меня сюда занесло?!\n\n"
                 "Смысл моего существования не подразумевает работу в этом чате"
             )
-            logger.warning(f"Блокировка сообщения из чужого чата {message.chat.id}")
+            logger.warning(
+                f"Блокировка сообщения из чужого чата {message.chat.id}")
 
     async def _is_allowed_chat(self, message: Message) -> bool:
         """Проверяем, разрешен ли этот чат"""
