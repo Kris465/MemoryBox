@@ -30,7 +30,12 @@ class UniversityBot:
         finally:
             logger.info("Бот завершает работу...")
             if hasattr(self.telegram_bot, 'scheduler'):
-                self.telegram_bot.scheduler.shutdown()
+                self.telegram_bot.scheduler.shutdown(wait=False)
+            if hasattr(self.telegram_bot, 'dp'):
+                await self.telegram_bot.dp.storage.close()
+                await self.telegram_bot.dp.storage.wait_closed()
+            if hasattr(self.telegram_bot, 'bot'):
+                await self.telegram_bot.bot.session.close()
 
 
 async def main():

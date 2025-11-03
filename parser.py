@@ -117,6 +117,11 @@ class UniversityParser:
         await self.page.goto(f'{self.base_url}/#/login', wait_until='networkidle')
         await self.page.wait_for_timeout(3000)
 
+        # Проверяем, что мы на странице логина
+        if 'login' not in (await self.page.url()).lower():
+            logger.warning("Страница логина не загружена")
+            return False
+
         inputs = await self.page.query_selector_all('input')
         if len(inputs) >= 2:
             await inputs[0].fill(self.login)
@@ -133,7 +138,9 @@ class UniversityParser:
     async def check_current_auth_status(self) -> bool:
         """Проверяем статус авторизации"""
         try:
-            await self.page.goto(f'{self.base_url}/#/', wait_until='networkidle', timeout=10000)
+            await self.page.goto(f'{self.base_url}/#/',
+                                 wait_until='networkidle',
+                                 timeout=10000)
             await self.page.wait_for_timeout(2000)
 
             current_url = self.page.url
@@ -149,12 +156,14 @@ class UniversityParser:
         """Переход к расписанию"""
         try:
             # Пробуем прямой URL
-            await self.page.goto(f'{self.base_url}/#/Rasp/My', wait_until='networkidle')
+            await self.page.goto(f'{self.base_url}/#/Rasp/My',
+                                 wait_until='networkidle')
             await self.page.wait_for_timeout(3000)
 
             # Проверяем, что мы на странице расписания
             page_content = await self.page.content()
-            if any(word in page_content.lower() for word in ['расписание', 'schedule']):
+            if any(word in page_content.lower() for word in ['расписание',
+                                                             'schedule']):
                 return True
 
             return False
@@ -172,7 +181,7 @@ class UniversityParser:
                 "[placeholder*='дату']",
                 ".v-date-picker-table"
             ]
-            
+
             for selector in date_selectors:
                 if await self.page.is_visible(selector):
                     date_input = self.page.locator(selector).first

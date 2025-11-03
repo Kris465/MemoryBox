@@ -10,7 +10,6 @@ from apscheduler.triggers.cron import CronTrigger
 from dotenv import load_dotenv, find_dotenv
 from loguru import logger
 
-
 load_dotenv(find_dotenv())
 
 TELEGRAM_TOKEN = os.getenv('TOKEN')
@@ -47,54 +46,27 @@ class UniversityTelegramBot:
         await message.answer("Запрашиваю расписание на сегодня...")
         await self._send_schedule_message(message, datetime.now())
 
-    async def _send_schedule_message(self, message: Message, target_date: datetime):
+    async def _send_schedule_message(self, message: Message,
+                                     target_date: datetime):
         """Отправка сообщения с расписанием"""
         try:
             # Импорты внутри метода
             from parser import UniversityParser
             from scheduler import ScheduleChecker
-            
+
             checker = ScheduleChecker()
 
-            async with UniversityParser(headless=True, use_saved_session=True) as parser:
+            async with UniversityParser(headless=True,
+                                        use_saved_session=True) as parser:
                 result = await parser.get_schedule_for_date(target_date)
                 message_text = checker.format_telegram_message(result)
 
-                await message.answer(message_text, parse_mode=ParseMode.MARKDOWN)
+                await message.answer(message_text,
+                                     parse_mode=ParseMode.MARKDOWN)
 
         except Exception as e:
             logger.error(f"Ошибка при запросе расписания: {e}")
             await message.answer("Не удалось получить расписание")
-
-    async def send_daily_schedule(self):
-        """Ежедневная отправка расписания"""
-        try:
-            from parser import UniversityParser
-            from scheduler import ScheduleChecker
-
-            checker = ScheduleChecker()
-
-            async with UniversityParser(headless=True, use_saved_session=True) as parser:
-                result = await parser.get_schedule_for_date()
-                message_text = checker.format_telegram_message(result)
-
-                await self.bot.send_message(
-                    chat_id=ALLOWED_GROUP_ID,
-                    text=message_text,
-                    parse_mode=ParseMode.MARKDOWN
-                )
-
-            logger.info("Ежедневное расписание отправлено")
-
-        except Exception as e:
-            logger.error(f"Ошибка при отправке ежедневного расписания: {e}")
-            try:
-                await self.bot.send_message(
-                    chat_id=ALLOWED_GROUP_ID,
-                    text=f"Не удалось получить расписание: {str(e)}"
-                )
-            except Exception as send_error:
-                logger.error(f"Не удалось отправить сообщение об ошибке: {send_error}")
 
     async def handle_private_message(self, message: Message):
         """Обработка приватных сообщений"""
@@ -158,13 +130,6 @@ class UniversityTelegramBot:
                     parse_mode=ParseMode.MARKDOWN
                 )
 
-                # self.scheduler.add_job(
-                #     self.send_daily_schedule,
-                #     'interval',
-                #     minutes=10,
-                #     id='test_schedule'
-                # )
-
                 logger.info("Ежедневное расписание отправлено")
 
         except Exception as e:
@@ -188,13 +153,6 @@ class UniversityTelegramBot:
             id='daily_schedule'
         )
 
-        self.scheduler.add_job(
-            self.send_daily_schedule,
-            'interval',
-            minutes=1,
-            id='test_schedule'
-        )
-
         logger.info("Планировщик настроен на ежедневную отправку в 11:00")
 
     async def run(self):
@@ -215,31 +173,3 @@ class UniversityTelegramBot:
         logger.info("Telegram бот запущен (aiogram 3.x)")
 
         await self.dp.start_polling(self.bot)
-
-    async def send_schedule_to_telegram(message: str, bot_instance: Bot = None):
-        """Функция для отправки сообщения в Telegram"""
-        if not TELEGRAM_TOKEN or not ALLOWED_GROUP_ID:
-            logger.error("Не настроены TELEGRAM_TOKEN или ALLOWED_GROUP_ID")
-            return
-
-        try:
-            if bot_instance:
-                # Используем существующий экземпляр бота
-                await bot_instance.send_message(
-                    chat_id=ALLOWED_GROUP_ID,
-                    text=message,
-                    parse_mode=ParseMode.MARKDOWN
-                )
-            else:
-                # Создаем временный экземпляр только если нужно
-                bot = Bot(token=TELEGRAM_TOKEN)
-                await bot.send_message(
-                    chat_id=ALLOWED_GROUP_ID,
-                    text=message,
-                    parse_mode=ParseMode.MARKDOWN
-                )
-                await bot.session.close()
-            
-            logger.info("Сообщение отправлено в Telegram")
-        except Exception as e:
-            logger.error(f"Ошибка отправки в Telegram: {e}")

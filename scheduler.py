@@ -1,6 +1,7 @@
 from datetime import datetime
 from loguru import logger
 from parser import UniversityParser
+from telegram_helper import send_schedule_to_telegram
 
 
 class ScheduleChecker:
@@ -9,14 +10,16 @@ class ScheduleChecker:
 
     async def check_schedule_daily(self, bot_instance=None):
         """Ежедневная проверка расписания"""
-        logger.info("🔔 Выполняем ежедневную проверку расписания")
+        logger.info("Выполняем ежедневную проверку расписания")
 
         try:
-            async with UniversityParser(headless=True, use_saved_session=True) as parser:
+            async with UniversityParser(
+                headless=True,
+                use_saved_session=True
+            ) as parser:
                 result = await parser.get_schedule_for_date()
                 message = self.format_telegram_message(result)
 
-                from bot import send_schedule_to_telegram
                 await send_schedule_to_telegram(message, bot_instance)
 
                 self.last_check = datetime.now()
@@ -24,15 +27,8 @@ class ScheduleChecker:
 
         except Exception as e:
             logger.error(f"Ошибка при проверке расписания: {e}")
-            from bot import send_schedule_to_telegram
             error_msg = f"Ошибка при получении расписания: {str(e)}"
             await send_schedule_to_telegram(error_msg, bot_instance)
-
-        except Exception as e:
-            logger.error(f"Ошибка при проверке расписания: {e}")
-            from bot import send_schedule_to_telegram
-            error_msg = f"Ошибка при получении расписания: {str(e)}"
-            await send_schedule_to_telegram(error_msg)
 
     def format_telegram_message(self, schedule_result: dict) -> str:
         """Форматируем сообщение для Telegram"""
@@ -48,7 +44,8 @@ class ScheduleChecker:
             formatted_date = date_obj.strftime('%d.%m.%Y')
             weekday = self._get_weekday_russian(date_obj.weekday())
             date_display = f"{formatted_date} ({weekday})"
-        except:
+        except Exception as e:
+            logger.warning(f"Ошибка при форматировании даты: {e}")
             date_display = date
 
         message = f"*Расписание на {date_display}*\n"
@@ -57,7 +54,9 @@ class ScheduleChecker:
         if not schedule_data.get('has_classes', False):
             if schedule_data.get('next_class_date'):
                 message += "*Занятий нет*\n"
-                message += f"Ближайшее занятие — {schedule_data['next_class_date']}"
+                message += (
+                    f"Ближайшее занятие — {schedule_data['next_class_date']}"
+                )
             else:
                 message += "*Занятий нет*"
         else:
