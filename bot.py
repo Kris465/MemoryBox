@@ -35,6 +35,7 @@ class UniversityTelegramBot:
             "Также вы можете запросить расписание вручную командой /schedule\n"
             "Доступные команды:\n"
             "/schedule - Получить расписание на сегодня\n"
+            "/start - Получить описание бота\n"
         )
         await message.answer(welcome_text)
 
@@ -78,15 +79,36 @@ class UniversityTelegramBot:
             logger.warning(
                 f"Блокировка приватного сообщения от {message.from_user.id}")
 
+    async def handle_non_command_message(self, message: Message):
+        """Обработка некомандных сообщений в разрешенной группе"""
+        if (
+            message.chat.type in ['group', 'supergroup']
+            and message.chat.id == ALLOWED_GROUP_ID
+        ):
+            if not message.text.startswith('/'):
+                await message.answer(
+                    "Я реагирую только на команды. Пожалуйста, "
+                    "используйте команды для взаимодействия со мной."
+                )
+                logger.warning(
+                    f"Блокировка некомандного сообщения в разрешенной "
+                    f"группе {message.chat.id}"
+                )
+
     async def handle_other_group_messages(self, message: Message):
         """Обработка сообщений из других групповых чатов"""
-        if message.chat.type in ['group', 'supergroup'] and message.chat.id != ALLOWED_GROUP_ID:
+        if (
+            message.chat.type in ['group', 'supergroup']
+            and message.chat.id != ALLOWED_GROUP_ID
+        ):
             await message.answer(
                 "И как меня сюда занесло?!\n\n"
-                "Смысл моего существования не подразумевает работу в этом чате"
+                "Смысл моего существования не подразумевает работу "
+                "в этом чате"
             )
             logger.warning(
-                f"Блокировка сообщения из чужого чата {message.chat.id}")
+                f"Блокировка сообщения из чужого чата {message.chat.id}"
+            )
 
     async def _is_allowed_chat(self, message: Message) -> bool:
         """Проверяем, разрешен ли этот чат"""
@@ -105,8 +127,17 @@ class UniversityTelegramBot:
         router.message.register(self.get_schedule_today,
                                 Command(commands=['schedule', 'rasp']))
 
+        # Handle private messages
         router.message.register(self.handle_private_message,
                                 F.chat.type == 'private')
+
+        # Handle non-command messages in allowed group
+        router.message.register(
+            self.handle_non_command_message,
+            F.chat.type.in_(['group', 'supergroup']) & (F.chat.id == ALLOWED_GROUP_ID) & ~F.text.startswith('/')
+        )
+
+        # Handle messages in other groups
         router.message.register(
             self.handle_other_group_messages,
             F.chat.type.in_(['group', 'supergroup']) & (F.chat.id != ALLOWED_GROUP_ID)
@@ -143,7 +174,8 @@ class UniversityTelegramBot:
                 )
             except Exception as send_error:
                 logger.error(
-                    f"Не удалось отправить сообщение об ошибке: {send_error}")
+                    f"Не удалось отправить сообщение об ошибке: {send_error}"
+                )
 
     def setup_scheduler(self):
         """Настройка планировщика для ежедневной отправки"""
