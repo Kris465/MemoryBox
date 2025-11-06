@@ -24,6 +24,62 @@ class UniversityTelegramBot:
         self.dp = None
         self.scheduler = AsyncIOScheduler(max_workers=10)
 
+    def format_telegram_message(self, schedule_result: dict) -> str:
+        """Форматируем сообщение для Telegram"""
+        if not schedule_result.get('success'):
+            error_msg = schedule_result.get('error', 'Неизвестная ошибка')
+            return f"*Не удалось получить расписание*\n\nОшибка: {error_msg}"
+
+        schedule_data = schedule_result.get('schedule', {})
+        date = schedule_result.get('date', 'Неизвестная дата')
+
+        try:
+            date_obj = datetime.strptime(date, '%Y-%m-%d')
+            formatted_date = date_obj.strftime('%d.%m.%Y')
+            weekday = self._get_weekday_russian(date_obj.weekday())
+            date_display = f"{formatted_date} ({weekday})"
+        except Exception as e:
+            logger.warning(f"Ошибка при форматировании даты: {e}")
+            date_display = date
+
+        message = f"*Расписание на {date_display}*\n"
+        message += f"{schedule_data.get('group_info', 'Группа не определена')}\n\n"
+
+        if not schedule_data.get('has_classes', False):
+            if schedule_data.get('next_class_date'):
+                message += "*Занятий нет*\n"
+                message += f"Ближайшее занятие — {schedule_data['next_class_date']}"
+            else:
+                message += "*Занятий нет*"
+        else:
+            message += "*Сегодня есть занятия:*\n\n"
+
+            classes = schedule_data.get('classes', [])
+            for i, class_info in enumerate(classes, 1):
+                message += f"*{i}. {class_info.get('subject', 'Дисциплина')}*"
+
+                if class_info.get('time'):
+                    message += f"{class_info['time']}\n"
+                if class_info.get('room'):
+                    message += f"{class_info['room']}\n"
+                if class_info.get('teacher'):
+                    message += f"{class_info['teacher']}\n"
+
+                message += "\n"
+
+        message += f"\n_Обновлено: {datetime.now().strftime('%H:%M')}_"
+        return message
+
+    def _get_weekday_russian(self, weekday: int) -> str:
+        """Получаем день недели на русском"""
+        days = ['Понедельник', 'Вторник', 'Среда', 'Четверг',
+                'Пятница', 'Суббота', 'Воскресенье']
+        return days[weekday]
+
+    async def _is_allowed_chat(self, message: Message) -> bool:
+        """Проверяем, разрешен ли этот чат"""
+        return message.chat.id == ALLOWED_GROUP_ID
+
     async def start(self, message: Message):
         """Обработчик команды /start"""
         if not await self._is_allowed_chat(message):
@@ -51,16 +107,11 @@ class UniversityTelegramBot:
                                      target_date: datetime):
         """Отправка сообщения с расписанием"""
         try:
-            # Импорты внутри метода
             from parser import UniversityParser
-            from scheduler import ScheduleChecker
 
-            checker = ScheduleChecker()
-
-            async with UniversityParser(headless=True,
-                                        use_saved_session=True) as parser:
+            async with UniversityParser(headless=True, use_saved_session=True) as parser:
                 result = await parser.get_schedule_for_date(target_date)
-                message_text = checker.format_telegram_message(result)
+                message_text = self.format_telegram_message(result)
 
                 await message.answer(message_text,
                                      parse_mode=ParseMode.MARKDOWN)
@@ -69,92 +120,36 @@ class UniversityTelegramBot:
             logger.error(f"Ошибка при запросе расписания: {e}")
             await message.answer("Не удалось получить расписание")
 
-    async def handle_private_message(self, message: Message):
-        """Обработка приватных сообщений"""
-        if message.chat.type == 'private':
-            await message.answer(
-                "Эх... Это приватный чат...\n\n"
-                "Я не способен общаться тет-а-тет"
-            )
-            logger.warning(
-                f"Блокировка приватного сообщения от {message.from_user.id}")
-
-    async def handle_non_command_message(self, message: Message):
-        """Обработка некомандных сообщений в разрешенной группе"""
-        if (
-            message.chat.type in ['group', 'supergroup']
-            and message.chat.id == ALLOWED_GROUP_ID
-        ):
-            if not message.text.startswith('/'):
-                await message.answer(
-                    "Я реагирую только на команды. Пожалуйста, "
-                    "используйте команды для взаимодействия со мной."
-                )
-                logger.warning(
-                    f"Блокировка некомандного сообщения в разрешенной "
-                    f"группе {message.chat.id}"
-                )
-
-    async def handle_other_group_messages(self, message: Message):
-        """Обработка сообщений из других групповых чатов"""
-        if (
-            message.chat.type in ['group', 'supergroup']
-            and message.chat.id != ALLOWED_GROUP_ID
-        ):
-            await message.answer(
-                "И как меня сюда занесло?!\n\n"
-                "Смысл моего существования не подразумевает работу "
-                "в этом чате"
-            )
-            logger.warning(
-                f"Блокировка сообщения из чужого чата {message.chat.id}"
-            )
-
-    async def _is_allowed_chat(self, message: Message) -> bool:
-        """Проверяем, разрешен ли этот чат"""
-        if message.chat.id != ALLOWED_GROUP_ID:
-            if message.chat.type == 'private':
-                await self.handle_private_message(message)
-            else:
-                await self.handle_other_group_messages(message)
-            return False
-        return True
+    async def handle_other_chats(self, message: Message):
+        """Игнорируем все сообщения из других чатов"""
+        pass
 
     def setup_handlers(self):
-        """Настраиваем обработчики команд"""
-        router.message.register(self.start,
-                                Command(commands=['start', 'help']))
-        router.message.register(self.get_schedule_today,
-                                Command(commands=['schedule', 'rasp']))
-
-        # Handle private messages
-        router.message.register(self.handle_private_message,
-                                F.chat.type == 'private')
-
-        # Handle non-command messages in allowed group
+        """Настраиваем обработчики команд ТОЛЬКО для разрешенного чата"""
+        # Обработчики команд для разрешенной группы
         router.message.register(
-            self.handle_non_command_message,
-            F.chat.type.in_(['group', 'supergroup']) & (F.chat.id == ALLOWED_GROUP_ID) & ~F.text.startswith('/')
+            self.start,
+            Command(commands=['start']),
+            F.chat.id == ALLOWED_GROUP_ID
         )
 
-        # Handle messages in other groups
         router.message.register(
-            self.handle_other_group_messages,
-            F.chat.type.in_(['group', 'supergroup']) & (F.chat.id != ALLOWED_GROUP_ID)
+            self.get_schedule_today,
+            Command(commands=['schedule']),
+            F.chat.id == ALLOWED_GROUP_ID
         )
+
+        router.message.register(self.handle_other_chats)
 
     async def send_daily_schedule(self):
         """Ежедневная отправка расписания (вызывается планировщиком)"""
         try:
             from parser import UniversityParser
-            from scheduler import ScheduleChecker
-
-            checker = ScheduleChecker()
 
             async with UniversityParser(headless=True,
                                         use_saved_session=True) as parser:
                 result = await parser.get_schedule_for_date()
-                message_text = checker.format_telegram_message(result)
+                message_text = self.format_telegram_message(result)
 
                 await self.bot.send_message(
                     chat_id=ALLOWED_GROUP_ID,
@@ -173,13 +168,10 @@ class UniversityTelegramBot:
                     text=f"Не удалось получить расписание: {str(e)}"
                 )
             except Exception as send_error:
-                logger.error(
-                    f"Не удалось отправить сообщение об ошибке: {send_error}"
-                )
+                logger.error(f"Не удалось отправить сообщение об ошибке: {send_error}")
 
     def setup_scheduler(self):
         """Настройка планировщика для ежедневной отправки"""
-        # Ежедневно в 11:00
         self.scheduler.add_job(
             self.send_daily_schedule,
             CronTrigger(hour=11, minute=0),
@@ -190,7 +182,6 @@ class UniversityTelegramBot:
 
     async def run(self):
         """Запуск бота"""
-
         self.bot = Bot(
             token=TELEGRAM_TOKEN,
             default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN)
