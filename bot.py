@@ -87,8 +87,7 @@ class UniversityTelegramBot:
 
             classes = schedule_data.get('classes', [])
             for i, class_info in enumerate(classes, 1):
-                class_parts = [f"*{i}. {class_info.get('subject',
-                               'Дисциплина')}*"]
+                class_parts = [f"*{i}. {class_info.get('subject', 'Дисциплина')}*"]
 
                 if time := class_info.get('time'):
                     class_parts.append(f"{time}")
