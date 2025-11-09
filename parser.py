@@ -1,280 +1,163 @@
 import os
-from datetime import datetime
+from typing import Dict, List
 from dotenv import load_dotenv, find_dotenv
 from playwright.async_api import async_playwright
-from typing import Optional, Dict, Any
 from loguru import logger
+
+from json_tools import ScheduleJsonTools
+
+load_dotenv(find_dotenv())
 
 
 class UniversityParser:
+    """Парсер расписания университета"""
+
     def __init__(self, headless: bool = True, use_saved_session: bool = True):
-        load_dotenv(find_dotenv())
-        self.login = os.getenv('LOGIN')
-        self.password = os.getenv('PASSWORD')
         self.headless = headless
         self.use_saved_session = use_saved_session
+        self.login = os.getenv('LOGIN')
+        self.password = os.getenv('PASSWORD')
+        self.json_tools = ScheduleJsonTools()
 
         if not self.login or not self.password:
             raise ValueError("Логин или пароль не найдены в .env файле")
 
-        self.browser = None
-        self.context = None
-        self.page = None
-        self.playwright = None
-        self.is_authenticated = False
-        self.base_url = 'https://es.unitech-mo.ru/WebApp'
-
-        logger.remove()
-        logger.add(
-            "university_bot.log",
-            format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}",
-            level="INFO",
-            rotation="10 MB",
-            retention="30 days"
-        )
-
-    async def __aenter__(self):
-        await self.setup_browser()
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self.close()
-
-    async def setup_browser(self):
-        logger.info("Запускаем браузер...")
-
-        self.playwright = await async_playwright().start()
-
-        launch_options = {
-            'headless': self.headless,
-            'args': ['--no-sandbox', '--disable-dev-shm-usage']
-        }
-
-        self.browser = await self.playwright.chromium.launch(**launch_options)
-
-        storage_state = None
-        if self.use_saved_session and os.path.exists("auth_state.json"):
-            logger.info("Используем сохраненную сессию")
-            storage_state = "auth_state.json"
-
-        context_options = {
-            'viewport': {'width': 1920, 'height': 1080},
-            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        }
-
-        if storage_state:
-            context_options['storage_state'] = storage_state
-
-        self.context = await self.browser.new_context(**context_options)
-        self.page = await self.context.new_page()
-
-    async def close(self):
-        if self.browser:
-            await self.browser.close()
-        if self.playwright:
-            await self.playwright.stop()
-
-    async def get_schedule_for_date(self, target_date: datetime = None
-                                    ) -> Dict[str, Any]:
-        """
-        Получаем расписание на конкретную дату
-
-        Args:
-            target_date: Дата для получения расписания (по умолчанию сегодня)
-        """
-        if not target_date:
-            target_date = datetime.now()
-
-        logger.info(f"Получаем расписание на {target_date.strftime('%d.%m.%Y')}")
-
+    async def parse_and_save_schedule(self) -> bool:
+        """Основная функция: парсит расписание и сохраняет в JSON"""
         try:
-            if not await self._ensure_authenticated():
-                return {'success': False, 'error': 'Ошибка авторизации'}
+            logger.info("Начинаем парсинг расписания...")
 
-            if not await self._navigate_to_schedule():
-                return {'success': False,
-                        'error': 'Не удалось перейти к расписанию'}
+            events_data = await self._parse_calendar_data()
+            if events_data:
+                return self.json_tools.save_events_to_json(events_data)
+            return False
 
-            await self._select_date(target_date)
-            schedule_data = await self._parse_schedule()
+        except Exception as e:
+            logger.error(f"Ошибка при парсинге расписания: {e}")
+            return False
 
-            return {
-                'success': True,
-                'date': target_date.strftime('%Y-%m-%d'),
-                'schedule': schedule_data,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    async def _parse_calendar_data(self) -> List[Dict]:
+        """Парсит данные календаря с сайта"""
+        async with async_playwright() as playwright:
+            browser = await playwright.chromium.launch(headless=self.headless)
+
+            context_args = {
+                'viewport': {'width': 1280, 'height': 800},
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
 
-        except Exception as e:
-            logger.error(f"Ошибка при получении расписания: {e}")
-            return {'success': False, 'error': str(e)}
+            # Используем сохраненную сессию если доступна
+            if self.use_saved_session and os.path.exists("auth_state.json"):
+                context = await browser.new_context(**context_args, storage_state="auth_state.json")
+                logger.info("Используем сохраненную сессию")
+            else:
+                context = await browser.new_context(**context_args)
 
-    async def _ensure_authenticated(self) -> bool:
-        """Обеспечиваем авторизацию"""
-        if await self.check_current_auth_status():
-            return True
+            page = await context.new_page()
 
-        logger.info("Проходим авторизацию...")
-        await self.page.goto(f'{self.base_url}/#/login',
-                             wait_until='networkidle')
-        await self.page.wait_for_timeout(3000)
+            try:
+                # Логинимся если нужно
+                if not await self._ensure_login(page):
+                    logger.error("Не удалось авторизоваться")
+                    return []
 
-        # Проверяем, что мы на странице логина
-        if 'login' not in (await self.page.url()).lower():
-            logger.warning("Страница логина не загружена")
-            return False
+                # Переходим к календарю
+                await page.goto('https://es.unitech-mo.ru/WebApp/#/RaspCalendar/Group/12054', wait_until='networkidle')
+                await page.wait_for_timeout(5000)
+                await page.wait_for_selector('.v-event', timeout=10000)
 
-        inputs = await self.page.query_selector_all('input')
-        if len(inputs) >= 2:
-            await inputs[0].fill(self.login)
-            await inputs[1].fill(self.password)
-            await inputs[1].press('Enter')
-            await self.page.wait_for_timeout(5000)
+                # Парсим все события
+                events = await page.locator('.v-event').all()
+                logger.info(f"Найдено событий: {len(events)}")
 
-            if await self.check_current_auth_status():
-                await self.context.storage_state(path="auth_state.json")
-                return True
+                events_data = []
 
-        return False
+                for event in events:
+                    try:
+                        event_date = await event.get_attribute('data-date')
+                        event_text = await event.text_content()
+                        event_lines = [line.strip() for line in event_text.split('\n') if line.strip()]
 
-    async def check_current_auth_status(self) -> bool:
-        """Проверяем статус авторизации"""
+                        background_color = await event.evaluate('(element) => getComputedStyle(element).backgroundColor')
+                        # Парсим детали занятия
+                        parsed_event = self._parse_event_details(event_date, event_lines, background_color)
+                        events_data.append(parsed_event)
+
+                    except Exception as e:
+                        logger.warning(f"Ошибка парсинга события: {e}")
+                        continue
+
+                # Сохраняем сессию для будущего использования
+                await context.storage_state(path="auth_state.json")
+
+                return events_data
+
+            finally:
+                await browser.close()
+
+    async def _ensure_login(self, page) -> bool:
+        """Обеспечивает авторизацию на сайте"""
         try:
-            await self.page.goto(f'{self.base_url}/#/',
-                                 wait_until='networkidle',
-                                 timeout=10000)
-            await self.page.wait_for_timeout(2000)
+            await page.goto('https://es.unitech-mo.ru/WebApp/#/login',
+                            wait_until='networkidle')
+            await page.wait_for_timeout(3000)
 
-            current_url = self.page.url
-            if 'login' not in current_url.lower():
-                self.is_authenticated = True
-                return True
+            # Логинимся
+            inputs = await page.query_selector_all('input')
+            if len(inputs) >= 2:
+                await inputs[0].fill(self.login)
+                await inputs[1].fill(self.password)
+                await inputs[1].press('Enter')
+                await page.wait_for_timeout(5000)
 
-            return False
-        except:
-            return False
-
-    async def _navigate_to_schedule(self) -> bool:
-        """Переход к расписанию"""
-        try:
-            # Пробуем прямой URL
-            await self.page.goto(f'{self.base_url}/#/Rasp/My',
-                                 wait_until='networkidle')
-            await self.page.wait_for_timeout(3000)
-
-            # Проверяем, что мы на странице расписания
-            page_content = await self.page.content()
-            if any(word in page_content.lower() for word in ['расписание',
-                                                             'schedule']):
-                return True
-
-            return False
-        except Exception as e:
-            logger.error(f"Ошибка перехода к расписанию: {e}")
-            return False
-
-    async def _select_date(self, target_date: datetime):
-        """Выбираем дату в календаре"""
-        try:
-            # Ищем поле выбора даты
-            date_selectors = [
-                "input[type='date']",
-                ".v-text-field__slot input",
-                "[placeholder*='дату']",
-                ".v-date-picker-table"
-            ]
-
-            for selector in date_selectors:
-                if await self.page.is_visible(selector):
-                    date_input = self.page.locator(selector).first
-                    date_str = target_date.strftime('%Y-%m-%d')
-                    await date_input.fill(date_str)
-                    await self.page.wait_for_timeout(2000)
-                    logger.info(f"Установлена дата: {date_str}")
-                    break
+            return 'login' not in page.url.lower()
 
         except Exception as e:
-            logger.warning(f"Не удалось установить дату: {e}")
+            logger.error(f"Ошибка при авторизации: {e}")
+            return False
 
-    async def _parse_schedule(self) -> Dict[str, Any]:
-        """Парсим расписание с страницы"""
+    def _parse_event_details(self, date: str, lines: List[str], color: str) -> Dict:
+        """Парсит детали одного занятия"""
+        event_data = {
+            'date': date,
+            'text': ' | '.join(lines),
+            'lines': lines,
+            'color': color,
+            'parsed': {}
+        }
+
         try:
-            await self.page.wait_for_timeout(3000)
+            if lines:
+                first_line = lines[0]
+                parts = first_line.split(' ')
 
-            schedule_data = {
-                'has_classes': False,
-                'classes': [],
-                'next_class_date': None,
-                'group_info': None
-            }
+                if len(parts) >= 2:
+                    event_data['parsed']['time'] = parts[0]
+                    event_data['parsed']['type'] = parts[1]
 
-            group_elements = await self.page.query_selector_all('.v-card')
-            for element in group_elements:
-                text = await element.text_content()
-                if text and 'БМЗ' in text:
-                    schedule_data['group_info'] = text.strip()
-                    break
+                    # Ищем предмет
+                    subject_candidates = [line for line in lines if len(line) > 10 and not any(word in line.lower() for word in ['гр.', 'ауд.', 'преподаватель', 'аудитория'])]
+                    if subject_candidates:
+                        event_data['parsed']['subject'] = subject_candidates[0]
 
-            page_text = (await self.page.content()).lower()
-            if 'расписание отсутствует' in page_text:
-                if 'дата следующего занятия' in page_text:
-                    import re
-                    date_match = re.search(r'(\d{2}\.\d{2})', page_text)
-                    if date_match:
-                        schedule_data['next_class_date'] = date_match.group(1)
+                    # Ищем аудиторию
+                    room_candidates = [line for line in lines if any(word in line.lower() for word in ['ауд.', 'аудитория'])]
+                    if room_candidates:
+                        event_data['parsed']['room'] = room_candidates[0]
 
-                return schedule_data
-
-            class_selectors = [
-                '.schedule-item',
-                '.pair-item',
-                '.rasp-item',
-                '.v-card:has(.v-card__text)',
-                '[class*="lesson"]',
-                '[class*="pair"]'
-            ]
-
-            for selector in class_selectors:
-                elements = await self.page.query_selector_all(selector)
-                for element in elements:
-                    class_info = await self._parse_class_element(element)
-                    if class_info:
-                        schedule_data['classes'].append(class_info)
-                        schedule_data['has_classes'] = True
-
-            return schedule_data
+                    # Ищем преподавателя
+                    teacher_candidates = [line for line in lines if any(word in line.lower() for word in ['преподаватель', 'преп.'])]
+                    if teacher_candidates:
+                        event_data['parsed']['teacher'] = teacher_candidates[0]
 
         except Exception as e:
-            logger.error(f"Ошибка парсинга расписания: {e}")
-            return {'has_classes': False, 'classes': [], 'error': str(e)}
+            logger.warning(f"Ошибка детального парсинга события: {e}")
 
-    async def _parse_class_element(self, element) -> Optional[Dict[str, str]]:
-        """Парсим информацию об одном занятии"""
-        try:
-            text = await element.text_content()
-            if not text or len(text.strip()) < 10:
-                return None
+        return event_data
 
-            lines = [line.strip() for line in text.split('\n') if line.strip()]
 
-            class_info = {}
-
-            for line in lines:
-                if any(word in line.lower() for word in ['пара',
-                                                         'урок']):
-                    class_info['time'] = line
-                elif any(word in line.lower() for word in ['ауд.',
-                                                           'аудитория']):
-                    class_info['room'] = line
-                elif any(word in line.lower() for word in ['преподаватель',
-                                                           'преп.']):
-                    class_info['teacher'] = line
-                elif len(line) > 5 and not any(word in line.lower() for word in ['расписание', 'группа']):
-                    if 'subject' not in class_info:
-                        class_info['subject'] = line
-
-            return class_info if class_info else None
-
-        except Exception as e:
-            logger.warning(f"Ошибка парсинга элемента занятия: {e}")
-            return None
+async def update_schedule_daily():
+    """Функция для ежедневного обновления расписания"""
+    parser = UniversityParser(headless=True, use_saved_session=True)
+    success = await parser.parse_and_save_schedule()
+    return success
