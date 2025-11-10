@@ -1,7 +1,9 @@
-from typing import List, Optional, Dict, Any
-from loguru import logger
 import sys
 import os
+
+from typing import List, Optional, Dict, Any
+
+from loguru import logger
 
 from entities.question import Question
 from entities.quiz_result import QuizResult
@@ -294,3 +296,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
