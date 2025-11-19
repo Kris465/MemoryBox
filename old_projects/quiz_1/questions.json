@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "text": "Столица Франции?",
+      "options": ["Лондон", "Берлин", "Париж", "Мадрид"],
+      "correct_answer": 3,
+      "category": "География",
+      "difficulty": "Легкая"
+    },
+    {
+      "id": 2,
+      "text": "Сколько планет в Солнечной системе?",
+      "options": ["7", "8", "9", "10"],
+      "correct_answer": 2,
+      "category": "Астрономия",
+      "difficulty": "Средняя"
+    },
+    {
+      "id": 3,
+      "text": "Кто написал 'Войну и мир'?",
+      "options": ["Достоевский", "Толстой", "Чехов", "Тургенев"],
+      "correct_answer": 2,
+      "category": "Литература",
+      "difficulty": "Средняя"
+    },
+    {
+      "id": 4,
+      "text": "Формула воды?",
+      "options": ["CO2", "H2O", "O2", "NaCl"],
+      "correct_answer": 2,
+      "category": "Химия",
+      "difficulty": "Легкая"
+    },
+    {
+      "id": 5,
+      "text": "Год основания Москвы?",
+      "options": ["1147", "1247", "1047", "1347"],
+      "correct_answer": 1,
+      "category": "История",
+      "difficulty": "Сложная"
+    }
+  ]
+}
