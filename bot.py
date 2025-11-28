@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import datetime
 from typing import Optional
 
@@ -87,7 +88,14 @@ class UniversityTelegramBot:
 
             classes = schedule_data.get('classes', [])
             for i, class_info in enumerate(classes, 1):
-                class_parts = [f"*{i}. {class_info.get('subject', 'Дисциплина')}*"]
+                # Добавляем тип занятия к названию предмета, если он есть
+                subject = class_info.get('subject', 'Дисциплина')
+                class_type = class_info.get('type', '')
+                if class_type:
+                    formatted_subject = f"{subject} ({class_type})"
+                else:
+                    formatted_subject = subject
+                class_parts = [f"*{i}. {formatted_subject}*"]
 
                 if time := class_info.get('time'):
                     class_parts.append(f"{time}")
@@ -104,21 +112,20 @@ class UniversityTelegramBot:
 
     async def start_command(self, message: Message):
         """Обработчик команды /start только для разрешенной группы"""
-        welcome_text = (
-            "Привет! Я бот для проверки расписания университета.\n\n"
-            "*Доступные команды:*\n"
-            "/schedule - Получить расписание на сегодня\n"
-            "/start - Описание бота\n\n"
-            "*Автоматические уведомления:*\n"
-            "Расписание приходит каждый день в 8:00"
-        )
-        await message.answer(welcome_text, parse_mode=ParseMode.MARKDOWN)
+        welcome_text = ("Привет! Я бот для проверки расписания университета.\n\n"
+                       "<b>Доступные команды:</b>\n"
+                       "/schedule - Получить расписание на сегодня\n"
+                       "/update_schedule - Ручное обновление расписания\n"
+                       "/start - Описание бота\n\n"
+                       "<b>Автоматические уведомления:</b>\n"
+                       "Расписание приходит каждый день в 8:00")
+        await message.answer(welcome_text, parse_mode=ParseMode.HTML)
 
     async def schedule_command(self, message: Message):
         """Обработчик команды /schedule только для разрешенной группы"""
         await message.answer("Смотрю расписание на сегодня...")
 
-        # Если файла нет - парсим
+        # Проверяем, нужно ли обновлять расписание
         if not self.json_tools.file_exists():
             await message.answer(
                 "Файл с расписанием не найден. Схожу узнаю...")
@@ -127,11 +134,32 @@ class UniversityTelegramBot:
                 await message.answer(
                     "Не удалось получить расписание. Поcмотрю позже.")
                 return
+        else:
+            # Проверяем, содержит ли текущее расписание актуальные данные
+            if not self.parser.is_calendar_data_current():
+                await message.answer(
+                    "Расписание устарело. Обновляю...")
+                success = await self.parser.parse_and_save_schedule()
+                if not success:
+                    await message.answer(
+                        "Не удалось обновить расписание. Использую старые данные.")
+            else:
+                logger.info("Текущее расписание актуально")
 
         # Получаем расписание из JSON
         result = self.json_tools.get_schedule_for_date(datetime.now())
         message_text = self.format_telegram_message(result)
         await message.answer(message_text, parse_mode=ParseMode.MARKDOWN)
+
+    async def update_schedule_command(self, message: Message):
+        """Обработчик команды /update_schedule для ручного обновления расписания"""
+        await message.answer("Запускаю обновление расписания...")
+
+        success = await self.parser.parse_and_save_schedule()
+        if success:
+            await message.answer("Расписание успешно обновлено!")
+        else:
+            await message.answer("Не удалось обновить расписание.")
 
     def setup_handlers(self):
         """Настройка обработчиков команд"""
@@ -147,12 +175,18 @@ class UniversityTelegramBot:
             F.chat.id == ALLOWED_GROUP_ID
         )
 
+        router.message.register(
+            self.update_schedule_command,
+            Command(commands=['update_schedule']),
+            F.chat.id == ALLOWED_GROUP_ID
+        )
+
     async def send_daily_schedule(self):
         """Ежедневная отправка расписания"""
         try:
             logger.info("Обновление ежедневного расписания...")
 
-            # Обновляем данные
+            # Обновляем данные если нужно
             update_success = await update_schedule_daily()
             if not update_success:
                 logger.warning(

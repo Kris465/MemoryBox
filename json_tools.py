@@ -5,11 +5,17 @@ from typing import Dict, List, Optional
 from loguru import logger
 
 
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
+
 class ScheduleJsonTools:
     """Класс для работы с JSON файлом расписания"""
 
-    def __init__(self, json_filename: str = 'calendar_events.json'):
+    def __init__(self, json_filename: str = 'calendar_events.json', group_name: str = None):
         self.json_filename = json_filename
+        # Get group info from parameter or environment variable, fallback to default
+        self.group_name = group_name or os.getenv('GROUP_NAME', 'БМЗ-25')  # Default to БМЗ-25 for backward compatibility
 
     def save_events_to_json(self, events_data: List[Dict]) -> bool:
         """Сохраняет события в JSON файл"""
@@ -56,18 +62,18 @@ class ScheduleJsonTools:
         schedule_data = {
             'has_classes': len(day_events) > 0,
             'classes': [],
-            'group_info': 'БМЗ-25'
+            'group_info': self.group_name
         }
 
         for event in day_events:
-            parsed = event.get('parsed', {})
+            # Для упрощенной структуры используем поля напрямую
             class_info = {
-                'subject': parsed.get('subject', 'Неизвестно'),
-                'time': parsed.get('time', ''),
-                'room': parsed.get('room', ''),
-                'teacher': parsed.get('teacher', ''),
-                'type': parsed.get('type', ''),
-                'raw_text': event.get('text', '')
+                'subject': event.get('subject', 'Неизвестно'),
+                'time': event.get('time', ''),
+                'room': event.get('room', ''),
+                'teacher': event.get('teacher', ''),
+                'type': event.get('type', ''),
+                'raw_text': event.get('original_text', '')
             }
             schedule_data['classes'].append(class_info)
 
