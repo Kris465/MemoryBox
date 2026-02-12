@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+sound_term/__init__.py
+sound_term/main.py
+sound_term.egg-info/PKG-INFO
+sound_term.egg-info/SOURCES.txt
+sound_term.egg-info/dependency_links.txt
+sound_term.egg-info/entry_points.txt
+sound_term.egg-info/requires.txt
+sound_term.egg-info/top_level.txt
