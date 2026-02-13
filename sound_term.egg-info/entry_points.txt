@@ -1,2 +1,0 @@
-[console_scripts]
-sound-term = sound_term.main:main
