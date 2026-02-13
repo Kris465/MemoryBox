@@ -11,3 +11,5 @@ FREQ_RANGE_DIGITS_LOW = 300
 FREQ_RANGE_DIGITS_HIGH = 400
 FREQ_RANGE_SYMBOLS_LOW = 1500
 FREQ_RANGE_SYMBOLS_HIGH = 2000
+# Частота для специальных символов, например, новой строки
+FREQ_NEWLINE = 2500 # Выберем частоту за пределами обычных символов

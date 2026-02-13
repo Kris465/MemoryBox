@@ -2,7 +2,7 @@
 import numpy as np
 import sounddevice as sd
 import re # Добавим модуль для работы с регулярными выражениями
-from config import SAMPLE_RATE, DURATION_SEC, FREQ_RANGE_LETTERS_LOW, FREQ_RANGE_LETTERS_HIGH, FREQ_RANGE_DIGITS_LOW, FREQ_RANGE_DIGITS_HIGH, FREQ_RANGE_SYMBOLS_LOW, FREQ_RANGE_SYMBOLS_HIGH
+from config import SAMPLE_RATE, DURATION_SEC, FREQ_RANGE_LETTERS_LOW, FREQ_RANGE_LETTERS_HIGH, FREQ_RANGE_DIGITS_LOW, FREQ_RANGE_DIGITS_HIGH, FREQ_RANGE_SYMBOLS_LOW, FREQ_RANGE_SYMBOLS_HIGH, FREQ_NEWLINE
 
 # --- Определение алфавита ---
 # Пробел + ASCII Printable Characters (95 штук)
@@ -46,6 +46,9 @@ def create_frequency_map():
     freq_map.update(assign_frequencies(letter_chars, FREQ_RANGE_LETTERS_LOW, FREQ_RANGE_LETTERS_HIGH))
     freq_map.update(assign_frequencies(digit_chars, FREQ_RANGE_DIGITS_LOW, FREQ_RANGE_DIGITS_HIGH))
     freq_map.update(assign_frequencies(symbol_chars, FREQ_RANGE_SYMBOLS_LOW, FREQ_RANGE_SYMBOLS_HIGH))
+    # Добавим символ новой строки в маппинг
+    freq_map['\n'] = FREQ_NEWLINE
+    freq_map['\r'] = FREQ_NEWLINE # И возврат каретки, если нужно
     return freq_map
 
 FREQ_MAP = create_frequency_map()
@@ -69,6 +72,13 @@ def play_tone(tone_array):
 # --- Функция кодирования строки ---
 def encode_text_to_sound(text):
     for char in text:
+        # Обработка специальных символов, если нужно
+        if char in ('\n', '\r'):
+             # Генерируем и воспроизводим звук для новой строки
+             tone = generate_tone(FREQ_MAP[char], DURATION_SEC, envelope_flat) # Используем плоскую огибающую
+             play_tone(tone)
+             continue # Переходим к следующему символу
+
         if char not in FREQ_MAP:
             # print(f"Предупреждение: Символ '{char}' не найден в алфавите. Пропускаю.") # Закомментим для TTY
             continue

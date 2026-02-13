@@ -4,7 +4,7 @@ import pty
 import select
 import sys
 import signal
-from sound_generator import speak_output, speak_input # Импортируем speak_input
+from sound_generator import speak_output # speak_input больше не импортируем, если не планируем использовать
 
 def run_tty_wrapper():
     # PID дочернего процесса (bash) и файловый дескриптор мастера PTY
@@ -36,7 +36,7 @@ def run_tty_wrapper():
                             break # PTY закрыт
                         # Выводим данные в оригинальный терминал (вашему экрану)
                         os.write(sys.stdout.fileno(), output_data)
-                        # Озвучиваем прочитанные данные
+                        # Озвучиваем прочитанные данные (только вывод!)
                         speak_output(output_data.decode('utf-8', errors='ignore'))
 
                     except OSError:
@@ -47,10 +47,10 @@ def run_tty_wrapper():
                     input_data = os.read(sys.stdin.fileno(), 1024)
                     if not input_data:
                         break # stdin закрыт (например, Ctrl+D)
-                    # Озвучиваем вводимые символы (опционально)
-                    for char in input_data.decode('utf-8', errors='ignore'):
-                         speak_input(char)
-                    # Отправляем ввод в PTY (в bash)
+                    # ВАЖНО: Больше НЕ озвучиваем ввод!
+                    # for char in input_data.decode('utf-8', errors='ignore'):
+                    #      speak_input(char) # Закомментировано
+                    # Отправляем ввод в PTY (в bash) как обычно
                     os.write(fd_master, input_data)
 
         finally:
