@@ -1,5 +1,4 @@
 import os
-import re
 from datetime import datetime
 from typing import Optional
 
@@ -113,12 +112,13 @@ class UniversityTelegramBot:
     async def start_command(self, message: Message):
         """Обработчик команды /start только для разрешенной группы"""
         welcome_text = ("Привет! Я бот для проверки расписания университета.\n\n"
-                       "<b>Доступные команды:</b>\n"
-                       "/schedule - Получить расписание на сегодня\n"
-                       "/update_schedule - Ручное обновление расписания\n"
-                       "/start - Описание бота\n\n"
-                       "<b>Автоматические уведомления:</b>\n"
-                       "Расписание приходит каждый день в 8:00")
+                        "<b>Доступные команды:</b>\n"
+                        "/schedule - Получить расписание на сегодня\n"
+                        "/next - Ближайшие 5 занятий\n"
+                        "/update_schedule - Ручное обновление расписания\n"
+                        "/start - Описание бота\n\n"
+                        "<b>Автоматические уведомления:</b>\n"
+                        "Расписание приходит каждый день в 8:00")
         await message.answer(welcome_text, parse_mode=ParseMode.HTML)
 
     async def schedule_command(self, message: Message):
@@ -161,6 +161,84 @@ class UniversityTelegramBot:
         else:
             await message.answer("Не удалось обновить расписание.")
 
+    async def next_classes_command(self, message: Message):
+        """Обработчик команды /next для просмотра ближайших 5 занятий"""
+        await message.answer("Загружаю ближайшие занятия...")
+
+        # Проверяем, нужно ли обновлять расписание
+        if not self.json_tools.file_exists():
+            await message.answer("Файл с расписанием не найден. Схожу узнаю...")
+            success = await self.parser.parse_and_save_schedule()
+            if not success:
+                await message.answer("Не удалось получить расписание.")
+                return
+        else:
+            if not self.parser.is_calendar_data_current():
+                await message.answer("Расписание устарело. Обновляю...")
+                success = await self.parser.parse_and_save_schedule()
+                if not success:
+                    await message.answer("Не удалось обновить расписание.")
+
+        # Получаем все занятия из JSON
+        events_data = self.json_tools.load_events_from_json()
+        if not events_data:
+            await message.answer("Нет данных о занятиях.")
+            return
+
+        # Фильтруем и сортируем будущие занятия
+        now = datetime.now()
+        future_classes = []
+        for event in events_data:
+            event_date = event.get('date')
+            event_time = event.get('time', '00:00')
+            if event_date and event_time:
+                try:
+                    class_datetime = datetime.strptime(f"{event_date} {event_time}", '%Y-%m-%d %H:%M')
+                    if class_datetime >= now:
+                        future_classes.append((class_datetime, event))
+                except ValueError:
+                    continue
+
+        if not future_classes:
+            await message.answer("*Занятий не найдено*\n\nРасписание пустое или все занятия уже прошли.", parse_mode=ParseMode.MARKDOWN)
+            return
+
+        # Сортируем по времени и берём первые 5
+        future_classes.sort(key=lambda x: x[0])
+        next_five = future_classes[:5]
+
+        # Формируем сообщение
+        message_parts = ["*Ближайшие 5 занятий:*\n"]
+
+        for i, (class_dt, event) in enumerate(next_five, 1):
+            date_str = class_dt.strftime('%d.%m.%Y')
+            time_str = class_dt.strftime('%H:%M')
+            
+            subject = event.get('subject', 'Неизвестно')
+            class_type = event.get('type', '')
+            room = event.get('room', '')
+            teacher = event.get('teacher', '')
+
+            # Формируем название с типом занятия
+            if class_type:
+                formatted_subject = f"{subject} ({class_type})"
+            else:
+                formatted_subject = subject
+
+            class_parts = [f"*{i}. {formatted_subject}*"]
+            class_parts.append(f"{date_str} в {time_str}")
+            if room:
+                class_parts.append(f"{room}")
+            if teacher:
+                class_parts.append(f"{teacher}")
+
+            message_parts.append("\n".join(class_parts))
+            message_parts.append("")
+
+        message_parts.append(f"Обновлено: {datetime.now().strftime('%H:%M')}")
+
+        await message.answer("\n".join(message_parts), parse_mode=ParseMode.MARKDOWN)
+
     def setup_handlers(self):
         """Настройка обработчиков команд"""
         router.message.register(
@@ -172,6 +250,12 @@ class UniversityTelegramBot:
         router.message.register(
             self.schedule_command,
             Command(commands=['schedule']),
+            F.chat.id == ALLOWED_GROUP_ID
+        )
+
+        router.message.register(
+            self.next_classes_command,
+            Command(commands=['next']),
             F.chat.id == ALLOWED_GROUP_ID
         )
 
