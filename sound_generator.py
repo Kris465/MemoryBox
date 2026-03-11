@@ -106,10 +106,57 @@ def remove_ansi_escape_sequences(text):
 # --- Функция озвучки вывода ---
 def speak_output(output_text):
     """Озвучивает текст вывода."""
+    # Импортируем необходимые модули
+    import sys
+    import time
+    import re
+    
+    # Проверяем, не является ли этот текст дубликатом последнего
+    if not hasattr(speak_output, 'last_output'):
+        speak_output.last_output = ""
+        speak_output.last_time = 0
+    
+    # Проверяем, совпадает ли текущий вывод с предыдущим
+    # и прошло ли достаточно времени с предыдущего вызова
+    current_time = time.time()
+    is_duplicate = (output_text == speak_output.last_output and 
+                    (current_time - speak_output.last_time) < 0.1)  # 100 мс
+    
+    # Обновляем последние значения
+    speak_output.last_output = output_text
+    speak_output.last_time = current_time
+    
+    # Если это дубликат, пропускаем озвучку
+    if is_duplicate:
+        return
+    
+    # Фильтруем служебные символы и приглашения командной строки
     # Удаляем ANSI escape sequences
     clean_text_for_speech = remove_ansi_escape_sequences(output_text)
+    
     # Удаляем символы новой строки, если они не нужны как звук
     clean_text = clean_text_for_speech.replace('\n', '').replace('\r', '')
+    
+    # Пропускаем озвучку, если текст содержит только пробелы или является приглашением командной строки
+    if not clean_text.strip():
+        return  # Не озвучиваем пустые строки
+    
+    # Пропускаем озвучку, если текст похож на приглашение командной строки
+    # Обычно приглашения содержат символы вроде $, %, #, > или имя пользователя
+    prompt_patterns = [
+        r'^[\w\-@.:~#$%>+]+$',  # Обычные приглашения типа user@host:~$
+        r'^[\w\-@.:~#$%>+]+\s*[\$\%\#\>\)]\s*$',  # Приглашения с завершающим символом
+        r'^\(\w+\)\s+[\w\-@.:~#$%>+]+\s*[\$\%\#\>\)]\s*'  # Приглашения с префиксом (например, (env) user@host$)
+    ]
+    
+    for pattern in prompt_patterns:
+        if re.match(pattern, clean_text.strip()):
+            return  # Не озвучиваем приглашения командной строки
+    
+    # Также фильтруем короткие последовательности, которые могут быть служебными символами
+    if len(clean_text.strip()) < 2 and not clean_text.strip().isalnum():
+        return  # Не озвучиваем короткие служебные символы
+    
     encode_text_to_sound(clean_text)
 
 # --- Функция озвучки ввода (опционально) ---
