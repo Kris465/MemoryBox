@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Wallpaper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Верхняя панель -->
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <span class="terminal-icon">$</span>
+                <span id="filePath">loading...</span>
+            </div>
+            <div class="terminal-mode" id="terminalMode">INSERT</div>
+        </div>
+        
+        <!-- Основная область с кодом -->
+        <div class="terminal-body">
+            <div class="line-numbers" id="lineNumbers"></div>
+            <div class="code-area">
+                <pre id="codeContent"><span class="cursor" id="cursor"></span></pre>
+            </div>
+        </div>
+        
+        <!-- Нижняя панель (статус бар) -->
+        <div class="terminal-footer">
+            <div class="status-left">
+                <span id="languageBadge">TXT</span>
+                <span class="separator">│</span>
+                <span id="position">1:1</span>
+            </div>
+            <div class="status-center" id="vimStatus">-- INSERT --</div>
+            <div class="status-right">
+                <span id="fileProgress">0%</span>
+                <span class="separator">│</span>
+                <span id="clock">00:00</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
