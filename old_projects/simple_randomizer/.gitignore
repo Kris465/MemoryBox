@@ -1,0 +1,9 @@
+# venv
+
+.venv
+.env
+
+# files
+*.json
+tests
+script.txt
