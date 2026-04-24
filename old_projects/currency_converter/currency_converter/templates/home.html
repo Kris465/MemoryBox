@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 text-white mb-4">Конвертер валют</h1>
+            <p class="lead text-white">Используйте конвертер валют для быстрого пересчета по актуальным курсам Центрального Банка РФ.</p>
+            <a href="{% url 'converter' %}" class="btn btn-light btn-lg mt-3">Попробовать конвертер</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
