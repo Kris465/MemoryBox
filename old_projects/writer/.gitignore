@@ -1,0 +1,18 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__
+
+#srtucture
+sources/*
+!sources/README.md
+standards/*  
+!standards/README.md
+
+# log
+*.log
+
+# database
+vector_db
