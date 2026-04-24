@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace;
+    background: #0d1117;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #c9d1d9;
+}
+
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    padding: 0;
+    background: #0d1117;
+    margin-top: 0;
+}
+
+/* Header */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    font-size: 0.85rem;
+}
+
+.terminal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #8b949e;
+}
+
+.terminal-icon {
+    font-size: 1rem;
+}
+
+#filePath {
+    color: #58a6ff;
+    max-width: 70vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.terminal-mode {
+    padding: 0.25rem 0.75rem;
+    background: #238636;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Body */
+.terminal-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    padding: 0.5rem 0;
+}
+
+.line-numbers {
+    padding: 0 1rem;
+    color: #8b949e;
+    text-align: right;
+    user-select: none;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    min-width: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-area {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    padding-right: 1rem;
+}
+
+.code-area pre {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #e6edf3;
+}
+
+/* Cursor */
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background: #58a6ff;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Footer / Status bar */
+.terminal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 1rem;
+    background: #161b22;
+    border-top: 2px solid #30363d;
+    font-size: 0.75rem;
+    color: #8b949e;
+}
+
+.status-left,
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.separator {
+    color: #30363d;
+}
+
+#languageBadge {
+    background: #1f6feb;
+    color: #fff;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+#position {
+    color: #8b949e;
+}
+
+#vimStatus {
+    color: #238636;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#fileProgress {
+    color: #f0883e;
+}
+
+#clock {
+    color: #8b949e;
+}
+
+/* Glow effect */
+.code-area pre {
+    text-shadow: 0 0 2px rgba(230, 237, 243, 0.3);
+}
+
+/* Fade animation */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
