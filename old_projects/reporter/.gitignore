@@ -1,0 +1,12 @@
+#venv
+.venv
+.env
+__pycache__
+*.pyc
+
+#files
+reports
+data
+
+#logs
+*.log

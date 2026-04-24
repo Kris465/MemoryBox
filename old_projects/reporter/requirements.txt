@@ -1,0 +1,8 @@
+loguru
+python-dotenv
+requests
+openai-whisper
+python-docx
+opencv-python
+numba
+numpy
