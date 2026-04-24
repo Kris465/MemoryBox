@@ -1,0 +1,12 @@
+# venv
+.venv
+venv
+.env
+
+# log
+*.log
+
+# Database
+*.database
+*.sqlite3
+*.db
