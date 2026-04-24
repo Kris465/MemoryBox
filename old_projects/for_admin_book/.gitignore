@@ -1,0 +1,16 @@
+# venv
+.venv
+.env
+
+# python
+__pycache__
+
+# files
+*.json
+*.csv
+
+# database
+*.db
+
+# logs
+*.log
