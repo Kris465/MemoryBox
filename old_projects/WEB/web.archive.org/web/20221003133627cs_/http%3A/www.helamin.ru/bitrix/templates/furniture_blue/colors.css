@@ -1,0 +1,110 @@
+h1, h2, h3, h4, h5, h6 { color:#000000; }
+
+hr, .hr { border-color: #E9E9E9;}
+
+/* Text */
+a:link {color:#3C72CC;}
+a:visited {color:#3C72CC;}
+a:hover {color:#c90000;}
+a:active {color:#3C72CC;}
+
+/* Layout */
+body {background: #fff;}
+
+
+
+
+a.home-icon { background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/icons-sprite.gif) no-repeat 0 0; }
+a.search-icon { background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/icons-sprite.gif) no-repeat 0 -15px; }
+a.feedback-icon { background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/icons-sprite.gif) no-repeat 0 -29px; }
+
+#banner-overlay { background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/overlay.png) no-repeat; }
+#banner-slogan { color: #1F69CF; background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/overlay.png) no-repeat right top;}
+
+div.content-block {}
+div.content-block-inner {}
+
+#search div.search-inner-box { border-color: #DEDEDE; }
+#search div.search-inner-box input { border-color: white;}
+#search-button input { 	color: #FFF; }
+#search-button { 	background: none; }
+
+dl.block-list dt { color: #91908B; }
+dl.block-list a { color: #000 !important;}
+
+#sidebar h3 { color: #3C72CC; background: transparent url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/sidebar-header-border.gif) no-repeat center bottom; }
+
+#left-menu li {border-bottom: 1px solid #c3c3c3;background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/line3.png) no-repeat 0px 0px; padding-left: 15px;}
+
+#left-menu a { color: #2b9eee; font-weight: lighter; text-decoration: underline;}
+#left-menu a:hover { color: #1F69CF;}
+#left-menu li.selected a {text-decoration: none; font-weight: bold;}
+
+/* Product List */
+div.product-overlay { background: url(https://web.archive.org/web/20220707163516im_/https://helamin.ru/bitrix/templates/furniture_blue/images/product-overlay.png) no-repeat;}
+a.product-desc { color: #000 !important;}
+a.product-desc p { color: #7F7F7F !important; }
+
+/* Paging */
+span.nav-current-page { background-color:#e8e9ec; }
+div.navigation span.disabled, div.navigation span.arrow, div.navigation span.ctrl   { color:#7E7E7E;}
+
+/* News List */
+div.news-item { border-color: #E5E5E5}
+div.news-date { color: #7F7F7F; }
+
+/* Catalog List */
+div.catalog-item { border-color: #E5E5E5; }
+div.catalog-item-image { border-color: #ccc; }
+div.catalog-item-price { background: #1F69CF; color: white;}
+div.catalog-item-property { border-color: #ccc;}
+div.catalog-item-property b, div.catalog-item-property span { background: white; }
+
+
+
+
+/*Common Elements */
+div.content-form div.form-input input, div.content-form div.form-input textarea, div.content-form div.form-input select
+{
+	background: #F8F7F7;
+	border-color: #D9D9D9;
+}
+div.content-form div.field-error div.form-input input, 
+div.content-form div.field-error div.form-input textarea, 
+div.content-form div.field-error div.form-input select
+{
+	color: red;
+	background:	#fff8d3;
+}
+div.content-form div.field label.field-title { color:#1D0405; }
+
+/* Search results*/
+div.search-item, table.search-filter td { border-color: #E9E9E9;}
+div.search-page input.search-query, table.search-filter input.input-field, table.search-filter select.select-field { background: #F8F7F7; border-color: #D9D9D9; }
+
+div.search-advanced, div.search-item-meta, div.search-item-meta a { color: #8a8a8a;}
+div.search-sorting b { background: #E8E9EC; }
+
+/*Error & OK messages*/
+.errortext, .starrequired { color: red;}  
+.errortext, .notetext { background:#FFFEEB; border-color: #FFD482;} 
+/*
+     FILE ARCHIVED ON 16:35:16 Jul 07, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 21:35:51 Feb 22, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.903
+  exclusion.robots: 0.033
+  exclusion.robots.policy: 0.016
+  esindex: 0.021
+  cdx.remote: 10.59
+  LoadShardBlock: 533.632 (3)
+  PetaboxLoader3.datanode: 272.93 (4)
+  PetaboxLoader3.resolve: 130.103 (3)
+  load_resource: 117.511
+*/

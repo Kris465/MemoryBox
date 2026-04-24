@@ -1,0 +1,59 @@
+var _____WB$wombat$assign$function_____=function(name){return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name))||self[name];};if(!self.__WB_pmw){self.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opens = _____WB$wombat$assign$function_____("opens");
+
+; /* Start:/bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/script.js*/
+var jshover = function()
+{
+	var menuDiv = document.getElementById("horizontal-multilevel-menu")
+	if (!menuDiv)
+		return;
+
+	var sfEls = menuDiv.getElementsByTagName("li");
+	for (var i=0; i<sfEls.length; i++) 
+	{
+		sfEls[i].onmouseover=function()
+		{
+			this.className+=" jshover";
+		}
+		sfEls[i].onmouseout=function() 
+		{
+			this.className=this.className.replace(new RegExp(" jshover\\b"), "");
+		}
+	}
+}
+
+if (window.attachEvent) 
+	window.attachEvent("onload", jshover);
+/* End */
+;; /* /bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/script.js*/
+
+}
+
+/*
+     FILE ARCHIVED ON 21:03:07 Oct 04, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 21:35:48 Feb 22, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.581
+  exclusion.robots: 0.02
+  exclusion.robots.policy: 0.009
+  esindex: 0.009
+  cdx.remote: 9.889
+  LoadShardBlock: 206.944 (3)
+  PetaboxLoader3.resolve: 125.568 (4)
+  PetaboxLoader3.datanode: 210.329 (5)
+  load_resource: 165.455
+  loaddict: 48.675
+*/

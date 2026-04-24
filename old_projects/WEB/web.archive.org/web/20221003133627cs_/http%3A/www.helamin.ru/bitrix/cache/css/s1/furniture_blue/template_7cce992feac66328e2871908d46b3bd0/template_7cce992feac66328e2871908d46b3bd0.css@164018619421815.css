@@ -1,0 +1,868 @@
+
+
+
+/* Start:/bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/style.css*/
+/**Top menu**/
+#horizontal-multilevel-menu,#horizontal-multilevel-menu ul
+{
+	margin:0; padding:0;
+	background:#BC262C url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/images/header_menu_bg.gif) repeat-x;
+	min-height:27px;
+	width:100%;
+	list-style:none;
+	font-size:11px;
+	float:left;
+	/*font-size:90%*/
+}
+
+#horizontal-multilevel-menu
+{
+	
+}
+
+/*Links*/
+#horizontal-multilevel-menu a
+{
+	display:block;
+	padding:5px 10px;
+	/*padding:0.3em 0.8em;*/
+	text-decoration:none;
+	text-align:center;
+}
+
+#horizontal-multilevel-menu li 
+{
+	float:left;
+}
+
+/*Root items*/
+#horizontal-multilevel-menu li a.root-item
+{
+	color:#fff;
+	font-weight:bold;
+	padding:7px 12px;
+}
+
+/*Root menu selected*/
+#horizontal-multilevel-menu li a.root-item-selected
+{
+	background:#fc8d3d;
+	color:#fff;
+	font-weight:bold;
+	padding:7px 12px;
+}
+
+/*Root items: hover*/
+#horizontal-multilevel-menu li:hover a.root-item, #horizontal-multilevel-menu li.jshover a.root-item
+{
+	background:#e26336;
+	color:#fff;
+}
+
+/*Item-parents*/
+#horizontal-multilevel-menu a.parent
+{
+	background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/images/arrow.gif) center right no-repeat;
+}
+
+/*Denied items*/
+#horizontal-multilevel-menu a.denied
+{
+	background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/images/lock.gif) center right no-repeat;
+}
+
+/*Child-items: hover*/
+#horizontal-multilevel-menu li:hover, #horizontal-multilevel-menu li.jshover
+{
+	background:#D6D6D6;
+	color:#fff;
+}
+
+/*Child-items selected*/
+#horizontal-multilevel-menu li.item-selected
+{
+	background:#D6D6D6;
+	color:#fff;
+}
+
+/*Sub-menu box*/
+#horizontal-multilevel-menu li ul
+{
+	position:absolute;
+	/*top:-999em;*/
+	top:auto;
+	display:none;
+	z-index:500;
+
+	height:auto;
+	/*width:12em;*/
+	width:135px;
+	background:#F5F5F5;
+	border:1px solid #C1C1C1;
+}
+
+/*Sub-menu item box*/
+#horizontal-multilevel-menu li li 
+{
+	width:100%;
+	border-bottom:1px solid #DEDEDE;
+}
+
+/*Item link*/
+#horizontal-multilevel-menu li ul a
+{
+	text-align:left;
+}
+
+/*Items text color & size */
+#horizontal-multilevel-menu li a,
+#horizontal-multilevel-menu li:hover li a,
+#horizontal-multilevel-menu li.jshover li a,
+#horizontal-multilevel-menu li:hover li:hover li a,
+#horizontal-multilevel-menu li.jshover li.jshover li a,
+#horizontal-multilevel-menu li:hover li:hover li:hover li a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li a,
+#horizontal-multilevel-menu li:hover li:hover li:hover li:hover li a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li.jshover li a,
+#horizontal-multilevel-menu li:hover li:hover li:hover li:hover li:hover li a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li.jshover li.jshover li a
+{
+	color:#4F4F4F;
+	font-weight:bold;
+}
+
+/*Items text color & size: hover*/
+#horizontal-multilevel-menu li:hover li:hover a,
+#horizontal-multilevel-menu li.jshover li.jshover a,
+#horizontal-multilevel-menu li:hover li:hover li:hover a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover a,
+#horizontal-multilevel-menu li:hover li:hover li:hover li:hover a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li.jshover a
+#horizontal-multilevel-menu li:hover li:hover li:hover li:hover li:hover a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li.jshover li.jshover a
+#horizontal-multilevel-menu li:hover li:hover li:hover li:hover li:hover li:hover a,
+#horizontal-multilevel-menu li.jshover li.jshover li.jshover li.jshover li.jshover li.jshover a
+{
+	color:#4F4F4F;
+}
+
+#horizontal-multilevel-menu li ul ul
+{
+	margin:-27px 0 0 132px;
+	/*margin:-1.93em 0 0 11.6em;*/
+}
+
+#horizontal-multilevel-menu li:hover ul ul,
+#horizontal-multilevel-menu li.jshover ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul,
+#horizontal-multilevel-menu li.jshover ul ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul ul,
+#horizontal-multilevel-menu li.jshover ul ul ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul ul ul,
+#horizontal-multilevel-menu li.jshover ul ul ul ul ul
+{
+	/*top:-999em;*/
+	display:none;
+}
+
+#horizontal-multilevel-menu li:hover ul,
+#horizontal-multilevel-menu li.jshover ul,
+#horizontal-multilevel-menu li li:hover ul,
+#horizontal-multilevel-menu li li.jshover ul,
+#horizontal-multilevel-menu li li li:hover ul,
+#horizontal-multilevel-menu li li li.jshover ul,
+#horizontal-multilevel-menu li li li li:hover ul,
+#horizontal-multilevel-menu li li li li.jshover ul,
+#horizontal-multilevel-menu li li li li li:hover ul,
+#horizontal-multilevel-menu li li li li li.jshover ul
+{
+	/*z-index:1000;
+	top:auto;*/
+	display:block;
+}
+
+div.menu-clear-left
+{
+	clear:left;
+}
+/* End */
+
+
+
+/* Start:/bitrix/templates/furniture_blue/styles.css*/
+﻿img {border:0 none;}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: Arial, Helvetica,sans-serif; 
+	margin:1.3em 0 1em;
+	font-weight:normal;
+	line-height:1.2;
+}
+
+h1 { font-size:200%; margin:0 0 1em; }
+h2 { font-size:160%; }
+h3 { font-size:140%; }
+h4 { font-size:140%; }
+h5 { font-size:120%; }
+h6 { font-size:100%; }
+
+hr, .hr 
+{
+	border-top:1px solid;
+	display:block;
+	font-size:1px;
+	height:1px;
+	line-height:1px;
+	margin:12px 0;
+	overflow:hidden;
+	padding:0;
+}
+
+#workarea ol li, #workarea ul li { margin: 0.6em 0; }
+#workarea ul { list-style-type: disc; }
+/* End */
+
+
+
+/* Start:/bitrix/templates/furniture_blue/template_styles.css*/
+html { width:100%; height: 100%; }
+
+body
+{
+	height:100%;
+	margin:0;
+	padding:0;
+	font-size: 80.01%;
+	font-family: Arial;
+    background: #fff;
+}
+#workarea form table td {
+    padding: 2px 0px;
+    border: 0px;
+}
+#workarea form table.form-table td {
+    border-bottom: 1px solid #ccc;
+    font-size: 12px;
+    padding: 5px 5px;
+}
+#workarea form table.form-table td input.inputfile {
+    display: none;
+}
+#workarea form table.form-table td input.inputtext {
+    width: 500px;
+}
+#workarea form table.form-table td textarea.inputtextarea {
+    width: 500px;
+}
+.opros table td {
+    border: 0px !important;
+}
+
+#workarea img {
+    margin: 3px;
+}
+
+#workarea form table th {
+    background: 0px;
+    border: 0px;
+}
+#workarea h3 {
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
+}
+.dfgdsdgd4 {
+    /*display: inline-block;
+    width: 860px;*/
+}
+.dfgdsdgd4 thead td {
+    font-size: 13px;
+}
+.dfgdsdgd4 td {
+    max-width: 280px;
+}
+.dfgdsdgd4 input {
+    width: 95px;
+}
+
+
+
+
+
+
+
+form { margin:0; padding:0;}
+form.main-form
+{ 
+	display: block;
+	margin:0; 
+	padding:0;
+	width:100%;
+	height:100%;
+}
+#horizontal-multilevel-menu li:hover a.root-item {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu3.png) repeat-x !important;
+}
+.slogan {
+    position: absolute;
+    z-index: 99;
+    margin: 20px 0px 0px 420px;
+    font-style: italic;
+    color: #fff;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: lighter;
+}
+.slogan p {
+    color: #fff;
+    margin: 0px;
+    font-size: 18px;
+    font-family: Arial;
+    font-weight: lighter;
+}
+.slogan2 {
+    position: absolute;
+    z-index: 99;
+    margin: 20px 0px 0px 740px;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/line.png) no-repeat 0px 4px;
+    padding: 0px 0px 0px 10px;
+    font-family: Verdana;
+    font-size: 16px;
+}
+.slogan2 p {
+    color: #000;
+    margin: 0px;
+    font-size: 16px;
+    font-family: Verdana;
+}
+.phone {
+    position: absolute;
+    z-index: 99;
+    margin: 20px 0px 0px 970px;
+    font-size: 20px;
+    font-family: Arial;
+    color: #fff;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/tel.png) no-repeat 0px 3px;
+    padding: 0px 0px 0px 25px;
+    
+}
+.mail {
+    position: absolute;
+    z-index: 99;
+    margin: 50px 0px 0px 970px;
+    font-size: 16px;
+    font-family: Arial;
+    color: #fff;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/mail.png) no-repeat 0px 0px;
+    padding: 0px 0px 0px 30px;
+    
+}
+#top-menu {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menus.png) repeat-x;
+    position: relative;
+}
+
+
+
+
+#page-wrapper
+{	
+	min-height:100%;	
+	/*width:878px;*/  
+	margin: 0 auto -90px;
+}
+
+* html #page-wrapper { height: 100%; }
+
+#header {
+    height: 118px; position: relative; z-index: 10; width:1200px; margin:0 auto;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_hapka.png) no-repeat;
+}
+
+#headers {
+    height: 118px;width:100%;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon.png) repeat-x;
+}
+
+#top-menus {
+    width:100%;
+}
+#top-menu
+{
+	width: 1200px;
+	height: 36px;
+    margin: 0 auto;
+	
+}
+#header .search {
+    position: absolute;
+    z-index: 9;
+    margin: 80px 0px 0px 940px;
+}
+
+#header .search #search-button input#search-submit-button {
+    position: absolute;
+    z-index: 99;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/loupe.gif) no-repeat;
+    font-size: 0px;
+    height: 14px;
+    width: 14px;
+    margin: 8px 0px 0px 220px;
+}
+#header .search .search-inner-box input {
+    border-radius: 7px !important;
+    padding: 0px 0px 0px 5px;
+    outline: 0px;
+}
+.bx-context-toolbar-empty-area {
+    background: none !important;
+}
+#content {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/water.png) no-repeat bottom left;
+    padding-bottom: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#top-menu-inner
+{
+	height: 36px;
+}
+
+#logo 
+{
+	width: 235px; 
+	height: 100px;
+	position:absolute;
+	left:0;
+	top:0;
+	text-align: center;
+}
+
+#logo td { padding: 0;}
+#logo a { outline: none;}
+
+#top-icons { overflow: hidden; height: 15px; position: absolute; top: 17px; width: 200px; left: 252px; }
+#top-icons a 
+{
+	float: left;
+	margin-right: 31px;
+}
+
+a.home-icon { width: 12px; height: 11px;}
+a.search-icon { width: 12px; height: 12px;}
+a.feedback-icon { width: 14px; height: 10px;}
+
+#banner #bx_incl_area_8_1 embed {
+    background: #fff !important;
+}
+#banner { margin:0 auto; width: 1162px; height: 357px;  position: relative; padding: 10px 0px 0px 0px;}
+#banner-layout { height: 142px;  table-layout: fixed; }
+#banner-overlay { height: 153px; position: absolute; width:437px; left:0; top: 0;}
+#banner-image { padding:0; width: 437px; vertical-align: top;}
+#banner-image div { width: 437px; height: 142px; overflow: hidden;}
+#banner-slogan 
+{
+	padding:0;
+	width: 441px;	
+	font-family: Arial; 
+	font-style: italic; 
+	font-size: 2em; 
+	font-weight: bold;
+	padding:10px 0 32px;
+}
+
+#content { width:1200px; overflow: hidden; margin: 20px auto 0px; zoom: 1;}
+
+#sidebar { width: 290px; float: left; }
+
+#workarea { padding:10px 20px 20px 20px; width:860px; float: right; text-align: justify; min-height: 550px; font-family: Verdana; font-size: 15px; font-style: italic;}
+
+#footer  
+{
+	height: 119px; 
+	width:1200px; 
+	margin:0 auto;  
+	position: relative;
+}
+#workarea h1 {
+    color: #2b9eee;
+    font-size: 20px;
+    font-family: Verdana;
+    font-style: normal;
+}
+#workarea {
+    line-height: 20px;
+	background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/line4.png) repeat;
+}
+#all {
+    width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+#footers  
+{
+	background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon2.png) repeat-x;
+	height: 119px; 
+	width:100%;
+}
+#copyright { width: 250px; float: left; padding: 30px 0px 0px 0px;}
+#copyright2 { width: 400px; float: left;font-family: Arial regular; font-size: 14px; color: #fff; padding: 30px 0px 0px 50px; }
+#copyright2 p { margin: 0px; padding: 1px 0px; }
+#copyright p { margin: 0;}
+#phone {float: left; margin: 30px 0px 0px 300px; padding: 0px 0px 0px 25px; font-size: 20px; font-family: Arial; color: #fff;background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/tel.png) no-repeat 0px 3px;}
+#mail {position: absolute; margin: 60px 0px 0px 1000px; padding: 0px 0px 0px 30px; font-family: Arial; color: #fff;background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/mail.png) no-repeat 0px 0px;}
+#footer #mail {font-size: 16px;}
+
+
+
+#space-for-footer { height: 90px; }
+
+#footer-design { width:300px; position:absolute; right:20px; top: 92px;  text-align: right;}
+#footer-design a{color:#757575; font-size:11px; text-decoration:none;}
+#footer-design a:hover{text-decoration:underline;}
+
+div.content-block { margin-bottom: 24px; }
+div.content-block-inner { padding: 22px 8px 22px 21px;}
+
+div.information-block div.top
+{
+	height: 13px;
+	border-right: 1px solid;
+	font-size: 1px;
+	background: #FFF url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/sidebar-corners-form.gif) no-repeat left top;
+}
+
+div.information-block div.bottom
+{
+	height: 13px;
+	border-left: 1px solid;
+	font-size: 1px;
+	background: #FFF url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/sidebar-corners-form.gif) no-repeat right bottom;
+}
+
+div.information-block-inner
+{
+	border-left: 1px solid;
+	border-right: 1px solid;
+	padding: 9px 18px 9px 21px;
+	zoom: 1;
+}
+
+div.information-block div.top, div.information-block div.bottom, div.information-block-inner { border-color: #E3E3E3; }
+
+#search {  width: auto;}
+#search div.rounded-box { float: left; width: auto;}
+
+
+#search div.search-inner-box input
+{
+	border:1px solid;
+	width: 240px;
+	height: 27px;
+	padding:0;
+	margin:0;
+}
+
+#search input { vertical-align: top;}
+#search-button input::-moz-focus-inner { border: 0; padding: 0; }/*Remove button padding in FF*/
+#search-button input 
+{
+	display: block;
+	border: none;
+	background: none;
+	width:48px;
+	padding:0;
+	margin:0;
+	font-family: Georgia, serif;
+	font-size: 12px;
+	height: 19px;
+	cursor: pointer;
+	cursor: hand;
+	outline: none;	
+}
+
+div.search-item h4 { margin-bottom: 0.4em;}
+
+dl.block-list { margin: 0; padding:0; font-size: 0.85em;}
+dl.block-list dt { margin: 1.5em 0 0.5em; }
+dl.block-list dd { margin:0; padding:0;}
+dl.block-list a { text-decoration: none; outline: none;}
+dl.block-list a:hover { text-decoration: underline;}
+
+#sidebar h3  
+{
+	font-family: Verdana;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 0 0 1em;
+	margin: 0 0 1em;
+}
+
+#left-menu
+{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+#left-menu li
+{
+	margin:0 0 0.7em;
+	padding: 0 0 0.7em;
+	display: block;
+}
+
+#left-menu a
+{
+	text-decoration: none;
+	font-weight: bold;	
+	padding: 1em 5px 1em 0;
+	outline: none;
+    font-family: Verdana;
+    font-size: 15.9px;
+    font-style: italic;
+}
+
+#left-menu li.last-item { margin-bottom: 0; padding-bottom: 0;margin: 0 0 0.7em; padding: 0 0px 0.7em 15px;}
+#left-menu li.selected a { padding-left: 1em; }
+#left-menu li.selected { text-indent: -1em; padding-left:1em;}
+
+/* Navigation */
+div.navigation { font-size:100%; line-height:200%; }
+span.navigation-title { padding-right:0.65em; font-weight: bold;}
+div.navigation a { text-decoration:underline; padding:0.2em 0.3em;}
+span.nav-current-page { padding:0.2em 0.3em; }
+div.navigation span.arrow { font-size:100%; font-family:Times, serif; }
+div.navigation span.ctrl { font-size:85%; }
+
+/* Product List */
+div.product-list { overflow: hidden; }
+
+div.product
+{ 
+	overflow: hidden; 
+	width: 280px;
+	height: 105px;
+	margin: 0 25px 20px 0;
+	position: relative;
+	float: left;
+}
+
+div.product-alt { margin-right: 0;}
+
+div.product-image
+{
+	width: 250px;
+	height: 105px;
+	background-repeat: no-repeat;
+	background-position: left top;
+	position: absolute;
+	top:0;
+	left: 0;	
+}
+
+div.product-overlay
+{
+	width: 280px;
+	height: 105px;
+	position: absolute;
+	z-index: 1;	
+}
+
+a.product-desc
+{
+	float:right;
+	height:62px;
+	overflow:hidden;
+	position:absolute;
+	right:0;
+	top:0px;
+	width:142px;
+	z-index:2;
+	font-size: 1em;
+	text-decoration: none;
+	padding:13px 10px 30px 129px;
+}
+
+a.product-desc p { font-size: 0.85em; margin:7px 0 0;}
+
+/* News List */
+div.news-list { margin: 0 0 2em;}
+div.news-item { margin: 0 0 2em; padding: 0 0 2em; border-bottom: 1px solid; }
+div.news-date { margin: 0 0 1em;}
+div.news-title { font-size: 1em; margin: 0 0 1em;  font-weight: bold;}
+a.news-detail-link { display: block; margin: 1em 0 0; outline: none;}
+
+/* Catalog List */
+div.catalog-list, div.catalog-detail  { padding: 1em 0 0;}
+div.catalog-item { margin: 0 0 2em; padding: 0 0 2em; border-bottom: 1px solid; overflow: hidden; zoom: 1;}
+div.catalog-detail div.catalog-item { border: none; }
+div.catalog-item-title { margin: 0 0 1em;}
+div.catalog-item-title a { font-weight: bold; }
+
+div.catalog-item-image { float: left; margin: 0 1em 1em 0; border:1px solid; padding: 4px; }
+div.catalog-item-price {clear: left; float:left; padding: 0.5em 1em; margin:1em 0 0; font-weight: bold; }
+div.catalog-item-desc { clear: left; }
+div.catalog-item-desc-float { }
+div.catalog-item-properties { clear: both; padding: 1em 0 0;  overflow: hidden;}
+div.catalog-item-property { margin: 0 0 1em; border-bottom:1px dashed; float: left; width: 100%;}
+div.catalog-item-property b { float: right; position: relative; top: 0.31em; padding-left: 3px; font-style:italic; font-weight:normal; }
+div.catalog-item-property span { float: left; position: relative; top: 0.31em; padding-right: 3px; zoom: 1;}
+div.catalog-item-properties-title { font-size: 1em; font-weight: bold; margin: 2em 0 1em; }
+
+/* Special Product */
+div.special-product-title { text-align: center; margin: 0 0 1em;}
+div.special-product-image { text-align: center; margin: 0 0 1em;}
+div.special-product { text-align: center; }
+
+/* Top menu */
+#horizontal-multilevel-menu, #horizontal-multilevel-menu ul
+{
+	margin:0; padding:0;
+	min-height:27px;
+	width:100%;
+	list-style:none;
+	font-size:12px;
+	float:left;
+	background: none;
+}
+
+#horizontal-multilevel-menu a
+{
+	display:block;
+	padding:5px 3px;
+	text-decoration:none;
+	text-align:center;
+	outline: none;
+}
+#horizontal-multilevel-menu li a {
+    border-right: 1px solid #fff;
+}
+
+#horizontal-multilevel-menu li { float:left; }
+#horizontal-multilevel-menu li a.root-item {padding: 10px 9px 8px; font-family: Verdana; font-size: 15px !important; font-weight: lighter; text-transform: uppercase;} /*Root items*/
+#horizontal-multilevel-menu li:nth-child(6) a.root-item, #horizontal-multilevel-menu li:nth-child(7) a.root-item, #horizontal-multilevel-menu li:nth-child(8) a.root-item {background: url("https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu_hover.png") repeat-x; color: #000; text-transform: none;padding: 9px 17px 8px; font-family: Verdana;}
+#horizontal-multilevel-menu li:nth-child(8) a.root-item {border-right: 0px solid #000;}
+
+#horizontal-multilevel-menu li:nth-child(6) a.root-item-selected, #horizontal-multilevel-menu li:nth-child(7) a.root-item-selected, #horizontal-multilevel-menu li:nth-child(8) a.root-item-selected {background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu3.png) repeat-x; color: #fff; text-transform: none;padding: 9px 17px 8px; font-family: Verdana;}
+
+#horizontal-multilevel-menu a.parent { background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/top-menu-arrow.gif) center right no-repeat; } /*Item-parents*/
+#horizontal-multilevel-menu li a.root-item-selected {border-right: 1px solid #fff; background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu3.png) repeat-x; padding: 10px 9px 8px; font-family: Verdana; font-size: 15px !important; font-weight: lighter; text-transform: uppercase;} /*Root menu selected*/
+#horizontal-multilevel-menu li a:hover {background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu3.png) repeat-x !important; color: #fff !important;}
+#horizontal-multilevel-menu li.last-item { border: none; }
+
+ul#horizontal-multilevel-menu li ul {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/fon_menu4.png) repeat !important;
+    border: none !important;
+    min-width: 300px;
+    padding-bottom: 10px;
+}
+ul#horizontal-multilevel-menu li ul li {
+    border: none !important;
+}
+ul#horizontal-multilevel-menu li ul li a {
+    padding: 11px 10px 8px 17px;
+    font-family: Verdana;
+    font-size: 16px !important;
+    font-weight: lighter !important;
+    text-transform: none;
+    color: #fff !important;
+    border: none !important;
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/line1.png) no-repeat 0px 12px !important;
+    display: block;
+}
+ul#horizontal-multilevel-menu li ul li a:hover {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/line2.png) no-repeat 0px 12px !important;
+    color: #58ACFA !important;
+}
+
+#horizontal-multilevel-menu li:hover {
+    background: none !important;
+}
+#horizontal-multilevel-menu li.item-selected {
+    background: none !important;
+}
+
+#horizontal-multilevel-menu li.item-selected a {
+    background: url(https://web.archive.org/web/20221007001239im_/http://www.helamin.ru/bitrix/templates/furniture_blue/images/line2.png) no-repeat 0px 12px !important;
+    color: #58ACFA !important;
+}
+
+/*Sub-menu box*/
+#horizontal-multilevel-menu li ul
+{
+	position:absolute;
+	top:auto;
+	display:none;
+	z-index:500;
+	height:auto;
+	width:163px;
+	padding: 3px 11px;
+	border:1px solid;
+}
+
+#horizontal-multilevel-menu li li { width:100%; border-bottom:1px solid; } /*Sub-menu item box*/
+#horizontal-multilevel-menu li ul a { text-align:left; font-size: 12px;} /*Item link*/
+#horizontal-multilevel-menu li ul ul { margin:-27px 0 0 160px; }
+
+#horizontal-multilevel-menu li:hover ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul ul,
+#horizontal-multilevel-menu li:hover ul ul ul ul ul
+{
+	display:none;
+}
+
+#horizontal-multilevel-menu li:hover ul,
+#horizontal-multilevel-menu li li:hover ul,
+#horizontal-multilevel-menu li li li:hover ul,
+#horizontal-multilevel-menu li li li li:hover ul,
+#horizontal-multilevel-menu li li li li li:hover ul
+{
+	display:block;
+}
+
+div.menu-clear-left { clear:left; }
+
+/*Common Elements */
+div.content-form { padding-left:1em; }
+.question-and-answer .question {
+	cursor: pointer;
+}
+/* End */
+/* /bitrix/templates/.default/components/bitrix/menu/horizontal_multilevel1/style.css */
+/* /bitrix/templates/furniture_blue/styles.css */
+/* /bitrix/templates/furniture_blue/template_styles.css */
+
+/*
+     FILE ARCHIVED ON 00:12:39 Oct 07, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 21:35:45 Feb 22, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.825
+  exclusion.robots: 0.029
+  exclusion.robots.policy: 0.013
+  esindex: 0.012
+  cdx.remote: 14.73
+  LoadShardBlock: 351.361 (3)
+  PetaboxLoader3.datanode: 1377.432 (5)
+  load_resource: 1168.491
+  PetaboxLoader3.resolve: 40.687
+  loaddict: 1086.189
+*/
