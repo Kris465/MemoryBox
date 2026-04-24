@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="mainCarousel" class="carousel slide mb-4 shadow-lg rounded" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner rounded-3">
+        <div class="carousel-item active">
+            <img src="{% static 'images/image1.jpg' %}" class="d-block w-100" style="height: 300px; width: auto; margin: 0 auto;" alt="Финансовые технологии">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                <h5>Конвертер валют</h5>
+                <p>Актуальные курсы ЦБ РФ</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{% static 'images/image2.jpg' %}" class="d-block w-100" style="height: 300px; width: auto; margin: 0 auto;" alt="Международные валюты">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                <h5>Широкий выбор валют</h5>
+                <p>Все основные мировые валюты</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{% static 'images/image3.jpg' %}" class="d-block w-100" style="height: 300px; width: auto; margin: 0 auto;" alt="Мобильное приложение">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                <h5>Удобный интерфейс</h5>
+                <p>Адаптировано для всех устройств</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="display-5 mb-3">Добро пожаловать на наш сайт!</h2>
+            <p class="lead">Используйте конвертер валют для быстрого пересчета по актуальным курсам Центрального Банка РФ.</p>
+            <a href="{% url 'converter' %}" class="btn btn-primary btn-lg mt-3">Попробовать конвертер</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
