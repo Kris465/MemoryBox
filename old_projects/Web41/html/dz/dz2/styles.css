@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.deck {
+    display: flex;
+    gap: 20px; /* Расстояние между картами */
+}
+
+.card {
+    width: 80px; /* Ширина карты */
+    height: 120px; /* Высота карты */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: white; /* Цвет фона карты */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.value {
+    font-size: 24px; /* Размер цифры */
+    position: absolute;
+    top: 10px; /* Расположение цифры сверху */
+}
+
+.symbol {
+    font-size: 50px; /* Размер символа карты */
+}
+
+.spade .value, .spade .symbol {
+    color: black; /* Цвет для пик */
+}
+
+.heart .value, .heart .symbol {
+    color: red; /* Цвет для червей */
+}
+
+.diamond .value, .diamond .symbol {
+    color: red; /* Цвет для бубен */
+}
+
+.club .value, .club .symbol {
+    color: black; /* Цвет для треф */
+}

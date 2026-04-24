@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: aliceblue;
+}
+
+h1 {
+    color: black;
+    margin-bottom: 20px;
+}
+
+/* .clip-path-example {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: clip-path 0.5s ease;
+}
+
+.clip-path-example:hover {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+} */
+
+/* .clip-path-example {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    clip-path: circle(50% at 50% 50%);
+    transition: clip-path 0.5s ease;
+}
+
+.clip-path-example:hover {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+} */
+
+
+/* .clip-path-example {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)
+} */

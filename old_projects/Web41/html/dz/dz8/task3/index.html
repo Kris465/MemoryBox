@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма регистрации</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация</h1>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Регистрационные данные</legend>
+                <label for="username">Логин:</label>
+                <input type="text" id="username" name="username" required placeholder="Введите логин">
+
+                <label for="email">Почтовый адрес:</label>
+                <input type="email" id="email" name="email" required placeholder="Введите почту">
+
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required placeholder="Введите пароль">
+            </fieldset>
+
+            <fieldset>
+                <legend>Персональные данные</legend>
+                <label for="first-name">Имя:</label>
+                <input type="text" id="first-name" name="first-name" required placeholder="Введите имя">
+
+                <label for="last-name">Фамилия:</label>
+                <input type="text" id="last-name" name="last-name" required placeholder="Введите фамилию">
+
+                <label for="gender">Пол:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Выберите пол</option>
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                    <option value="other">Другой</option>
+                </select>
+
+                <label for="dob">Дата рождения:</label>
+                <input type="date" id="dob" name="dob" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Дополнительные настройки</legend>
+                <label>
+                    <input type="checkbox" name="newsletter"> Подписаться на рассылку
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="terms" required> Согласен с правилами ресурса
+                </label>
+            </fieldset>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    gap: 20px; /* Пробел между блоками */
+}
+
+.subscription-plan {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px; /* Начальная ширина блока */
+    height: 250px; /* Начальная высота блока */
+    text-align: center;
+    transition: transform 0.3s; /* Плавное изменение размера */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-plan:hover {
+    transform: scale(1.1); /* Увеличение размера блока при наведении */
+}

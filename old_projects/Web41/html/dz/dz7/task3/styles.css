@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: grid; /* Используем Grid для основного контейнера */
+    grid-template-rows: auto 1fr; /* Заголовок занимает авто высоту, остальные элементы занимают оставшееся пространство */
+    height: 100%;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: sticky; /* Фиксируем заголовок при прокрутке */
+    top: 0;
+    z-index: 1000; /* Убедимся, что заголовок поверх других элементов */
+}
+
+.boards-container {
+    display: grid; /* Используем Grid для контейнера досок */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Автоматически заполняем колонки */
+    gap: 10px; /* Отступ между досками */
+    padding: 10px;
+    overflow-y: auto; /* Вертикальный скролл для контейнера досок */
+}
+
+.board {
+    background-color: #555; /* Темно-серый цвет доски */
+    color: white;
+    padding: 10px;
+    border-radius: 8px; /* Скругление углов */
+    height: 100%; /* Высота доски будет зависеть от содержимого */
+    overflow-y: auto; /* Вертикальный скролл для доски */
+}
+
+.board h2 {
+    margin-bottom: 10px;
+}
+
+.board ul {
+    list-style-type: none; /* Убираем маркеры списка */
+}

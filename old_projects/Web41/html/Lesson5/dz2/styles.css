@@ -1,0 +1,72 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: #f0f0f0;
+}
+
+.container {
+width: 800px;
+height: 400px;
+position: relative;
+overflow: hidden;
+}
+
+.door-container {
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.door {
+width: 50%;
+height: 100%;
+background-color: #333;
+position: relative;
+transition: transform 2s ease, width 2s ease; /* Добавляем переход для ширины */
+}
+
+.door.left {
+transform-origin: left center;
+}
+
+.door.right {
+transform-origin: right center;
+}
+
+.content {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff;
+font-size: 3rem;
+font-weight: bold;
+opacity: 0;
+transition: opacity 2s ease;
+}
+
+.door-container:hover .door.left {
+transform: rotateY(-90deg) scale(0.8, 1); /* Уменьшаем ширину и поворачиваем */
+}
+
+.door-container:hover .door.right {
+transform: rotateY(90deg) scale(0.8, 1); /* Уменьшаем ширину и поворачиваем */
+}
+
+.door-container:hover .content {
+opacity: 1; /* Появление текста */
+}

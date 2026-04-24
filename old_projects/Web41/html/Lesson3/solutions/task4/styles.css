@@ -1,0 +1,8 @@
+ul {
+    font-size: 50px;
+    list-style-type: none;
+}
+
+ul li img {
+    margin: 30px;
+}

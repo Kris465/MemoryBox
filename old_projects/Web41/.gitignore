@@ -1,0 +1,13 @@
+# project files
+css
+js
+uikit-3.21.12
+*.png
+*.jpg
+*.jpeg
+*.hintrc
+
+# environment
+node_modules
+package-lock.json
+package.json

@@ -1,0 +1,13 @@
+body {
+    background-color: bisque;
+}
+
+ul {
+    font-size: 50px;
+    list-style-type: none;
+    color:brown;
+}
+
+ul li img {
+    margin: 10px;
+}

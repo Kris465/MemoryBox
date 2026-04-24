@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color:blanchedalmond;
+}
+
+ol {
+    color:beige;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+ol li {
+    font-size: 30px;
+}

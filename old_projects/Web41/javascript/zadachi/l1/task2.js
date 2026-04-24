@@ -1,0 +1,1 @@
+let dayOfWeek = 7;

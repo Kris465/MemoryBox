@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+}
+
+.clock {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 10px solid white;
+    border-radius: 50%;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    background: white;
+    transform-origin: bottom;
+}
+
+.hour-hand {
+    height: 50px;
+    width: 6px;
+    animation: rotateHour 12s linear infinite; /* Анимация для часовой стрелки */
+}
+
+.minute-hand {
+    height: 70px;
+    width: 4px;
+    animation: rotateMinute 60s linear infinite; /* Анимация для минутной стрелки */
+}
+
+.second-hand {
+    height: 90px;
+    width: 2px;
+    background: red;
+    animation: rotateSecond 60s linear infinite; /* Анимация для секундной стрелки */
+}
+
+@keyframes rotateHour {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateMinute {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateSecond {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

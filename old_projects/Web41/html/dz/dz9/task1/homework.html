@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашние задания</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .completed { background-color: green; }
+        .pending { background-color: yellow; }
+        .overdue { background-color: red; }
+    </style>
+</head>
+<body>
+    <header class="bg-light p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h3">Логотип</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="homework.html">Homework</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <h2>Домашние задания</h2>
+
+        <!-- Цветовые обозначения -->
+        <div class="mb-4">
+            <span class="status completed"></span> Завершено
+            <span class="status pending"></span> В процессе
+            <span class="status overdue"></span> Просрочено
+        </div>
+
+        <!-- Блоки по предметам -->
+        <div class="mb-4">
+            <h3>Математика</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Упражнение 5, страницы 32-34
+                    <div>
+                        <span class="text-muted">Дата выдачи: 1 октября 2023</span>
+                        <button class="btn btn-success btn-sm ml-2">Загрузить</button>
+                        <span class="badge badge-primary ml-2">Оценка: 5</span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Упражнение 6, страницы 35-37
+                    <div>
+                        <span class="text-muted">Дата выдачи: 3 октября 2023</span>
+                        <button class="btn btn-warning btn-sm ml-2">Перезагрузить</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+            <h3>История</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Написать эссе на тему "Вторая мировая война"
+                    <div>
+                        <span class="text-muted">Дата выдачи: 2 октября 2023</span>
+                        <button class="btn btn-danger btn-sm ml-2">Удалить</button>
+                        <span class="badge badge-primary ml-2">Оценка: 4</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+            <h3>Биология</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Подготовить презентацию о клетке
+                    <div>
+                        <span class="text-muted">Дата выдачи: 4 октября 2023</span>
+                        <button class="btn btn-info btn-sm ml-2">Скачать</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer class="bg-light p-3 text-center">
+        <p>&copy; 2024 Сайт-дневник студента</p>
+    </footer>
+
+    <!-- Подключение Font Awesome для иконок -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-библиотека стилей ввода данных</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Мини-библиотека стилей ввода данных</h1>
+
+        <h2>Input</h2>
+        <input type="text" class="input-default" placeholder="Нетронутое состояние">
+        <input type="text" class="input-valid" placeholder="Корректные данные">
+        <input type="text" class="input-invalid" placeholder="Некорректные данные">
+
+        <h2>Checkbox</h2>
+        <label>
+            <input type="checkbox" class="checkbox-checked"> Включен
+        </label>
+        <label>
+            <input type="checkbox" class="checkbox-unchecked"> Выключен
+        </label>
+
+        <h2>Radio Button</h2>
+        <label>
+            <input type="radio" name="radio" class="radio-checked"> Включен
+        </label>
+        <label>
+            <input type="radio" name="radio" class="radio-unchecked"> Выключен
+        </label>
+
+        <h2>Кнопки</h2>
+        <button class="btn-green">Зеленая кнопка</button>
+        <button class="btn-red">Красная кнопка</button>
+        <button class="btn-disabled" disabled>Неактивная кнопка</button>
+
+        <h2>Круглые кнопки с иконками</h2>
+        <button class="btn-circle-green"><span>✔️</span></button>
+        <button class="btn-circle-red"><span>❌</span></button>
+
+        <h2>Textarea</h2>
+        <textarea class="textarea-default" placeholder="Введите текст..."></textarea>
+    </div>
+</body>
+</html>

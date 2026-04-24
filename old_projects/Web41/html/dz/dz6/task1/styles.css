@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Начальное направление - столбец */
+    align-items: center;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.description, .registration {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Максимальная ширина блока */
+    margin: 20px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+.date-time {
+    font-size: 18px;
+    color: #555;
+}
+
+.register-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}
+
+/* Медиа-запросы для адаптивной верстки */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Изменяем направление на строку */
+        justify-content: space-between; /* Распределяем блоки по горизонтали */
+    }
+
+    .description, .registration {
+        flex-basis: 48%; /* Задаем ширину блоков */
+        margin-bottom: 0; /* Убираем нижний отступ */
+    }
+
+    h1 {
+        font-size: 28px; /* Увеличиваем размер заголовка */
+    }
+
+    h2 {
+        font-size: 22px; /* Увеличиваем размер подзаголовка */
+    }
+
+    .date-time {
+        font-size: 20px; /* Увеличиваем размер даты и времени */
+    }
+}
+
+@media (min-width: 1024px) {
+    .header {
+        margin-bottom: 40px; /* Увеличиваем отступ между заголовком и описанием */
+    }
+
+    h1 {
+        font-size: 32px; /* Еще больше увеличиваем размер заголовка */
+    }
+
+    h2 {
+        font-size: 24px; /* Еще больше увеличиваем размер подзаголовка */
+    }
+
+    .register-button {
+        padding: 15px 30px; /* Увеличиваем размеры кнопки */
+        font-size: 18px; /* Увеличиваем размер шрифта кнопки */
+    }
+}

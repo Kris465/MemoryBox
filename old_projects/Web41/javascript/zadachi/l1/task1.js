@@ -1,0 +1,1 @@
+let maximumDataTransferSpeed = 100;

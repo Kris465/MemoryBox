@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Изучаем Vue 3</title>
+<meta charset="utf-8" />
+</head>
+<body>
+<div id="app">
+    <div v-html="message"></div>
+    <div>{{message}}</div>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script>
+const vueApp = Vue.createApp({
+  data() {
+    return { message:'<h2>Hello</h2>'}
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.movie-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.movie-item {
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}

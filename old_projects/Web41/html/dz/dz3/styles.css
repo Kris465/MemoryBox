@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #ffffff;
+}
+
+.container {
+    background-color: #ccc;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #000000;
+    text-align: center;
+}
+
+h2 {
+    color: #000000;
+    text-align: center;
+}
+
+a {
+    color: black;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+a:hover {
+    color: lightcoral;
+    text-decoration: underline;
+    text-decoration-style: solid;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+code {
+    background-color: #eaeaea;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: rgb(255, 0, 0);
+}
+
+.example {
+    background-color: #eef;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px 0;
+    white-space: pre;
+    line-height: 0.6;
+}
+
+.tag {
+    color: red;
+}
+
+.tag1 {
+    background-color: gray;
+    color: rgb(157, 255, 157);
+    padding: 5px;
+    border-radius: 4px;
+}

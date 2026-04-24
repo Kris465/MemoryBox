@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.email-list {
+    flex: 1; /* Занимает оставшееся пространство */
+    padding: 20px;
+}
+
+.email-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Вертикальная компоновка */
+    }
+
+    .sidebar {
+        width: 100%; /* Ширина бокового меню на весь экран */
+        padding: 10px; /* Меньшие отступы */
+    }
+
+    .email-list {
+        padding: 10px; /* Меньшие отступы */
+    }
+}

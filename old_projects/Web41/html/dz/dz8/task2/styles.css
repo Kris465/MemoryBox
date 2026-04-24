@@ -1,0 +1,114 @@
+/* Общие стили для контейнера */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Стили для input */
+.input-default {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-valid {
+    border: 1px solid #4CAF50; /* Зеленый цвет для корректных данных */
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-invalid {
+    border: 1px solid #F44336; /* Красный цвет для некорректных данных */
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Стили для checkbox */
+.checkbox-checked {
+    accent-color: #4CAF50; /* Зеленый цвет для включенного состояния */
+}
+
+.checkbox-unchecked {
+    accent-color: #F44336; /* Красный цвет для выключенного состояния */
+}
+
+/* Стили для radio button */
+.radio-checked {
+    accent-color: #4CAF50; /* Зеленый цвет для включенного состояния */
+}
+
+.radio-unchecked {
+    accent-color: #F44336; /* Красный цвет для выключенного состояния */
+}
+
+/* Стили для кнопок */
+.btn-green {
+    background-color: #4CAF50; /* Зеленая кнопка */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-green:hover {
+    background-color: #45a049; /* При наведении */
+}
+
+.btn-red {
+    background-color: #F44336; /* Красная кнопка */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: #e53935; /* При наведении */
+}
+
+.btn-disabled {
+    background-color: #ccc; /* Неактивная кнопка */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Стили для круглых кнопок с иконками */
+.btn-circle-green {
+    background-color: #4CAF50; /* Зеленая круглая кнопка */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-circle-red {
+    background-color: #F44336; /* Красная круглая кнопка */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+/* Стили для textarea */
+.textarea-default {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

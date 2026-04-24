@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.task-list {
+    list-style: none; /* Убираем стандартные маркеры */
+    padding: 0;
+}
+
+.task-item {
+    padding: 10px;
+    display: flex;
+    align-items: center; /* Центрирование по вертикали */
+    position: relative; /* Для позиционирования фонового изображения */
+    padding-left: 50px; /* Добавляем отступ слева для текста */
+}
+
+.task-item:nth-child(even) {
+    background-color: #e0f7fa; /* Светло-голубой для четных элементов */
+}
+
+.task-item:nth-child(odd) {
+    background-color: #b2ebf2; /* Темно-голубой для нечетных элементов */
+}
+
+.task-item.completed {
+    background-color: #dcdcdc; /* Серый фон для завершенных задач */
+    text-decoration: line-through; /* Зачеркивание текста */
+}
+
+.task-item::before {
+    content: ''; /* Создаем пустое содержимое для псевдоэлемента */
+    position: absolute; /* Позиционируем относительно элемента списка */
+    left: 10px; /* Сдвигаем вправо */
+    top: 50%; /* Центрируем по вертикали */
+    transform: translateY(-50%); /* Центрируем по вертикали */
+    width: 20px; /* Ширина иконки */
+    height: 20px; /* Высота иконки */
+    background-image: url('checked_16.png'); /* Путь к изображению для незавершенных задач */
+    background-size: contain; /* Подгоняем размер изображения */
+}
+
+.task-item.completed::before {
+    background-image: url('unchecked_16.png'); /* Путь к изображению для завершенных задач */
+}
+
+.remove-icon {
+    color: red; /* Красный цвет для крестика */
+    cursor: pointer; /* Указатель при наведении */
+    margin-left: 20px; /* Отодвигаем крестик вправо */
+}

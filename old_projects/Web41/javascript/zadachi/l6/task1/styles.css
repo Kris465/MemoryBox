@@ -1,0 +1,13 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #fff;
+    text-align: left;
+    margin: 50px;
+    font-size: 36px;
+}
+
+.author {
+    margin-top: 20px;
+    font-size: 24px;
+}

@@ -1,0 +1,110 @@
+/* Общие стили для контейнера */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Стили для заголовка */
+h1 {
+    text-align: center;
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Стили для fieldset */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+/* Стили для label */
+label {
+    margin-bottom: 5px;
+}
+
+/* Стили для input и select */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Стили для кнопки */
+button {
+    background-color: #4CAF50; /* Зеленая кнопка */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* При наведении */
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .container {
+        padding: 15px; /* Уменьшение отступов на больших экранах */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    button {
+        font-size: 16px; /* Увеличение шрифта на больших экранах */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Уменьшение отступов на средних экранах */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    button {
+        font-size: 15px; /* Уменьшение шрифта на средних экранах */
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px; /* Уменьшение отступов на маленьких экранах */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    button {
+        font-size: 14px; /* Уменьшение шрифта на маленьких экранах */
+    }
+}

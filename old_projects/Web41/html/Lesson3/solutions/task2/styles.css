@@ -1,0 +1,9 @@
+h1 {
+    color:blue;
+}
+
+ol li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+}

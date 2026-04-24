@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.article {
+    margin-bottom: 40px;
+}
+
+.text-with-image {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.text-block {
+    flex: 1; /* Занимает доступное пространство */
+}
+
+.image-container {
+    text-align: center;
+    margin-left: 20px; /* Отступ между текстом и изображением */
+}
+
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+figcaption {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .text-with-image {
+        flex-direction: column; /* Изменяем направление на вертикальное */
+        align-items: center; /* Центрируем элементы */
+    }
+
+    .image-container {
+        margin-left: 0; /* Убираем отступ */
+        margin-top: 10px; /* Отступ сверху для изображения */
+    }
+}

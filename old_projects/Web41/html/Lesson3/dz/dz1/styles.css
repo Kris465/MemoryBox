@@ -1,0 +1,39 @@
+body {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    height: 100vh; /* Высота на весь экран */
+    margin: 0;
+}
+
+.container {
+    background-color: rgb(192, 192, 192);
+    width: 80%;
+    padding: 20px; /* Отступ внутри контейнера */
+    border-radius: 10px; /* Закругленные углы */
+}
+
+.custom-list {
+    background: linear-gradient(to bottom, #ffccf2, #ff66b2); /* Градиентный фон от нежно-розового до яркого */
+    padding: 20px; /* Отступ внутри списка */
+    border-radius: 10px; /* Закругленные углы списка */
+    border: 5px solid #e96dff; /* Внешняя рамка списка */
+}
+
+.fruit-item {
+    background-color: #e96dff;
+    margin-bottom: 10px; /* Отступ между строками */
+    padding: 10px; /* Отступ внутри элемента списка */
+    border-radius: 5px; /* Закругленные углы элементов списка */
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+/* Изменение цвета на голубые оттенки при наведении */
+.fruit-item:hover {
+    background-color: #66b3ff; /* Цвет фона при наведении */
+}
+
+.highlight {
+    background-color: rgb(251, 31, 31);
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма ввода кредитной карты</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Введите данные кредитной карты</h1>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="card-number">Номер кредитной карты:</label>
+                <input type="text" id="card-number" name="card-number" required>
+            </div>
+            <div class="form-group">
+                <label for="cardholder-name">Имя владельца:</label>
+                <input type="text" id="cardholder-name" name="cardholder-name" required>
+            </div>
+            <div class="form-group">
+                <label for="expiration-date">Срок действия (ММ/ГГ):</label>
+                <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV / CVN:</label>
+                <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.block {
+    display: flex;
+    width: 100%;
+    height: 300px; /* Фиксированная высота */
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden; /* Скрываем часть изображения */
+}
+
+.text {
+    width: 50%; /* Половина ширины блока */
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение текста */
+    justify-content: center; /* Центрируем текст по вертикали */
+    align-items: flex-start; /* Выровнять текст по левому краю */
+    padding-left: 20px; /* Отступ слева для текста */
+    background-color: white;
+    position: relative;
+    z-index: 1; /* Помещаем текст выше */
+}
+
+.image {
+    width: 50%; /* Половина ширины блока */
+    position: relative;
+    overflow: hidden; /* Скрываем часть изображения */
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обеспечивает заполнение области изображения */
+    transition: transform 1s ease; /* Плавный переход для увеличения изображения */
+}
+
+.block:hover .image img {
+    transform: scale(1.1); /* Увеличение изображения при наведении */
+}
+
+.block:hover .text {
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачная черная плашка */
+}
+
+.block:hover .text h2,
+.block:hover .text p {
+    color: white; /* Изменение цвета текста на белый при наведении */
+}

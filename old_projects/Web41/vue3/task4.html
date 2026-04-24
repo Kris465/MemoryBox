@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Изучаем Vue 3</title>
+    <meta charset="utf-8" />
+        <style>
+        button{margin:20px;}
+        </style>
+    </head>
+<body>
+<div id="app">
+    <button v-on:click="increase(2), inform()">+</button>
+    <span>{{ counter }}</span>
+    <div>{{ status }}</div>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script>
+const vueApp = Vue.createApp({
+  data() {
+    return {counter:0, status:''}
+  },
+  methods:{
+    increase(n){
+        this.counter = this.counter + n;
+    },
+    inform(){
+        this.status = "Время нажатия кнопки: " + new Date().toLocaleString();
+    }
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+const prompt = require('prompt-sync')();
+let b = prompt('введите b:');  
+let n = prompt('введите n:');     
+let x = prompt('введите x:');       
+let y = prompt('введите y:');       
+let alpha = prompt('введите alpha:');   
+let beta = prompt('введите beta:');   
+let a = prompt('введите :');      
+let result1 = 2 * x;
+let result2 = Math.sin(x);
+let result3 = Math.pow(a, 2);
+let result4 = Math.sqrt(x);
+let result5 = Math.abs(n);
+let result6 = 5 * Math.cos(y)
+let result7 = -7.5 * Math.pow(7.5, 2 * a);
+let result8 = 3 * Math.sqrt(x);
+let result9 = Math.sin(alpha) * Math.cos(beta) + Math.cos(alpha) * Math.sin(beta);
+let result10 = a * Math.sqrt(2 * b);
+let result11 = 3 * Math.sin(2 * alpha) * Math.cos(3 * beta);
+let result12 = -5 * Math.sqrt(x + Math.sqrt(y));
+console.log(result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12);

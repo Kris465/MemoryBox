@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column {
+    flex: 1; /* Колонки будут одинаковой ширины */
+    margin: 0 10px; /* Отступ между колонками */
+    background-color: #f4f4f4; /* Цвет фона для колонок */
+    padding: 20px; /* Внутренний отступ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для колонок */
+}
+
+.column:first-child {
+    margin-left: 0; /* Убираем отступ слева для первой колонки */
+}
+
+.column:last-child {
+    margin-right: 0; /* Убираем отступ справа для последней колонки */
+}
+
+article {
+    margin-bottom: 20px; /* Отступ между статьями */
+    padding: 15px; /* Внутренний отступ для статей */
+    background-color: #ffffff; /* Цвет фона для статей */
+    border-radius: 5px; /* Скругление углов */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Тень для статей */
+}
+
+h3 {
+    margin-top: 0; /* Убираем верхний отступ у заголовков статей */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* На узких экранах колонки становятся вертикальными */
+    }
+    
+    .column {
+        margin: 10px 0; /* Отступы для вертикального расположения */
+    }
+}

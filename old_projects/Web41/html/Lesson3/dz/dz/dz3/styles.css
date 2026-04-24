@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.phonetic {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.part-of-speech {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.synonyms_entry {
+    color: rgb(38, 38, 38);
+}
+
+.definition {
+    font-weight: bold;
+}
+
+.example {
+    margin-left: 20px;
+    color: #777;
+}
+
+.synonyms {
+    margin-left: 20px;
+    color: #00aaff;
+    font-style: italic;
+}

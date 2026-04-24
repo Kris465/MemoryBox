@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.table-container {
+    overflow: auto; /* Возможность прокрутки */
+    max-height: 400px; /* Ограничение высоты контейнера для прокрутки */
+}
+
+table {
+    width: max-content; /* Ширина таблицы по содержимому */
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    position: sticky; /* Фиксация заголовков */
+    top: 0; /* Прикрепление к верхней части контейнера */
+    z-index: 10; /* Повышение уровня для отображения поверх содержимого */
+}
+
+tbody tr td:first-child {
+    position: sticky; /* Фиксация первого столбца */
+    left: 0; /* Прикрепление к левому краю контейнера */
+    background-color: #f9f9f9; /* Фоновый цвет для первого столбца */
+    z-index: 5; /* Повышение уровня для отображения поверх содержимого */
+}

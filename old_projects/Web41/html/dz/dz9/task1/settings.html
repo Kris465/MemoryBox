@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h3">Логотип</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="homework.html">Homework</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="settings.html">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <h2>Настройки профиля</h2>
+
+        <!-- Блок загрузки изображения профиля -->
+        <div class="mb-4 text-center">
+            <img src="default-profile.png" alt="Профиль" class="profile-img mb-3" id="profileImage">
+            <input type="file" class="form-control-file" id="profileImageUpload">
+            <label for="profileImageUpload" class="btn btn-secondary mt-2">Загрузить изображение профиля</label>
+        </div>
+
+        <!-- Форма с личными данными -->
+        <form>
+            <h3>Личные данные</h3>
+            <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Введите имя">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию">
+            </div>
+            <div class="form-group">
+                <label for="email">Электронная почта</label>
+                <input type="email" class="form-control" id="email" placeholder="Введите электронную почту">
+            </div>
+            <div class="form-group">
+                <label for="phone">Номер телефона</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Введите номер телефона">
+            </div>
+            <div class="form-group">
+                <label for="address">Адрес</label>
+                <input type="text" class="form-control" id="address" placeholder="Введите адрес">
+            </div>
+            <div class="form-group">
+                <label for="socialLink">Ссылка на социальную сеть</label>
+                <input type="url" class="form-control" id="socialLink" placeholder="Введите ссылку на социальную сеть">
+            </div>
+
+            <!-- Форма для изменения пароля -->
+            <h3>Изменение пароля</h3>
+            <div class="form-group">
+                <label for="newPassword">Новый пароль</label>
+                <input type="password" class="form-control" id="newPassword" placeholder="Введите новый пароль">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Подтверждение пароля</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Подтвердите новый пароль">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </form>
+    </main>
+
+    <footer class="bg-light p-3 text-center">
+        <p>&copy; 2024 Сайт-дневник студента</p>
+    </footer>
+
+    <!-- Подключение Font Awesome для иконок -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
