@@ -1,0 +1,17 @@
+# Парсинг
+scrapy==2.11.0
+scrapy-playwright==0.0.33
+playwright==1.40.0
+beautifulsoup4==4.12.2
+
+# Работа с данными
+sqlalchemy==2.0.23
+pydantic==2.5.0
+
+# API клиент
+requests==2.31.0
+aiohttp==3.9.1
+
+# Утилиты
+python-dotenv==1.0.0
+loguru==0.7.2

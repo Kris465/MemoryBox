@@ -1,0 +1,17 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Scrapy
+.scrapy/
+
+# Базы данных
+*.db
+*.sqlite
+
+# Логи
+*.log
