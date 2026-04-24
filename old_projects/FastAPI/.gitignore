@@ -1,0 +1,11 @@
+# venv
+.venv
+venv
+.env
+
+# python
+__pychache__
+*.pyc 
+
+# log
+*.log
