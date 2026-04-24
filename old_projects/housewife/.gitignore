@@ -1,0 +1,18 @@
+# venv
+venv
+.venv
+.env
+
+# logger
+*.log
+
+# database
+*.db
+
+# project-files
+.qwen
+
+# python
+__pycache__
+*.pyc
+
