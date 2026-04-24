@@ -1,0 +1,10 @@
+# venv
+.venv
+.env
+__pycache__
+
+# log
+*.log
+
+# files
+*.json
