@@ -1,0 +1,8 @@
+a = int(input('Число:'))
+b = int(input('Число:'))
+c = int(input('Число:'))
+d = int(input('Число:'))
+print("Ответ", a)
+print("Ответ", b)
+print("Ответ", c)
+print("Ответ", d)
